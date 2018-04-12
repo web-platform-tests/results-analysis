@@ -12,6 +12,6 @@ RUN mkdir -p "${GO_REPO_PATH}"
 RUN mkdir -p "${WPT_PATH}"
 
 RUN apk update
-RUN apk add bash
+RUN apk add bash git make
 
 WORKDIR "${GO_REPO_PATH}"

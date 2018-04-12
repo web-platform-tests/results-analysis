@@ -17,3 +17,5 @@ docker run -t -d --entrypoint /bin/bash \
 OWNERSHIP="$(id -u $USER):$(id -g $USER)"
 info "Setting ownership for container GOPATH=${CONTAINER_GOPATH} to ${OWNERSHIP}"
 docker exec -u 0:0 "${INSTANCE_NAME}" chown -R "${OWNERSHIP}" "${CONTAINER_GOPATH}"
+
+info "Docker instance ${INSTANCE_NAME} ready"
