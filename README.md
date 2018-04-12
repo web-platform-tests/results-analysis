@@ -9,5 +9,3 @@ The code in this project performs two kinds of analysis on WPT results:
 
 - [Web Platform Tests](https://github.com/w3c/web-platform-tests): The tests themselves
 - [wpt.fyi](https://github.com/web-platform-tests/wpt.fyi): A dashboard displaying test results
-
-A dashboard of cross-browser results for [web-platform-tests](https://github.com/w3c/web-platform-tests).
