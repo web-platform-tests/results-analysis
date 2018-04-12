@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 pushd "$(dirname ${BASH_SOURCE})" > /dev/null
 HOST_DIR=$(pwd)
 popd > /dev/null
