@@ -32,12 +32,14 @@ func (s ByCreatedDate) Less(i int, j int) bool {
 	return s[i].OSVersion < s[j].OSVersion
 }
 
+// SubTest models a single test within a WPT test file.
 type SubTest struct {
 	Name    string  `json:"name"`
 	Status  string  `json:"status"`
 	Message *string `json:"message"`
 }
 
+// TestResults captures the results of running the tests in a WPT test file.
 type TestResults struct {
 	Test     string    `json:"test"`
 	Status   string    `json:"status"`
@@ -45,18 +47,20 @@ type TestResults struct {
 	Subtests []SubTest `json:"subtests"`
 }
 
+// TestRunResults binds a base.TestRun to a TestResults.
 type TestRunResults struct {
 	Run *base.TestRun
 	Res *TestResults
 }
 
-type TestId struct {
+// TestID uniquely identifies a test within the scope of its WPT revision.
+type TestID struct {
 	Test string `json:"test"`
 	Name string `json:"name"`
 }
 
 // ByTestPath sorts test ids by their test path, then name, descending.
-type ByTestPath []TestId
+type ByTestPath []TestID
 
 func (s ByTestPath) Len() int          { return len(s) }
 func (s ByTestPath) Swap(i int, j int) { s[i], s[j] = s[j], s[i] }
@@ -67,8 +71,8 @@ func (s ByTestPath) Less(i int, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// Enum: Test status, according to legitimate string values in WPT results
-// reports.
+// TestStatus is an enum of test status, according to legitimate string values
+// in WPT results reports.
 type TestStatus int32
 
 const (
@@ -99,8 +103,8 @@ func TestStatus_fromString(str string) (ts TestStatus) {
 	return TestStatus(value)
 }
 
-// Enum: Sub-test status, according to legitimate string values in WPT
-// results reports.
+// SubTestStatus is an enum of sub-test status, according to legitimate string
+// values in WPT results reports.
 type SubTestStatus int32
 
 const (
@@ -139,17 +143,19 @@ func SubTestStatus_fromString(str string) (ts SubTestStatus) {
 // Intermediate state representations for metrics computation
 //
 
+// CompleteTestStatus binds a TestStatus to a SubTestStatus.
 type CompleteTestStatus struct {
 	Status    TestStatus
 	SubStatus SubTestStatus
 }
 
+// TestRunStatus binds a TestRun to a CompleteTestStatus.
 type TestRunStatus struct {
 	Run    *base.TestRun
 	Status CompleteTestStatus
 }
 
-// Metadata capturing:
+// PassRateMetadata constitutes metadata capturing:
 // - When metric run was performed;
 // - What test runs are part of the metric run;
 // - Where the metric run results reside (a URL).
@@ -157,10 +163,10 @@ type PassRateMetadata struct {
 	StartTime time.Time      `json:"start_time"`
 	EndTime   time.Time      `json:"end_time"`
 	TestRuns  []base.TestRun `json:"test_runs"`
-	DataUrl   string         `json:"url"`
+	DataURL   string         `json:"url"`
 }
 
-// Metadata capturing:
+// FailuresMetadata constitutes metadata capturing:
 // - When failures report was gathered;
 // - What test runs are part of the failures report;
 // - Where the failures report resids (a URL);
@@ -169,13 +175,13 @@ type FailuresMetadata struct {
 	StartTime   time.Time      `json:"start_time"`
 	EndTime     time.Time      `json:"end_time"`
 	TestRuns    []base.TestRun `json:"test_runs"`
-	DataUrl     string         `json:"url"`
+	DataURL     string         `json:"url"`
 	BrowserName string         `json:"browser_name"`
 }
 
-// Output type for metrics: Include runs as metadata, and arbitrary content
-// as data.
-type MetricsRunData struct {
+// RunData is the output type for metrics: Include runs as metadata, and
+// arbitrary content as data.
+type RunData struct {
 	Metadata interface{} `json:"metadata"`
 	Data     interface{} `json:"data"`
 }
