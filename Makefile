@@ -20,8 +20,6 @@ GO_FILES := $(wildcard $(REPO_PATH)/**/*.go)
 
 build: deps
 
-test: test
-
 lint: deps
 	go get -u golang.org/x/lint/golint
 	golint -set_exit_status $(GO_FILES)
