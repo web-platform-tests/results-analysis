@@ -76,44 +76,51 @@ func (s ByTestPath) Less(i int, j int) bool {
 type TestStatus int32
 
 const (
-	// TestStatus_TEST_STATUS_UNKNOWN is an uninitialized TestStatus and should
+	// TestStatusUnknown is an uninitialized TestStatus and should
 	// not be used.
-	TestStatus_TEST_STATUS_UNKNOWN TestStatus = 0
+	TestStatusUnknown TestStatus = 0
 
-	// TestStatus_TEST_OK indicates that all tests completed successfully.
-	TestStatus_TEST_OK TestStatus = 1
+	// TestStatusOK indicates that all tests completed successfully.
+	TestStatusOK TestStatus = 1
 
-	// TestStatus_TEST_ERROR indicates that some tests did not complete
+	// TestStatusError indicates that some tests did not complete
 	// successfully.
-	TestStatus_TEST_ERROR TestStatus = 2
+	TestStatusError TestStatus = 2
 
-	// TestStatus_TEST_TIMEOUT indicates that some tests timed out.
-	TestStatus_TEST_TIMEOUT TestStatus = 3
+	// TestStatusTimeout indicates that some tests timed out.
+	TestStatusTimeout TestStatus = 3
 )
 
-// TestStatus_name maps TestStatus values to names.
-var TestStatus_name = map[int32]string{
+var testStatusNames = map[int32]string{
 	0: "TEST_STATUS_UNKNOWN",
 	1: "TEST_OK",
 	2: "TEST_ERROR",
 	3: "TEST_TIMEOUT",
 }
 
-// TestStatus_value maps test names to TestStatus values.
-var TestStatus_value = map[string]int32{
+var testStatusValues = map[string]int32{
 	"TEST_STATUS_UNKNOWN": 0,
 	"TEST_OK":             1,
 	"TEST_ERROR":          2,
 	"TEST_TIMEOUT":        3,
 }
 
-// TestStatus_fromString produces a TestStatus value from a name.
-func TestStatus_fromString(str string) (ts TestStatus) {
-	value, ok := TestStatus_value["TEST_"+str]
+// TestStatusfromString produces a TestStatus value from a name.
+func TestStatusfromString(str string) (ts TestStatus) {
+	value, ok := testStatusValues["TEST_"+str]
 	if !ok {
-		return TestStatus_TEST_STATUS_UNKNOWN
+		return TestStatusUnknown
 	}
 	return TestStatus(value)
+}
+
+// TestStatusName produces a name from a TestStatus value.
+func TestStatusName(ts TestStatus) string {
+	name, ok := testStatusNames[int32(ts)]
+	if !ok {
+		return testStatusNames[0]
+	}
+	return name
 }
 
 // SubTestStatus is an enum of sub-test status, according to legitimate string
@@ -121,25 +128,24 @@ func TestStatus_fromString(str string) (ts TestStatus) {
 type SubTestStatus int32
 
 const (
-	// SubTestStatus_SUB_TEST_STATUS_UNKNOWN is an uninitialized SubTestStatus
+	// SubTestStatusUnknown is an uninitialized SubTestStatus
 	// and should not be used.
-	SubTestStatus_SUB_TEST_STATUS_UNKNOWN SubTestStatus = 0
+	SubTestStatusUnknown SubTestStatus = 0
 
-	// SubTestStatus_SUB_TEST_PASS indicates that a test passed.
-	SubTestStatus_SUB_TEST_PASS SubTestStatus = 1
+	// SubTestStatusPass indicates that a test passed.
+	SubTestStatusPass SubTestStatus = 1
 
-	// SubTestStatus_SUB_TEST_FAIL indicates that a test failed.
-	SubTestStatus_SUB_TEST_FAIL SubTestStatus = 2
+	// SubTestStatusFail indicates that a test failed.
+	SubTestStatusFail SubTestStatus = 2
 
-	// SubTestStatus_SUB_TEST_TIMEOUT indicates that a test timed out.
-	SubTestStatus_SUB_TEST_TIMEOUT SubTestStatus = 3
+	// SubTestStatusTimeout indicates that a test timed out.
+	SubTestStatusTimeout SubTestStatus = 3
 
-	// SubTestStatus_SUB_TEST_NOT_RUN indicates that a test was not run.
-	SubTestStatus_SUB_TEST_NOT_RUN SubTestStatus = 4
+	// SubTestStatusNotRun indicates that a test was not run.
+	SubTestStatusNotRun SubTestStatus = 4
 )
 
-// SubTestStatus_name maps SubTestStatus values to names.
-var SubTestStatus_name = map[int32]string{
+var subTestStatusNames = map[int32]string{
 	0: "SUB_TEST_STATUS_UNKNOWN",
 	1: "SUB_TEST_PASS",
 	2: "SUB_TEST_FAIL",
@@ -147,8 +153,7 @@ var SubTestStatus_name = map[int32]string{
 	4: "SUB_TEST_NOT_RUN",
 }
 
-// SubTestStatus_value maps test status names to SubTestStatus values.
-var SubTestStatus_value = map[string]int32{
+var subTestStatusValues = map[string]int32{
 	"SUB_TEST_STATUS_UNKNOWN": 0,
 	"SUB_TEST_PASS":           1,
 	"SUB_TEST_FAIL":           2,
@@ -156,13 +161,24 @@ var SubTestStatus_value = map[string]int32{
 	"SUB_TEST_NOT_RUN":        4,
 }
 
-// SubTestStatus_fromString produces a SubTestStatus value from a name.
-func SubTestStatus_fromString(str string) (ts SubTestStatus) {
-	value, ok := SubTestStatus_value["SUB_TEST_"+str]
+// SubTestStatusFromString produces a SubTestStatus value from a name.
+func SubTestStatusFromString(str string) (ts SubTestStatus) {
+	value, ok := subTestStatusValues["SUB_TEST_"+str]
 	if !ok {
-		return SubTestStatus_SUB_TEST_STATUS_UNKNOWN
+		return SubTestStatusUnknown
+
 	}
 	return SubTestStatus(value)
+}
+
+// SubTestStatusName produces a SubTestStatus value from a name.
+func SubTestStatusName(ts SubTestStatus) string {
+	name, ok := subTestStatusNames[int32(ts)]
+	if !ok {
+		return subTestStatusNames[0]
+
+	}
+	return name
 }
 
 //
