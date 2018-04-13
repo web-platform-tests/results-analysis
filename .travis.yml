@@ -13,7 +13,7 @@ install: |
 
 script: |
   source ./docker_env.sh
-  docker -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
-  docker -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
+  docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
+  docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
 
 after_script: ./docker_stop.sh
