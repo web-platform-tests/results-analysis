@@ -32,12 +32,14 @@ func (s ByCreatedDate) Less(i int, j int) bool {
 	return s[i].OSVersion < s[j].OSVersion
 }
 
+// SubTest models a single test within a WPT test file.
 type SubTest struct {
 	Name    string  `json:"name"`
 	Status  string  `json:"status"`
 	Message *string `json:"message"`
 }
 
+// TestResults captures the results of running the tests in a WPT test file.
 type TestResults struct {
 	Test     string    `json:"test"`
 	Status   string    `json:"status"`
@@ -45,18 +47,20 @@ type TestResults struct {
 	Subtests []SubTest `json:"subtests"`
 }
 
+// TestRunResults binds a base.TestRun to a TestResults.
 type TestRunResults struct {
 	Run *base.TestRun
 	Res *TestResults
 }
 
-type TestId struct {
+// TestID uniquely identifies a test within the scope of its WPT revision.
+type TestID struct {
 	Test string `json:"test"`
 	Name string `json:"name"`
 }
 
 // ByTestPath sorts test ids by their test path, then name, descending.
-type ByTestPath []TestId
+type ByTestPath []TestID
 
 func (s ByTestPath) Len() int          { return len(s) }
 func (s ByTestPath) Swap(i int, j int) { s[i], s[j] = s[j], s[i] }
@@ -67,59 +71,89 @@ func (s ByTestPath) Less(i int, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// Enum: Test status, according to legitimate string values in WPT results
-// reports.
+// TestStatus is an enum of test status, according to legitimate string values
+// in WPT results reports.
 type TestStatus int32
 
 const (
-	TestStatus_TEST_STATUS_UNKNOWN TestStatus = 0
-	TestStatus_TEST_OK             TestStatus = 1
-	TestStatus_TEST_ERROR          TestStatus = 2
-	TestStatus_TEST_TIMEOUT        TestStatus = 3
+	// TestStatusUnknown is an uninitialized TestStatus and should
+	// not be used.
+	TestStatusUnknown TestStatus = 0
+
+	// TestStatusOK indicates that all tests completed successfully.
+	TestStatusOK TestStatus = 1
+
+	// TestStatusError indicates that some tests did not complete
+	// successfully.
+	TestStatusError TestStatus = 2
+
+	// TestStatusTimeout indicates that some tests timed out.
+	TestStatusTimeout TestStatus = 3
 )
 
-var TestStatus_name = map[int32]string{
+var testStatusNames = map[int32]string{
 	0: "TEST_STATUS_UNKNOWN",
 	1: "TEST_OK",
 	2: "TEST_ERROR",
 	3: "TEST_TIMEOUT",
 }
-var TestStatus_value = map[string]int32{
+
+var testStatusValues = map[string]int32{
 	"TEST_STATUS_UNKNOWN": 0,
 	"TEST_OK":             1,
 	"TEST_ERROR":          2,
 	"TEST_TIMEOUT":        3,
 }
 
-func TestStatus_fromString(str string) (ts TestStatus) {
-	value, ok := TestStatus_value["TEST_"+str]
+// TestStatusfromString produces a TestStatus value from a name.
+func TestStatusfromString(str string) (ts TestStatus) {
+	value, ok := testStatusValues["TEST_"+str]
 	if !ok {
-		return TestStatus_TEST_STATUS_UNKNOWN
+		return TestStatusUnknown
 	}
 	return TestStatus(value)
 }
 
-// Enum: Sub-test status, according to legitimate string values in WPT
-// results reports.
+// TestStatusName produces a name from a TestStatus value.
+func TestStatusName(ts TestStatus) string {
+	name, ok := testStatusNames[int32(ts)]
+	if !ok {
+		return testStatusNames[0]
+	}
+	return name
+}
+
+// SubTestStatus is an enum of sub-test status, according to legitimate string
+// values in WPT results reports.
 type SubTestStatus int32
 
 const (
-	SubTestStatus_SUB_TEST_STATUS_UNKNOWN SubTestStatus = 0
-	SubTestStatus_SUB_TEST_PASS           SubTestStatus = 1
-	SubTestStatus_SUB_TEST_FAIL           SubTestStatus = 2
-	SubTestStatus_SUB_TEST_TIMEOUT        SubTestStatus = 3
-	SubTestStatus_SUB_TEST_NOT_RUN        SubTestStatus = 4
+	// SubTestStatusUnknown is an uninitialized SubTestStatus
+	// and should not be used.
+	SubTestStatusUnknown SubTestStatus = 0
+
+	// SubTestStatusPass indicates that a test passed.
+	SubTestStatusPass SubTestStatus = 1
+
+	// SubTestStatusFail indicates that a test failed.
+	SubTestStatusFail SubTestStatus = 2
+
+	// SubTestStatusTimeout indicates that a test timed out.
+	SubTestStatusTimeout SubTestStatus = 3
+
+	// SubTestStatusNotRun indicates that a test was not run.
+	SubTestStatusNotRun SubTestStatus = 4
 )
 
-// Copied from generated/sub_test_status.pb.go.
-var SubTestStatus_name = map[int32]string{
+var subTestStatusNames = map[int32]string{
 	0: "SUB_TEST_STATUS_UNKNOWN",
 	1: "SUB_TEST_PASS",
 	2: "SUB_TEST_FAIL",
 	3: "SUB_TEST_TIMEOUT",
 	4: "SUB_TEST_NOT_RUN",
 }
-var SubTestStatus_value = map[string]int32{
+
+var subTestStatusValues = map[string]int32{
 	"SUB_TEST_STATUS_UNKNOWN": 0,
 	"SUB_TEST_PASS":           1,
 	"SUB_TEST_FAIL":           2,
@@ -127,29 +161,43 @@ var SubTestStatus_value = map[string]int32{
 	"SUB_TEST_NOT_RUN":        4,
 }
 
-func SubTestStatus_fromString(str string) (ts SubTestStatus) {
-	value, ok := SubTestStatus_value["SUB_TEST_"+str]
+// SubTestStatusFromString produces a SubTestStatus value from a name.
+func SubTestStatusFromString(str string) (ts SubTestStatus) {
+	value, ok := subTestStatusValues["SUB_TEST_"+str]
 	if !ok {
-		return SubTestStatus_SUB_TEST_STATUS_UNKNOWN
+		return SubTestStatusUnknown
+
 	}
 	return SubTestStatus(value)
+}
+
+// SubTestStatusName produces a SubTestStatus value from a name.
+func SubTestStatusName(ts SubTestStatus) string {
+	name, ok := subTestStatusNames[int32(ts)]
+	if !ok {
+		return subTestStatusNames[0]
+
+	}
+	return name
 }
 
 //
 // Intermediate state representations for metrics computation
 //
 
+// CompleteTestStatus binds a TestStatus to a SubTestStatus.
 type CompleteTestStatus struct {
 	Status    TestStatus
 	SubStatus SubTestStatus
 }
 
+// TestRunStatus binds a TestRun to a CompleteTestStatus.
 type TestRunStatus struct {
 	Run    *base.TestRun
 	Status CompleteTestStatus
 }
 
-// Metadata capturing:
+// PassRateMetadata constitutes metadata capturing:
 // - When metric run was performed;
 // - What test runs are part of the metric run;
 // - Where the metric run results reside (a URL).
@@ -157,10 +205,10 @@ type PassRateMetadata struct {
 	StartTime time.Time      `json:"start_time"`
 	EndTime   time.Time      `json:"end_time"`
 	TestRuns  []base.TestRun `json:"test_runs"`
-	DataUrl   string         `json:"url"`
+	DataURL   string         `json:"url"`
 }
 
-// Metadata capturing:
+// FailuresMetadata constitutes metadata capturing:
 // - When failures report was gathered;
 // - What test runs are part of the failures report;
 // - Where the failures report resids (a URL);
@@ -169,13 +217,13 @@ type FailuresMetadata struct {
 	StartTime   time.Time      `json:"start_time"`
 	EndTime     time.Time      `json:"end_time"`
 	TestRuns    []base.TestRun `json:"test_runs"`
-	DataUrl     string         `json:"url"`
+	DataURL     string         `json:"url"`
 	BrowserName string         `json:"browser_name"`
 }
 
-// Output type for metrics: Include runs as metadata, and arbitrary content
-// as data.
-type MetricsRunData struct {
+// RunData is the output type for metrics: Include runs as metadata, and
+// arbitrary content as data.
+type RunData struct {
 	Metadata interface{} `json:"metadata"`
 	Data     interface{} `json:"data"`
 }

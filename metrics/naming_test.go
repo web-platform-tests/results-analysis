@@ -11,15 +11,15 @@ import (
 )
 
 func TestGetDatastoreKindName(t *testing.T) {
-	testId := TestId{
+	testID := TestID{
 		Test: "test",
 		Name: "name",
 	}
 
-	const expected = "github.com.web-platform-tests.results-analysis.metrics.TestId"
-	name := GetDatastoreKindName(testId)
+	const expected = "github.com.web-platform-tests.results-analysis.metrics.TestID"
+	name := GetDatastoreKindName(testID)
 	assert.Equal(t, expected, name)
 
-	name = GetDatastoreKindName(&testId)
+	name = GetDatastoreKindName(&testID)
 	assert.Equal(t, expected, name)
 }
