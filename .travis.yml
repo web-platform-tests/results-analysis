@@ -9,11 +9,11 @@ before_install: ./docker_build.sh && ./docker_start.sh
 
 install: |
   source ./docker_env.sh
-  docker -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make build
+  docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make build
 
 script: |
   source ./docker_env.sh
-  docker -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
-  docker -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
+  docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
+  docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
 
 after_script: ./docker_stop.sh
