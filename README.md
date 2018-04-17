@@ -1,4 +1,4 @@
-# Analysis of Web Platform Tests (WPT) results
+# Analysis of Web Platform Tests (WPT) results [![Build Status](https://travis-ci.org/web-platform-tests/results-analysis.svg?branch=master)](https://travis-ci.org/web-platform-tests/results-analysis)
 
 The code in this project performs two kinds of analysis on WPT results:
 
