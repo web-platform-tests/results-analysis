@@ -105,8 +105,8 @@ var testStatusValues = map[string]int32{
 	"TEST_TIMEOUT":        3,
 }
 
-// TestStatusfromString produces a TestStatus value from a name.
-func TestStatusfromString(str string) (ts TestStatus) {
+// TestStatusFromString produces a TestStatus value from a name.
+func TestStatusFromString(str string) (ts TestStatus) {
 	value, ok := testStatusValues["TEST_"+str]
 	if !ok {
 		return TestStatusUnknown

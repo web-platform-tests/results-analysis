@@ -59,16 +59,16 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 	}
 	gathered := GatherResultsById(results)
 	assert.Equal(t, 1, len(gathered)) // Merged to single TestId: {"A test",""}.
-	for testId, runStatusMap := range gathered {
-		assert.Equal(t, metrics.TestId{"A test", ""}, testId)
+	for testID, runStatusMap := range gathered {
+		assert.Equal(t, metrics.TestID{"A test", ""}, testID)
 		assert.Equal(t, 2, len(runStatusMap))
 		assert.Equal(t, metrics.CompleteTestStatus{
-			metrics.TestStatus_fromString("OK"),
-			metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
+			metrics.TestStatusFromString("OK"),
+			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 		}, runStatusMap[runA])
 		assert.Equal(t, metrics.CompleteTestStatus{
-			metrics.TestStatus_fromString("ERROR"),
-			metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
+			metrics.TestStatusFromString("ERROR"),
+			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 		}, runStatusMap[runB])
 	}
 }
@@ -115,25 +115,25 @@ func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
 	}
 	gathered := GatherResultsById(results)
 	assert.Equal(t, 3, len(gathered)) // A, Shared, B.
-	assert.Equal(t, 1, len(gathered[metrics.TestId{"A test", ""}]))
+	assert.Equal(t, 1, len(gathered[metrics.TestID{"A test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestId{"A test", ""}][runA])
-	assert.Equal(t, 2, len(gathered[metrics.TestId{"Shared test", ""}]))
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}, gathered[metrics.TestID{"A test", ""}][runA])
+	assert.Equal(t, 2, len(gathered[metrics.TestID{"Shared test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("ERROR"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestId{"Shared test", ""}][runA])
+		metrics.TestStatusFromString("ERROR"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}, gathered[metrics.TestID{"Shared test", ""}][runA])
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestId{"Shared test", ""}][runB])
-	assert.Equal(t, 1, len(gathered[metrics.TestId{"B test", ""}]))
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}, gathered[metrics.TestID{"Shared test", ""}][runB])
+	assert.Equal(t, 1, len(gathered[metrics.TestID{"B test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("ERROR"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestId{"B test", ""}][runB])
+		metrics.TestStatusFromString("ERROR"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}, gathered[metrics.TestID{"B test", ""}][runB])
 }
 
 func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
@@ -166,53 +166,53 @@ func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
 	}
 	gathered := GatherResultsById(results)
 	assert.Equal(t, 3, len(gathered)) // Top-level test + 2 sub-tests.
-	testIds := make([]metrics.TestId, 0, len(gathered))
+	testIds := make([]metrics.TestID, 0, len(gathered))
 	for testId, _ := range gathered {
 		testIds = append(testIds, testId)
 	}
-	assert.ElementsMatch(t, [...]metrics.TestId{
+	assert.ElementsMatch(t, [...]metrics.TestID{
 		{"A test", ""},
 		{"A test", subName1},
 		{"A test", subName2},
 	}, testIds)
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestId{"A test", ""}][runA])
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}, gathered[metrics.TestID{"A test", ""}][runA])
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("PASS"),
-	}, gathered[metrics.TestId{"A test", subName1}][runA])
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("PASS"),
+	}, gathered[metrics.TestID{"A test", subName1}][runA])
 	assert.Equal(t, metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("FAIL"),
-	}, gathered[metrics.TestId{"A test", subName2}][runA])
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("FAIL"),
+	}, gathered[metrics.TestID{"A test", subName2}][runA])
 }
 
 func TestComputeTotals(t *testing.T) {
 	statusz := make(TestRunsStatus)
 	status1 := metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 	}
 	status2 := metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("ERROR"),
-		metrics.SubTestStatus_fromString("STATUS_UNKNOWN"),
+		metrics.TestStatusFromString("ERROR"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 	}
 	subStatus1 := metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("PASS"),
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("PASS"),
 	}
 	subStatus2 := metrics.CompleteTestStatus{
-		metrics.TestStatus_fromString("OK"),
-		metrics.SubTestStatus_fromString("NOT_RUN"),
+		metrics.TestStatusFromString("OK"),
+		metrics.SubTestStatusFromString("NOT_RUN"),
 	}
-	ab1 := metrics.TestId{"a/b/1", ""}
-	ab2 := metrics.TestId{"a/b/2", ""}
-	ac1 := metrics.TestId{"a/c/1", ""}
-	ac1x := metrics.TestId{"a/c/1", "x"}
-	ac1y := metrics.TestId{"a/c/1", "y"}
-	ac1z := metrics.TestId{"a/c/1", "z"}
+	ab1 := metrics.TestID{"a/b/1", ""}
+	ab2 := metrics.TestID{"a/b/2", ""}
+	ac1 := metrics.TestID{"a/c/1", ""}
+	ac1x := metrics.TestID{"a/c/1", "x"}
+	ac1y := metrics.TestID{"a/c/1", "y"}
+	ac1z := metrics.TestID{"a/c/1", "z"}
 	statusz[ab1] = make(map[shared.TestRun]metrics.CompleteTestStatus)
 	statusz[ab2] = make(map[shared.TestRun]metrics.CompleteTestStatus)
 	statusz[ac1] = make(map[shared.TestRun]metrics.CompleteTestStatus)

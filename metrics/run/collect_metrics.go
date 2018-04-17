@@ -193,7 +193,7 @@ func main() {
 
 	var totals map[string]int
 	var passRateMetric map[string][]int
-	failuresMetrics := make(map[string][][]metrics.TestId)
+	failuresMetrics := make(map[string][][]metrics.TestID)
 	var wg sync.WaitGroup
 	wg.Add(2 + len(runs))
 	go func() {
@@ -270,7 +270,7 @@ func main() {
 		StartTime: readStartTime,
 		EndTime:   readEndTime,
 		TestRuns:  runs,
-		DataUrl:   passRatesUrl,
+		DataURL:   passRatesUrl,
 	}
 
 	wg.Add((1 + len(failuresMetrics)) * len(outputters))
@@ -302,13 +302,13 @@ func main() {
 			processUploadErrors(errs)
 		}(outputter)
 		for browserName, failuresMetric := range failuresMetrics {
-			go func(browserName string, failuresMetric [][]metrics.TestId, outputter storage.Outputter) {
+			go func(browserName string, failuresMetric [][]metrics.TestID, outputter storage.Outputter) {
 				defer wg.Done()
 				failuresMetadata := metrics.FailuresMetadata{
 					StartTime:   readStartTime,
 					EndTime:     readEndTime,
 					TestRuns:    runs,
-					DataUrl:     failuresUrlf(browserName),
+					DataURL:     failuresUrlf(browserName),
 					BrowserName: browserName,
 				}
 				outputId := storage.OutputId{
@@ -340,7 +340,7 @@ func main() {
 type FailureListsRow struct {
 	BrowserName      string         `json:"browser_name"`
 	NumOtherFailures int            `json:"num_other_failures"`
-	Tests            metrics.TestId `json:"test"`
+	Tests            metrics.TestID `json:"test"`
 }
 type ByTestId []interface{}
 
@@ -350,7 +350,7 @@ func (s ByTestId) Less(i int, j int) bool {
 	return s[i].(FailureListsRow).Tests.Test < s[j].(FailureListsRow).Tests.Test
 }
 
-func failureListsToRows(browserName string, failureLists [][]metrics.TestId) (
+func failureListsToRows(browserName string, failureLists [][]metrics.TestID) (
 	rows []interface{}) {
 	numRows := 0
 	for _, failureList := range failureLists {
@@ -406,7 +406,7 @@ func uploadTotalsAndPassRateMetric(metricsRun *metrics.PassRateMetadata,
 
 func uploadFailureLists(metricsRun *metrics.FailuresMetadata,
 	outputter storage.Outputter, id storage.OutputId,
-	browserName string, failureLists [][]metrics.TestId) (
+	browserName string, failureLists [][]metrics.TestID) (
 	interface{}, []interface{}, []error) {
 	rows := failureListsToRows(browserName, failureLists)
 	return outputter.Output(id, metricsRun, rows)

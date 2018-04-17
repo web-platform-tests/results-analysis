@@ -12,7 +12,7 @@ import (
 	base "github.com/web-platform-tests/wpt.fyi/shared"
 )
 
-type TestRunsStatus map[metrics.TestId]map[base.TestRun]metrics.CompleteTestStatus
+type TestRunsStatus map[metrics.TestID]map[base.TestRun]metrics.CompleteTestStatus
 
 // Type for decision problem: "What does it mean for a test result to 'pass'"?
 type Passes func(*metrics.CompleteTestStatus) bool
@@ -22,10 +22,10 @@ type Passes func(*metrics.CompleteTestStatus) bool
 //
 
 func OkAndUnknownOrPasses(status *metrics.CompleteTestStatus) bool {
-	return status.Status == metrics.TestStatus_TEST_OK &&
+	return status.Status == metrics.TestStatusOK &&
 		(status.SubStatus ==
-			metrics.SubTestStatus_SUB_TEST_STATUS_UNKNOWN ||
-			status.SubStatus == metrics.SubTestStatus_SUB_TEST_PASS)
+			metrics.SubTestStatusUnknown ||
+			status.SubStatus == metrics.SubTestStatusPass)
 }
 
 // Gather results from test runs into input format for Compute* functions in
@@ -37,46 +37,46 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 	for _, results := range *allResults {
 		result := results.Res
 		run := *results.Run
-		testId := metrics.TestId{Test: result.Test}
-		_, ok := resultsById[testId]
+		TestID := metrics.TestID{Test: result.Test}
+		_, ok := resultsById[TestID]
 		if !ok {
-			resultsById[testId] = make(
+			resultsById[TestID] = make(
 				map[base.TestRun]metrics.CompleteTestStatus)
 
 		}
-		_, ok = resultsById[testId][run]
+		_, ok = resultsById[TestID][run]
 		if ok {
-			log.Printf("Duplicate results for TestId:%v  in "+
-				"TestRun:%v.  Overwriting.\n", testId, run)
+			log.Printf("Duplicate results for TestID:%v  in "+
+				"TestRun:%v.  Overwriting.\n", TestID, run)
 		}
 		newStatus := metrics.CompleteTestStatus{
-			Status: metrics.TestStatus_fromString(result.Status),
+			Status: metrics.TestStatusFromString(result.Status),
 		}
-		resultsById[testId][run] = newStatus
+		resultsById[TestID][run] = newStatus
 
 		for _, subResult := range result.Subtests {
-			testId := metrics.TestId{
+			TestID := metrics.TestID{
 				Test: result.Test,
 				Name: subResult.Name,
 			}
-			_, ok := resultsById[testId]
+			_, ok := resultsById[TestID]
 			if !ok {
-				resultsById[testId] = make(
+				resultsById[TestID] = make(
 					map[base.TestRun]metrics.CompleteTestStatus)
 			}
-			_, ok = resultsById[testId][run]
+			_, ok = resultsById[TestID][run]
 			if ok {
 				log.Printf("Duplicate sub-results for "+
-					"TestId:%v  in TestRun:%v.  "+
-					"Overwriting.\n", testId, run)
+					"TestID:%v  in TestRun:%v.  "+
+					"Overwriting.\n", TestID, run)
 			}
 			newStatus := metrics.CompleteTestStatus{
-				Status: metrics.TestStatus_fromString(
+				Status: metrics.TestStatusFromString(
 					result.Status),
-				SubStatus: metrics.SubTestStatus_fromString(
+				SubStatus: metrics.SubTestStatusFromString(
 					subResult.Status),
 			}
-			resultsById[testId][run] = newStatus
+			resultsById[TestID][run] = newStatus
 		}
 	}
 
@@ -88,8 +88,8 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 func ComputeTotals(results *TestRunsStatus) (metrics map[string]int) {
 	metrics = make(map[string]int)
 
-	for testId := range *results {
-		pathParts := strings.Split(testId.Test, "/")
+	for TestID := range *results {
+		pathParts := strings.Split(TestID.Test, "/")
 		for i := range pathParts {
 			subPath := strings.Join(pathParts[:i+1], "/")
 			_, ok := metrics[subPath]
@@ -105,16 +105,16 @@ func ComputeTotals(results *TestRunsStatus) (metrics map[string]int) {
 
 // Compute:
 // [
-//  [TestIds of tests browserName + 0 other browsers fail],
-//  [TestIds of tests browserName + 1 other browsers fail],
+//  [TestIDs of tests browserName + 0 other browsers fail],
+//  [TestIDs of tests browserName + 1 other browsers fail],
 //  ...
-//  [TestIds of tests browserName + n other browsers fail],
+//  [TestIDs of tests browserName + n other browsers fail],
 // ]
 func ComputeBrowserFailureList(numRuns int, browserName string,
-	results *TestRunsStatus, passes Passes) (failures [][]metrics.TestId) {
-	failures = make([][]metrics.TestId, numRuns)
+	results *TestRunsStatus, passes Passes) (failures [][]metrics.TestID) {
+	failures = make([][]metrics.TestID, numRuns)
 
-	for testId, runStatuses := range *results {
+	for TestID, runStatuses := range *results {
 		numOtherFailures := 0
 		browserFailed := false
 		for run, status := range runStatuses {
@@ -129,7 +129,7 @@ func ComputeBrowserFailureList(numRuns int, browserName string,
 		if !browserFailed {
 			continue
 		}
-		failures[numOtherFailures] = append(failures[numOtherFailures], testId)
+		failures[numOtherFailures] = append(failures[numOtherFailures], TestID)
 	}
 
 	return failures
@@ -150,14 +150,14 @@ func ComputePassRateMetric(numRuns int,
 	metrics map[string][]int) {
 	metrics = make(map[string][]int)
 
-	for testId, runStatuses := range *results {
+	for TestID, runStatuses := range *results {
 		passCount := 0
 		for _, status := range runStatuses {
 			if passes(&status) {
 				passCount++
 			}
 		}
-		pathParts := strings.Split(testId.Test, "/")
+		pathParts := strings.Split(TestID.Test, "/")
 		for i := range pathParts {
 			subPath := strings.Join(pathParts[:i+1], "/")
 			_, ok := metrics[subPath]
