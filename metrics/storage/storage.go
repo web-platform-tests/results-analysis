@@ -21,8 +21,8 @@ import (
 	"cloud.google.com/go/datastore"
 	"cloud.google.com/go/storage"
 	tm "github.com/buger/goterm"
-	base "github.com/w3c/wptdashboard/shared"
 	"github.com/web-platform-tests/results-analysis/metrics"
+	base "github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
 	"google.golang.org/api/iterator"
 )

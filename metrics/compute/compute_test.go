@@ -10,8 +10,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/w3c/wptdashboard/shared"
 	"github.com/web-platform-tests/results-analysis/metrics"
+	"github.com/web-platform-tests/wpt.fyi/shared"
 )
 
 var timeA = time.Unix(0, 0)

@@ -16,10 +16,10 @@ import (
 	"cloud.google.com/go/bigquery"
 	"cloud.google.com/go/datastore"
 	gcs "cloud.google.com/go/storage"
-	base "github.com/w3c/wptdashboard/shared"
 	"github.com/web-platform-tests/results-analysis/metrics"
 	"github.com/web-platform-tests/results-analysis/metrics/compute"
 	"github.com/web-platform-tests/results-analysis/metrics/storage"
+	base "github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
 )
 
@@ -92,7 +92,7 @@ Outputs:
 Run with:
 
   make go_deps && cd $GOPATH && go run \
-    src/github.com/w3c/wptdashboard/metrics/run/collect_metrics.go [flags]
+    src/github.com/web-platform-tests/results-analysis/metrics/run/collect_metrics.go [flags]
 
 To run in development environment:
 
