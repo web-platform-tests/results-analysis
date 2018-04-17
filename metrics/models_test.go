@@ -12,7 +12,7 @@ import (
 	"fmt"
 
 	"github.com/stretchr/testify/assert"
-	models "github.com/w3c/wptdashboard/shared"
+	models "github.com/web-platform-tests/wpt.fyi/shared"
 )
 
 var today = time.Date(2018, 1, 4, 0, 0, 0, 0, time.UTC)
