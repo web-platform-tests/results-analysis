@@ -10,8 +10,9 @@ import (
 	"time"
 
 	"fmt"
+
 	"github.com/stretchr/testify/assert"
-	models "github.com/w3c/wptdashboard/shared"
+	models "github.com/web-platform-tests/wpt.fyi/shared"
 )
 
 var today = time.Date(2018, 1, 4, 0, 0, 0, 0, time.UTC)
@@ -54,7 +55,7 @@ func TestByCreatedDate_SameRevisions(t *testing.T) {
 }
 
 func TestByTestPath_DifferentPaths(t *testing.T) {
-	tests := []TestId{
+	tests := []TestID{
 		{
 			Test: "/bcd/efg",
 			Name: "Alignment test",
@@ -70,7 +71,7 @@ func TestByTestPath_DifferentPaths(t *testing.T) {
 }
 
 func TestByTestPath_SamePaths(t *testing.T) {
-	tests := []TestId{
+	tests := []TestID{
 		{
 			Test: "/abc/def",
 			Name: "Border test",

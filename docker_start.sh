@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 pushd "$(dirname ${BASH_SOURCE})" > /dev/null
 HOST_DIR=$(pwd)
 popd > /dev/null
@@ -14,7 +16,7 @@ docker run -t -d --entrypoint /bin/bash \
     -u $(id -u $USER):$(id -g $USER) \
     --name wpt-results-analysis-instance wpt-results-analysis
 
-OWNERSHIP="$(id -u $USER):$(id -g $USER)"
+OWNERSHIP="$(id -u ${USER}):$(id -g ${USER})"
 info "Setting ownership for container GOPATH=${CONTAINER_GOPATH} to ${OWNERSHIP}"
 docker exec -u 0:0 "${INSTANCE_NAME}" chown -R "${OWNERSHIP}" "${CONTAINER_GOPATH}"
 
