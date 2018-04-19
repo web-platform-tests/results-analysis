@@ -148,6 +148,7 @@ Data collection procedure:
 */
 
 func main() {
+	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	logFileName := "current_metrics.log"
