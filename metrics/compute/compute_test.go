@@ -71,6 +71,14 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 		}, runStatusMap[runB])
 	}
+
+	totals := ComputeTotals(&gathered)
+	assert.Equal(t, 1, len(totals))
+	assert.Equal(t, 1, totals["A"])
+
+	passes := ComputePassRateMetric(2, &gathered, OkAndUnknownOrPasses)
+	assert.Equal(t, 1, len(passes))
+	assert.Equal(t, []int{0, 1, 0}, totals["A"])
 }
 
 func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
