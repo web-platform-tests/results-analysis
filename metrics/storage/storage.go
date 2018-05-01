@@ -24,7 +24,12 @@ import (
 	"github.com/web-platform-tests/results-analysis/metrics"
 	base "github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
+	"golang.org/x/time/rate"
 	"google.golang.org/api/iterator"
+)
+
+var (
+	limiter = rate.NewLimiter(50, 50)
 )
 
 type OutputLocation struct {
@@ -383,6 +388,9 @@ func processTestRun(ctx *GCSDatastoreContext, testRun *base.TestRun,
 func loadTestResults(ctx *GCSDatastoreContext, testRun *base.TestRun,
 	objName string, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
+	// Rate limit.
+	limiter.Wait(ctx.Context)
+
 	// Read object from GCS
 	obj := ctx.Bucket.Handle.Object(objName)
 	reader, err := obj.NewReader(ctx.Context)
