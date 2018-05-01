@@ -71,14 +71,6 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 		}, runStatusMap[runB])
 	}
-
-	totals := ComputeTotals(&gathered)
-	assert.Equal(t, 1, len(totals))
-	assert.Equal(t, 1, totals["A"])
-
-	passes := ComputePassRateMetric(2, &gathered, OkAndUnknownOrPasses)
-	assert.Equal(t, 1, len(passes))
-	assert.Equal(t, []int{0, 1, 0}, totals["A"])
 }
 
 func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
@@ -197,7 +189,7 @@ func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
 	}, gathered[metrics.TestID{"A test", subName2}][runA])
 }
 
-func TestComputeTotals(t *testing.T) {
+func getPrecomputedStatusz() *TestRunsStatus {
 	statusz := make(TestRunsStatus)
 	status1 := metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
@@ -205,6 +197,10 @@ func TestComputeTotals(t *testing.T) {
 	}
 	status2 := metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("ERROR"),
+		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
+	}
+	status3 := metrics.CompleteTestStatus{
+		metrics.TestStatusFromString("PASS"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 	}
 	subStatus1 := metrics.CompleteTestStatus{
@@ -229,13 +225,19 @@ func TestComputeTotals(t *testing.T) {
 	statusz[ac1z] = make(map[shared.TestRun]metrics.CompleteTestStatus)
 	statusz[ab1][runA] = status1
 	statusz[ab1][runB] = status2
-	statusz[ab2][runB] = status1
+	statusz[ab2][runB] = status3
 	statusz[ac1][runA] = status1
 	statusz[ac1x][runA] = subStatus1
 	statusz[ac1y][runA] = subStatus2
 	statusz[ac1z][runA] = subStatus2
 
-	totals := ComputeTotals(&statusz)
+	return &statusz
+}
+
+func TestComputeTotals(t *testing.T) {
+	statusz := getPrecomputedStatusz()
+
+	totals := ComputeTotals(statusz)
 	assert.Equal(t, 6, len(totals))   // a, a/b, a/c, a/b/1, a/b/2, a/c/1.
 	assert.Equal(t, 6, totals["a"])   // a/b/1, a/b/2, a/c/1, a/c/1:x, a/c/1:y, a/c/1:z.
 	assert.Equal(t, 2, totals["a/b"]) // a/b/1, a/b/2.
@@ -243,4 +245,27 @@ func TestComputeTotals(t *testing.T) {
 	assert.Equal(t, 1, totals["a/b/2"])
 	assert.Equal(t, 4, totals["a/c"])   // a/c/1, a/c/1:x, a/c/1:y, a/c/1:z.
 	assert.Equal(t, 4, totals["a/c/1"]) // a/c/1, a/c/1:x, a/c/1:y, a/c/1:z.
+}
+
+func TestComputePassRateMetric(t *testing.T) {
+	statusz := getPrecomputedStatusz()
+
+	noTopLevelPasses := ComputePassRateMetric(2, statusz, OkAndUnknownOrPasses)
+	topLevelPasses := ComputePassRateMetric(2, statusz, OkOrPassesAndUnknownOrPasses)
+
+	assert.Equal(t, 6, len(noTopLevelPasses))
+	assert.Equal(t, 6, len(topLevelPasses))
+
+	// a/b/1: runA=OK, runB=ERROR.
+	assert.Equal(t, []int{0, 1, 0}, noTopLevelPasses["a/b/1"])
+	assert.Equal(t, []int{0, 1, 0}, topLevelPasses["a/b/1"])
+
+	// a/c/1: runA=OK.
+	assert.Equal(t, []int{2, 2, 0}, noTopLevelPasses["a/c/1"])
+	assert.Equal(t, []int{2, 2, 0}, topLevelPasses["a/c/1"])
+
+	// a/b/2: runB=PASS (and not OK): leads to [1, 0, 0].
+	assert.Equal(t, []int{1, 0, 0}, noTopLevelPasses["a/b/2"])
+	// a/b/2: runB=PASS acceptable; leads to [0, 1, 0].
+	assert.Equal(t, []int{0, 1, 0}, topLevelPasses["a/b/2"])
 }
