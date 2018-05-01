@@ -7,13 +7,13 @@ services:
 
 before_install: ./docker_build.sh && ./docker_start.sh
 
-install: |
-  source ./docker_env.sh
-  docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make build
+install:
+- source ./docker_env.sh
+- docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make build
 
-script: |
-  source ./docker_env.sh
-  docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
-  docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
+script:
+- source ./docker_env.sh
+- docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
+- docker exec -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
 
 after_script: ./docker_stop.sh
