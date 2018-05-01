@@ -71,6 +71,8 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
 		}, runStatusMap[runB])
 	}
+
+	assert.True(t, false)
 }
 
 func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
