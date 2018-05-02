@@ -28,6 +28,14 @@ func OkAndUnknownOrPasses(status *metrics.CompleteTestStatus) bool {
 			status.SubStatus == metrics.SubTestStatusPass)
 }
 
+func OkOrPassesAndUnknownOrPasses(status *metrics.CompleteTestStatus) bool {
+	return (status.Status == metrics.TestStatusOK ||
+		status.Status == metrics.TestStatusPass) &&
+		(status.SubStatus ==
+			metrics.SubTestStatusUnknown ||
+			status.SubStatus == metrics.SubTestStatusPass)
+}
+
 // Gather results from test runs into input format for Compute* functions in
 // this module.
 func GatherResultsById(allResults *[]metrics.TestRunResults) (
