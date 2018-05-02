@@ -31,9 +31,7 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-var (
-	limiter = rate.NewLimiter(50, 50)
-)
+const readWritePermission = 0600
 
 type OutputLocation struct {
 	GCSObjectPath string
@@ -277,7 +275,7 @@ func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun) (
 
 	if *cachePath != "" {
 		if _, statErr := os.Stat(*cachePath); os.IsNotExist(statErr) {
-			if err := os.MkdirAll(*cachePath, 0700); err != nil {
+			if err := os.MkdirAll(*cachePath, readWritePermission); err != nil {
 				log.Fatalf("Failed to create cache dir %s: %s", *cachePath, err.Error())
 			}
 		}
@@ -421,14 +419,11 @@ func loadTestResults(ctx *GCSDatastoreContext, testRun *base.TestRun,
 	if data == nil {
 		data, err = fetchFile(objName, ctx)
 		if err != nil {
-			if storage.ErrObjectNotExist == err {
+			if err == storage.ErrObjectNotExist {
 				return
 			}
 			log.Printf("Error fetching object %s", objName)
 			errChan <- err
-			return
-		}
-		if data == nil {
 			return
 		}
 		if *cachePath != "" {
@@ -445,7 +440,7 @@ func loadTestResults(ctx *GCSDatastoreContext, testRun *base.TestRun,
 	var results metrics.TestResults
 	jsonData := data
 
-	// Try unzip
+	// Try unzip.
 	reader2 := bytes.NewReader(data)
 	reader3, err := gzip.NewReader(reader2)
 	if err == nil {
@@ -479,13 +474,13 @@ func writeCacheFile(filename string, data []byte) error {
 	func() {
 		pieces := strings.Split(filename, "/")
 		parentDir := strings.Join(pieces[:len(pieces)-1], "/")
-		if err := os.MkdirAll(parentDir, 0700); err != nil {
+		if err := os.MkdirAll(parentDir, readWritePermission); err != nil {
 			log.Printf("Failed to make parent dir %s", parentDir)
 		}
 	}()
 
 	// Write cache file.
-	return ioutil.WriteFile(filename, data, 0700)
+	return ioutil.WriteFile(filename, data, readWritePermission)
 }
 
 func fetchFile(objName string, ctx *GCSDatastoreContext) ([]byte, error) {
@@ -493,7 +488,7 @@ func fetchFile(objName string, ctx *GCSDatastoreContext) ([]byte, error) {
 	if *rateLimitFetches {
 		limiter.Wait(ctx.Context)
 	}
-	// Read object from GCS
+	// Read object from GCS.
 	obj := ctx.Bucket.Handle.Object(objName)
 	reader, err := obj.NewReader(ctx.Context)
 	if err != nil {
