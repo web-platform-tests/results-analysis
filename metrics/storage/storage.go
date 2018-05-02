@@ -31,7 +31,7 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-const readWritePermission = 0600
+const cacheFilePermissions = 0644
 
 type OutputLocation struct {
 	GCSObjectPath string
@@ -275,7 +275,7 @@ func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun) (
 
 	if *cachePath != "" {
 		if _, statErr := os.Stat(*cachePath); os.IsNotExist(statErr) {
-			if err := os.MkdirAll(*cachePath, readWritePermission); err != nil {
+			if err := os.MkdirAll(*cachePath, cacheFilePermissions); err != nil {
 				log.Fatalf("Failed to create cache dir %s: %s", *cachePath, err.Error())
 			}
 		}
@@ -474,13 +474,13 @@ func writeCacheFile(filename string, data []byte) error {
 	func() {
 		pieces := strings.Split(filename, "/")
 		parentDir := strings.Join(pieces[:len(pieces)-1], "/")
-		if err := os.MkdirAll(parentDir, readWritePermission); err != nil {
+		if err := os.MkdirAll(parentDir, cacheFilePermissions); err != nil {
 			log.Printf("Failed to make parent dir %s", parentDir)
 		}
 	}()
 
 	// Write cache file.
-	return ioutil.WriteFile(filename, data, readWritePermission)
+	return ioutil.WriteFile(filename, data, cacheFilePermissions)
 }
 
 func fetchFile(objName string, ctx *GCSDatastoreContext) ([]byte, error) {
