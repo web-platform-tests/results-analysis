@@ -31,6 +31,10 @@ import (
 	"google.golang.org/api/iterator"
 )
 
+var (
+	limiter = rate.NewLimiter(50, 50)
+)
+
 type OutputLocation struct {
 	GCSObjectPath string
 	BQDatasetName string

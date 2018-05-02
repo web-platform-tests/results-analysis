@@ -89,6 +89,9 @@ const (
 
 	// TestStatusTimeout indicates that some tests timed out.
 	TestStatusTimeout TestStatus = 3
+
+	// TestStatusPass indicates that all tests completed successfully and passed.
+	TestStatusPass TestStatus = 4
 )
 
 var testStatusNames = map[int32]string{
@@ -96,6 +99,7 @@ var testStatusNames = map[int32]string{
 	1: "TEST_OK",
 	2: "TEST_ERROR",
 	3: "TEST_TIMEOUT",
+	4: "TEST_PASS",
 }
 
 var testStatusValues = map[string]int32{
@@ -103,6 +107,7 @@ var testStatusValues = map[string]int32{
 	"TEST_OK":             1,
 	"TEST_ERROR":          2,
 	"TEST_TIMEOUT":        3,
+	"TEST_PASS":           4,
 }
 
 // TestStatusFromString produces a TestStatus value from a name.
