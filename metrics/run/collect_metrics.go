@@ -286,7 +286,7 @@ func main() {
 	for _, outputter := range outputters {
 		go func(outputter storage.Outputter) {
 			defer wg.Done()
-			outputId := storage.OutputId{
+			outputID := storage.OutputID{
 				MetadataLocation: storage.OutputLocation{
 					BQDatasetName: *outputBQMetadataDataset,
 					BQTableName:   *outputBQPassRateMetadataTable,
@@ -298,7 +298,7 @@ func main() {
 				},
 			}
 			_, _, errs := uploadTotalsAndPassRateMetric(
-				&passRateMetadata, outputter, outputId, totals,
+				&passRateMetadata, outputter, outputID, totals,
 				passRateMetric)
 			processUploadErrors(errs)
 		}(outputter)
@@ -312,7 +312,7 @@ func main() {
 					DataURL:     failuresUrlf(browserName),
 					BrowserName: browserName,
 				}
-				outputId := storage.OutputId{
+				outputID := storage.OutputID{
 					MetadataLocation: storage.OutputLocation{
 						BQDatasetName: *outputBQMetadataDataset,
 						BQTableName:   *outputBQFailuresMetadataTable,
@@ -327,7 +327,7 @@ func main() {
 					},
 				}
 				_, _, errs := uploadFailureLists(&failuresMetadata,
-					outputter, outputId, browserName,
+					outputter, outputID, browserName,
 					failuresMetric)
 				processUploadErrors(errs)
 			}(browserName, failuresMetric, outputter)
@@ -398,7 +398,7 @@ func totalsAndPassRateMetricToRows(totals map[string]int,
 }
 
 func uploadTotalsAndPassRateMetric(metricsRun *metrics.PassRateMetadata,
-	outputter storage.Outputter, id storage.OutputId,
+	outputter storage.Outputter, id storage.OutputID,
 	totals map[string]int, passRateMetric map[string][]int) (
 	interface{}, []interface{}, []error) {
 	rows := totalsAndPassRateMetricToRows(totals, passRateMetric)
@@ -406,7 +406,7 @@ func uploadTotalsAndPassRateMetric(metricsRun *metrics.PassRateMetadata,
 }
 
 func uploadFailureLists(metricsRun *metrics.FailuresMetadata,
-	outputter storage.Outputter, id storage.OutputId,
+	outputter storage.Outputter, id storage.OutputID,
 	browserName string, failureLists [][]metrics.TestID) (
 	interface{}, []interface{}, []error) {
 	rows := failureListsToRows(browserName, failureLists)
