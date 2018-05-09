@@ -263,8 +263,8 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 
 // Load (test run, test results) pairs for given test runs. Use client in
 // context to load data from bucket.
-func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun) (
-	runResults []metrics.TestRunResults) {
+func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun,
+	pretty bool) (runResults []metrics.TestRunResults) {
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)
@@ -307,16 +307,27 @@ func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun) (
 			}
 			sort.Sort(metrics.ByCreatedDate(keys))
 
-			tm.Clear()
-			tm.MoveCursor(1, 1)
+			msgs := make([]string, 0, len(keys))
 			for _, run := range keys {
 				count := progress[run]
-				tm.Printf("%10s %10s %10s %10s %10s :: %10d\n",
+				msg := fmt.Sprintf("%10s %10s %10s %10s %10s :: %10d",
 					run.Revision, run.BrowserName,
 					run.BrowserVersion, run.OSName,
 					run.OSVersion, count)
+				msgs = append(msgs, msg)
 			}
-			tm.Flush()
+			if pretty {
+				tm.Clear()
+				tm.MoveCursor(1, 1)
+				for _, msg := range msgs {
+					tm.Println(msg)
+				}
+				tm.Flush()
+			} else {
+				for _, msg := range msgs {
+					log.Println(msg)
+				}
+			}
 		}
 	}()
 	go func() {

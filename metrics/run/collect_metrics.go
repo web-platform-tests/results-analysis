@@ -34,6 +34,7 @@ var outputBQPassRateTable *string
 var outputBQPassRateMetadataTable *string
 var outputBQFailuresTable *string
 var outputBQFailuresMetadataTable *string
+var pretty *bool
 
 func init() {
 	unixNow := time.Now().Unix()
@@ -66,6 +67,8 @@ func init() {
 		"BigQuery table where pass rate metrics are stored")
 	wptdHost = flag.String("wptd_host", "wpt.fyi",
 		"Hostname of endpoint that serves WPT Dashboard data API")
+	pretty = flag.Bool("pretty", false,
+		"Prettify stdout output; appropriate for terminals but not log files")
 }
 
 /*
@@ -179,7 +182,7 @@ func main() {
 
 	readStartTime := time.Now()
 	runs := base.FetchLatestRuns(*wptdHost)
-	allResults := storage.LoadTestRunResults(&inputCtx, runs)
+	allResults := storage.LoadTestRunResults(&inputCtx, runs, *pretty)
 	readEndTime := time.Now()
 
 	log.Println("Read test results from Google Cloud Storage bucket: " +
