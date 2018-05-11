@@ -13,6 +13,8 @@ import (
 	"sync"
 	"time"
 
+	"google.golang.org/api/option"
+
 	"cloud.google.com/go/bigquery"
 	"cloud.google.com/go/datastore"
 	gcs "cloud.google.com/go/storage"
@@ -35,6 +37,7 @@ var outputBQPassRateMetadataTable *string
 var outputBQFailuresTable *string
 var outputBQFailuresMetadataTable *string
 var pretty *bool
+var gcpCredentialsFile *string
 
 func init() {
 	unixNow := time.Now().Unix()
@@ -69,6 +72,8 @@ func init() {
 		"Hostname of endpoint that serves WPT Dashboard data API")
 	pretty = flag.Bool("pretty", false,
 		"Prettify stdout output; appropriate for terminals but not log files")
+	gcpCredentialsFile = flag.String("gcp_credentials_file", "client-secret.json",
+		"Path to Google Cloud Platform file for accessing services")
 }
 
 /*
@@ -164,7 +169,8 @@ func main() {
 	log.SetOutput(logFile)
 
 	ctx := context.Background()
-	gcsClient, err := gcs.NewClient(ctx)
+	gcsClient, err := gcs.NewClient(ctx,
+		option.WithCredentialsFile(*gcpCredentialsFile))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -224,11 +230,13 @@ func main() {
 	log.Println("Uploading metrics")
 
 	outputBucket := gcsClient.Bucket(*outputGcsBucket)
-	datastoreClient, err := datastore.NewClient(ctx, *projectId)
+	datastoreClient, err := datastore.NewClient(ctx, *projectId,
+		option.WithCredentialsFile(*gcpCredentialsFile))
 	if err != nil {
 		log.Fatal(err)
 	}
-	bigqueryClient, err := bigquery.NewClient(ctx, *projectId)
+	bigqueryClient, err := bigquery.NewClient(ctx, *projectId,
+		option.WithCredentialsFile(*gcpCredentialsFile))
 	if err != nil {
 		log.Fatal(err)
 	}
