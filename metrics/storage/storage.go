@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"reflect"
 	"sort"
 	"strings"
@@ -47,6 +48,13 @@ type Outputter interface {
 	Output(OutputId, interface{}, []interface{}) (interface{}, []interface{}, []error)
 }
 
+type Loader interface {
+	// LoadTestRunResults loads (test run, test results) pairs for given test
+	// runs. Uses client in context to load data from bucket.
+	LoadTestRunResults(runs []base.TestRun, pretty bool) (
+		[]metrics.TestRunResults, error)
+}
+
 // Encapsulate bucket name and handle; both are needed for some storage
 // read/write routines.
 type Bucket struct {
@@ -55,11 +63,41 @@ type Bucket struct {
 }
 
 // Encapsulate info required to read from or write to a storage bucket.
-type GCSDatastoreContext struct {
+type gcsDatastoreContext struct {
 	Context context.Context
 	Bucket  Bucket
 	Client  *datastore.Client
+
+	impl loaderImpl
 }
+
+func NewShardedGCSDatastoreContext(ctx context.Context, bucket Bucket,
+	client *datastore.Client) *gcsDatastoreContext {
+	return &gcsDatastoreContext{
+		Context: ctx,
+		Bucket:  bucket,
+		Client:  client,
+		impl:    shardedLoaderImpl{},
+	}
+}
+
+func NewConsolidatedGCSDatastoreContext(ctx context.Context, bucket Bucket,
+	client *datastore.Client) *gcsDatastoreContext {
+	return &gcsDatastoreContext{
+		Context: ctx,
+		Bucket:  bucket,
+		Client:  client,
+		impl:    consolidatedLoaderImpl{},
+	}
+}
+
+type loaderImpl interface {
+	processTestRun(ctx *gcsDatastoreContext, testRun *base.TestRun,
+		resultChan chan metrics.TestRunResults, errChan chan error)
+}
+
+type shardedLoaderImpl struct{}
+type consolidatedLoaderImpl struct{}
 
 type GCSData struct {
 	Metadata interface{}   `json:"metadata"`
@@ -86,7 +124,7 @@ type BQContext struct {
 	Client  *bigquery.Client
 }
 
-func (ctx GCSDatastoreContext) Output(id OutputId, metadata interface{},
+func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (
 	metadataWritten interface{}, dataWritten []interface{}, errs []error) {
 	name := fmt.Sprintf("%s/%s", ctx.Bucket.Name,
@@ -261,10 +299,25 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	return metadataWritten, dataWritten, errs
 }
 
-// Load (test run, test results) pairs for given test runs. Use client in
-// context to load data from bucket.
-func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun,
-	pretty bool) (runResults []metrics.TestRunResults) {
+type multiError struct {
+	errs []error
+}
+
+func (me multiError) Error() string {
+	var buffer bytes.Buffer
+	buffer.WriteString("Multiple errors:")
+
+	for _, err := range me.errs {
+		buffer.WriteString("\n" + err.Error())
+	}
+
+	return buffer.String()
+}
+
+// LoadTestRunResults loads (test run, test results) pairs for given test runs.
+// Use client in context to load data from bucket.
+func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
+	pretty bool) (runResults []metrics.TestRunResults, err error) {
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)
@@ -278,7 +331,7 @@ func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun,
 		for _, run := range runs {
 			go func(run base.TestRun) {
 				defer wg.Done()
-				processTestRun(ctx, &run, resultChan, errChan)
+				ctx.impl.processTestRun(ctx, &run, resultChan, errChan)
 			}(run)
 		}
 		wg.Wait()
@@ -330,19 +383,30 @@ func LoadTestRunResults(ctx *GCSDatastoreContext, runs []base.TestRun,
 			}
 		}
 	}()
+
 	go func() {
 		defer wg.Done()
+		errs := make([]error, 0)
 		for err := range errChan {
-			log.Fatal(err)
+			errs = append(errs, err)
+		}
+		if len(errs) == 0 {
+			return
+		} else if len(errs) == 1 {
+			err = errs[0]
+		} else {
+			err = multiError{errs}
 		}
 	}()
+
 	wg.Wait()
 
-	return runResults
+	return runResults, err
 }
 
-func processTestRun(ctx *GCSDatastoreContext, testRun *base.TestRun,
-	resultChan chan metrics.TestRunResults, errChan chan error) {
+func (impl shardedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
+	testRun *base.TestRun, resultChan chan metrics.TestRunResults,
+	errChan chan error) {
 	resultsURL := testRun.ResultsURL
 
 	// summaryURL format:
@@ -388,7 +452,7 @@ func processTestRun(ctx *GCSDatastoreContext, testRun *base.TestRun,
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			loadTestResults(ctx, testRun, attrs.Name, resultChan,
+			impl.loadTestResults(ctx, testRun, attrs.Name, resultChan,
 				errChan)
 		}()
 	}
@@ -396,8 +460,8 @@ func processTestRun(ctx *GCSDatastoreContext, testRun *base.TestRun,
 	wg.Wait()
 }
 
-func loadTestResults(ctx *GCSDatastoreContext, testRun *base.TestRun,
-	objName string, resultChan chan metrics.TestRunResults,
+func (impl shardedLoaderImpl) loadTestResults(ctx *gcsDatastoreContext,
+	testRun *base.TestRun, objName string, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
 	// Rate limit.
 	limiter.Wait(ctx.Context)
@@ -443,5 +507,47 @@ func loadTestResults(ctx *GCSDatastoreContext, testRun *base.TestRun,
 			return
 		}
 		resultChan <- metrics.TestRunResults{testRun, &results}
+	}
+}
+
+func (impl consolidatedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
+	testRun *base.TestRun, resultChan chan metrics.TestRunResults,
+	errChan chan error) {
+	if testRun.RawResultsURL == "" {
+		errChan <- fmt.Errorf("No RawResultsURL for %v", testRun)
+		return
+	}
+
+	resp, err := http.Get(testRun.RawResultsURL)
+	defer resp.Body.Close()
+	if err != nil {
+		errChan <- err
+		return
+	}
+	if resp.StatusCode != 200 {
+		errChan <- fmt.Errorf("Fetching %s unexpected HTTP status code %d",
+			testRun.RawResultsURL, resp.StatusCode)
+		return
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		errChan <- err
+		return
+	}
+
+	var report metrics.TestResultsReport
+	report.Results = make([]*metrics.TestResults, 0, 100000)
+	err = json.Unmarshal(body, &report)
+	if err != nil {
+		errChan <- err
+		return
+	}
+
+	for _, result := range report.Results {
+		resultChan <- metrics.TestRunResults{
+			Run: testRun,
+			Res: result,
+		}
 	}
 }

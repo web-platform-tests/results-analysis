@@ -175,24 +175,26 @@ func main() {
 		log.Fatal(err)
 	}
 	inputBucket := gcsClient.Bucket(*inputGcsBucket)
-	inputCtx := storage.GCSDatastoreContext{
-		Context: ctx,
-		Bucket: storage.Bucket{
-			Name:   *inputGcsBucket,
-			Handle: inputBucket,
-		},
-	}
+	inputCtx := storage.NewShardedGCSDatastoreContext(ctx, storage.Bucket{
+		Name:   *inputGcsBucket,
+		Handle: inputBucket,
+	}, nil)
 
 	log.Println("Reading test results from Google Cloud Storage bucket: " +
 		*inputGcsBucket)
 
 	readStartTime := time.Now()
 	runs := base.FetchLatestRuns(*wptdHost)
-	allResults := storage.LoadTestRunResults(&inputCtx, runs, *pretty)
+	allResults, err := inputCtx.LoadTestRunResults(runs, *pretty)
 	readEndTime := time.Now()
 
 	log.Println("Read test results from Google Cloud Storage bucket: " +
 		*inputGcsBucket)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	log.Println("Consolidating results")
 
 	resultsById := compute.GatherResultsById(&allResults)
@@ -241,14 +243,10 @@ func main() {
 		log.Fatal(err)
 	}
 	outputters := [2]storage.Outputter{
-		storage.GCSDatastoreContext{
-			Context: ctx,
-			Bucket: storage.Bucket{
-				Name:   *outputGcsBucket,
-				Handle: outputBucket,
-			},
-			Client: datastoreClient,
-		},
+		storage.NewShardedGCSDatastoreContext(ctx, storage.Bucket{
+			Name:   *outputGcsBucket,
+			Handle: outputBucket,
+		}, datastoreClient),
 		storage.BQContext{
 			Context: ctx,
 			Client:  bigqueryClient,
