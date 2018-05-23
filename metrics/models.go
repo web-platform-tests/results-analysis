@@ -47,6 +47,11 @@ type TestResults struct {
 	Subtests []SubTest `json:"subtests"`
 }
 
+// TestResultsReport models the `wpt run` results report JSON file format.
+type TestResultsReport struct {
+	Results []*TestResults `json:"results"`
+}
+
 // TestRunResults binds a base.TestRun to a TestResults.
 type TestRunResults struct {
 	Run *base.TestRun
