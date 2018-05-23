@@ -21,14 +21,21 @@ var tomorrow = time.Date(2018, 1, 5, 0, 0, 0, 0, time.UTC)
 func TestByCreatedDate_DifferentRevisions(t *testing.T) {
 	tests := []models.TestRun{
 		{
-			Revision:    "abc",
-			CreatedAt:   today,
-			BrowserName: "chrome",
-		},
-		{
-			Revision:    "def",
-			CreatedAt:   tomorrow,
-			BrowserName: "safari",
+			ProductAtRevision: models.ProductAtRevision{
+				Product: models.Product{
+					BrowserName: "chrome",
+				},
+				Revision: "abc",
+			},
+			CreatedAt: today,
+		}, {
+			ProductAtRevision: models.ProductAtRevision{
+				Product: models.Product{
+					BrowserName: "safari",
+				},
+				Revision: "def",
+			},
+			CreatedAt: tomorrow,
 		},
 	}
 	sort.Sort(ByCreatedDate(tests))
@@ -39,14 +46,22 @@ func TestByCreatedDate_DifferentRevisions(t *testing.T) {
 func TestByCreatedDate_SameRevisions(t *testing.T) {
 	tests := []models.TestRun{
 		{
-			Revision:    "abc",
-			CreatedAt:   today,
-			BrowserName: "chrome",
+			ProductAtRevision: models.ProductAtRevision{
+				Product: models.Product{
+					BrowserName: "chrome",
+				},
+				Revision: "abc",
+			},
+			CreatedAt: today,
 		},
 		{
-			Revision:    "abc",
-			CreatedAt:   tomorrow,
-			BrowserName: "safari",
+			ProductAtRevision: models.ProductAtRevision{
+				Product: models.Product{
+					BrowserName: "safari",
+				},
+				Revision: "abc",
+			},
+			CreatedAt: tomorrow,
 		},
 	}
 	sort.Sort(ByCreatedDate(tests))

@@ -17,22 +17,30 @@ import (
 var timeA = time.Unix(0, 0)
 var timeB = time.Unix(0, 1)
 var runA = shared.TestRun{
-	"ABrowser",
-	"1.0",
-	"MyOS",
-	"1.0",
-	"abcd",
-	"http://example.com/a_run.json",
-	timeA,
+	ProductAtRevision: shared.ProductAtRevision{
+		Product: shared.Product{
+			BrowserName:    "ABrowser",
+			BrowserVersion: "1.0",
+			OSName:         "MyOS",
+			OSVersion:      "1.0",
+		},
+		Revision: "abcd",
+	},
+	ResultsURL: "http://example.com/a_run.json",
+	CreatedAt:  timeA,
 }
 var runB = shared.TestRun{
-	"BBrowser",
-	"1.0",
-	"MyOS",
-	"1.0",
-	"dcba",
-	"http://example.com/b_run.json",
-	timeB,
+	ProductAtRevision: shared.ProductAtRevision{
+		Product: shared.Product{
+			BrowserName:    "BBrowser",
+			BrowserVersion: "1.0",
+			OSName:         "dcba",
+			OSVersion:      "1.0",
+		},
+		Revision: "dcba",
+	},
+	ResultsURL: "http://example.com/b_run.json",
+	CreatedAt:  timeB,
 }
 
 func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
