@@ -25,6 +25,11 @@ import (
 	"golang.org/x/net/context"
 )
 
+const (
+	DEFAULT_SHARDED_INPUT_BUCKET      = "wptd"
+	DEFAULT_CONSOLIDATED_INPUT_BUCKET = "wptd-results"
+)
+
 var wptDataPath *string
 var projectId *string
 var inputGcsBucket *string
@@ -38,6 +43,7 @@ var outputBQFailuresTable *string
 var outputBQFailuresMetadataTable *string
 var pretty *bool
 var gcpCredentialsFile *string
+var consolidatedInput *bool
 
 func init() {
 	unixNow := time.Now().Unix()
@@ -46,7 +52,7 @@ func init() {
 		"from Google Cloud Storage")
 	projectId = flag.String("project_id", "wptdashboard",
 		"Google Cloud Platform project id")
-	inputGcsBucket = flag.String("input_gcs_bucket", "wptd",
+	inputGcsBucket = flag.String("input_gcs_bucket", DEFAULT_SHARDED_INPUT_BUCKET,
 		"Google Cloud Storage bucket where test results are stored")
 	outputGcsBucket = flag.String("output_gcs_bucket", "wptd-metrics",
 		"Google Cloud Storage bucket where metrics are stored")
@@ -74,6 +80,8 @@ func init() {
 		"Prettify stdout output; appropriate for terminals but not log files")
 	gcpCredentialsFile = flag.String("gcp_credentials_file", "client-secret.json",
 		"Path to Google Cloud Platform file for accessing services")
+	consolidatedInput = flag.Bool("consolidated_input", false,
+		"Read input from consolidated results files")
 }
 
 /*
@@ -158,6 +166,14 @@ Data collection procedure:
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
+	flag.Parse()
+	if *consolidatedInput && *inputGcsBucket == DEFAULT_SHARDED_INPUT_BUCKET {
+		log.Printf(
+			"Using consolidated GCS bucket, %s, rather than sharded bucket, %s",
+			DEFAULT_CONSOLIDATED_INPUT_BUCKET, DEFAULT_SHARDED_INPUT_BUCKET)
+		*inputGcsBucket = DEFAULT_CONSOLIDATED_INPUT_BUCKET
+	}
+
 	logFileName := "current_metrics.log"
 	logFile, err := os.OpenFile(logFileName, os.O_RDWR|os.O_CREATE|
 		os.O_APPEND, 0666)
@@ -175,10 +191,18 @@ func main() {
 		log.Fatal(err)
 	}
 	inputBucket := gcsClient.Bucket(*inputGcsBucket)
-	inputCtx := storage.NewShardedGCSDatastoreContext(ctx, storage.Bucket{
-		Name:   *inputGcsBucket,
-		Handle: inputBucket,
-	}, nil)
+	var inputCtx storage.Loader
+	if *consolidatedInput {
+		inputCtx = storage.NewConsolidatedGCSDatastoreContext(ctx, storage.Bucket{
+			Name:   *inputGcsBucket,
+			Handle: inputBucket,
+		}, nil)
+	} else {
+		inputCtx = storage.NewShardedGCSDatastoreContext(ctx, storage.Bucket{
+			Name:   *inputGcsBucket,
+			Handle: inputBucket,
+		}, nil)
+	}
 
 	log.Println("Reading test results from Google Cloud Storage bucket: " +
 		*inputGcsBucket)
