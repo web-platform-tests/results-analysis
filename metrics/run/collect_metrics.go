@@ -148,7 +148,14 @@ Flags:
     BigQuery table where pass rate metrics are stored
 
   wptd_host (default: wpt.fyi)
-    Hostname of endpoint that serves WPT Dashboard data API
+		Hostname of endpoint that serves WPT Dashboard data API
+
+	pretty (default: false)
+		Prettify stdout output; appropriate for terminals but not log files
+	gcpCredentialsFile (default: client-secret.json)
+		Path to Google Cloud Platform file for accessing services
+	consolidatedInput (default: false)
+		Read input from consolidated results files
 
 Data collection procedure:
   1. Fetch latest runs from WPTD endpoint
@@ -191,18 +198,14 @@ func main() {
 		log.Fatal(err)
 	}
 	inputBucket := gcsClient.Bucket(*inputGcsBucket)
-	var inputCtx storage.Loader
+	ctxF := storage.NewShardedGCSDatastoreContext
 	if *consolidatedInput {
-		inputCtx = storage.NewConsolidatedGCSDatastoreContext(ctx, storage.Bucket{
-			Name:   *inputGcsBucket,
-			Handle: inputBucket,
-		}, nil)
-	} else {
-		inputCtx = storage.NewShardedGCSDatastoreContext(ctx, storage.Bucket{
-			Name:   *inputGcsBucket,
-			Handle: inputBucket,
-		}, nil)
+		ctxF = storage.NewConsolidatedGCSDatastoreContext
 	}
+	inputCtx := ctxF(ctx, storage.Bucket{
+		Name:   *inputGcsBucket,
+		Handle: inputBucket,
+	}, nil)
 
 	log.Println("Reading test results from Google Cloud Storage bucket: " +
 		*inputGcsBucket)
