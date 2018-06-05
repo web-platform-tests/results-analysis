@@ -23,7 +23,7 @@ import (
 	"cloud.google.com/go/storage"
 	tm "github.com/buger/goterm"
 	"github.com/web-platform-tests/results-analysis/metrics"
-	base "github.com/web-platform-tests/wpt.fyi/shared"
+	"github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
 	"google.golang.org/api/iterator"
@@ -51,7 +51,7 @@ type Outputter interface {
 type Loader interface {
 	// LoadTestRunResults loads (test run, test results) pairs for given test
 	// runs. Uses client in context to load data from bucket.
-	LoadTestRunResults(runs []base.TestRun, pretty bool) (
+	LoadTestRunResults(runs shared.TestRuns, pretty bool) (
 		[]metrics.TestRunResults, error)
 }
 
@@ -92,7 +92,7 @@ func NewConsolidatedGCSDatastoreContext(ctx context.Context, bucket Bucket,
 }
 
 type loaderImpl interface {
-	processTestRun(ctx *gcsDatastoreContext, testRun *base.TestRun,
+	processTestRun(ctx *gcsDatastoreContext, testRun *shared.TestRun,
 		resultChan chan metrics.TestRunResults, errChan chan error)
 }
 
@@ -316,8 +316,8 @@ func (me multiError) Error() string {
 
 // LoadTestRunResults loads (test run, test results) pairs for given test runs.
 // Use client in context to load data from bucket.
-func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
-	pretty bool) (runResults []metrics.TestRunResults, err error) {
+func (ctx *gcsDatastoreContext) LoadTestRunResults(
+	runs shared.TestRuns, pretty bool) (runResults []metrics.TestRunResults, err error) {
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)
@@ -329,7 +329,7 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
 		var wg sync.WaitGroup
 		wg.Add(len(runs))
 		for _, run := range runs {
-			go func(run base.TestRun) {
+			go func(run shared.TestRun) {
 				defer wg.Done()
 				ctx.impl.processTestRun(ctx, &run, resultChan, errChan)
 			}(run)
@@ -337,7 +337,7 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
 		wg.Wait()
 	}()
 
-	progress := make(map[base.TestRun]int)
+	progress := make(map[shared.TestRun]int)
 	type Nothing struct{}
 
 	var wg sync.WaitGroup
@@ -354,7 +354,7 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
 			}
 			progress[testRun] = progress[testRun] + 1
 
-			keys := make([]base.TestRun, 0, len(progress))
+			keys := make(shared.TestRuns, 0, len(progress))
 			for key := range progress {
 				keys = append(keys, key)
 			}
@@ -405,7 +405,7 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(runs []base.TestRun,
 }
 
 func (impl shardedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
-	testRun *base.TestRun, resultChan chan metrics.TestRunResults,
+	testRun *shared.TestRun, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
 	resultsURL := testRun.ResultsURL
 
@@ -461,7 +461,7 @@ func (impl shardedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
 }
 
 func (impl shardedLoaderImpl) loadTestResults(ctx *gcsDatastoreContext,
-	testRun *base.TestRun, objName string, resultChan chan metrics.TestRunResults,
+	testRun *shared.TestRun, objName string, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
 	// Rate limit.
 	limiter.Wait(ctx.Context)
@@ -511,7 +511,7 @@ func (impl shardedLoaderImpl) loadTestResults(ctx *gcsDatastoreContext,
 }
 
 func (impl consolidatedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
-	testRun *base.TestRun, resultChan chan metrics.TestRunResults,
+	testRun *shared.TestRun, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
 	if testRun.RawResultsURL == "" {
 		errChan <- fmt.Errorf("No RawResultsURL for %v", testRun)

@@ -50,11 +50,11 @@ func init() {
 	wptDataPath = flag.String("wpt_data_path", os.Getenv("HOME")+
 		"/wpt-data", "Path to data directory for local data copied "+
 		"from Google Cloud Storage")
-	projectId = flag.String("project_id", "wptdashboard",
+	projectId = flag.String("project_id", "wptdashboard-staging",
 		"Google Cloud Platform project id")
 	inputGcsBucket = flag.String("input_gcs_bucket", DEFAULT_SHARDED_INPUT_BUCKET,
 		"Google Cloud Storage bucket where test results are stored")
-	outputGcsBucket = flag.String("output_gcs_bucket", "wptd-metrics",
+	outputGcsBucket = flag.String("output_gcs_bucket", "wptd-metrics-staging",
 		"Google Cloud Storage bucket where metrics are stored")
 	outputBQMetadataDataset = flag.String("output_bq_metadata_dataset",
 		fmt.Sprintf("wptd_metrics_%d", unixNow),
@@ -74,7 +74,7 @@ func init() {
 	outputBQFailuresMetadataTable = flag.String("output_bq_failures_metadata_table",
 		fmt.Sprintf("FailuresMetadata_%d", unixNow),
 		"BigQuery table where pass rate metrics are stored")
-	wptdHost = flag.String("wptd_host", "wpt.fyi",
+	wptdHost = flag.String("wptd_host", "staging.wpt.fyi",
 		"Hostname of endpoint that serves WPT Dashboard data API")
 	pretty = flag.Bool("pretty", false,
 		"Prettify stdout output; appropriate for terminals but not log files")
@@ -120,13 +120,13 @@ Flags:
   wpt_data_path (default: $HOME/wpt-data)
     Path to data directory for local data copied from Google Cloud Storage
 
-  project_id (default: wptdashboard)
+  project_id (default: wptdashboard-staging)
     Google Cloud Platform project id
 
-  input_gcs_bucket (default:
+  input_gcs_bucket (default: wptd-results)
     Google Cloud Storage bucket where test results are stored
 
-  output_gcs_bucket (default: wptd-metrics)
+  output_gcs_bucket (default: wptd-metrics-staging)
     Google Cloud Storage bucket where metrics are stored
 
   output_bq_metadata_dataset (default: wptd_metrics_[current UNIX time])
@@ -147,7 +147,7 @@ Flags:
   output_bq_failures_metadata_table (default: FailuresMetadata_[current UNIX time])
     BigQuery table where pass rate metrics are stored
 
-  wptd_host (default: wpt.fyi)
+  wptd_host (default: staging.wpt.fyi)
 		Hostname of endpoint that serves WPT Dashboard data API
 
 	pretty (default: false)
@@ -303,10 +303,12 @@ func main() {
 			failuresGCSPathf(browserName))
 	}
 	passRateMetadata := metrics.PassRateMetadata{
-		StartTime: readStartTime,
-		EndTime:   readEndTime,
-		TestRuns:  runs,
-		DataURL:   passRatesUrl,
+		TestRunsMetadata: metrics.TestRunsMetadata{
+			StartTime:  readStartTime,
+			EndTime:    readEndTime,
+			TestRunIDs: runs.GetTestRunIDs(),
+			DataURL:    passRatesUrl,
+		},
 	}
 
 	wg.Add((1 + len(failuresMetrics)) * len(outputters))
@@ -341,10 +343,12 @@ func main() {
 			go func(browserName string, failuresMetric [][]metrics.TestID, outputter storage.Outputter) {
 				defer wg.Done()
 				failuresMetadata := metrics.FailuresMetadata{
-					StartTime:   readStartTime,
-					EndTime:     readEndTime,
-					TestRuns:    runs,
-					DataURL:     failuresUrlf(browserName),
+					TestRunsMetadata: metrics.TestRunsMetadata{
+						StartTime:  readStartTime,
+						EndTime:    readEndTime,
+						TestRunIDs: runs.GetTestRunIDs(),
+						DataURL:    failuresUrlf(browserName),
+					},
 					BrowserName: browserName,
 				}
 				outputId := storage.OutputId{

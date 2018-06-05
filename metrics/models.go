@@ -5,14 +5,16 @@
 package metrics
 
 import (
+	"context"
 	"time"
 
-	base "github.com/web-platform-tests/wpt.fyi/shared"
+	"github.com/web-platform-tests/wpt.fyi/shared"
+	"google.golang.org/appengine/datastore"
 )
 
 // ByCreatedDate sorts tests by run's CreatedAt date (descending)
 // then by platform alphabetically (ascending).
-type ByCreatedDate []base.TestRun
+type ByCreatedDate []shared.TestRun
 
 func (s ByCreatedDate) Len() int          { return len(s) }
 func (s ByCreatedDate) Swap(i int, j int) { s[i], s[j] = s[j], s[i] }
@@ -52,9 +54,9 @@ type TestResultsReport struct {
 	Results []*TestResults `json:"results"`
 }
 
-// TestRunResults binds a base.TestRun to a TestResults.
+// TestRunResults binds a shared.TestRun to a TestResults.
 type TestRunResults struct {
-	Run *base.TestRun
+	Run *shared.TestRun
 	Res *TestResults
 }
 
@@ -203,8 +205,33 @@ type CompleteTestStatus struct {
 
 // TestRunStatus binds a TestRun to a CompleteTestStatus.
 type TestRunStatus struct {
-	Run    *base.TestRun
+	Run    *shared.TestRun
 	Status CompleteTestStatus
+}
+
+// TestRunsMetadata is a struct for metadata derived from a group of TestRun entities.
+type TestRunsMetadata struct {
+	// Deprecated. Store the IDs in TestRunIDs instead.
+	TestRuns   []shared.TestRun `json:"test_runs,omitempty" datastore:"TestRuns,omitempty"`
+	TestRunIDs []int64          `json:"-"`
+	StartTime  time.Time        `json:"start_time"`
+	EndTime    time.Time        `json:"end_time"`
+	DataURL    string           `json:"url"`
+}
+
+// LoadTestRuns fetches the TestRun entities for the PassRateMetadata's TestRunIDs.
+func (metadata *TestRunsMetadata) LoadTestRuns(ctx context.Context) (err error) {
+	if len(metadata.TestRunIDs) > 0 {
+		keys := make([]*datastore.Key, len(metadata.TestRunIDs))
+		for i, id := range metadata.TestRunIDs {
+			keys[i] = datastore.NewKey(ctx, "TestRun", "", id, nil)
+		}
+		metadata.TestRuns = make([]shared.TestRun, len(keys))
+		if err = datastore.GetMulti(ctx, keys, metadata.TestRuns); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // PassRateMetadata constitutes metadata capturing:
@@ -212,10 +239,7 @@ type TestRunStatus struct {
 // - What test runs are part of the metric run;
 // - Where the metric run results reside (a URL).
 type PassRateMetadata struct {
-	StartTime time.Time      `json:"start_time"`
-	EndTime   time.Time      `json:"end_time"`
-	TestRuns  []base.TestRun `json:"test_runs"`
-	DataURL   string         `json:"url"`
+	TestRunsMetadata
 }
 
 // FailuresMetadata constitutes metadata capturing:
@@ -224,11 +248,8 @@ type PassRateMetadata struct {
 // - Where the failures report resids (a URL);
 // - What browser is described in the report.
 type FailuresMetadata struct {
-	StartTime   time.Time      `json:"start_time"`
-	EndTime     time.Time      `json:"end_time"`
-	TestRuns    []base.TestRun `json:"test_runs"`
-	DataURL     string         `json:"url"`
-	BrowserName string         `json:"browser_name"`
+	TestRunsMetadata
+	BrowserName string `json:"browser_name"`
 }
 
 // RunData is the output type for metrics: Include runs as metadata, and
