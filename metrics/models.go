@@ -210,8 +210,18 @@ type TestRunStatus struct {
 
 // TestRunsMetadata is a struct for metadata derived from a group of TestRun entities.
 type TestRunsMetadata struct {
-	// Deprecated. Store the IDs in TestRunIDs instead.
-	TestRuns   shared.TestRuns   `json:"test_runs,omitempty" datastore:"TestRuns,omitempty"`
+	// TestRuns are the TestRun entities, loaded from the TestRunIDs
+	TestRuns   shared.TestRuns   `json:"test_runs,omitempty" datastore:"-"`
+	TestRunIDs shared.TestRunIDs `json:"-"`
+	StartTime  time.Time         `json:"start_time"`
+	EndTime    time.Time         `json:"end_time"`
+	DataURL    string            `json:"url"`
+}
+
+// TestRunsMetadataLegacy is a struct for loading legacy TestRunMetadata entities,
+// which may have nested TestRun entities.
+type TestRunsMetadataLegacy struct {
+	TestRuns   shared.TestRuns   `json:"test_runs"`
 	TestRunIDs shared.TestRunIDs `json:"-"`
 	StartTime  time.Time         `json:"start_time"`
 	EndTime    time.Time         `json:"end_time"`
@@ -224,12 +234,29 @@ func (metadata *TestRunsMetadata) LoadTestRuns(ctx context.Context) (err error) 
 	return err
 }
 
+// LoadTestRuns fetches the TestRun entities for the PassRateMetadata's TestRunIDs.
+func (metadata *TestRunsMetadataLegacy) LoadTestRuns(ctx context.Context) (err error) {
+	if len(metadata.TestRuns) == 0 {
+		metadata.TestRuns, err = metadata.TestRunIDs.LoadTestRuns(ctx)
+	}
+	return err
+}
+
 // PassRateMetadata constitutes metadata capturing:
 // - When metric run was performed;
 // - What test runs are part of the metric run;
 // - Where the metric run results reside (a URL).
 type PassRateMetadata struct {
 	TestRunsMetadata
+}
+
+// PassRateMetadataLegacy is a struct for storing a PassRateMetadata entry in the
+// datastore, avoiding nested arrays. PassRateMetadata is the legacy format, used for
+// loading the entity, for backward compatibility.
+type PassRateMetadataLegacy struct {
+	TestRunsMetadataLegacy
+	// Override the TestRuns to be omitted by datastore.
+	TestRuns shared.TestRuns `json:"test_runs,omitempty" datastore:"-"`
 }
 
 // FailuresMetadata constitutes metadata capturing:
@@ -240,6 +267,15 @@ type PassRateMetadata struct {
 type FailuresMetadata struct {
 	TestRunsMetadata
 	BrowserName string `json:"browser_name"`
+}
+
+// FailuresMetadataLegacy is a struct for storing a FailuresMetadata entry in the
+// datastore, avoiding nested arrays. FailuresMetadata is the legacy format, used for
+// loading the entity, for backward compatibility.
+type FailuresMetadataLegacy struct {
+	TestRunsMetadataLegacy
+	// Override the TestRuns to be omitted by datastore.
+	TestRuns shared.TestRuns `json:"test_runs,omitempty" datastore:"-"`
 }
 
 // RunData is the output type for metrics: Include runs as metadata, and
