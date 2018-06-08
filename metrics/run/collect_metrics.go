@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -211,7 +212,14 @@ func main() {
 		*inputGcsBucket)
 
 	readStartTime := time.Now()
-	runs := base.FetchLatestRuns(*wptdHost)
+	var runs []metrics.TestRunLegacy
+	runsWithLabels := base.FetchLatestRuns(*wptdHost)
+	if serialized, err := json.Marshal(runsWithLabels); err != nil {
+		log.Fatal(err)
+	} else if err = json.Unmarshal(serialized, &runs); err != nil {
+		log.Fatal(err)
+	}
+
 	allResults, err := inputCtx.LoadTestRunResults(runs, *pretty)
 	readEndTime := time.Now()
 
@@ -306,7 +314,7 @@ func main() {
 		TestRunsMetadata: metrics.TestRunsMetadata{
 			StartTime:  readStartTime,
 			EndTime:    readEndTime,
-			TestRunIDs: runs.GetTestRunIDs(),
+			TestRunIDs: runsWithLabels.GetTestRunIDs(),
 			DataURL:    passRatesUrl,
 		},
 	}
@@ -346,7 +354,7 @@ func main() {
 					TestRunsMetadata: metrics.TestRunsMetadata{
 						StartTime:  readStartTime,
 						EndTime:    readEndTime,
-						TestRunIDs: runs.GetTestRunIDs(),
+						TestRunIDs: runsWithLabels.GetTestRunIDs(),
 						DataURL:    failuresUrlf(browserName),
 					},
 					BrowserName: browserName,

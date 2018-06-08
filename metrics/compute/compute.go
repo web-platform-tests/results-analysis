@@ -9,10 +9,9 @@ import (
 	"strings"
 
 	"github.com/web-platform-tests/results-analysis/metrics"
-	base "github.com/web-platform-tests/wpt.fyi/shared"
 )
 
-type TestRunsStatus map[metrics.TestID]map[base.TestRun]metrics.CompleteTestStatus
+type TestRunsStatus map[metrics.TestID]map[metrics.TestRunLegacy]metrics.CompleteTestStatus
 
 // Type for decision problem: "What does it mean for a test result to 'pass'"?
 type Passes func(*metrics.CompleteTestStatus) bool
@@ -49,7 +48,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 		_, ok := resultsById[TestID]
 		if !ok {
 			resultsById[TestID] = make(
-				map[base.TestRun]metrics.CompleteTestStatus)
+				map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
 
 		}
 		_, ok = resultsById[TestID][run]
@@ -70,7 +69,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 			_, ok := resultsById[TestID]
 			if !ok {
 				resultsById[TestID] = make(
-					map[base.TestRun]metrics.CompleteTestStatus)
+					map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
 			}
 			_, ok = resultsById[TestID][run]
 			if ok {
