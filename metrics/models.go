@@ -219,6 +219,8 @@ type TestRunsMetadata struct {
 	DataURL    string            `json:"url"`
 }
 
+// TODO(lukebjerring): Remove TestRunLegacy when old format migrated.
+
 // TestRunLegacy is a copy of the TestRun struct, before the `Labels` field
 // was added (which causes an array of array and breaks datastore).
 type TestRunLegacy struct {
@@ -236,6 +238,18 @@ type TestRunLegacy struct {
 	// wpt report tool.
 	RawResultsURL string `json:"raw_results_url"`
 }
+
+// ConvertRuns converts TestRuns into the legacy format.
+func ConvertRuns(runs shared.TestRuns) (converted []TestRunLegacy, err error) {
+	if serialized, err := json.Marshal(runs); err != nil {
+		return nil, err
+	} else if err = json.Unmarshal(serialized, &runs); err != nil {
+		return nil, err
+	}
+	return converted, nil
+}
+
+// TODO(lukebjerring): Remove TestRunsMetadataLegacy when old format migrated.
 
 // TestRunsMetadataLegacy is a struct for loading legacy TestRunMetadata entities,
 // which may have nested TestRun entities.
@@ -260,12 +274,9 @@ func (metadata *TestRunsMetadataLegacy) LoadTestRuns(ctx context.Context) (err e
 		if err != nil {
 			return err
 		}
-		// Serialize + unserialize - aka "Copy fields"
-		serialized, err := json.Marshal(newRuns)
-		if err != nil {
+		if metadata.TestRuns, err = ConvertRuns(newRuns); err != nil {
 			return err
 		}
-		err = json.Unmarshal(serialized, &metadata.TestRuns)
 	}
 	return err
 }
@@ -277,6 +288,8 @@ func (metadata *TestRunsMetadataLegacy) LoadTestRuns(ctx context.Context) (err e
 type PassRateMetadata struct {
 	TestRunsMetadata
 }
+
+// TODO(lukebjerring): Remove PassRateMetadataLegacy when old format migrated.
 
 // PassRateMetadataLegacy is a struct for storing a PassRateMetadata entry in the
 // datastore, avoiding nested arrays. PassRateMetadata is the legacy format, used for
@@ -294,6 +307,8 @@ type FailuresMetadata struct {
 	TestRunsMetadata
 	BrowserName string `json:"browser_name"`
 }
+
+// TODO(lukebjerring): Remove FailuresMetadataLegacy when old format migrated.
 
 // FailuresMetadataLegacy is a struct for storing a FailuresMetadata entry in the
 // datastore, avoiding nested arrays. FailuresMetadata is the legacy format, used for

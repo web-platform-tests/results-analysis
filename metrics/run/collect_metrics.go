@@ -5,7 +5,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -212,11 +211,9 @@ func main() {
 		*inputGcsBucket)
 
 	readStartTime := time.Now()
-	var runs []metrics.TestRunLegacy
 	runsWithLabels := base.FetchLatestRuns(*wptdHost)
-	if serialized, err := json.Marshal(runsWithLabels); err != nil {
-		log.Fatal(err)
-	} else if err = json.Unmarshal(serialized, &runs); err != nil {
+	runs, err := metrics.ConvertRuns(runsWithLabels)
+	if err != nil {
 		log.Fatal(err)
 	}
 
