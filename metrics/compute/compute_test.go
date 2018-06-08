@@ -16,7 +16,7 @@ import (
 
 var timeA = time.Unix(0, 0)
 var timeB = time.Unix(0, 1)
-var runA = shared.TestRun{
+var runA = metrics.TestRunLegacy{
 	ProductAtRevision: shared.ProductAtRevision{
 		Product: shared.Product{
 			BrowserName:    "ABrowser",
@@ -29,7 +29,7 @@ var runA = shared.TestRun{
 	ResultsURL: "http://example.com/a_run.json",
 	CreatedAt:  timeA,
 }
-var runB = shared.TestRun{
+var runB = metrics.TestRunLegacy{
 	ProductAtRevision: shared.ProductAtRevision{
 		Product: shared.Product{
 			BrowserName:    "BBrowser",
@@ -225,12 +225,12 @@ func getPrecomputedStatusz() *TestRunsStatus {
 	ac1x := metrics.TestID{"a/c/1", "x"}
 	ac1y := metrics.TestID{"a/c/1", "y"}
 	ac1z := metrics.TestID{"a/c/1", "z"}
-	statusz[ab1] = make(map[shared.TestRun]metrics.CompleteTestStatus)
-	statusz[ab2] = make(map[shared.TestRun]metrics.CompleteTestStatus)
-	statusz[ac1] = make(map[shared.TestRun]metrics.CompleteTestStatus)
-	statusz[ac1x] = make(map[shared.TestRun]metrics.CompleteTestStatus)
-	statusz[ac1y] = make(map[shared.TestRun]metrics.CompleteTestStatus)
-	statusz[ac1z] = make(map[shared.TestRun]metrics.CompleteTestStatus)
+	statusz[ab1] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+	statusz[ab2] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+	statusz[ac1] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+	statusz[ac1x] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+	statusz[ac1y] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+	statusz[ac1z] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
 	statusz[ab1][runA] = status1
 	statusz[ab1][runB] = status2
 	statusz[ab2][runB] = status3

@@ -19,7 +19,7 @@ var today = time.Date(2018, 1, 4, 0, 0, 0, 0, time.UTC)
 var tomorrow = time.Date(2018, 1, 5, 0, 0, 0, 0, time.UTC)
 
 func TestByCreatedDate_DifferentRevisions(t *testing.T) {
-	tests := []models.TestRun{
+	tests := []TestRunLegacy{
 		{
 			ProductAtRevision: models.ProductAtRevision{
 				Product: models.Product{
@@ -44,7 +44,7 @@ func TestByCreatedDate_DifferentRevisions(t *testing.T) {
 }
 
 func TestByCreatedDate_SameRevisions(t *testing.T) {
-	tests := []models.TestRun{
+	tests := []TestRunLegacy{
 		{
 			ProductAtRevision: models.ProductAtRevision{
 				Product: models.Product{
