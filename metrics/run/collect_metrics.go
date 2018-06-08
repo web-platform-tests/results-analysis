@@ -211,7 +211,12 @@ func main() {
 		*inputGcsBucket)
 
 	readStartTime := time.Now()
-	runs := base.FetchLatestRuns(*wptdHost)
+	runsWithLabels := base.FetchLatestRuns(*wptdHost)
+	runs, err := metrics.ConvertRuns(runsWithLabels)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	allResults, err := inputCtx.LoadTestRunResults(runs, *pretty)
 	readEndTime := time.Now()
 
@@ -306,7 +311,7 @@ func main() {
 		TestRunsMetadata: metrics.TestRunsMetadata{
 			StartTime:  readStartTime,
 			EndTime:    readEndTime,
-			TestRunIDs: runs.GetTestRunIDs(),
+			TestRunIDs: runsWithLabels.GetTestRunIDs(),
 			DataURL:    passRatesUrl,
 		},
 	}
@@ -346,7 +351,7 @@ func main() {
 					TestRunsMetadata: metrics.TestRunsMetadata{
 						StartTime:  readStartTime,
 						EndTime:    readEndTime,
-						TestRunIDs: runs.GetTestRunIDs(),
+						TestRunIDs: runsWithLabels.GetTestRunIDs(),
 						DataURL:    failuresUrlf(browserName),
 					},
 					BrowserName: browserName,

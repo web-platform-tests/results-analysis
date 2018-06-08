@@ -6,6 +6,7 @@ package metrics
 
 import (
 	"context"
+	"encoding/json"
 	"time"
 
 	"github.com/web-platform-tests/wpt.fyi/shared"
@@ -13,7 +14,7 @@ import (
 
 // ByCreatedDate sorts tests by run's CreatedAt date (descending)
 // then by platform alphabetically (ascending).
-type ByCreatedDate []shared.TestRun
+type ByCreatedDate []TestRunLegacy
 
 func (s ByCreatedDate) Len() int          { return len(s) }
 func (s ByCreatedDate) Swap(i int, j int) { s[i], s[j] = s[j], s[i] }
@@ -55,7 +56,7 @@ type TestResultsReport struct {
 
 // TestRunResults binds a shared.TestRun to a TestResults.
 type TestRunResults struct {
-	Run *shared.TestRun
+	Run *TestRunLegacy
 	Res *TestResults
 }
 
@@ -218,10 +219,42 @@ type TestRunsMetadata struct {
 	DataURL    string            `json:"url"`
 }
 
+// TODO(lukebjerring): Remove TestRunLegacy when old format migrated.
+
+// TestRunLegacy is a copy of the TestRun struct, before the `Labels` field
+// was added (which causes an array of array and breaks datastore).
+type TestRunLegacy struct {
+	ID int64 `json:"id" datastore:"-"`
+
+	shared.ProductAtRevision
+
+	// URL for summary of results, which is derived from raw results.
+	ResultsURL string `json:"results_url"`
+
+	// Time when the test run metadata was first created.
+	CreatedAt time.Time `json:"created_at"`
+
+	// URL for raw results JSON object. Resembles the JSON output of the
+	// wpt report tool.
+	RawResultsURL string `json:"raw_results_url"`
+}
+
+// ConvertRuns converts TestRuns into the legacy format.
+func ConvertRuns(runs shared.TestRuns) (converted []TestRunLegacy, err error) {
+	if serialized, err := json.Marshal(runs); err != nil {
+		return nil, err
+	} else if err = json.Unmarshal(serialized, &runs); err != nil {
+		return nil, err
+	}
+	return converted, nil
+}
+
+// TODO(lukebjerring): Remove TestRunsMetadataLegacy when old format migrated.
+
 // TestRunsMetadataLegacy is a struct for loading legacy TestRunMetadata entities,
 // which may have nested TestRun entities.
 type TestRunsMetadataLegacy struct {
-	TestRuns   shared.TestRuns   `json:"test_runs"`
+	TestRuns   []TestRunLegacy   `json:"test_runs"`
 	TestRunIDs shared.TestRunIDs `json:"-"`
 	StartTime  time.Time         `json:"start_time"`
 	EndTime    time.Time         `json:"end_time"`
@@ -237,7 +270,13 @@ func (metadata *TestRunsMetadata) LoadTestRuns(ctx context.Context) (err error) 
 // LoadTestRuns fetches the TestRun entities for the PassRateMetadata's TestRunIDs.
 func (metadata *TestRunsMetadataLegacy) LoadTestRuns(ctx context.Context) (err error) {
 	if len(metadata.TestRuns) == 0 {
-		metadata.TestRuns, err = metadata.TestRunIDs.LoadTestRuns(ctx)
+		newRuns, err := metadata.TestRunIDs.LoadTestRuns(ctx)
+		if err != nil {
+			return err
+		}
+		if metadata.TestRuns, err = ConvertRuns(newRuns); err != nil {
+			return err
+		}
 	}
 	return err
 }
@@ -250,13 +289,13 @@ type PassRateMetadata struct {
 	TestRunsMetadata
 }
 
+// TODO(lukebjerring): Remove PassRateMetadataLegacy when old format migrated.
+
 // PassRateMetadataLegacy is a struct for storing a PassRateMetadata entry in the
 // datastore, avoiding nested arrays. PassRateMetadata is the legacy format, used for
 // loading the entity, for backward compatibility.
 type PassRateMetadataLegacy struct {
 	TestRunsMetadataLegacy
-	// Override the TestRuns to be omitted by datastore.
-	TestRuns shared.TestRuns `json:"test_runs,omitempty" datastore:"-"`
 }
 
 // FailuresMetadata constitutes metadata capturing:
@@ -269,13 +308,14 @@ type FailuresMetadata struct {
 	BrowserName string `json:"browser_name"`
 }
 
+// TODO(lukebjerring): Remove FailuresMetadataLegacy when old format migrated.
+
 // FailuresMetadataLegacy is a struct for storing a FailuresMetadata entry in the
 // datastore, avoiding nested arrays. FailuresMetadata is the legacy format, used for
 // loading the entity, for backward compatibility.
 type FailuresMetadataLegacy struct {
 	TestRunsMetadataLegacy
-	// Override the TestRuns to be omitted by datastore.
-	TestRuns shared.TestRuns `json:"test_runs,omitempty" datastore:"-"`
+	BrowserName string `json:"browser_name"`
 }
 
 // RunData is the output type for metrics: Include runs as metadata, and
