@@ -49,9 +49,23 @@ type TestResults struct {
 	Subtests []SubTest `json:"subtests"`
 }
 
+// RunInfo includes some metadata of a test run, and matches the run_info field
+// in the report JSON.
+type RunInfo struct {
+	Revision string `json:"revision"`
+	// The four fields below are very similar to wpt.fyi/shared.Product
+	// except some unfortunate differences (Product vs. BrowserName &
+	// OS vs. OSName).
+	Product        string `json:"product"`
+	BrowserVersion string `json:"browser_version"`
+	OS             string `json:"os"`
+	OSVersion      string `json:"os_version,omitempty"` // optional
+}
+
 // TestResultsReport models the `wpt run` results report JSON file format.
 type TestResultsReport struct {
 	Results []*TestResults `json:"results"`
+	RunInfo RunInfo        `json:"run_info,omitempty"`
 }
 
 // TestRunResults binds a shared.TestRun to a TestResults.
