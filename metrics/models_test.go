@@ -5,6 +5,7 @@
 package metrics
 
 import (
+	"encoding/json"
 	"sort"
 	"testing"
 	"time"
@@ -12,7 +13,7 @@ import (
 	"fmt"
 
 	"github.com/stretchr/testify/assert"
-	models "github.com/web-platform-tests/wpt.fyi/shared"
+	"github.com/web-platform-tests/wpt.fyi/shared"
 )
 
 var today = time.Date(2018, 1, 4, 0, 0, 0, 0, time.UTC)
@@ -21,16 +22,16 @@ var tomorrow = time.Date(2018, 1, 5, 0, 0, 0, 0, time.UTC)
 func TestByCreatedDate_DifferentRevisions(t *testing.T) {
 	tests := []TestRunLegacy{
 		{
-			ProductAtRevision: models.ProductAtRevision{
-				Product: models.Product{
+			ProductAtRevision: shared.ProductAtRevision{
+				Product: shared.Product{
 					BrowserName: "chrome",
 				},
 				Revision: "abc",
 			},
 			CreatedAt: today,
 		}, {
-			ProductAtRevision: models.ProductAtRevision{
-				Product: models.Product{
+			ProductAtRevision: shared.ProductAtRevision{
+				Product: shared.Product{
 					BrowserName: "safari",
 				},
 				Revision: "def",
@@ -46,8 +47,8 @@ func TestByCreatedDate_DifferentRevisions(t *testing.T) {
 func TestByCreatedDate_SameRevisions(t *testing.T) {
 	tests := []TestRunLegacy{
 		{
-			ProductAtRevision: models.ProductAtRevision{
-				Product: models.Product{
+			ProductAtRevision: shared.ProductAtRevision{
+				Product: shared.Product{
 					BrowserName: "chrome",
 				},
 				Revision: "abc",
@@ -55,8 +56,8 @@ func TestByCreatedDate_SameRevisions(t *testing.T) {
 			CreatedAt: today,
 		},
 		{
-			ProductAtRevision: models.ProductAtRevision{
-				Product: models.Product{
+			ProductAtRevision: shared.ProductAtRevision{
+				Product: shared.Product{
 					BrowserName: "safari",
 				},
 				Revision: "abc",
@@ -99,4 +100,31 @@ func TestByTestPath_SamePaths(t *testing.T) {
 	sort.Sort(ByTestPath(tests))
 	fmt.Print(tests)
 	assert.True(t, tests[0].Name == "Alignment test")
+}
+
+func TestTestRunsLegacy_Convert(t *testing.T) {
+	run := TestRunLegacy{
+		ID: 123,
+		ProductAtRevision: shared.ProductAtRevision{
+			Product: shared.Product{
+				BrowserName: "chrome",
+			},
+			Revision: "1234512345",
+		},
+	}
+	meta := TestRunsMetadataLegacy{
+		TestRunIDs: shared.TestRunIDs{
+			123,
+		},
+		TestRuns: []TestRunLegacy{
+			run,
+		},
+	}
+	bytes, _ := json.Marshal(meta)
+	var metaNew TestRunsMetadata
+	json.Unmarshal(bytes, &metaNew)
+	assert.Equal(t, meta.TestRunIDs, metaNew.TestRuns.GetTestRunIDs())
+	converted, err := ConvertRuns(metaNew.TestRuns)
+	assert.Nil(t, err)
+	assert.Equal(t, meta.TestRuns, converted)
 }
