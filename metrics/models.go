@@ -243,7 +243,7 @@ type TestRunLegacy struct {
 func ConvertRuns(runs shared.TestRuns) (converted []TestRunLegacy, err error) {
 	if serialized, err := json.Marshal(runs); err != nil {
 		return nil, err
-	} else if err = json.Unmarshal(serialized, &runs); err != nil {
+	} else if err = json.Unmarshal(serialized, &converted); err != nil {
 		return nil, err
 	}
 	return converted, nil
