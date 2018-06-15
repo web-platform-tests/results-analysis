@@ -49,17 +49,26 @@ type TestResults struct {
 	Subtests []SubTest `json:"subtests"`
 }
 
-// RunInfo includes some metadata of a test run, and matches the run_info field
-// in the report JSON.
+// RunInfo is an alias of ProductAtRevision with a custom marshaler to produce
+// the "run_info" object in wptreport.json.
 type RunInfo struct {
-	Revision string `json:"revision"`
-	// The four fields below are very similar to wpt.fyi/shared.Product
-	// except some unfortunate differences (Product vs. BrowserName &
-	// OS vs. OSName).
-	Product        string `json:"product"`
-	BrowserVersion string `json:"browser_version"`
-	OS             string `json:"os"`
-	OSVersion      string `json:"os_version,omitempty"` // optional
+	shared.ProductAtRevision
+}
+
+// MarshalJSON is the custom JSON marshaler that produces field names matching
+// the "run_info" object in wptreport.json.
+func (r RunInfo) MarshalJSON() ([]byte, error) {
+	m := map[string]string{
+		"revision":        r.FullRevisionHash,
+		"product":         r.BrowserName,
+		"browser_version": r.BrowserVersion,
+		"os":              r.OSName,
+	}
+	// Optional field:
+	if r.OSVersion != "" {
+		m["os_version"] = r.OSVersion
+	}
+	return json.Marshal(m)
 }
 
 // TestResultsReport models the `wpt run` results report JSON file format.
