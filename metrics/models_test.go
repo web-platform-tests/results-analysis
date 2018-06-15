@@ -123,7 +123,7 @@ func TestTestRunsLegacy_Convert(t *testing.T) {
 	bytes, _ := json.Marshal(meta)
 	var metaNew TestRunsMetadata
 	json.Unmarshal(bytes, &metaNew)
-	assert.Equal(t, meta.TestRunIDs, metaNew.TestRunIDs)
+	assert.Equal(t, meta.TestRunIDs, metaNew.TestRuns.GetTestRunIDs())
 	converted, err := ConvertRuns(metaNew.TestRuns)
 	assert.Nil(t, err)
 	assert.Equal(t, meta.TestRuns, converted)
