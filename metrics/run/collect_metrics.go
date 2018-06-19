@@ -10,8 +10,11 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 	"sync"
 	"time"
+
+	"github.com/deckarep/golang-set"
 
 	"google.golang.org/api/option"
 
@@ -35,6 +38,7 @@ var projectId *string
 var inputGcsBucket *string
 var outputGcsBucket *string
 var wptdHost *string
+var labels *string
 var outputBQMetadataDataset *string
 var outputBQDataDataset *string
 var outputBQPassRateTable *string
@@ -76,6 +80,7 @@ func init() {
 		"BigQuery table where pass rate metrics are stored")
 	wptdHost = flag.String("wptd_host", "staging.wpt.fyi",
 		"Hostname of endpoint that serves WPT Dashboard data API")
+	labels = flag.String("labels", "", "Labels to filter by when computing interop")
 	pretty = flag.Bool("pretty", false,
 		"Prettify stdout output; appropriate for terminals but not log files")
 	gcpCredentialsFile = flag.String("gcp_credentials_file", "client-secret.json",
@@ -211,7 +216,14 @@ func main() {
 		*inputGcsBucket)
 
 	readStartTime := time.Now()
-	runsWithLabels := base.FetchLatestRuns(*wptdHost)
+	var labelSet mapset.Set
+	if *labels != "" {
+		labelSet = mapset.NewSet()
+		for _, label := range strings.Split(*labels, ",") {
+			labelSet.Add(label)
+		}
+	}
+	runsWithLabels := base.FetchRuns(*wptdHost, "latest", labelSet)
 	runs, err := metrics.ConvertRuns(runsWithLabels)
 	if err != nil {
 		log.Fatal(err)
