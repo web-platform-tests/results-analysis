@@ -232,7 +232,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var limiter storage.Limiter = nil
+	var limiter storage.Limiter
 	if *rateLimitGCS {
 		limiter = storage.GCSLimiter()
 	}

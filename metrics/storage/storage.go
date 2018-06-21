@@ -64,7 +64,7 @@ type Outputter interface {
 type Loader interface {
 	// LoadTestRunResults loads (test run, test results) pairs for given test
 	// runs. Uses client in context to load data from bucket.
-	LoadTestRunResults(runs []metrics.TestRunLegacy, pretty bool) (
+	LoadTestRunResults(runs []metrics.TestRunLegacy, limiter Limiter, pretty bool) (
 		[]metrics.TestRunResults, error)
 }
 
