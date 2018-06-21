@@ -32,6 +32,15 @@ var (
 	limiter = rate.NewLimiter(50, 50)
 )
 
+// Limiter is a simpler subset of rate.Limiter capabilities.
+type Limiter interface {
+	Wait(context.Context) error
+}
+
+func GCSLimiter() Limiter {
+	return limiter
+}
+
 type OutputLocation struct {
 	GCSObjectPath string
 	BQDatasetName string
@@ -50,7 +59,7 @@ type Outputter interface {
 type Loader interface {
 	// LoadTestRunResults loads (test run, test results) pairs for given test
 	// runs. Uses client in context to load data from bucket.
-	LoadTestRunResults(runs []metrics.TestRunLegacy, pretty bool) (
+	LoadTestRunResults(runs []metrics.TestRunLegacy, limiter Limiter, pretty bool) (
 		[]metrics.TestRunResults, error)
 }
 
@@ -92,7 +101,7 @@ func NewConsolidatedGCSDatastoreContext(ctx context.Context, bucket Bucket,
 
 type loaderImpl interface {
 	processTestRun(ctx *gcsDatastoreContext, testRun *metrics.TestRunLegacy,
-		resultChan chan metrics.TestRunResults, errChan chan error)
+		limiter Limiter, resultChan chan metrics.TestRunResults, errChan chan error)
 }
 
 type shardedLoaderImpl struct{}
@@ -316,7 +325,8 @@ func (me multiError) Error() string {
 // LoadTestRunResults loads (test run, test results) pairs for given test runs.
 // Use client in context to load data from bucket.
 func (ctx *gcsDatastoreContext) LoadTestRunResults(
-	runs []metrics.TestRunLegacy, pretty bool) (runResults []metrics.TestRunResults, err error) {
+	runs []metrics.TestRunLegacy, limiter Limiter, pretty bool) (
+	runResults []metrics.TestRunResults, err error) {
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)
@@ -330,7 +340,7 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 		for _, run := range runs {
 			go func(run metrics.TestRunLegacy) {
 				defer wg.Done()
-				ctx.impl.processTestRun(ctx, &run, resultChan, errChan)
+				ctx.impl.processTestRun(ctx, &run, limiter, resultChan, errChan)
 			}(run)
 		}
 		wg.Wait()
@@ -404,8 +414,8 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 }
 
 func (impl shardedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
-	testRun *metrics.TestRunLegacy, resultChan chan metrics.TestRunResults,
-	errChan chan error) {
+	testRun *metrics.TestRunLegacy, limiter Limiter,
+	resultChan chan metrics.TestRunResults, errChan chan error) {
 	resultsURL := testRun.ResultsURL
 
 	// summaryURL format:
@@ -463,7 +473,9 @@ func (impl shardedLoaderImpl) loadTestResults(ctx *gcsDatastoreContext,
 	testRun *metrics.TestRunLegacy, objName string, resultChan chan metrics.TestRunResults,
 	errChan chan error) {
 	// Rate limit.
-	limiter.Wait(ctx.Context)
+	if limiter != nil {
+		limiter.Wait(ctx.Context)
+	}
 
 	// Read object from GCS
 	obj := ctx.Bucket.Handle.Object(objName)
@@ -510,8 +522,8 @@ func (impl shardedLoaderImpl) loadTestResults(ctx *gcsDatastoreContext,
 }
 
 func (impl consolidatedLoaderImpl) processTestRun(ctx *gcsDatastoreContext,
-	testRun *metrics.TestRunLegacy, resultChan chan metrics.TestRunResults,
-	errChan chan error) {
+	testRun *metrics.TestRunLegacy, limiter Limiter,
+	resultChan chan metrics.TestRunResults, errChan chan error) {
 	if testRun.RawResultsURL == "" {
 		errChan <- fmt.Errorf("No RawResultsURL for %v", testRun)
 		return

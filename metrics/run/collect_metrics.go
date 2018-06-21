@@ -47,6 +47,7 @@ var outputBQFailuresTable *string
 var outputBQFailuresMetadataTable *string
 var pretty *bool
 var gcpCredentialsFile *string
+var rateLimitGCS *bool
 var consolidatedInput *bool
 
 func init() {
@@ -85,6 +86,8 @@ func init() {
 		"Prettify stdout output; appropriate for terminals but not log files")
 	gcpCredentialsFile = flag.String("gcp_credentials_file", "client-secret.json",
 		"Path to Google Cloud Platform file for accessing services")
+	rateLimitGCS = flag.Bool("rate_limit_gcs", true,
+		"Whether or not to rate limit concurrent requests to Google Cloud Storage")
 	consolidatedInput = flag.Bool("consolidated_input", false,
 		"Read input from consolidated results files")
 }
@@ -229,7 +232,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	allResults, err := inputCtx.LoadTestRunResults(runs, *pretty)
+	var limiter storage.Limiter
+	if *rateLimitGCS {
+		limiter = storage.GCSLimiter()
+	}
+	allResults, err := inputCtx.LoadTestRunResults(runs, limiter, *pretty)
 	readEndTime := time.Now()
 
 	log.Println("Read test results from Google Cloud Storage bucket: " +
