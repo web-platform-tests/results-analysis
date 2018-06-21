@@ -379,12 +379,12 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 				msgs = append(msgs, msg)
 			}
 			if pretty {
-				tm.Clear()
-				tm.MoveCursor(1, 1)
 				for _, msg := range msgs {
 					tm.Println(msg)
+					// Flush will also put a newline, so we need to move two lines up.
+					tm.MoveCursorUp(2)
+					tm.Flush()
 				}
-				tm.Flush()
 			} else {
 				for _, msg := range msgs {
 					log.Println(msg)
