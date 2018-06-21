@@ -381,10 +381,10 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 			if pretty {
 				for _, msg := range msgs {
 					tm.Println(msg)
-					// Flush will also put a newline, so we need to move two lines up.
-					tm.MoveCursorUp(2)
-					tm.Flush()
 				}
+				tm.Flush()
+				// Flush will also put a newline, so we need to move one more line up.
+				tm.MoveCursorUp(len(msgs) + 1)
 			} else {
 				for _, msg := range msgs {
 					log.Println(msg)
