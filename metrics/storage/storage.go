@@ -32,6 +32,7 @@ var (
 	limiter = rate.NewLimiter(50, 50)
 )
 
+// Limiter is a simpler subset of rate.Limiter capabilities.
 type Limiter interface {
 	Wait(context.Context) error
 }
