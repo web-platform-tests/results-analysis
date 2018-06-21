@@ -33,17 +33,11 @@ var (
 )
 
 type Limiter interface {
-	Wait(context.Context)
-}
-
-type limiterStruct rate.Limiter
-
-func (l *limiterStruct) Wait(ctx context.Context) {
-	l.Wait(ctx)
+	Wait(context.Context) error
 }
 
 func GCSLimiter() Limiter {
-	return (*limiterStruct)(limiter)
+	return limiter
 }
 
 type OutputLocation struct {
