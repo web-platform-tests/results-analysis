@@ -260,6 +260,9 @@ type TestRunLegacy struct {
 	// URL for raw results JSON object. Resembles the JSON output of the
 	// wpt report tool.
 	RawResultsURL string `json:"raw_results_url"`
+
+	// Legacy format's Labels are (necessarily) ignored by datastore.
+	Labels []string `datastore:"-" json:"labels"`
 }
 
 // ConvertRuns converts TestRuns into the legacy format.
