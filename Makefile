@@ -20,6 +20,9 @@ GO_FILES := $(wildcard $(REPO_PATH)/**/*.go)
 
 build: deps
 
+collect_metrics: deps var-WPTD_HOST var-PROJECT_ID
+	cd $(REPO_PATH); go get -t ./... -rate_limit_gcs=false -consolidated_input -labels="$(LABELS)" -wptd_host="$(WPTD_HOST)" -project_id="$(PROJECT_ID)" || cat current_metrics.log
+
 lint: deps
 	go get -u golang.org/x/lint/golint
 	golint -set_exit_status $(GO_FILES)
@@ -34,3 +37,6 @@ fmt: deps
 
 deps: $(GO_FILES)
 	cd $(REPO_PATH); go get -t ./...
+
+var-%:
+	@ if [[ "$($*)" = "" ]]; then echo "Make variable $* not set"; exit 1; fi
