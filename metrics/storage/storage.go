@@ -346,7 +346,11 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 		wg.Wait()
 	}()
 
-	progress := make(map[metrics.TestRunLegacy]int)
+	progress := make(map[string]int)
+	runsByBrowser := make(map[string]metrics.TestRunLegacy)
+	for _, run := range runs {
+		runsByBrowser[run.BrowserName] = run
+	}
 	type Nothing struct{}
 
 	var wg sync.WaitGroup
@@ -358,20 +362,21 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 
 			testRunPtr := results.Run
 			testRun := *testRunPtr
-			if _, ok := progress[testRun]; !ok {
-				progress[testRun] = 0
+			if _, ok := progress[testRun.BrowserName]; !ok {
+				progress[testRun.BrowserName] = 0
 			}
-			progress[testRun] = progress[testRun] + 1
+			progress[testRun.BrowserName] = progress[testRun.BrowserName] + 1
 
-			keys := make([]metrics.TestRunLegacy, 0, len(progress))
+			keys := make([]string, 0, len(progress))
 			for key := range progress {
 				keys = append(keys, key)
 			}
-			sort.Sort(metrics.ByCreatedDate(keys))
+			sort.Strings(keys)
 
 			msgs := make([]string, 0, len(keys))
-			for _, run := range keys {
-				count := progress[run]
+			for _, browser := range keys {
+				run := runsByBrowser[browser]
+				count := progress[browser]
 				msg := fmt.Sprintf("%10s %10s %10s %10s %10s :: %10d",
 					run.Revision, run.BrowserName,
 					run.BrowserVersion, run.OSName,

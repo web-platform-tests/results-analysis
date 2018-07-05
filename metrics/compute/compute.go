@@ -11,7 +11,7 @@ import (
 	"github.com/web-platform-tests/results-analysis/metrics"
 )
 
-type TestRunsStatus map[metrics.TestID]map[metrics.TestRunLegacy]metrics.CompleteTestStatus
+type TestRunsStatus map[metrics.TestID]map[string]metrics.CompleteTestStatus
 
 // Type for decision problem: "What does it mean for a test result to 'pass'"?
 type Passes func(*metrics.CompleteTestStatus) bool
@@ -47,11 +47,10 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 		TestID := metrics.TestID{Test: result.Test}
 		_, ok := resultsById[TestID]
 		if !ok {
-			resultsById[TestID] = make(
-				map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+			resultsById[TestID] = make(map[string]metrics.CompleteTestStatus)
 
 		}
-		_, ok = resultsById[TestID][run]
+		_, ok = resultsById[TestID][run.BrowserName]
 		if ok {
 			log.Printf("Duplicate results for TestID:%v  in "+
 				"TestRun:%v.  Overwriting.\n", TestID, run)
@@ -59,7 +58,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 		newStatus := metrics.CompleteTestStatus{
 			Status: metrics.TestStatusFromString(result.Status),
 		}
-		resultsById[TestID][run] = newStatus
+		resultsById[TestID][run.BrowserName] = newStatus
 
 		for _, subResult := range result.Subtests {
 			TestID := metrics.TestID{
@@ -68,10 +67,9 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 			}
 			_, ok := resultsById[TestID]
 			if !ok {
-				resultsById[TestID] = make(
-					map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
+				resultsById[TestID] = make(map[string]metrics.CompleteTestStatus)
 			}
-			_, ok = resultsById[TestID][run]
+			_, ok = resultsById[TestID][run.BrowserName]
 			if ok {
 				log.Printf("Duplicate sub-results for "+
 					"TestID:%v  in TestRun:%v.  "+
@@ -83,7 +81,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 				SubStatus: metrics.SubTestStatusFromString(
 					subResult.Status),
 			}
-			resultsById[TestID][run] = newStatus
+			resultsById[TestID][run.BrowserName] = newStatus
 		}
 	}
 
@@ -124,9 +122,9 @@ func ComputeBrowserFailureList(numRuns int, browserName string,
 	for TestID, runStatuses := range *results {
 		numOtherFailures := 0
 		browserFailed := false
-		for run, status := range runStatuses {
+		for runBrowser, status := range runStatuses {
 			if !passes(&status) {
-				if run.BrowserName == browserName {
+				if runBrowser == browserName {
 					browserFailed = true
 				} else {
 					numOtherFailures++
