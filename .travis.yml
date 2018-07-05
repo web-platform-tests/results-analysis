@@ -10,55 +10,55 @@ matrix:
     # "Normal" job: Use default metrics parameters.
     - if: type != cron
       env:
-      - PROJECT_ID="wptdashboard-staging"
-      - INPUT_GCS_BUCKET="wptd-results-staging"
-      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
-      - WPTD_HOST="staging.wpt.fyi"
-      - LABELS=""
+        - PROJECT_ID="wptdashboard-staging"
+        - INPUT_GCS_BUCKET="wptd-results-staging"
+        - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+        - WPTD_HOST="staging.wpt.fyi"
+        - LABELS=""
     # Cron jobs: Run matrix of metrics data collection runs:
     # {staging, prod} x {<no-labels>, experimental, stable}
     - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard"
-      - INPUT_GCS_BUCKET="wptd-results"
-      - OUTPUT_GCS_BUCKET="wptd-metrics"
-      - WPTD_HOST="wpt.fyi"
-      - LABELS=""
+        - PROJECT_ID="wptdashboard"
+        - INPUT_GCS_BUCKET="wptd-results"
+        - OUTPUT_GCS_BUCKET="wptd-metrics"
+        - WPTD_HOST="wpt.fyi"
+        - LABELS=""
     - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard"
-      - INPUT_GCS_BUCKET="wptd-results"
-      - OUTPUT_GCS_BUCKET="wptd-metrics"
-      - WPTD_HOST="wpt.fyi"
-      - LABELS="experimental"
+        - PROJECT_ID="wptdashboard"
+        - INPUT_GCS_BUCKET="wptd-results"
+        - OUTPUT_GCS_BUCKET="wptd-metrics"
+        - WPTD_HOST="wpt.fyi"
+        - LABELS="experimental"
   - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard"
-      - INPUT_GCS_BUCKET="wptd-results"
-      - OUTPUT_GCS_BUCKET="wptd-metrics"
-      - WPTD_HOST="wpt.fyi"
-      - LABELS="stable"
+        - PROJECT_ID="wptdashboard"
+        - INPUT_GCS_BUCKET="wptd-results"
+        - OUTPUT_GCS_BUCKET="wptd-metrics"
+        - WPTD_HOST="wpt.fyi"
+        - LABELS="stable"
     - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard-staging"
-      - INPUT_GCS_BUCKET="wptd-results-staging"
-      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
-      - WPTD_HOST="staging.wpt.fyi"
-      - LABELS=""
+        - PROJECT_ID="wptdashboard-staging"
+        - INPUT_GCS_BUCKET="wptd-results-staging"
+        - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+        - WPTD_HOST="staging.wpt.fyi"
+        - LABELS=""
     - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard-staging"
-      - INPUT_GCS_BUCKET="wptd-results-staging"
-      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
-      - WPTD_HOST="staging.wpt.fyi"
-      - LABELS="experimental"
+        - PROJECT_ID="wptdashboard-staging"
+        - INPUT_GCS_BUCKET="wptd-results-staging"
+        - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+        - WPTD_HOST="staging.wpt.fyi"
+        - LABELS="experimental"
     - if: type = cron
       env:
-      - PROJECT_ID="wptdashboard-staging"
-      - INPUT_GCS_BUCKET="wptd-results-staging"
-      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
-      - WPTD_HOST="staging.wpt.fyi"
-      - LABELS="stable"
+        - PROJECT_ID="wptdashboard-staging"
+        - INPUT_GCS_BUCKET="wptd-results-staging"
+        - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+        - WPTD_HOST="staging.wpt.fyi"
+        - LABELS="stable"
 
 before_install:
 # Encrypted credentials only needed by cron jobs.
