@@ -31,7 +31,7 @@ matrix:
         - OUTPUT_GCS_BUCKET="wptd-metrics"
         - WPTD_HOST="wpt.fyi"
         - LABELS="experimental"
-  - if: type = cron
+    - if: type = cron
       env:
         - PROJECT_ID="wptdashboard"
         - INPUT_GCS_BUCKET="wptd-results"
