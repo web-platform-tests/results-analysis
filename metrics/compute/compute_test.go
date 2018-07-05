@@ -73,11 +73,11 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 		assert.Equal(t, metrics.CompleteTestStatus{
 			metrics.TestStatusFromString("OK"),
 			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-		}, runStatusMap[runA])
+		}, runStatusMap[runA.BrowserName])
 		assert.Equal(t, metrics.CompleteTestStatus{
 			metrics.TestStatusFromString("ERROR"),
 			metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-		}, runStatusMap[runB])
+		}, runStatusMap[runB.BrowserName])
 	}
 }
 
@@ -127,21 +127,21 @@ func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestID{"A test", ""}][runA])
+	}, gathered[metrics.TestID{"A test", ""}][runA.BrowserName])
 	assert.Equal(t, 2, len(gathered[metrics.TestID{"Shared test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("ERROR"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestID{"Shared test", ""}][runA])
+	}, gathered[metrics.TestID{"Shared test", ""}][runA.BrowserName])
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestID{"Shared test", ""}][runB])
+	}, gathered[metrics.TestID{"Shared test", ""}][runB.BrowserName])
 	assert.Equal(t, 1, len(gathered[metrics.TestID{"B test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("ERROR"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestID{"B test", ""}][runB])
+	}, gathered[metrics.TestID{"B test", ""}][runB.BrowserName])
 }
 
 func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
@@ -186,15 +186,15 @@ func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
 		metrics.SubTestStatusFromString("STATUS_UNKNOWN"),
-	}, gathered[metrics.TestID{"A test", ""}][runA])
+	}, gathered[metrics.TestID{"A test", ""}][runA.BrowserName])
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
 		metrics.SubTestStatusFromString("PASS"),
-	}, gathered[metrics.TestID{"A test", subName1}][runA])
+	}, gathered[metrics.TestID{"A test", subName1}][runA.BrowserName])
 	assert.Equal(t, metrics.CompleteTestStatus{
 		metrics.TestStatusFromString("OK"),
 		metrics.SubTestStatusFromString("FAIL"),
-	}, gathered[metrics.TestID{"A test", subName2}][runA])
+	}, gathered[metrics.TestID{"A test", subName2}][runA.BrowserName])
 }
 
 func getPrecomputedStatusz() *TestRunsStatus {
@@ -225,19 +225,19 @@ func getPrecomputedStatusz() *TestRunsStatus {
 	ac1x := metrics.TestID{"a/c/1", "x"}
 	ac1y := metrics.TestID{"a/c/1", "y"}
 	ac1z := metrics.TestID{"a/c/1", "z"}
-	statusz[ab1] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ab2] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ac1] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ac1x] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ac1y] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ac1z] = make(map[metrics.TestRunLegacy]metrics.CompleteTestStatus)
-	statusz[ab1][runA] = status1
-	statusz[ab1][runB] = status2
-	statusz[ab2][runB] = status3
-	statusz[ac1][runA] = status1
-	statusz[ac1x][runA] = subStatus1
-	statusz[ac1y][runA] = subStatus2
-	statusz[ac1z][runA] = subStatus2
+	statusz[ab1] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ab2] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ac1] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ac1x] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ac1y] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ac1z] = make(map[string]metrics.CompleteTestStatus)
+	statusz[ab1][runA.BrowserName] = status1
+	statusz[ab1][runB.BrowserName] = status2
+	statusz[ab2][runB.BrowserName] = status3
+	statusz[ac1][runA.BrowserName] = status1
+	statusz[ac1x][runA.BrowserName] = subStatus1
+	statusz[ac1y][runA.BrowserName] = subStatus2
+	statusz[ac1z][runA.BrowserName] = subStatus2
 
 	return &statusz
 }
