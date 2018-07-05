@@ -11,6 +11,8 @@ matrix:
     - if: type != cron
       env:
       - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
       - WPTD_HOST="staging.wpt.fyi"
       - LABELS=""
     # Cron jobs: Run matrix of metrics data collection runs:
@@ -18,33 +20,45 @@ matrix:
     - if: type = cron
       env:
       - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
       - WPTD_HOST="wpt.fyi"
       - LABELS=""
     - if: type = cron
       env:
-        - PROJECT_ID="wptdashboard"
-        - WPTD_HOST="wpt.fyi"
-        - LABELS="experimental"
-    - if: type = cron
+      - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
+      - WPTD_HOST="wpt.fyi"
+      - LABELS="experimental"
+  - if: type = cron
       env:
-        - PROJECT_ID="wptdashboard"
-        - WPTD_HOST="wpt.fyi"
-        - LABELS="stable"
+      - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
+      - WPTD_HOST="wpt.fyi"
+      - LABELS="stable"
     - if: type = cron
       env:
       - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
       - WPTD_HOST="staging.wpt.fyi"
       - LABELS=""
     - if: type = cron
       env:
-        - PROJECT_ID="wptdashboard-staging"
-        - WPTD_HOST="staging.wpt.fyi"
-        - LABELS="experimental"
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS="experimental"
     - if: type = cron
       env:
-        - PROJECT_ID="wptdashboard-staging"
-        - WPTD_HOST="staging.wpt.fyi"
-        - LABELS="stable"
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS="stable"
 
 before_install:
 # Encrypted credentials only needed by cron jobs.
@@ -61,6 +75,6 @@ script:
 - if [[ "${TRAVIS_EVENT_TYPE}" != "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test; fi
 - if [[ "${TRAVIS_EVENT_TYPE}" != "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint; fi
 # Cron: Run metrics data collection using environment variables.
-- if [[ "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make collect_metrics PROJECT_ID="${PROJECT_ID}" WPTD_HOST="${WPTD_HOST}" LABELS="${LABELS}"; fi
+- if [[ "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make collect_metrics PROJECT_ID="${PROJECT_ID}" INPUT_GCS_BUCKET="${INPUT_GCS_BUCKET}" OUTPUT_GCS_BUCKET="${OUTPUT_GCS_BUCKET}" WPTD_HOST="${WPTD_HOST}" LABELS="${LABELS}"; fi
 
 after_script: ./docker_stop.sh
