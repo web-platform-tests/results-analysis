@@ -5,7 +5,65 @@
 services:
   - docker
 
-before_install: ./docker_build.sh && ./docker_start.sh
+matrix:
+  include:
+    # "Normal" job: Use default metrics parameters.
+    - if: type != cron
+      env:
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS=""
+    # Cron jobs: Run matrix of metrics data collection runs:
+    # {staging, prod} x {<no-labels>, experimental, stable}
+    - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
+      - WPTD_HOST="wpt.fyi"
+      - LABELS=""
+    - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
+      - WPTD_HOST="wpt.fyi"
+      - LABELS="experimental"
+  - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard"
+      - INPUT_GCS_BUCKET="wptd-results"
+      - OUTPUT_GCS_BUCKET="wptd-metrics"
+      - WPTD_HOST="wpt.fyi"
+      - LABELS="stable"
+    - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS=""
+    - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS="experimental"
+    - if: type = cron
+      env:
+      - PROJECT_ID="wptdashboard-staging"
+      - INPUT_GCS_BUCKET="wptd-results-staging"
+      - OUTPUT_GCS_BUCKET="wptd-metrics-staging"
+      - WPTD_HOST="staging.wpt.fyi"
+      - LABELS="stable"
+
+before_install:
+# Encrypted credentials only needed by cron jobs.
+- if [[ "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then openssl aes-256-cbc -K $encrypted_e5281058aa9e_key -iv $encrypted_e5281058aa9e_iv -in client-secret.json.enc -out client-secret.json -d; fi
+- ./docker_build.sh && ./docker_start.sh
 
 install:
 - source ./docker_env.sh
@@ -13,7 +71,10 @@ install:
 
 script:
 - source ./docker_env.sh
-- docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test
-- docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint
+# Non-cron: Run test and lint.
+- if [[ "${TRAVIS_EVENT_TYPE}" != "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make test; fi
+- if [[ "${TRAVIS_EVENT_TYPE}" != "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make lint; fi
+# Cron: Run metrics data collection using environment variables.
+- if [[ "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then docker exec -t -u "$(id -u ${USER}):$(id -g ${USER})" "${INSTANCE_NAME}" make collect_metrics PROJECT_ID="${PROJECT_ID}" INPUT_GCS_BUCKET="${INPUT_GCS_BUCKET}" OUTPUT_GCS_BUCKET="${OUTPUT_GCS_BUCKET}" WPTD_HOST="${WPTD_HOST}" LABELS="${LABELS}"; fi
 
 after_script: ./docker_stop.sh
