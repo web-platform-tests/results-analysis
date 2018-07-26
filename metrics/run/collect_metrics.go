@@ -226,7 +226,8 @@ func main() {
 			labelSet.Add(label)
 		}
 	}
-	runsWithLabels := base.FetchRuns(*wptdHost, "latest", labelSet)
+	one := 1
+	runsWithLabels := base.FetchRuns(*wptdHost, "latest", &one, labelSet)
 	runs, err := metrics.ConvertRuns(runsWithLabels)
 	if err != nil {
 		log.Fatal(err)
