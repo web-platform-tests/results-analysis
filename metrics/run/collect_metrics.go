@@ -233,7 +233,10 @@ func main() {
 		SHA:    *sha,
 		Labels: labelSet,
 	}
-	runsWithLabels := base.FetchRuns(*wptdHost, filters)
+	runsWithLabels, err := base.FetchRuns(*wptdHost, filters)
+	if err != nil {
+		log.Fatal(err)
+	}
 	runs, err := metrics.ConvertRuns(runsWithLabels)
 	if err != nil {
 		log.Fatal(err)
