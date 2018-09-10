@@ -21,7 +21,7 @@ GO_FILES := $(wildcard $(REPO_PATH)/**/*.go)
 build: deps
 
 collect_metrics: deps var-PROJECT_ID var-INPUT_GCS_BUCKET var-OUTPUT_GCS_BUCKET var-WPTD_HOST
-	cd $(REPO_PATH); go run metrics/run/collect_metrics.go -rate_limit_gcs=false -consolidated_input -project_id="$(PROJECT_ID)" -input_gcs_bucket="$(INPUT_GCS_BUCKET)" -output_gcs_bucket="$(OUTPUT_GCS_BUCKET)" -wptd_host="$(WPTD_HOST)" -labels="$(LABELS)" || cat current_metrics.log
+	cd $(REPO_PATH); go run metrics/run/collect_metrics.go -project_id="$(PROJECT_ID)" -input_gcs_bucket="$(INPUT_GCS_BUCKET)" -output_gcs_bucket="$(OUTPUT_GCS_BUCKET)" -wptd_host="$(WPTD_HOST)" -labels="$(LABELS)" || cat current_metrics.log
 
 lint: deps
 	go get -u golang.org/x/lint/golint

@@ -3,8 +3,6 @@ package api
 import (
 	"context"
 	"fmt"
-	"log"
-	"os"
 	"sort"
 	"sync"
 	"time"
@@ -13,6 +11,7 @@ import (
 	"cloud.google.com/go/datastore"
 	gcs "cloud.google.com/go/storage"
 	mapset "github.com/deckarep/golang-set"
+	flags "github.com/jessevdk/go-flags"
 	"github.com/web-platform-tests/results-analysis/metrics"
 	"github.com/web-platform-tests/results-analysis/metrics/compute"
 	"github.com/web-platform-tests/results-analysis/metrics/storage"
@@ -21,44 +20,103 @@ import (
 )
 
 const (
-	DEFAULT_SHARDED_INPUT_BUCKET      = "wptd"
-	DEFAULT_CONSOLIDATED_INPUT_BUCKET = "wptd-results"
+	DefaultShardedInputBucket      = "wptd"
+	DefaultConsolidatedInputBucket = "wptd-results"
 )
 
+var defaultStagingComputer = metricsComputerData{
+	ProjectID:       "wptdashboard-staging",
+	InputGCSBucket:  DefaultConsolidatedInputBucket,
+	OutputGCSBucket: "wptd-metrics-staging",
+	WPTDHost:        "staging.wpt.fyi",
+	Pretty:          false,
+	RateLimitGCS:    false,
+	ShardedInput:    false,
+}
+
+var defaultProdComputer = metricsComputerData{
+	ProjectID:       "wptdashboard",
+	InputGCSBucket:  DefaultConsolidatedInputBucket,
+	OutputGCSBucket: "wptd-metrics",
+	WPTDHost:        "wpt.fyi",
+	Pretty:          false,
+	RateLimitGCS:    false,
+	ShardedInput:    false,
+}
+
+var DefaultStagingComputer = func() MetricsComputer {
+	c := defaultStagingComputer
+	return &c
+}
+
+var DefaultProdComputer = func() MetricsComputer {
+	c := defaultProdComputer
+	return &c
+}
+
 type MetricsComputer interface {
-	Compute(shortSHA string, labels []string) error
+	Compute(ctx context.Context, shortSHA string, labels []string) error
 }
 
 type metricsComputerData struct {
-	ProjectID                     string
-	InputGCSBucket                string
-	OutputGCSBucket               string
-	OutputBQMetadataDataset       string
-	OutputBQDataDataset           string
-	OutputBQPassRateTable         string
-	OutputBQPassRateMetadataTable string
-	OutputBQFailuresTable         string
-	OutputBQFailuresMetadataTable string
-	WPTDHost                      string
-	ShortSHA                      string
-	Pretty                        bool
-	GCPCredentialsFile            string
-	RateLimitGCS                  bool
-	ConsolidatedInput             bool
+	ProjectID                     string `short:"project_id" default:"wptdashboard-staging" description:"Google Cloud Platform project id"`
+	InputGCSBucket                string `short:"input_gcs_bucket" description:"Google Cloud Storage bucket from which  test results are fetched"`
+	OutputGCSBucket               string `short:"output_gcs_bucket" default:"wptd-metrics-staging" description:"Google Cloud Storage bucket where metrics are stored"`
+	OutputBQMetadataDataset       string `short:"output_bq_metadata_dataset" description:"BigQuery dataset where metrics metadata are stored"`
+	OutputBQDataDataset           string `short:"output_bq_data_dataset" description:"BigQuery dataset where metrics data are stored"`
+	OutputBQPassRateTable         string `short:"output_bq_pass_rate_table" description:"BigQuery table where pass rate metrics are stored"`
+	OutputBQPassRateMetadataTable string `short:"output_bq_pass_rate_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
+	OutputBQFailuresTable         string `short:"output_bq_failures_table" description:"BigQuery table where test failure lists are stored"`
+	OutputBQFailuresMetadataTable string `short:"output_bq_failures_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
+	WPTDHost                      string `short:"wptd_host" default:"staging.wpt.fyi" description:"Hostname of endpoint that serves WPT Dashboard data API"`
+	GCPCredentialsFile            string `short:"gcp_credentials_file" default:"client-secret.json" description:"Path to Google Cloud Platform file for accessing services"`
+	Pretty                        bool   `short:"pretty" description:"Prettify stdout output; appropriate for terminals but not log files"`
+	RateLimitGCS                  bool   `short:"rate_limit_gcs" description:"Whether or not to rate limit concurrent requests to Google Cloud Storage"`
+	ShardedInput                  bool   `short:"sharded_input" description:"Read input from sharded (rather than consolidated) results files"`
 }
 
-func (mcd metricsComputerData) Compute(ctx context.Context, shortSHA string, labels []string, logFile *os.File) error {
-	// TODO(markdittmer): Write os.File-based shared.Logger implementation.
-	if logFile != nil {
-		// log.SetOutput(logFile)
-		log.Printf("WARNING: File-based logging not currently supported")
+func NewMetricsComputerFromArgs(args []string) (MetricsComputer, []string, error) {
+	unixNow := time.Now().Unix()
+
+	var mcd metricsComputerData
+	rest, err := flags.ParseArgs(&mcd, args)
+	if err != nil {
+		return nil, nil, err
 	}
 
-	logger := ctx.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
-	if mcd.ConsolidatedInput && mcd.InputGCSBucket == DEFAULT_SHARDED_INPUT_BUCKET {
-		logger.Infof("Using consolidated GCS bucket, %s, rather than sharded bucket, %s", DEFAULT_CONSOLIDATED_INPUT_BUCKET, DEFAULT_SHARDED_INPUT_BUCKET)
-		mcd.InputGCSBucket = DEFAULT_CONSOLIDATED_INPUT_BUCKET
+	if mcd.InputGCSBucket == "" {
+		if mcd.ShardedInput {
+			mcd.InputGCSBucket = DefaultShardedInputBucket
+		} else {
+			mcd.InputGCSBucket = DefaultConsolidatedInputBucket
+		}
 	}
+
+	if mcd.OutputBQMetadataDataset == "" {
+		mcd.OutputBQMetadataDataset = fmt.Sprintf("wptd_metrics_%d", unixNow)
+	}
+	if mcd.OutputBQDataDataset == "" {
+		mcd.OutputBQDataDataset = fmt.Sprintf("wptd_metrics_%d", unixNow)
+	}
+	if mcd.OutputBQPassRateTable == "" {
+		mcd.OutputBQPassRateTable = fmt.Sprintf("PassRates_%d", unixNow)
+	}
+	if mcd.OutputBQPassRateMetadataTable == "" {
+		mcd.OutputBQPassRateMetadataTable = fmt.Sprintf("PassRateMetadata_%d", unixNow)
+	}
+	if mcd.OutputBQFailuresTable == "" {
+		mcd.OutputBQFailuresTable = fmt.Sprintf("Failures_%d", unixNow)
+	}
+	if mcd.OutputBQFailuresMetadataTable == "" {
+		mcd.OutputBQFailuresMetadataTable = fmt.Sprintf("FailuresMetadata_%d", unixNow)
+	}
+
+	return &mcd, rest, err
+}
+
+func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, labels []string) error {
+	// TODO(markdittmer): Write os.File-based shared.Logger implementation.
+	logger := ctx.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
 
 	var gcsClient *gcs.Client
 	var err error
@@ -75,9 +133,9 @@ func (mcd metricsComputerData) Compute(ctx context.Context, shortSHA string, lab
 	}
 
 	inputBucket := gcsClient.Bucket(mcd.InputGCSBucket)
-	ctxF := storage.NewShardedGCSDatastoreContext
-	if mcd.ConsolidatedInput {
-		ctxF = storage.NewConsolidatedGCSDatastoreContext
+	ctxF := storage.NewConsolidatedGCSDatastoreContext
+	if mcd.ShardedInput {
+		ctxF = storage.NewShardedGCSDatastoreContext
 	}
 	inputCtx := ctxF(ctx, storage.Bucket{
 		Name:   mcd.InputGCSBucket,
@@ -142,7 +200,7 @@ func (mcd metricsComputerData) Compute(ctx context.Context, shortSHA string, lab
 	for _, run := range runs {
 		go func(browserName string) {
 			defer wg.Done()
-			// TODO: Check that browser names are different
+			// TODO: Check that browser names are different.
 			failuresMetrics[browserName] =
 				compute.ComputeBrowserFailureList(len(runs),
 					browserName, &resultsByID,
