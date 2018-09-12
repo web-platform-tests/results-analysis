@@ -211,7 +211,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 	logger.Infof("Computed metrics")
 	logger.Infof("Uploading metrics")
 
-	outputBucket := gcsClient.Bucket(mcd.OutputGCSBucket)
 	var datastoreClient *datastore.Client
 	if mcd.GCPCredentialsFile != "" {
 		logger.Infof("Connecting to Datastore with credentials from file")
@@ -222,6 +221,11 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 	}
 	if err != nil {
 		return err
+	}
+
+	var outputBucket *gcs.BucketHandle
+	if mcd.OutputGCSBucket != "" {
+		outputBucket = gcsClient.Bucket(mcd.OutputGCSBucket)
 	}
 
 	var bigqueryClient *bigquery.Client
@@ -279,6 +283,10 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 
 	wg.Add((1 + len(failuresMetrics)) * len(outputters))
 	processUploadErrors := func(errs []error) error {
+		if errs == nil {
+			return nil
+		}
+
 		for _, err := range errs {
 			logger.Errorf("Upload error: %v", err)
 		}

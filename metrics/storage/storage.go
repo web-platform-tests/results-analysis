@@ -136,6 +136,13 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (
 	metadataWritten interface{}, dataWritten []interface{}, errs []error) {
 	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+
+	if ctx.Bucket.Handle == nil || id.DataLocation.GCSObjectPath == "" {
+		logger.Warningf("GCS configuration incomplete: Skipping output to GCS (bucket handle = %v ; GCS object path = %v)",
+			ctx.Bucket.Handle, id.DataLocation.GCSObjectPath)
+		return nil, nil, nil
+	}
+
 	name := fmt.Sprintf("%s/%s", ctx.Bucket.Name,
 		id.DataLocation.GCSObjectPath)
 	logger.Infof("Writing %s to Google Cloud Storage\n", name)
@@ -213,6 +220,15 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (metadataWritten interface{},
 	dataWritten []interface{}, errs []error) {
 	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+
+	if id.DataLocation.BQDatasetName == "" || id.DataLocation.BQTableName == "" ||
+		id.MetadataLocation.BQDatasetName == "" ||
+		id.MetadataLocation.BQTableName == "" {
+		logger.Warningf("BQ configuration incomplete: Skipping output to BQ (data location = %v ; metadata location = %v)",
+			id.DataLocation, id.MetadataLocation)
+		return nil, nil, nil
+	}
+
 	dataName := fmt.Sprintf("%s.%s", id.DataLocation.BQDatasetName,
 		id.DataLocation.BQTableName)
 	metadataName := fmt.Sprintf("%s.%s",
@@ -227,11 +243,11 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	metadataTable := dataDataset.Table(id.MetadataLocation.BQTableName)
 
 	if err := dataDataset.Create(ctx.Context, nil); err != nil {
-		logger.Errorf("Error creating BigQuery dataset %s for data (continuing anyway): %v\n",
+		logger.Warningf("Error creating BigQuery dataset %s for data (continuing anyway): %v\n",
 			id.DataLocation.BQDatasetName, err)
 	}
 	if err := metadataDataset.Create(ctx.Context, nil); err != nil {
-		logger.Errorf("Error creating BigQuery dataset %s for metadata (continuing anyway): %v\n",
+		logger.Warningf("Error creating BigQuery dataset %s for metadata (continuing anyway): %v\n",
 			id.MetadataLocation.BQDatasetName, err)
 	}
 
@@ -253,13 +269,13 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	if err := dataTable.Create(ctx.Context, &bigquery.TableMetadata{
 		Schema: dataSchema,
 	}); err != nil {
-		logger.Errorf("Error creating BigQuery table %s for data (continuing anyway): %v\n",
+		logger.Warningf("Error creating BigQuery table %s for data (continuing anyway): %v\n",
 			dataName, err)
 	}
 	if err := metadataTable.Create(ctx.Context, &bigquery.TableMetadata{
 		Schema: metadataSchema,
 	}); err != nil {
-		logger.Errorf("Error creating BigQuery table %s for metadata (continuing anyway): %v\n",
+		logger.Warningf("Error creating BigQuery table %s for metadata (continuing anyway): %v\n",
 			metadataName, err)
 	}
 
