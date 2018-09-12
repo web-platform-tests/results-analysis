@@ -63,15 +63,17 @@ func main() {
 		defer logFile.Close()
 		log.Printf("Detailed logs appended to %s\n", logFileName)
 
-		ctx = context.WithValue(context.Background(), shared.DefaultLoggerCtxKey(), shared.SplitLogger{
-			A: stdoutLogger,
-			B: &log.Logger{
-				Out:       logFile,
-				Formatter: new(log.TextFormatter),
-				Hooks:     make(log.LevelHooks),
-				Level:     log.DebugLevel,
-			},
-		})
+		ctx = context.WithValue(context.Background(), shared.DefaultLoggerCtxKey(),
+			shared.NewLoggerMux([]shared.Logger{
+				stdoutLogger,
+				&log.Logger{
+					Out:       logFile,
+					Formatter: new(log.TextFormatter),
+					Hooks:     make(log.LevelHooks),
+					Level:     log.DebugLevel,
+				},
+			}),
+		)
 	}
 
 	err = metricsAPI.Compute(ctx, lass.ShortSHA, lass.Labels)
