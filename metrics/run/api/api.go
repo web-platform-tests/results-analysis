@@ -28,20 +28,22 @@ var defaultStagingComputer = metricsComputerData{
 	ProjectID:       "wptdashboard-staging",
 	InputGCSBucket:  DefaultConsolidatedInputBucket,
 	OutputGCSBucket: "wptd-metrics-staging",
-	WPTDHost:        "staging.wpt.fyi",
-	Pretty:          false,
-	RateLimitGCS:    false,
-	ShardedInput:    false,
+	// No BQ config: Output to GCS only.
+	WPTDHost:     "staging.wpt.fyi",
+	Pretty:       false,
+	RateLimitGCS: false,
+	ShardedInput: false,
 }
 
 var defaultProdComputer = metricsComputerData{
 	ProjectID:       "wptdashboard",
 	InputGCSBucket:  DefaultConsolidatedInputBucket,
 	OutputGCSBucket: "wptd-metrics",
-	WPTDHost:        "wpt.fyi",
-	Pretty:          false,
-	RateLimitGCS:    false,
-	ShardedInput:    false,
+	// No BQ config: Output to GCS only.
+	WPTDHost:     "wpt.fyi",
+	Pretty:       false,
+	RateLimitGCS: false,
+	ShardedInput: false,
 }
 
 var DefaultStagingComputer = func() MetricsComputer {
