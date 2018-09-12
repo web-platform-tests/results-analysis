@@ -59,27 +59,27 @@ type MetricsComputer interface {
 }
 
 type metricsComputerData struct {
-	ProjectID                     string `short:"project_id" default:"wptdashboard-staging" description:"Google Cloud Platform project id"`
-	InputGCSBucket                string `short:"input_gcs_bucket" description:"Google Cloud Storage bucket from which  test results are fetched"`
-	OutputGCSBucket               string `short:"output_gcs_bucket" default:"wptd-metrics-staging" description:"Google Cloud Storage bucket where metrics are stored"`
-	OutputBQMetadataDataset       string `short:"output_bq_metadata_dataset" description:"BigQuery dataset where metrics metadata are stored"`
-	OutputBQDataDataset           string `short:"output_bq_data_dataset" description:"BigQuery dataset where metrics data are stored"`
-	OutputBQPassRateTable         string `short:"output_bq_pass_rate_table" description:"BigQuery table where pass rate metrics are stored"`
-	OutputBQPassRateMetadataTable string `short:"output_bq_pass_rate_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
-	OutputBQFailuresTable         string `short:"output_bq_failures_table" description:"BigQuery table where test failure lists are stored"`
-	OutputBQFailuresMetadataTable string `short:"output_bq_failures_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
-	WPTDHost                      string `short:"wptd_host" default:"staging.wpt.fyi" description:"Hostname of endpoint that serves WPT Dashboard data API"`
-	GCPCredentialsFile            string `short:"gcp_credentials_file" default:"client-secret.json" description:"Path to Google Cloud Platform file for accessing services"`
-	Pretty                        bool   `short:"pretty" description:"Prettify stdout output; appropriate for terminals but not log files"`
-	RateLimitGCS                  bool   `short:"rate_limit_gcs" description:"Whether or not to rate limit concurrent requests to Google Cloud Storage"`
-	ShardedInput                  bool   `short:"sharded_input" description:"Read input from sharded (rather than consolidated) results files"`
+	ProjectID                     string `long:"project_id" default:"wptdashboard-staging" description:"Google Cloud Platform project id"`
+	InputGCSBucket                string `long:"input_gcs_bucket" description:"Google Cloud Storage bucket from which  test results are fetched"`
+	OutputGCSBucket               string `long:"output_gcs_bucket" default:"wptd-metrics-staging" description:"Google Cloud Storage bucket where metrics are stored"`
+	OutputBQMetadataDataset       string `long:"output_bq_metadata_dataset" description:"BigQuery dataset where metrics metadata are stored"`
+	OutputBQDataDataset           string `long:"output_bq_data_dataset" description:"BigQuery dataset where metrics data are stored"`
+	OutputBQPassRateTable         string `long:"output_bq_pass_rate_table" description:"BigQuery table where pass rate metrics are stored"`
+	OutputBQPassRateMetadataTable string `long:"output_bq_pass_rate_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
+	OutputBQFailuresTable         string `long:"output_bq_failures_table" description:"BigQuery table where test failure lists are stored"`
+	OutputBQFailuresMetadataTable string `long:"output_bq_failures_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
+	WPTDHost                      string `long:"wptd_host" default:"staging.wpt.fyi" description:"Hostname of endpoint that serves WPT Dashboard data API"`
+	GCPCredentialsFile            string `long:"gcp_credentials_file" default:"client-secret.json" description:"Path to Google Cloud Platform file for accessing services"`
+	Pretty                        bool   `long:"pretty" description:"Prettify stdout output; appropriate for terminals but not log files"`
+	RateLimitGCS                  bool   `long:"rate_limit_gcs" description:"Whether or not to rate limit concurrent requests to Google Cloud Storage"`
+	ShardedInput                  bool   `long:"sharded_input" description:"Read input from sharded (rather than consolidated) results files"`
 }
 
 func NewMetricsComputerFromArgs(args []string) (MetricsComputer, []string, error) {
 	unixNow := time.Now().Unix()
 
 	var mcd metricsComputerData
-	rest, err := flags.ParseArgs(&mcd, args)
+	rest, err := flags.NewParser(&mcd, flags.IgnoreUnknown).ParseArgs(args)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -115,7 +115,6 @@ func NewMetricsComputerFromArgs(args []string) (MetricsComputer, []string, error
 }
 
 func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, labels []string) error {
-	// TODO(markdittmer): Write os.File-based shared.Logger implementation.
 	logger := ctx.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
 
 	var gcsClient *gcs.Client
@@ -178,7 +177,7 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 
 	logger.Infof("Consolidating results")
 
-	resultsByID := compute.GatherResultsById(&allResults)
+	resultsByID := compute.GatherResultsById(ctx, &allResults)
 
 	logger.Infof("Consolidated results")
 	logger.Infof("Computing metrics")

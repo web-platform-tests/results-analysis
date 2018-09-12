@@ -11,7 +11,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"reflect"
 	"sort"
@@ -23,6 +22,7 @@ import (
 	"cloud.google.com/go/storage"
 	tm "github.com/buger/goterm"
 	"github.com/web-platform-tests/results-analysis/metrics"
+	"github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
 	"google.golang.org/api/iterator"
@@ -135,9 +135,10 @@ type BQContext struct {
 func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (
 	metadataWritten interface{}, dataWritten []interface{}, errs []error) {
+	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
 	name := fmt.Sprintf("%s/%s", ctx.Bucket.Name,
 		id.DataLocation.GCSObjectPath)
-	log.Printf("Writing %s to Google Cloud Storage\n", name)
+	logger.Infof("Writing %s to Google Cloud Storage\n", name)
 	gcsData := GCSData{metadata, data}
 	obj := ctx.Bucket.Handle.Object(id.DataLocation.GCSObjectPath)
 	if err := func() error {
@@ -158,16 +159,16 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 		}
 		return objWriter.Close()
 	}(); err != nil {
-		log.Printf("Error writing %s to Google Cloud Storage: %v\n",
+		logger.Errorf("Error writing %s to Google Cloud Storage: %v\n",
 			name, err)
 		errs = append(errs, err)
 		return nil, make([]interface{}, 0), errs
 	}
-	log.Printf("Wrote %s to Google Cloud Storage\n", name)
+	logger.Infof("Wrote %s to Google Cloud Storage\n", name)
 
 	dataWritten = data
 
-	log.Printf("Writing %s to Datastore\n", name)
+	logger.Infof("Writing %s to Datastore\n", name)
 	metadataType := reflect.TypeOf(metadata)
 	for metadataType.Kind() == reflect.Ptr {
 		metadataType = reflect.Indirect(reflect.ValueOf(
@@ -196,12 +197,12 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 			passRateMetadata)
 	}
 	if err != nil {
-		log.Printf("Error writing %s to Datastore: %v\n",
+		logger.Errorf("Error writing %s to Datastore: %v\n",
 			name, err)
 		errs = append(errs, err)
 		return nil, dataWritten, errs
 	}
-	log.Printf("Wrote %s to Google Cloud Storage\n", name)
+	logger.Infof("Wrote %s to Google Cloud Storage\n", name)
 
 	metadataWritten = metadata
 
@@ -211,12 +212,13 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 func (ctx BQContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (metadataWritten interface{},
 	dataWritten []interface{}, errs []error) {
+	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
 	dataName := fmt.Sprintf("%s.%s", id.DataLocation.BQDatasetName,
 		id.DataLocation.BQTableName)
 	metadataName := fmt.Sprintf("%s.%s",
 		id.MetadataLocation.BQDatasetName,
 		id.MetadataLocation.BQTableName)
-	log.Printf("Writing data to %s, %s BigQuery tables\n", dataName,
+	logger.Infof("Writing data to %s, %s BigQuery tables\n", dataName,
 		metadataName)
 
 	dataDataset := ctx.Client.Dataset(id.DataLocation.BQDatasetName)
@@ -225,24 +227,24 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	metadataTable := dataDataset.Table(id.MetadataLocation.BQTableName)
 
 	if err := dataDataset.Create(ctx.Context, nil); err != nil {
-		log.Printf("Error creating BigQuery dataset %s for data (continuing anyway): %v\n",
+		logger.Errorf("Error creating BigQuery dataset %s for data (continuing anyway): %v\n",
 			id.DataLocation.BQDatasetName, err)
 	}
 	if err := metadataDataset.Create(ctx.Context, nil); err != nil {
-		log.Printf("Error creating BigQuery dataset %s for metadata (continuing anyway): %v\n",
+		logger.Errorf("Error creating BigQuery dataset %s for metadata (continuing anyway): %v\n",
 			id.MetadataLocation.BQDatasetName, err)
 	}
 
 	metadataSchema, err := bigquery.InferSchema(metadata)
 	if err != nil {
-		log.Printf("Error creating BigQuery schema for metadata: %v\n",
+		logger.Errorf("Error creating BigQuery schema for metadata: %v\n",
 			err)
 		errs = append(errs, err)
 		return metadataWritten, dataWritten, errs
 	}
 	dataSchema, err := bigquery.InferSchema(data[0])
 	if err != nil {
-		log.Printf("Error creating BigQuery schema for data: %v\n",
+		logger.Errorf("Error creating BigQuery schema for data: %v\n",
 			err)
 		errs = append(errs, err)
 		return metadataWritten, dataWritten, errs
@@ -251,13 +253,13 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	if err := dataTable.Create(ctx.Context, &bigquery.TableMetadata{
 		Schema: dataSchema,
 	}); err != nil {
-		log.Printf("Error creating BigQuery table %s for data (continuing anyway): %v\n",
+		logger.Errorf("Error creating BigQuery table %s for data (continuing anyway): %v\n",
 			dataName, err)
 	}
 	if err := metadataTable.Create(ctx.Context, &bigquery.TableMetadata{
 		Schema: metadataSchema,
 	}); err != nil {
-		log.Printf("Error creating BigQuery table %s for metadata (continuing anyway): %v\n",
+		logger.Errorf("Error creating BigQuery table %s for metadata (continuing anyway): %v\n",
 			metadataName, err)
 	}
 
@@ -272,14 +274,14 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 		}
 		dataSlice := data[startIdx:endIdx]
 		for err = dataUploader.Put(ctx.Context, dataSlice); err != nil; err = dataUploader.Put(ctx.Context, dataSlice) {
-			log.Printf("Failed to write %d records to BigQuery table %s: %v\n",
+			logger.Warningf("Failed to write %d records to BigQuery table %s: %v\n",
 				len(dataSlice), dataName, err)
 			multiErr, ok := err.(bigquery.PutMultiError)
 			if !ok {
 				errs := append(errs, err)
 				return metadataWritten, dataWritten, errs
 			}
-			log.Printf("Retrying data write to BigQuery table %s\n",
+			logger.Infof("Retrying data write to BigQuery table %s\n",
 				dataName)
 			newSlice := make([]interface{}, 0, len(multiErr))
 			for _, rowInsertionErr := range multiErr {
@@ -293,7 +295,7 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 	dataWritten = data
 
 	if err := metadataUploader.Put(ctx.Context, metadata); err != nil {
-		log.Printf("Error writing metadata to BigQuery table %s: %v\n",
+		logger.Errorf("Error writing metadata to BigQuery table %s: %v\n",
 			metadataName, err)
 		errs = append(errs, err)
 		return metadataWritten, dataWritten, errs
@@ -301,7 +303,7 @@ func (ctx BQContext) Output(id OutputId, metadata interface{},
 
 	metadataWritten = metadata
 
-	log.Printf("Wrote data to %s, %s BigQuery tables\n", dataName,
+	logger.Infof("Wrote data to %s, %s BigQuery tables\n", dataName,
 		metadataName)
 
 	return metadataWritten, dataWritten, errs
@@ -327,6 +329,7 @@ func (me multiError) Error() string {
 func (ctx *gcsDatastoreContext) LoadTestRunResults(
 	runs []metrics.TestRunLegacy, limiter Limiter, pretty bool) (
 	runResults []metrics.TestRunResults, err error) {
+	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)
@@ -387,12 +390,12 @@ func (ctx *gcsDatastoreContext) LoadTestRunResults(
 				tm.Clear()
 				tm.MoveCursor(1, 1)
 				for _, msg := range msgs {
-					tm.Println(msg)
+					logger.Debugf(msg)
 				}
 				tm.Flush()
 			} else {
 				for _, msg := range msgs {
-					log.Println(msg)
+					logger.Debugf(msg)
 				}
 			}
 		}
