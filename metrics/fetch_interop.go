@@ -6,7 +6,7 @@ import "github.com/web-platform-tests/wpt.fyi/shared"
 // the API on the given host.
 func FetchInterop(wptdHost string, filter shared.TestRunFilter) PassRateMetadata {
 	url := "https://" + wptdHost + "/api/interop"
-	url += "?" + filter.ToQuery(true).Encode()
+	url += "?" + filter.OrDefault().ToQuery().Encode()
 
 	var interop PassRateMetadata
 	shared.FetchJSON(url, &interop)
