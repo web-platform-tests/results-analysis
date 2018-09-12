@@ -117,7 +117,7 @@ func NewMetricsComputerFromArgs(args []string) (MetricsComputer, []string, error
 }
 
 func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, labels []string) error {
-	logger := ctx.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+	logger := metrics.GetLogger(ctx)
 
 	var gcsClient *gcs.Client
 	var err error

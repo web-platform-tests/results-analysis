@@ -22,7 +22,6 @@ import (
 	"cloud.google.com/go/storage"
 	tm "github.com/buger/goterm"
 	"github.com/web-platform-tests/results-analysis/metrics"
-	"github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
 	"google.golang.org/api/iterator"
@@ -135,7 +134,7 @@ type BQContext struct {
 func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (
 	metadataWritten interface{}, dataWritten []interface{}, errs []error) {
-	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+	logger := metrics.GetLogger(ctx.Context)
 
 	if ctx.Bucket.Handle == nil || id.DataLocation.GCSObjectPath == "" {
 		logger.Warningf("GCS configuration incomplete: Skipping output to GCS (bucket handle = %v ; GCS object path = %v)",
@@ -219,7 +218,7 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 func (ctx BQContext) Output(id OutputId, metadata interface{},
 	data []interface{}) (metadataWritten interface{},
 	dataWritten []interface{}, errs []error) {
-	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+	logger := metrics.GetLogger(ctx.Context)
 
 	if id.DataLocation.BQDatasetName == "" || id.DataLocation.BQTableName == "" ||
 		id.MetadataLocation.BQDatasetName == "" ||
@@ -345,7 +344,7 @@ func (me multiError) Error() string {
 func (ctx *gcsDatastoreContext) LoadTestRunResults(
 	runs []metrics.TestRunLegacy, limiter Limiter, pretty bool) (
 	runResults []metrics.TestRunResults, err error) {
-	logger := ctx.Context.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+	logger := metrics.GetLogger(ctx.Context)
 	resultChan := make(chan metrics.TestRunResults, 0)
 	errChan := make(chan error, 0)
 	runResults = make([]metrics.TestRunResults, 0, 100000)

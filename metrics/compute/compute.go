@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/web-platform-tests/results-analysis/metrics"
-	"github.com/web-platform-tests/wpt.fyi/shared"
 )
 
 type TestRunsStatus map[metrics.TestID]map[string]metrics.CompleteTestStatus
@@ -40,7 +39,7 @@ func OkOrPassesAndUnknownOrPasses(status *metrics.CompleteTestStatus) bool {
 // this module.
 func GatherResultsById(ctx context.Context, allResults *[]metrics.TestRunResults) (
 	resultsById TestRunsStatus) {
-	logger := ctx.Value(shared.DefaultLoggerCtxKey()).(shared.Logger)
+	logger := metrics.GetLogger(ctx)
 	resultsById = make(TestRunsStatus)
 
 	for _, results := range *allResults {
