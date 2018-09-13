@@ -5,7 +5,7 @@
 package compute
 
 import (
-	"log"
+	"context"
 	"strings"
 
 	"github.com/web-platform-tests/results-analysis/metrics"
@@ -37,8 +37,9 @@ func OkOrPassesAndUnknownOrPasses(status *metrics.CompleteTestStatus) bool {
 
 // Gather results from test runs into input format for Compute* functions in
 // this module.
-func GatherResultsById(allResults *[]metrics.TestRunResults) (
+func GatherResultsById(ctx context.Context, allResults *[]metrics.TestRunResults) (
 	resultsById TestRunsStatus) {
+	logger := metrics.GetLogger(ctx)
 	resultsById = make(TestRunsStatus)
 
 	for _, results := range *allResults {
@@ -52,7 +53,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 		}
 		_, ok = resultsById[TestID][run.BrowserName]
 		if ok {
-			log.Printf("Duplicate results for TestID:%v  in "+
+			logger.Warningf("Duplicate results for TestID:%v  in "+
 				"TestRun:%v.  Overwriting.\n", TestID, run)
 		}
 		newStatus := metrics.CompleteTestStatus{
@@ -71,7 +72,7 @@ func GatherResultsById(allResults *[]metrics.TestRunResults) (
 			}
 			_, ok = resultsById[TestID][run.BrowserName]
 			if ok {
-				log.Printf("Duplicate sub-results for "+
+				logger.Warningf("Duplicate sub-results for "+
 					"TestID:%v  in TestRun:%v.  "+
 					"Overwriting.\n", TestID, run)
 			}

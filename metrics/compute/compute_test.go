@@ -65,7 +65,8 @@ func TestGatherResultsById_TwoRuns_SameTest(t *testing.T) {
 			},
 		},
 	}
-	gathered := GatherResultsById(results)
+
+	gathered := GatherResultsById(shared.NewTestContext(), results)
 	assert.Equal(t, 1, len(gathered)) // Merged to single TestId: {"A test",""}.
 	for testID, runStatusMap := range gathered {
 		assert.Equal(t, metrics.TestID{"A test", ""}, testID)
@@ -121,7 +122,7 @@ func TestGatherResultsById_TwoRuns_DiffTests(t *testing.T) {
 			},
 		},
 	}
-	gathered := GatherResultsById(results)
+	gathered := GatherResultsById(shared.NewTestContext(), results)
 	assert.Equal(t, 3, len(gathered)) // A, Shared, B.
 	assert.Equal(t, 1, len(gathered[metrics.TestID{"A test", ""}]))
 	assert.Equal(t, metrics.CompleteTestStatus{
@@ -172,7 +173,7 @@ func TestGatherResultsById_OneRun_SubTest(t *testing.T) {
 			},
 		},
 	}
-	gathered := GatherResultsById(results)
+	gathered := GatherResultsById(shared.NewTestContext(), results)
 	assert.Equal(t, 3, len(gathered)) // Top-level test + 2 sub-tests.
 	testIds := make([]metrics.TestID, 0, len(gathered))
 	for testId, _ := range gathered {

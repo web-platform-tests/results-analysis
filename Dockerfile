@@ -16,6 +16,6 @@ RUN mkdir -p "${WPT_PATH}"
 ENV GOCACHE="/go/.cache"
 
 RUN apk update
-RUN apk add bash git make
+RUN apk add bash build-base git make
 
 WORKDIR "${GO_REPO_PATH}"
