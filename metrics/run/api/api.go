@@ -143,22 +143,58 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 		Handle: inputBucket,
 	}, nil)
 
-	logger.Infof("Reading test results from Google Cloud Storage bucket: %s", mcd.InputGCSBucket)
-
-	readStartTime := time.Now()
 	var labelSet mapset.Set
 	for _, label := range labels {
 		labelSet.Add(label)
 	}
 
+	alignment := true
 	filters := shared.TestRunFilter{
 		SHA:    shortSHA,
 		Labels: labelSet,
+		// Set Aligned to ensure that, if SHA and Labels are zero-valued, the filter
+		// isn't interpreted as zero-valued and filled out with default data, such
+		// as labels that should not be applied.
+		Aligned: &alignment,
 	}
 	runsWithLabels, err := shared.FetchRuns(mcd.WPTDHost, filters)
 	if err != nil {
 		return err
 	}
+
+	var datastoreClient *datastore.Client
+	if mcd.GCPCredentialsFile != "" {
+		logger.Infof("Connecting to Datastore with credentials from file")
+		datastoreClient, err = datastore.NewClient(ctx, mcd.ProjectID, option.WithCredentialsFile(mcd.GCPCredentialsFile))
+	} else {
+		logger.Infof("Connecting to Datastore without credentials from file")
+		datastoreClient, err = datastore.NewClient(ctx, mcd.ProjectID)
+	}
+	if err != nil {
+		return err
+	}
+
+	prm := metrics.GetDatastoreKindName(metrics.PassRateMetadata{})
+	runsWithLabelsIDs := runsWithLabels.GetTestRunIDs()
+
+	logger.Infof("Checking whether interop data already exists for runs %v", runsWithLabelsIDs)
+
+	q := datastore.NewQuery(prm).Limit(1).KeysOnly()
+	for _, id := range runsWithLabelsIDs {
+		q = q.Filter("TestRunIDs =", id)
+	}
+	keys, err := datastoreClient.GetAll(ctx, q, nil)
+	if err != nil {
+		return err
+	}
+	if len(keys) > 0 {
+		logger.Warningf("Found interop metadata for runs; skipping interop compute+store")
+		return nil
+	}
+
+	logger.Infof("Reading test results from Google Cloud Storage bucket: %s", mcd.InputGCSBucket)
+
+	readStartTime := time.Now()
 	runs, err := metrics.ConvertRuns(runsWithLabels)
 	if err != nil {
 		return err
@@ -212,18 +248,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 
 	logger.Infof("Computed metrics")
 	logger.Infof("Uploading metrics")
-
-	var datastoreClient *datastore.Client
-	if mcd.GCPCredentialsFile != "" {
-		logger.Infof("Connecting to Datastore with credentials from file")
-		datastoreClient, err = datastore.NewClient(ctx, mcd.ProjectID, option.WithCredentialsFile(mcd.GCPCredentialsFile))
-	} else {
-		logger.Infof("Connecting to Datastore without credentials from file")
-		datastoreClient, err = datastore.NewClient(ctx, mcd.ProjectID)
-	}
-	if err != nil {
-		return err
-	}
 
 	var outputBucket *gcs.BucketHandle
 	if mcd.OutputGCSBucket != "" {
