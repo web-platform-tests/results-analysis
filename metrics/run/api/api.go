@@ -143,7 +143,7 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 		Handle: inputBucket,
 	}, nil)
 
-	var labelSet mapset.Set
+	labelSet := mapset.NewSet()
 	for _, label := range labels {
 		labelSet.Add(label)
 	}
