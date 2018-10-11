@@ -133,7 +133,7 @@ async function main() {
     }
 
     if (hasLoneFailure) {
-      console.log(`* [${test.replace('?', '%3F')}](https://wpt.fyi/results${test}?${query})`);
+      console.log(`* [${test}](https://wpt.fyi/results${test.replace('?', '%3F')}?${query})`);
     }
   }
 }
