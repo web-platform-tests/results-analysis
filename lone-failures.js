@@ -67,14 +67,26 @@ function isLoneFailure(result, otherResults) {
   //return isFailure(result) && !otherResults.some(isFailure);
 }
 
-async function main() {
-  const targetProduct = process.argv[2];
-
-  if (!PRODUCTS.includes(targetProduct)) {
-    throw new Error(`Unknown product: ${targetProduct}`);
+function checkProduct(p) {
+  if (!PRODUCTS.includes(p)) {
+    throw new Error(`Unknown product: ${p}`);
   }
+  return p;
+}
 
-  const products = PRODUCTS.map(product => {
+async function main() {
+  const targetProduct = checkProduct(process.argv[2]);
+
+  const excludeProducts = process.argv.slice(3).map(arg => {
+    if (!arg.startsWith('-')) {
+      throw new Error('exclude products by prefixing with -, e.g. -chrome');
+    }
+    return checkProduct(arg.substr(1));
+  });
+
+  const products = PRODUCTS.filter(product => {
+    return !excludeProducts.includes(product);
+  }).map(product => {
     // get experimental of the lone (target) product and stable of everything
     // else to make results the most useful for that product team.
     const label = product === targetProduct ? 'experimental' : 'stable';
