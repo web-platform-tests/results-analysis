@@ -81,8 +81,8 @@ async function main() {
     return `${product}%5B${label}%5D`;
   });
 
-  const query = `products=${products.join(',')}&aligned`;
-  const runsUrl = `https://wpt.fyi/api/runs?${query}`
+  const query = `products=${products.join(',')}`;
+  const runsUrl = `https://wpt.fyi/api/runs?${query}&aligned`
   //console.info(`Fetching ${runsUrl}`);
   //console.info(`Equivalent to: https://wpt.fyi/results/?${query}`);
   const runsInfo = await (await fetch(runsUrl)).json();
@@ -96,16 +96,22 @@ async function main() {
     return report;
   }));
 
+  let alignedSha;
   console.log('Using these runs:')
   for (const report of reports) {
     const product = report.run_info.product;
-    const sha = report.run_info.revision;
+    const sha = report.run_info.revision.substr(0,10);
+    if (alignedSha === undefined) {
+      alignedSha = sha;
+    } else if (alignedSha !== sha) {
+      throw new Error(`Expected aligned runs but got ${alignedSha} != ${sha}`);
+    }
     const results = report.results;
-    console.log(`* ${product} @${sha.substr(0,10)}: ${results.size} tests`);
+    console.log(`* ${product} @${sha}: ${results.size} tests`);
   }
-  console.log()
+  console.log();
 
-  console.log(`${targetProduct}-only failures:`)
+  console.log(`${targetProduct}-only failures:`);
   const single = reports.find(r => r.run_info.product == targetProduct);
   const others = reports.filter(r => r != single);
   for (const [test, result] of single.results.entries()) {
@@ -133,7 +139,7 @@ async function main() {
     }
 
     if (hasLoneFailure) {
-      console.log(`* [${test}](https://wpt.fyi/results${test.replace('?', '%3F')}?${query})`);
+      console.log(`* [${test}](https://wpt.fyi/results${test.replace('?', '%3F')}?${query}&sha=${alignedSha})`);
     }
   }
 }
