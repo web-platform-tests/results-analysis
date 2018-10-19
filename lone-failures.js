@@ -116,6 +116,7 @@ async function main() {
   console.log('Using these runs:')
   for (const report of reports) {
     const product = report.run_info.product;
+    const version = report.run_info.browser_version;
     const sha = report.run_info.revision.substr(0,10);
     if (alignedSha === undefined) {
       alignedSha = sha;
@@ -123,7 +124,7 @@ async function main() {
       throw new Error(`Expected aligned runs but got ${alignedSha} != ${sha}`);
     }
     const results = report.results;
-    console.log(`* ${product} @${sha}: ${results.size} tests`);
+    console.log(`* ${product} ${version} @${sha}: ${results.size} tests`);
   }
   console.log();
 
