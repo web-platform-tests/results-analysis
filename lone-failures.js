@@ -75,6 +75,10 @@ function checkProduct(p) {
 }
 
 async function main() {
+  if (process.argv.length < 3) {
+    console.log(`Usage: node --max-old-space-size=2048 lone-failures.js [product]`);
+    return;
+  }
   const targetProduct = checkProduct(process.argv[2]);
 
   const excludeProducts = process.argv.slice(3).map(arg => {
