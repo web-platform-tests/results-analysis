@@ -19,6 +19,7 @@ async function main() {
 
   const reports = [];
 
+  console.info('Reading reports...');
   for (const file of flags.get('report-file')) {
     reports.push(JSON.parse(fs.readFileSync(file, 'UTF-8')));
   }
@@ -43,6 +44,13 @@ async function main() {
     process.exit(1);
   }
 
+  // sort reports to make output nicer, doesn't affect scoring
+  for (const report of reports) {
+    report.results.sort((a, b) => {
+      return a.test.localeCompare(b.test);
+    });
+  }
+
   let testPrefix = flags.get('test-prefix');
   if (testPrefix) {
     if (!testPrefix.startsWith('/')) {
@@ -51,15 +59,11 @@ async function main() {
     options.testFilter = test => test.test.startsWith(testPrefix);
   }
 
+  console.info('Computing scores...');
   const computeInterop = flags.get('interop');
   if (!computeInterop) {
     // score each report individually (the default)
     for (const report of reports) {
-      // sort to make output nicer, doesn't affect scoring
-      report.results.sort((a, b) => {
-        return a.test.localeCompare(b.test);
-      });
-
       let [score, total] = metrics.scoreReport(report, options);
       const pct = (100 * score / total).toFixed(2);
       if (options.normalizePerTest) {
