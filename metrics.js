@@ -62,4 +62,21 @@ function scoreSubtest(subtest) {
   return subtest.status === 'PASS' ? 1 : 0;
 }
 
-module.exports = { scoreReport };
+function scoreInterop(reports, options = {}) {
+  let score = 0;
+  let total = 0;
+
+  // Create merged results by taking the union of all tests. For subtests, take
+  // the intersection of the reports where there was no harness error, to allow
+  // for tests that have varying numbers of tests that all pass.
+  const mergedResults = new Map;
+  for (const report of reports) {
+    const results = report.results;
+    for (const test of results) {
+      mergedResults.set(test.test, test.status);
+    }
+  }
+  return [0, mergedResults.size];
+}
+
+module.exports = { scoreReport, scoreInterop };

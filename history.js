@@ -15,26 +15,65 @@ const SCORING_OPTIONS = {
 }
 
 async function getStableRuns(sha) {
+    const cacheFile = `cache/stable-runs-${sha}.json`;
+    try {
+        return JSON.parse(fs.readFileSync(cacheFile, 'UTF-8'));
+    } catch (e) {}
+
     const url = `https://wpt.fyi/api/runs?labels=stable&sha=${sha}&max-count=500`;
     let runs = await (await fetch(url)).json();
+    fs.writeFileSync(cacheFile, JSON.stringify(runs), 'UTF-8');
     return runs;
 }
 
 function pickBestRun(product, runs) {
-    const candidates = runs.filter(r => r.browser_name === product);
-    /*
-    if (candidates.length !== 1) {
-        console.log(`${product} has ${runs.length} candidate runs:`);
-        for (const run of candidates) {
-            console.log(`  ${run.raw_results_url}`);
-        }
+    let candidates = runs.filter(r => r.browser_name === product);
+
+    if (candidates.length === 0) {
+        return null;
     }
-    */
+
+    // Dedup to just keep one run with the same `raw_results_url`.
+    // See https://github.com/web-platform-tests/wpt.fyi/issues/738.
+    const resultsUrls = new Set;
+    candidates = candidates.filter(run => {
+        const url = run.raw_results_url;
+        if (resultsUrls.has(url)) {
+            return false;
+        }
+        resultsUrls.add(url);
+        return true;
+    });
+
+    if (candidates.length === 1) {
+        return candidates[0];
+    }
+
+    // Sort and pick the first.
+    candidates.sort((a, b) => {
+        // Prefer newer version (mostly for Safari 11/12)
+        // No, this won't work for a "9.0" to "10.0" comparison.
+        if (a.browser_version !== b.browser_version) {
+            return -a.browser_version.localeCompare(b.browser_version);
+        }
+
+        // Prefer Buildbot (for continuity)
+        if (a.labels.includes('buildbot') && !b.labels.includes('buildbot')) {
+            return -1;
+        }
+        if (b.labels.includes('buildbot') && !a.labels.includes('buildbot')) {
+            return 1;
+        }
+
+        // Fall back to sorting by `time_start` (earliest first).
+        return Date.parse(a.time_start) - Date.parse(b.time_start);
+    });
+
     return candidates[0];
 }
 
 async function main() {
-    const csvHeader = ['date', 'sha', ...PRODUCTS, 'total'];
+    const csvHeader = ['date', 'sha', ...PRODUCTS, 'interop', 'total'];
     console.log(csvHeader.join(','));
 
     const maybeAlignedRuns = fs.readFileSync('aligned-shas.txt', 'UTF-8')
@@ -56,12 +95,7 @@ async function main() {
         }
 
         //console.log(date, sha, 'OK');
-        const scores = {};
-        for (const run of bestRuns) {
-            const product = run.browser_name;
-            //if (product !== 'chrome') continue;
-            //console.log(date, sha, product);
-
+        const reports = bestRuns.map(run => {
             const resultsUrl = run.raw_results_url;
             if (!resultsUrl.startsWith(RESULTS_URL_PREFIX)) {
                 throw new Error(`Unexpected results URL: ${resultsUrl}`);
@@ -72,15 +106,19 @@ async function main() {
                 throw new Error(`Local copy of results not found: ${resultsPath}`);
             }
 
-            const report = JSON.parse(fs.readFileSync(resultsPath, 'UTF-8'));
+            return JSON.parse(fs.readFileSync(resultsPath, 'UTF-8'));
+        });
+        const reportScores = reports.map(report => {
             const [score, total] = metrics.scoreReport(report, SCORING_OPTIONS);
-            scores[product] = { score, total };
-        }
+            return { score, total };
+        });
 
-        const productScores = PRODUCTS.map(p => Math.floor(scores[p].score));
-        const productTotals = PRODUCTS.map(p => scores[p].total);
+        const interopScore = metrics.scoreInterop(reports, SCORING_OPTIONS);
+
+        const productScores = reportScores.map(s => Math.floor(s.score));
+        const productTotals = reportScores.map(s => s.total);
         const maxTotal = productTotals.reduce((x, y) => Math.max(x, y));
-        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...productScores, maxTotal];
+        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...productScores, interopScore[1], maxTotal];
         console.log(csvRecord.join(','));
     }
 }
