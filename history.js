@@ -73,11 +73,7 @@ function pickBestRun(product, runs) {
 }
 
 async function main() {
-    const interopHeadings = new Array(PRODUCTS.length + 1);
-    for (let i = 0; i <= PRODUCTS.length; i++) {
-        interopHeadings[i] = `${i}/${PRODUCTS.length}`
-    }
-    const csvHeader = ['date', 'sha', ...interopHeadings, 'total'];
+    const csvHeader = ['date', 'sha', ...PRODUCTS, 'total'];
     console.log(csvHeader.join(','));
 
     const maybeAlignedRuns = fs.readFileSync('aligned-shas.txt', 'UTF-8')
@@ -112,9 +108,15 @@ async function main() {
 
             return JSON.parse(fs.readFileSync(resultsPath, 'UTF-8'));
         });
+        const reportScores = reports.map(report => {
+            const [score, total] = metrics.scoreReport(report, SCORING_OPTIONS);
+            return { score, total };
+        });
 
-        const scores = metrics.scoreInterop(reports, SCORING_OPTIONS);
-        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...scores];
+        const productScores = reportScores.map(s => Math.floor(s.score));
+        const productTotals = reportScores.map(s => s.total);
+        const maxTotal = productTotals.reduce((x, y) => Math.max(x, y));
+        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...productScores, maxTotal];
         console.log(csvRecord.join(','));
     }
 }
