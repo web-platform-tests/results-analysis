@@ -73,7 +73,7 @@ async function main() {
       if (options.normalizePerTest) {
         score = score.toFixed(2);
       }
-      console.log(`${report.browser_name}: ${score} / ${total} => ${pct}%`);
+      console.log(`${report.run_info.product}: ${score} / ${total} => ${pct}%`);
     }
   } else {
     // compute interop score
