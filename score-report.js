@@ -10,13 +10,15 @@ flags.defineMultiString('report-file', [], 'path to report.json file');
 flags.defineMultiString('report-url', [], 'URL to report.json file');
 flags.defineString('runs-query', 'label=stable', 'wpt.fyi/api/runs query string (used if --report-*= is not used)');
 flags.defineString('test-prefix', '', 'Test path prefix to filter tests by');
+flags.defineBoolean('normalize-per-test', true, 'Normalize score of each test to [0, 1] instead of counting subtests');
+flags.defineBoolean('require-harness-ok', true, 'Require harness status to be OK to count tests');
 flags.defineBoolean('interop', false, 'Compute interop numbers');
 flags.parse();
 
 async function main() {
   const options = {
-    normalizePerTest: true,
-    requireHarnessOK: true,
+    normalizePerTest: flags.get('normalize-per-test'),
+    requireHarnessOK: flags.get('require-harness-ok'),
   }
 
   const reports = [];
