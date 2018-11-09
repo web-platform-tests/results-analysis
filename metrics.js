@@ -67,9 +67,13 @@ function scoreInterop(reports, options = {}) {
   // use the union, even though this means tests with correctly varying number
   // of subtests can never be scored at 100%.
 
-  // Phase one, produce a map from all test names to an array of the statuses.
-  const mergedResults = new Map;
-  reports.forEach((report, i) => {
+  // Phase one, produce a map from all test names to an array of the test
+  // objects, which are just the members of a `report.results`. This will
+  // store the names redundantly, but the objects already exist and creating
+  // new smaller objects will just use more memory. The array will contain null
+  // where there were no results in a report.
+  const testMap = new Map;
+  for (const [i, report] of reports.entries()) {
     const results = report.results;
     for (const test of results) {
       if (options.testFilter && !options.testFilter(test)) {
@@ -77,34 +81,101 @@ function scoreInterop(reports, options = {}) {
         continue;
       }
 
-      let resultList = mergedResults.get(test.test);
-      if (!resultList) {
-        resultList = new Array(reports.length);
-        mergedResults.set(test.test, resultList);
+      let testList = testMap.get(test.test);
+      if (!testList) {
+        testList = new Array(reports.length).fill(null);
+        testMap.set(test.test, testList);
       }
 
-      resultList[i] = { status: test.status, subtests: test.subtests };
+      testList[i] = test;
     }
-  });
+  }
 
-  // Phase two, score each test as [0, 1] for 0/N, 1/N, ... N/N.
-  const counts = new Array(reports.length + 1).fill(0);
-  mergedResults.forEach((resultList, test) => {
-    // If there are no subtests, then just count passes and increment the
-    // corresponding count.
-    console.log(resultList);
-    if (!resultList.some(r => r && r.subtests && r.subtests.length)) {
-      const passes = resultList.reduce((acc, r) => r && r.status === 'PASS' ? acc + 1 : acc, 0);
-      counts[passes] += 1;
-      return;
+  function hasSubtests(test) {
+    return test && test.subtests && test.subtests.length;
+  }
+
+  // Phase two, find [0/N, 1/N, ... N/N] scores per test and accumlate those
+  // into `scores`, and update `total` to be the denominator.
+  const scores = new Array(reports.length + 1).fill(0);
+  let total = 0;
+  for (const [testName, testList] of testMap.entries()) {
+    // If there aren't any subtests, then just count passes.
+    if (!testList.some(hasSubtests)) {
+      let passes = 0;
+      for (const test of testList) {
+        if (test && test.status === 'PASS') {
+          passes++;
+        }
+      }
+      scores[passes] += 1;
+      total += 1;
+      continue;
     }
 
-    // With subtests, take the union of subtest names where the harness status
-    // was OK, then allow results with harness error to contribute as well.
-    // TODO
-  });
+    // With subtests, create a map from subtest name to number of reports that
+    // pass that subtest.
+    const subtestMap = new Map;
+    for (const test of testList) {
+      // It's still possible that some (but not all) `test` has no subtests.
+      if (!hasSubtests(test)) {
+        continue;
+      }
 
-  return [...counts, mergedResults.size];
+      // For `requireHarnessOK`, ignore results with harness errors, including
+      // any subtests that did run and pass.
+      if (options.requireHarnessOK && test.status !== 'OK') {
+        continue;
+      }
+
+      for (const subtest of test.subtests) {
+        let count = subtestMap.get(subtest.name) || 0;
+        if (subtest.status === 'PASS') {
+          count++;
+        }
+        subtestMap.set(subtest.name, count);
+      }
+    }
+
+    // If `subtestMap` is still empty, it's because `requireHarnessOK` is set
+    // and there were harness errors across the board.
+    if (subtestMap.size === 0) {
+      scores[0] += 1;
+      total += 1;
+      continue;
+    }
+
+    // Finally, increment the `scores` and `total` using `subtestMap`.
+    for (let [subtestName, passes] of subtestMap.entries()) {
+      // The same subtest name may appear multiple times in a report, and we
+      // can end up counting it more times than `reports.length` (or fewer). We
+      // would have to detect this earlier, so now just clamp.
+      if (passes > reports.length) {
+        console.warn(`${testName}: clamping subtest ${JSON.stringify(subtestName)} pass count ${passes} to ${reports.length} in a way that is not pedantically correct.`);
+        // TODO: Be pedantically correct.
+        passes = reports.length;
+      }
+
+      if (options.normalizePerTest) {
+        // Adding `1 / subtestMap.size` to a possibly already large count over
+        // and over would lead to a precision problem with sufficiently many
+        // subtests. However, up to about ~10M the accumulated error is <1%.
+        scores[passes] += 1 / subtestMap.size;
+      } else {
+        scores[passes] += 1;
+      }
+    }
+
+    // The total has to be updated outside the loop because it should be
+    // incremented by exactly 1 for `normalizePerTest`.
+    if (options.normalizePerTest) {
+      total += 1;
+    } else {
+      total += subtestMap.size;
+    }
+  }
+
+  return [...scores, total];
 }
 
 module.exports = { scoreReport, scoreInterop };

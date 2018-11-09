@@ -1,3 +1,5 @@
+'use strict';
+
 const fetch = require ('node-fetch');
 const flags = require('flags');
 const fs = require('fs');
@@ -69,12 +71,20 @@ async function main() {
       if (options.normalizePerTest) {
         score = score.toFixed(2);
       }
-      console.log(`${score} / ${total} => ${pct}%`);
+      console.log(`${report.browser_name}: ${score} / ${total} => ${pct}%`);
     }
   } else {
     // compute interop score
-    const score = metrics.scoreInterop(reports, options);
-    console.log(score);
+    const scores = metrics.scoreInterop(reports, options);
+    const total = scores[reports.length + 1];
+    for (let i = 0; i <= reports.length; i++) {
+      let score = scores[i];
+      const pct = (100 * score / total).toFixed(2);
+      if (options.normalizePerTest) {
+        score = score.toFixed(2);
+      }
+      console.log(`${i}/${reports.length}: ${score} / ${total} => ${pct}%`);
+    }
   }
 }
 
