@@ -10,7 +10,7 @@ const RESULTS_URL_PREFIX = 'https://storage.googleapis.com/wptd-results/'
 const LOCAL_RESULTS_PATH = '../wptd-results/'
 
 const SCORING_OPTIONS = {
-    normalizePerTest: true,
+    normalizePerTest: false,
     requireHarnessOK: true,
 }
 
@@ -73,7 +73,11 @@ function pickBestRun(product, runs) {
 }
 
 async function main() {
-    const csvHeader = ['date', 'sha', ...PRODUCTS, 'interop', 'total'];
+    const interopHeadings = new Array(PRODUCTS.length + 1);
+    for (let i = 0; i <= PRODUCTS.length; i++) {
+        interopHeadings[i] = `${i}/${PRODUCTS.length}`
+    }
+    const csvHeader = ['date', 'sha', ...interopHeadings, 'total'];
     console.log(csvHeader.join(','));
 
     const maybeAlignedRuns = fs.readFileSync('aligned-shas.txt', 'UTF-8')
@@ -108,17 +112,9 @@ async function main() {
 
             return JSON.parse(fs.readFileSync(resultsPath, 'UTF-8'));
         });
-        const reportScores = reports.map(report => {
-            const [score, total] = metrics.scoreReport(report, SCORING_OPTIONS);
-            return { score, total };
-        });
 
-        const interopScore = metrics.scoreInterop(reports, SCORING_OPTIONS);
-
-        const productScores = reportScores.map(s => Math.floor(s.score));
-        const productTotals = reportScores.map(s => s.total);
-        const maxTotal = productTotals.reduce((x, y) => Math.max(x, y));
-        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...productScores, interopScore[1], maxTotal];
+        const scores = metrics.scoreInterop(reports, SCORING_OPTIONS);
+        const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...scores];
         console.log(csvRecord.join(','));
     }
 }
