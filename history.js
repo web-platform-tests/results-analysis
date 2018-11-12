@@ -2,7 +2,8 @@
 
 const fetch = require ('node-fetch');
 const fs = require('fs');
-const metrics = require('./metrics.js');
+
+const metrics = require('./lib/metrics.js');
 
 const PRODUCTS = ['chrome', 'edge', 'firefox', 'safari'];
 

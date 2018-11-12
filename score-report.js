@@ -4,7 +4,7 @@ const fetch = require ('node-fetch');
 const flags = require('flags');
 const fs = require('fs');
 
-const metrics = require('./metrics.js');
+const metrics = require('./lib/metrics.js');
 
 flags.defineMultiString('report-file', [], 'path to report.json file');
 flags.defineMultiString('report-url', [], 'URL to report.json file');
