@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "flags": "^0.1.3",
-    "node-fetch": "^2.2.1"
+    "node-fetch": "^2.2.1",
+    "shelljs": "^0.8.3"
   }
 }
