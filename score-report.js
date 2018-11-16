@@ -11,15 +11,24 @@ flags.defineMultiString('report-url', [], 'URL to report.json file');
 flags.defineString('runs-query', 'label=stable', 'wpt.fyi/api/runs query string (used if --report-*= is not used)');
 flags.defineString('test-prefix', '', 'Test path prefix to filter tests by');
 flags.defineBoolean('normalize-per-test', true, 'Normalize score of each test to [0, 1] instead of counting subtests');
+flags.defineBoolean('score-per-dir', false, 'Report scores per top-level and css/ directory (cannot be combined with --test-prefix)');
+flags.defineBoolean('normalize-per-dir', false, 'Normalize score of each directory to [0,1]');
 flags.defineBoolean('require-harness-ok', true, 'Require harness status to be OK to count tests');
 flags.defineBoolean('interop', false, 'Compute interop numbers');
 flags.parse();
 
 async function main() {
+  const normalizePerDir = flags.get('normalize-per-dir');
+  const scorePerDir = flags.get('score-per-dir');
+  const normalizePerTest = flags.get('normalize-per-test');
+  const requireHarnessOK = flags.get('require-harness-ok');
+
   const options = {
-    normalizePerTest: flags.get('normalize-per-test'),
-    requireHarnessOK: flags.get('require-harness-ok'),
-  }
+    scorePerDir,
+    normalizePerDir,
+    normalizePerTest,
+    requireHarnessOK,
+  };
 
   const reports = [];
 
@@ -55,7 +64,7 @@ async function main() {
     });
   }
 
-  let testPrefix = flags.get('test-prefix');
+  let testPrefix = !scorePerDir && flags.get('test-prefix');
   if (testPrefix) {
     if (!testPrefix.startsWith('/')) {
       testPrefix = `/${testPrefix}`;
@@ -68,12 +77,23 @@ async function main() {
   if (!computeInterop) {
     // score each report individually (the default)
     for (const report of reports) {
-      let [score, total] = metrics.scoreReport(report, options);
-      const pct = (100 * score / total).toFixed(2);
-      if (options.normalizePerTest) {
-        score = score.toFixed(2);
+      if (scorePerDir) {
+        const scores = metrics.scoreReport(report, options);
+        for (let [dir, [score, total]] of scores.entries()) {
+          const pct = (100 * score / total).toFixed(2);
+          if (normalizePerDir || normalizePerTest) {
+            score = score.toFixed(2);
+          }
+          console.log(`${report.run_info.product} ${dir}: ${score} / ${total} => ${pct}%`);
+        }
+      } else {
+        let [score, total] = metrics.scoreReport(report, options);
+        const pct = (100 * score / total).toFixed(2);
+        if (normalizePerTest) {
+          score = score.toFixed(2);
+        }
+        console.log(`${report.run_info.product}: ${score} / ${total} => ${pct}%`);
       }
-      console.log(`${report.run_info.product}: ${score} / ${total} => ${pct}%`);
     }
   } else {
     // compute interop score
