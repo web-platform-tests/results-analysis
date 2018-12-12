@@ -1,0 +1,21 @@
+branches:
+  only:
+    - master
+language: node_js
+node_js: stable
+install:
+  - npm install
+script:
+  - mkdir out
+  - |
+    for product in chrome firefox safari; do
+      node lone-failures.js $product > out/$product-lone-failures.md
+    done
+deploy:
+  local-dir: out
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: master
