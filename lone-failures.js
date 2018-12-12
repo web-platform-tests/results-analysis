@@ -6,7 +6,7 @@ const writeFile = util.promisify(fs.writeFile);
 
 const PRODUCTS = ['chrome', 'firefox', 'safari'];
 
-const USE_EXPERIMENTAL_TARGET = false;
+const USE_EXPERIMENTAL_TARGET = true;
 
 // fetch report and cache
 async function fetchReport(info) {
