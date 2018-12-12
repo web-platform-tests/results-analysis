@@ -62,7 +62,7 @@ function isFailure(result) {
 
 function isLoneFailure(result, otherResults) {
   // The "best" definition isn't a given. This one is conservative:
-  return !isPass(result) && !isFailure(result) && otherResults.every(isPass);
+  return isFailure(result) && otherResults.every(isPass);
   // This one would include more stuff:
   //return isFailure(result) && !otherResults.some(isFailure);
 }
@@ -98,7 +98,7 @@ async function main() {
   });
 
   const query = `products=${products.join(',')}`;
-  const runsUrl = `https://wpt.fyi/api/runs?${query}&sha=434ca47448`
+  const runsUrl = `https://wpt.fyi/api/runs?${query}&aligned`
   //console.info(`Fetching ${runsUrl}`);
   //console.info(`Equivalent to: https://wpt.fyi/results/?${query}`);
   const runsInfo = await (await fetch(runsUrl)).json();
@@ -128,7 +128,7 @@ async function main() {
   }
   console.log();
 
-  console.log(`${targetProduct}-only errors:`);
+  console.log(`${targetProduct}-only failures:`);
   const single = reports.find(r => r.run_info.product == targetProduct);
   const others = reports.filter(r => r != single);
   for (const [test, result] of single.results.entries()) {
