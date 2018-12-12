@@ -4,7 +4,9 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-const PRODUCTS = ['chrome', 'edge', 'firefox', 'safari'];
+const PRODUCTS = ['chrome', 'firefox', 'safari'];
+
+const USE_EXPERIMENTAL_TARGET = false;
 
 // fetch report and cache
 async function fetchReport(info) {
@@ -91,9 +93,14 @@ async function main() {
   const products = PRODUCTS.filter(product => {
     return !excludeProducts.includes(product);
   }).map(product => {
-    // get experimental of the lone (target) product and stable of everything
-    // else to make results the most useful for that product team.
-    const label = product === targetProduct ? 'experimental' : 'stable';
+    let label = 'stable';
+
+    if (USE_EXPERIMENTAL_TARGET && product === targetProduct) {
+      // get experimental of the lone (target) product and stable of everything
+      // else to make results the most useful for that product team.
+      label = 'experimental';
+    }
+
     return `${product}%5B${label}%5D`;
   });
 
