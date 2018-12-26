@@ -827,7 +827,6 @@ chrome-only failures:
 * [/websockets/closing-handshake/004.html?wss](https://wpt.fyi/results/websockets/closing-handshake/004.html%3Fwss?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
 * [/websockets/constructor/002.html](https://wpt.fyi/results/websockets/constructor/002.html?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
 * [/websockets/constructor/002.html?wss](https://wpt.fyi/results/websockets/constructor/002.html%3Fwss?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
-* [/websockets/cookies/007.html](https://wpt.fyi/results/websockets/cookies/007.html?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
 * [/websockets/cookies/007.html?wss](https://wpt.fyi/results/websockets/cookies/007.html%3Fwss?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
 * [/websockets/Create-Secure-url-with-space.any.html](https://wpt.fyi/results/websockets/Create-Secure-url-with-space.any.html?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
 * [/websockets/Create-Secure-url-with-space.any.worker.html](https://wpt.fyi/results/websockets/Create-Secure-url-with-space.any.worker.html?products=chrome%5Bexperimental%5D%2Cfirefox%5Bstable%5D%2Csafari%5Bstable%5D&sha=e751708440)
