@@ -150,7 +150,7 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 
 	alignment := true
 	filters := shared.TestRunFilter{
-		SHA:    shortSHA,
+		SHAs:   shared.SHAs{shortSHA},
 		Labels: labelSet,
 		// Set Aligned to ensure that, if SHA and Labels are zero-valued, the filter
 		// isn't interpreted as zero-valued and filled out with default data, such
