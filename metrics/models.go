@@ -296,6 +296,7 @@ type TestRunsMetadataLegacy struct {
 
 // LoadTestRuns fetches the TestRun entities for the PassRateMetadata's TestRunIDs.
 func (metadata *TestRunsMetadata) LoadTestRuns(ctx context.Context) (err error) {
+	// TODO(lukebjerring): Shift to shared.TestRunIDs.LoadRuns(shared.Datastore) after wpt.fyi #978
 	keys := make([]*datastore.Key, len(metadata.TestRunIDs))
 	for i, id := range metadata.TestRunIDs {
 		keys[i] = datastore.NewKey(ctx, "TestRun", "", id, nil)
@@ -307,6 +308,7 @@ func (metadata *TestRunsMetadata) LoadTestRuns(ctx context.Context) (err error) 
 // LoadTestRuns fetches the TestRun entities for the PassRateMetadata's TestRunIDs.
 func (metadata *TestRunsMetadataLegacy) LoadTestRuns(ctx context.Context) (err error) {
 	if len(metadata.TestRuns) == 0 {
+		// TODO(lukebjerring): Shift to shared.TestRunIDs.LoadRuns(shared.Datastore) after wpt.fyi #978
 		keys := make([]*datastore.Key, len(metadata.TestRunIDs))
 		for i, id := range metadata.TestRunIDs {
 			keys[i] = datastore.NewKey(ctx, "TestRun", "", id, nil)
