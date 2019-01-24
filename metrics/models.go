@@ -339,26 +339,6 @@ type PassRateMetadataLegacy struct {
 	TestRunsMetadataLegacy
 }
 
-// FailuresMetadata constitutes metadata capturing:
-// - When failures report was gathered;
-// - What test runs are part of the failures report;
-// - Where the failures report resids (a URL);
-// - What browser is described in the report.
-type FailuresMetadata struct {
-	TestRunsMetadata
-	BrowserName string `json:"browser_name"`
-}
-
-// TODO(lukebjerring): Remove FailuresMetadataLegacy when old format migrated.
-
-// FailuresMetadataLegacy is a struct for storing a FailuresMetadata entry in the
-// datastore, avoiding nested arrays. FailuresMetadata is the legacy format, used for
-// loading the entity, for backward compatibility.
-type FailuresMetadataLegacy struct {
-	TestRunsMetadataLegacy
-	BrowserName string `json:"browser_name"`
-}
-
 // RunData is the output type for metrics: Include runs as metadata, and
 // arbitrary content as data.
 type RunData struct {

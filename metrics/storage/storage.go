@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -188,20 +187,8 @@ func (ctx gcsDatastoreContext) Output(id OutputId, metadata interface{},
 	// TODO: This is terrible, but Datastore doesn't use reflection, so the
 	// metadata must be of a concrete struct type.
 	var err error
-	passRateMetadata, ok := metadata.(*metrics.PassRateMetadata)
-	if !ok {
-		failuresMetadata, ok := metadata.(*metrics.FailuresMetadata)
-		if !ok {
-			return nil, make([]interface{}, 0), []error{
-				errors.New("Unknown metadata type"),
-			}
-		}
-		_, err = ctx.Client.Put(ctx.Context, metadataKey,
-			failuresMetadata)
-	} else {
-		_, err = ctx.Client.Put(ctx.Context, metadataKey,
-			passRateMetadata)
-	}
+	passRateMetadata := metadata.(*metrics.PassRateMetadata)
+	_, err = ctx.Client.Put(ctx.Context, metadataKey, passRateMetadata)
 	if err != nil {
 		logger.Errorf("Error writing %s to Datastore: %v\n",
 			name, err)
