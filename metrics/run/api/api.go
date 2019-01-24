@@ -68,8 +68,6 @@ type metricsComputerData struct {
 	OutputBQDataDataset           string `long:"output_bq_data_dataset" description:"BigQuery dataset where metrics data are stored"`
 	OutputBQPassRateTable         string `long:"output_bq_pass_rate_table" description:"BigQuery table where pass rate metrics are stored"`
 	OutputBQPassRateMetadataTable string `long:"output_bq_pass_rate_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
-	OutputBQFailuresTable         string `long:"output_bq_failures_table" description:"BigQuery table where test failure lists are stored"`
-	OutputBQFailuresMetadataTable string `long:"output_bq_failures_metadata_table" description:"BigQuery table where pass rate metrics are stored"`
 	WPTDHost                      string `long:"wptd_host" default:"staging.wpt.fyi" description:"Hostname of endpoint that serves WPT Dashboard data API"`
 	GCPCredentialsFile            string `long:"gcp_credentials_file" default:"client-secret.json" description:"Path to Google Cloud Platform file for accessing services"`
 	Pretty                        bool   `long:"pretty" description:"Prettify stdout output; appropriate for terminals but not log files"`
@@ -106,13 +104,6 @@ func NewMetricsComputerFromArgs(args []string) (MetricsComputer, []string, error
 	if mcd.OutputBQPassRateMetadataTable == "" {
 		mcd.OutputBQPassRateMetadataTable = fmt.Sprintf("PassRateMetadata_%d", unixNow)
 	}
-	if mcd.OutputBQFailuresTable == "" {
-		mcd.OutputBQFailuresTable = fmt.Sprintf("Failures_%d", unixNow)
-	}
-	if mcd.OutputBQFailuresMetadataTable == "" {
-		mcd.OutputBQFailuresMetadataTable = fmt.Sprintf("FailuresMetadata_%d", unixNow)
-	}
-
 	return &mcd, rest, err
 }
 
@@ -222,7 +213,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 
 	var totals map[string]int
 	var passRateMetric map[string][]int
-	failuresMetrics := make(map[string][][]metrics.TestID)
 	var wg sync.WaitGroup
 	wg.Add(2 + len(runs))
 	go func() {
@@ -234,16 +224,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 		passRateMetric = compute.ComputePassRateMetric(len(runs),
 			&resultsByID, compute.OkOrPassesAndUnknownOrPasses)
 	}()
-	for _, run := range runs {
-		go func(browserName string) {
-			defer wg.Done()
-			// TODO: Check that browser names are different.
-			failuresMetrics[browserName] =
-				compute.ComputeBrowserFailureList(len(runs),
-					browserName, &resultsByID,
-					compute.OkOrPassesAndUnknownOrPasses)
-		}(run.BrowserName)
-	}
 	wg.Wait()
 
 	logger.Infof("Computed metrics")
@@ -285,19 +265,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 		"https://storage.googleapis.com/%s/%s",
 		mcd.OutputGCSBucket,
 		passRateGCSPath)
-	failuresBasenamef := func(browserName string) string {
-		return fmt.Sprintf("%s-failures", browserName)
-	}
-	failuresGCSPathf := func(browserName string) string {
-		return fmt.Sprintf("%s/%s.json.gz", gcsDir,
-			failuresBasenamef(browserName))
-	}
-	failuresUrlf := func(browserName string) string {
-		return fmt.Sprintf(
-			"https://storage.googleapis.com/%s/%s",
-			mcd.OutputGCSBucket,
-			failuresGCSPathf(browserName))
-	}
 	passRateMetadata := metrics.PassRateMetadata{
 		TestRunsMetadata: metrics.TestRunsMetadata{
 			StartTime:  readStartTime,
@@ -307,7 +274,6 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 		},
 	}
 
-	wg.Add((1 + len(failuresMetrics)) * len(outputters))
 	processUploadErrors := func(errs []error) error {
 		if errs == nil {
 			return nil
@@ -339,77 +305,12 @@ func (mcd *metricsComputerData) Compute(ctx context.Context, shortSHA string, la
 			_, _, errs := uploadTotalsAndPassRateMetric(&passRateMetadata, outputter, outputID, totals, passRateMetric)
 			err = processUploadErrors(errs)
 		}(outputter)
-		for browserName, failuresMetric := range failuresMetrics {
-			go func(browserName string, failuresMetric [][]metrics.TestID, outputter storage.Outputter) {
-				defer wg.Done()
-				failuresMetadata := metrics.FailuresMetadata{
-					TestRunsMetadata: metrics.TestRunsMetadata{
-						StartTime:  readStartTime,
-						EndTime:    readEndTime,
-						TestRunIDs: runsWithLabels.GetTestRunIDs(),
-						DataURL:    failuresUrlf(browserName),
-					},
-					BrowserName: browserName,
-				}
-				outputID := storage.OutputId{
-					MetadataLocation: storage.OutputLocation{
-						BQDatasetName: mcd.OutputBQMetadataDataset,
-						BQTableName:   mcd.OutputBQFailuresMetadataTable,
-					},
-					DataLocation: storage.OutputLocation{
-						GCSObjectPath: gcsDir +
-							"/" +
-							failuresBasenamef(browserName) +
-							".json.gz",
-						BQDatasetName: mcd.OutputBQDataDataset,
-						BQTableName:   mcd.OutputBQFailuresTable,
-					},
-				}
-				_, _, errs := uploadFailureLists(&failuresMetadata,
-					outputter, outputID, browserName,
-					failuresMetric)
-				err = processUploadErrors(errs)
-			}(browserName, failuresMetric, outputter)
-		}
 	}
 	wg.Wait()
 
 	logger.Infof("Uploaded metrics")
 
 	return err
-}
-
-type FailureListsRow struct {
-	BrowserName      string         `json:"browser_name"`
-	NumOtherFailures int            `json:"num_other_failures"`
-	Tests            metrics.TestID `json:"test"`
-}
-type ByTestId []interface{}
-
-func (s ByTestId) Len() int          { return len(s) }
-func (s ByTestId) Swap(i int, j int) { s[i], s[j] = s[j], s[i] }
-func (s ByTestId) Less(i int, j int) bool {
-	return s[i].(FailureListsRow).Tests.Test < s[j].(FailureListsRow).Tests.Test
-}
-
-func failureListsToRows(browserName string, failureLists [][]metrics.TestID) (
-	rows []interface{}) {
-	numRows := 0
-	for _, failureList := range failureLists {
-		numRows += len(failureList)
-	}
-	rows = make([]interface{}, 0, numRows)
-	for i, failuresPtrList := range failureLists {
-		for _, failure := range failuresPtrList {
-			rows = append(rows, FailureListsRow{
-				browserName,
-				i,
-				failure,
-			})
-		}
-	}
-	sort.Sort(ByTestId(rows))
-	return rows
 }
 
 type PassRateMetricRow struct {
@@ -443,13 +344,5 @@ func uploadTotalsAndPassRateMetric(metricsRun *metrics.PassRateMetadata,
 	totals map[string]int, passRateMetric map[string][]int) (
 	interface{}, []interface{}, []error) {
 	rows := totalsAndPassRateMetricToRows(totals, passRateMetric)
-	return outputter.Output(id, metricsRun, rows)
-}
-
-func uploadFailureLists(metricsRun *metrics.FailuresMetadata,
-	outputter storage.Outputter, id storage.OutputId,
-	browserName string, failureLists [][]metrics.TestID) (
-	interface{}, []interface{}, []error) {
-	rows := failureListsToRows(browserName, failureLists)
 	return outputter.Output(id, metricsRun, rows)
 }
