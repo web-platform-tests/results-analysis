@@ -59,7 +59,11 @@ async function main() {
     return `${product}[${label}]`;
   });
 
-  const runs = await lib.runs.get({ products, aligned: true });
+  const runs = await lib.runs.get({
+    products,
+    label: 'master',
+    aligned: true,
+  });
 
   // needs a lot of memory: use --max-old-space-size=2048
   const reports = await Promise.all(runs.map(run => {
