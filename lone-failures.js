@@ -72,7 +72,7 @@ async function main() {
 
   let alignedSha;
   console.log('Using these runs:')
-  for (const report of reports) {
+  for (const [i, report] of reports.entries()) {
     const product = report.run_info.product;
     const version = report.run_info.browser_version;
     const sha = report.run_info.revision.substr(0,10);
@@ -82,7 +82,7 @@ async function main() {
       throw new Error(`Expected aligned runs but got ${alignedSha} != ${sha}`);
     }
     const results = report.results;
-    console.log(`* ${product} ${version} @${sha}: ${results.size} tests`);
+    console.log(`* [${product} ${version} @${sha}](https://wpt.fyi/results/?run_id=${runs[i].id}): ${results.size} tests`);
   }
   console.log();
 
@@ -114,7 +114,7 @@ async function main() {
     }
 
     if (hasLoneFailure) {
-      console.log(`* [${test}](https://wpt.fyi/results${test.replace('?', '%3F')}?products=${encodeURIComponent(products.join(','))}&sha=${alignedSha})`);
+      console.log(`* [${test}](https://wpt.fyi/results${test.replace('?', '%3F')}?${runs.map(run => `run_id=${run.id}`).join('&')})`);
     }
   }
 }
