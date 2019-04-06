@@ -1,7 +1,11 @@
 {
+  "scripts": {
+    "install": "git clone --bare https://github.com/foolip/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:foolip/wpt-results.git || git --git-dir=wpt-results.git fetch --tags"
+  },
   "dependencies": {
     "flags": "^0.1.3",
     "node-fetch": "^2.2.1",
+    "nodegit": "^0.24.1",
     "shelljs": "^0.8.3"
   }
 }
