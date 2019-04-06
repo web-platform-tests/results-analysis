@@ -1,9 +1,6 @@
 'use strict';
 
-const lib = {
-  report: require('./lib/report.js'),
-  runs: require('./lib/runs.js'),
-};
+const lib = require('./lib');
 
 const PRODUCTS = ['chrome', 'firefox', 'safari'];
 
