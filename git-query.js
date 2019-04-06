@@ -22,62 +22,6 @@ function oidToKey(oid) {
   return oid.tostrS();
 }
 
-const resultsCache = new Map;
-
-async function queryGit(repo, tree) {
-  let resolve, reject;
-  const walkDone = new Promise((resolve_, reject_) => {
-    resolve = resolve_;
-    reject = reject_;
-  });
-
-  const walker = tree.walk(true);
-
-  const ops = [];
-
-  let counter = 0;
-  walker.on('entry', entry => {
-    if (!entry.isBlob()) {
-      reject(new TypeError('y not blob?'));
-    }
-
-    const path = entry.path();
-    if (!path.endsWith('.json')) {
-      reject(new Error('y not json?'));
-    }
-
-    function callback(results) {
-      if (results.status === 'FAIL') {
-        counter++;
-      }
-    }
-
-    const resultsKey = entry.id().tostrS();
-    const results = resultsCache.get(resultsKey);
-    if (results) {
-      callback(results);
-      return;
-    }
-
-    // need to do async read of results from blob
-    ops.push(entry.getBlob().then(blob => {
-      const buffer = blob.content();
-      const results = JSON.parse(buffer);
-      resultsCache.set(resultsKey, results);
-      callback(results);
-    }));
-  });
-
-  walker.on('end', resolve);
-  walker.on('error', reject);
-
-  walker.start();
-
-  await walkDone;
-  await Promise.all(ops);
-  return counter;
-}
-
 // Map from oid to { "trees": { ... }, "tests": { ... } } objects.
 const treeCache = {};
 // Map from oid to { "status": "OK", ... } objects.
