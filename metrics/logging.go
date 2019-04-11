@@ -7,7 +7,7 @@ package metrics
 import (
 	"context"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/Hexcles/logrus"
 	"github.com/web-platform-tests/wpt.fyi/shared"
 )
 

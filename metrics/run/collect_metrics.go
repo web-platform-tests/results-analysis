@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
+	log "github.com/Hexcles/logrus"
 	flags "github.com/jessevdk/go-flags"
-	log "github.com/sirupsen/logrus"
 	"github.com/web-platform-tests/results-analysis/metrics/run/api"
 	"github.com/web-platform-tests/wpt.fyi/shared"
 	"golang.org/x/net/context"
