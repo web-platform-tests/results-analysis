@@ -3,9 +3,9 @@
     "install": "git clone --bare https://github.com/foolip/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:foolip/wpt-results.git || git --git-dir=wpt-results.git fetch --tags"
   },
   "dependencies": {
-    "flags": "^0.1.3",
-    "node-fetch": "^2.2.1",
-    "nodegit": "^0.24.3",
-    "shelljs": "^0.8.3"
+    "flags": "0.1.3",
+    "node-fetch": "2.3.0",
+    "nodegit": "0.24.3",
+    "shelljs": "0.8.3"
   }
 }
