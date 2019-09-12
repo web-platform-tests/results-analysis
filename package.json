@@ -5,7 +5,7 @@
   "dependencies": {
     "flags": "0.1.3",
     "node-fetch": "2.6.0",
-    "nodegit": "0.25.1",
+    "nodegit": "0.26.0",
     "shelljs": "0.8.3"
   }
 }
