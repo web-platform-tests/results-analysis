@@ -13,4 +13,7 @@ async function main() {
   }
 }
 
-main();
+main().catch(reason => {
+  console.error(reason);
+  process.exit(1);
+});

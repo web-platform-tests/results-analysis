@@ -222,4 +222,7 @@ async function main() {
   console.log(`${runs.length}\t${loadTime}\t${queryTime}\t${treeCount}\t${testCount}\t${memory.rss}\t${memory.heapTotal}\t${memory.heapUsed}\t${memory.external}`);
 }
 
-main();
+main().catch(reason => {
+  console.error(reason);
+  process.exit(1);
+});

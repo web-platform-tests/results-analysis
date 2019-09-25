@@ -141,4 +141,7 @@ async function main() {
   // TODO: push runs to GitHub
 }
 
-main();
+main().catch(reason => {
+  console.error(reason);
+  process.exit(1);
+});
