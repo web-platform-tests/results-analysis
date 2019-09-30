@@ -11,7 +11,7 @@ const RESULTS_URL_PREFIX = 'https://storage.googleapis.com/wptd-results/'
 const LOCAL_RESULTS_PATH = '../wptd-results/'
 
 const SCORING_OPTIONS = {
-    normalizePerDir: true,
+    normalizePerTest: true,
     requireHarnessOK: true,
 }
 
@@ -114,7 +114,7 @@ async function main() {
             return { score, total };
         });
 
-        const productScores = reportScores.map(s => s.score.toFixed(2));
+        const productScores = reportScores.map(s => Math.floor(s.score));
         const productTotals = reportScores.map(s => s.total);
         const maxTotal = productTotals.reduce((x, y) => Math.max(x, y));
         const csvRecord = [date.substr(0, 10), sha.substr(0, 10), ...productScores, maxTotal];
