@@ -142,7 +142,7 @@ function queryTree(tree) {
 }
 
 async function getLocalRuns(repo) {
-  const refs = await repo.getReferences(Git.Reference.TYPE.OID);
+  const refs = await repo.getReferences();
   const tags = refs.filter(ref => ref.isTag());
   tags.sort();
 
@@ -165,7 +165,7 @@ async function main() {
   // bare clone of https://github.com/foolip/wpt-results
   const repo = await Git.Repository.open('wpt-results.git');
 
-  const RUN_LIMIT = Number(process.argv[2]);
+  const RUN_LIMIT = Number(process.argv[2]) || 10;
   let runs = await lib.runs.getAll();
 
   // Filter out runs which we don't have locally.
