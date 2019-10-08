@@ -65,7 +65,7 @@ async function readTree(treeOrEntry) {
       if (!name.endsWith('.json')) {
         throw new Error('y not .json?');
       }
-      name = name.substr(0, name.length - 5);
+      name = decodeURIComponent(name.substr(0, name.length - 5));
       newTree.tests[name] = await readResults(entry);
     } else {
       throw new TypeError('y not tree or blob?')

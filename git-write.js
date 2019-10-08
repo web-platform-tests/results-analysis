@@ -113,13 +113,11 @@ async function writeReportToGit(report, repo, tagName) {
 
     const path = test.test;
     // Complexity to handle /foo/bar/test.html?a/b, which can occur especially
-    // with variants. Unescaped slashes in the query string are valid, but replace
-    // them with %2F so that it's possible to use in a file name. TODO: This is not
-    // a reversible mapping so needs to change to reliably make links to wpt.fyi
+    // with variants. decodeURIComponent needs to be used when reading.
     const queryStart = path.indexOf('?');
     const lastSlash = path.lastIndexOf('/', queryStart >= 0 ? queryStart : path.length);
     const dirname = path.substr(0, lastSlash);
-    const filename = path.substr(lastSlash + 1).replace(/\//g, '%2F');
+    const filename = encodeURIComponent(path.substr(lastSlash + 1));
 
     const dirs = dirname.split('/').filter(d => d);
 
