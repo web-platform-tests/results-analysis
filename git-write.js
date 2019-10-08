@@ -15,12 +15,12 @@ async function writeRunToGit(run, repo) {
   const reportURL = run.raw_results_url;
   console.log(`Fetching ${reportURL}`);
   const report = await (await fetch(reportURL)).json();
-  await writeReportToGit(report, repo, tagName);
+  await writeReportToGit(report, repo, reportURL, tagName);
   console.log(`Wrote ${tagName}`);
   return tagName;
 }
 
-async function writeReportToGit(report, repo, tagName) {
+async function writeReportToGit(report, repo, commitMessage, tagName) {
   // Create a tree of Treebuilders. When all the files have been written, this
   // tree is traversed depth first to write all of the trees.
   async function emptyTree() {
@@ -129,7 +129,7 @@ async function writeReportToGit(report, repo, tagName) {
 
   const signature = Git.Signature.now('autofoolip', 'auto@foolip.org');
 
-  const commit = await repo.createCommit(null, signature, signature, 'commit message', oid, []);
+  const commit = await repo.createCommit(null, signature, signature, commitMessage, oid, []);
 
   await repo.createLightweightTag(commit, tagName);
 }
