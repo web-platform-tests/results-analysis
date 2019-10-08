@@ -1,15 +1,19 @@
 'use strict';
 
 const fetch = require('node-fetch');
+const flags = require('flags');
 const Git = require('nodegit');
 const runs = require('./lib/runs');
+
+flags.defineInteger('limit', 0, 'Write at most this many runs');
+flags.parse();
 
 async function writeRunToGit(run, repo) {
   const tagName = `results/${run.id}`;
   try {
     await repo.getReference(`refs/tags/${tagName}`);
     console.log(`Tag ${tagName} already exists, skipping run`);
-    return;
+    return false;
   } catch (e) {}
 
   const reportURL = run.raw_results_url;
@@ -17,7 +21,7 @@ async function writeRunToGit(run, repo) {
   const report = await (await fetch(reportURL)).json();
   await writeReportToGit(report, repo, reportURL, tagName);
   console.log(`Wrote ${tagName}`);
-  return tagName;
+  return true;
 }
 
 async function writeReportToGit(report, repo, commitMessage, tagName) {
@@ -138,11 +142,19 @@ async function main() {
   // bare clone of https://github.com/foolip/wpt-results
   const repo = await Git.Repository.init('wpt-results.git', 1);
 
-  for await (const run of runs.getIterator({label: 'master'})) {
-    await writeRunToGit(run, repo);
-  }
+  const limit = flags.get('limit');
+  let written = 0;
 
-  // TODO: push runs to GitHub
+  for await (const run of runs.getIterator({label: 'master'})) {
+    const didWrite = await writeRunToGit(run, repo);
+    if (didWrite) {
+      written++;
+      if (limit && written >= limit) {
+        console.log(`Stopping because limit of ${limit} runs was reached`);
+        break;
+      }
+    }
+  }
 }
 
 main().catch(reason => {
