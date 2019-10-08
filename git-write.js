@@ -9,7 +9,7 @@ flags.defineInteger('limit', 0, 'Write at most this many runs');
 flags.parse();
 
 async function writeRunToGit(run, repo) {
-  const tagName = `results/${run.id}`;
+  const tagName = `run/${run.id}/results`;
   try {
     await repo.getReference(`refs/tags/${tagName}`);
     console.log(`Tag ${tagName} already exists, skipping run`);

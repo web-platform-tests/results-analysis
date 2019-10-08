@@ -156,7 +156,7 @@ async function getLocalRuns(repo) {
 }
 
 async function getGitTree(repo, run) {
-  const commit = await repo.getReferenceCommit(`refs/tags/results/${run.id}`);
+  const commit = await repo.getReferenceCommit(`refs/tags/run/${run.id}/results`);
   const tree = await commit.getTree();
   return tree;
 }
