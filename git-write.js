@@ -145,7 +145,11 @@ async function main() {
   const limit = flags.get('limit');
   let written = 0;
 
-  for await (const run of runs.getIterator({label: 'master'})) {
+  const masterRuns = await runs.getAll({label: 'master'});
+  masterRuns.reverse(); // oldest first
+
+  console.log(`Found ${masterRuns.length} master runs`);
+  for (const run of masterRuns) {
     const didWrite = await writeRunToGit(run, repo);
     if (didWrite) {
       written++;
