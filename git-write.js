@@ -58,15 +58,19 @@ async function writeReportToGit(report, repo, tagName) {
     return typeof v === "object" && v !== null && !Array.isArray(v);
   }
 
+  // Keep only a fixed set of keys. This filters out at least:
+  //  - "duration" which is different for every run
+  //  - "expected" which will always be "PASS" or "OK" for wpt.fyi runs
+  //  - "known_intermittent" which is for flaky expectations
+  //  - "message" which contains the failure reason
+  //  - "screenshots" which contains screenshot hashes
+  //  - "test" which is the test path, and will be represented elsewhere
+  // Note that "" is the dummy key value for the initial object.
+  const keepKeys = new Set(["", "name", "status", "subtests"]);
+
   function replacer(key, value) {
     if (isJSONObject(this)) {
-      // The keys that can appear for objects are:
-      // ["duration", "expected", "message", "name", "status", "subtests", "test"]
-      // Filter out:
-      //  - "duration" which is different for every run
-      //  - "expected" which will always be "PASS" or "OK" for wpt.fyi runs
-      //  - "test" which is the test name, and will be represented elsewhere
-      if (key === "duration" || key === "expected" || key === "test") {
+      if (!keepKeys.has(key)) {
         return undefined;
       }
     }
