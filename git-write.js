@@ -13,7 +13,6 @@ async function writeRunToGit(run, repo) {
   const tagName = `run/${run.id}/results`;
   try {
     await repo.getReference(`refs/tags/${tagName}`);
-    console.log(`Tag ${tagName} already exists, skipping run`);
     return false;
   } catch (e) {}
 
