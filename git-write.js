@@ -5,7 +5,8 @@ const flags = require('flags');
 const Git = require('nodegit');
 const runs = require('./lib/runs');
 
-flags.defineInteger('limit', 0, 'Write at most this many runs');
+flags.defineInteger('max-runs', 0, 'Write at most this many runs');
+flags.defineInteger('max-time', 0, 'Run for at most this many seconds');
 flags.parse();
 
 async function writeRunToGit(run, repo) {
@@ -142,21 +143,28 @@ async function main() {
   // bare clone of https://github.com/foolip/wpt-results
   const repo = await Git.Repository.init('wpt-results.git', 1);
 
-  const limit = flags.get('limit');
-  let written = 0;
+  const maxRuns = flags.get('max-runs');
+  const maxTime = flags.get('max-time');
+
+  let writtenRuns = 0;
+  const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
 
   const masterRuns = await runs.getAll({label: 'master'});
   masterRuns.reverse(); // oldest first
-
   console.log(`Found ${masterRuns.length} master runs`);
+
   for (const run of masterRuns) {
     const didWrite = await writeRunToGit(run, repo);
     if (didWrite) {
-      written++;
-      if (limit && written >= limit) {
-        console.log(`Stopping because limit of ${limit} runs was reached`);
+      writtenRuns++;
+      if (maxRuns && writtenRuns >= maxRuns) {
+        console.log(`Stopping because limit of ${maxRuns} runs was reached`);
         break;
       }
+    }
+    if (maxTime && Date.now() >= deadline) {
+      console.log(`Stopping because limit of ${maxTime} seconds was reached`);
+      break;
     }
   }
 }
