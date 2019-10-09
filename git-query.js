@@ -147,9 +147,9 @@ async function getLocalRuns(repo) {
   tags.sort();
 
   return tags.map(tag => {
-    // format is refs/tags/results/6286849043595264
+    // format is refs/tags/run/6286849043595264/results
     const parts = tag.toString().split('/');
-    const id = Number(parts[parts.length - 1]);
+    const id = Number(parts[3]);
     // run info beyond id isn't available
     return { id };
   });
