@@ -1,7 +1,11 @@
 'use strict';
 
+const flags = require('flags');
 const Git = require('nodegit');
 const lib = require('./lib');
+
+flags.defineInteger('max-runs', 0, 'Query at most this many runs');
+flags.parse();
 
 /*
 // Oids are 160 bit (20 byte) SHA-1 hashes. The hex strings would take
@@ -162,26 +166,24 @@ async function getGitTree(repo, run) {
 }
 
 async function main() {
+  const maxRuns = flags.get('max-runs');
+
   // bare clone of https://github.com/foolip/wpt-results
   const repo = await Git.Repository.open('wpt-results.git');
 
-  const RUN_LIMIT = Number(process.argv[2]) || 10;
-  let runs = await lib.runs.getAll();
+  let masterRuns = await lib.runs.getAll({label: 'master'});
+  console.log(`Found ${masterRuns.length} master runs`);
 
   // Filter out runs which we don't have locally.
   const localRuns = await getLocalRuns(repo);
   const localRunsIds = new Set(localRuns.map(run => run.id));
-  runs = runs.filter(run => localRunsIds.has(run.id));
+  let runs = masterRuns.filter(run => localRunsIds.has(run.id));
 
-  console.log(`Found ${runs.length} runs`);
+  console.log(`Found ${runs.length} local runs`);
 
-  // Sort runs by start time, most recent first.
-  runs.sort((a, b) => {
-    return Date.parse(b.time_start) - Date.parse(a.time_start);
-  });
-
-  // Now just keep `RUN_LIMIT` runs.
-  runs = runs.slice(0, RUN_LIMIT);
+  if (maxRuns) {
+    runs = runs.slice(0, maxRuns);
+  }
 
   // Fully parallel loading is slower than loading one run after the other
   // probably because it's I/O bound. Also uses more memory. But loading a few
