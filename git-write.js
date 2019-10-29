@@ -149,8 +149,12 @@ async function main() {
   let writtenRuns = 0;
   const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
 
-  for await (const run of runs.getIterator({label: 'master'})) {
+  for await (const run of runs.getIterator()) {
     iteratedRuns++;
+    // Skip runs of affected tests for PRs.
+    if (run.labels.some(l => l === 'pr_base' || l === 'pr_head')) {
+      continue;
+    }
     const didWrite = await writeRunToGit(run, repo);
     if (didWrite) {
       writtenRuns++;
