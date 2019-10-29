@@ -145,14 +145,12 @@ async function main() {
   const maxRuns = flags.get('max-runs');
   const maxTime = flags.get('max-time');
 
+  let iteratedRuns = 0;
   let writtenRuns = 0;
   const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
 
-  const masterRuns = await runs.getAll({label: 'master'});
-  masterRuns.reverse(); // oldest first
-  console.log(`Found ${masterRuns.length} master runs`);
-
-  for (const run of masterRuns) {
+  for await (const run of runs.getIterator({label: 'master'})) {
+    iteratedRuns++;
     const didWrite = await writeRunToGit(run, repo);
     if (didWrite) {
       writtenRuns++;
@@ -166,6 +164,7 @@ async function main() {
       break;
     }
   }
+  console.log(`Iterated ${iteratedRuns} runs`);
 }
 
 main().catch(reason => {
