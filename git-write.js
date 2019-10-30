@@ -152,6 +152,7 @@ async function main() {
   const products = ['chrome', 'edge', 'firefox', 'safari', 'webkitgtk'];
   for (const product of products) {
     let productRuns = 0;
+    let stop = false;
     for await (const run of runs.getIterator({product})) {
       productRuns++;
       totalRuns++;
@@ -164,15 +165,20 @@ async function main() {
         writtenRuns++;
         if (maxRuns && writtenRuns >= maxRuns) {
           console.log(`Stopping because limit of ${maxRuns} runs was reached`);
+          stop = true;
           break;
         }
       }
       if (maxTime && Date.now() >= deadline) {
         console.log(`Stopping because limit of ${maxTime} seconds was reached`);
+        stop = true;
         break;
       }
     }
     console.log(`Iterated ${productRuns} ${product} runs`);
+    if (stop) {
+      break;
+    }
   }
   console.log(`Iterated ${totalRuns} runs in total`);
 }
