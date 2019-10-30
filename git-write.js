@@ -145,30 +145,36 @@ async function main() {
   const maxRuns = flags.get('max-runs');
   const maxTime = flags.get('max-time');
 
-  let iteratedRuns = 0;
+  let totalRuns = 0;
   let writtenRuns = 0;
   const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
 
-  for await (const run of runs.getIterator()) {
-    iteratedRuns++;
-    // Skip runs of affected tests for PRs.
-    if (run.labels.some(l => l === 'pr_base' || l === 'pr_head')) {
-      continue;
-    }
-    const didWrite = await writeRunToGit(run, repo);
-    if (didWrite) {
-      writtenRuns++;
-      if (maxRuns && writtenRuns >= maxRuns) {
-        console.log(`Stopping because limit of ${maxRuns} runs was reached`);
+  const products = ['chrome', 'edge', 'firefox', 'safari', 'webkitgtk'];
+  for (const product of products) {
+    let productRuns = 0;
+    for await (const run of runs.getIterator({product})) {
+      productRuns++;
+      totalRuns++;
+      // Skip runs of affected tests for PRs.
+      if (run.labels.some(l => l === 'pr_base' || l === 'pr_head')) {
+        continue;
+      }
+      const didWrite = await writeRunToGit(run, repo);
+      if (didWrite) {
+        writtenRuns++;
+        if (maxRuns && writtenRuns >= maxRuns) {
+          console.log(`Stopping because limit of ${maxRuns} runs was reached`);
+          break;
+        }
+      }
+      if (maxTime && Date.now() >= deadline) {
+        console.log(`Stopping because limit of ${maxTime} seconds was reached`);
         break;
       }
     }
-    if (maxTime && Date.now() >= deadline) {
-      console.log(`Stopping because limit of ${maxTime} seconds was reached`);
-      break;
-    }
+    console.log(`Iterated ${productRuns} ${product} runs`);
   }
-  console.log(`Iterated ${iteratedRuns} runs`);
+  console.log(`Iterated ${totalRuns} runs in total`);
 }
 
 main().catch(reason => {
