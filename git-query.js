@@ -171,24 +171,31 @@ async function main() {
   // bare clone of https://github.com/foolip/wpt-results
   const repo = await Git.Repository.open('wpt-results.git');
 
+  console.log('Getting master set of runs from server');
+  let t0 = Date.now();
   let masterRuns = await lib.runs.getAll({label: 'master'});
-  console.log(`Found ${masterRuns.length} master runs`);
+  const serverLoadTime = Date.now() - t0;
+  console.log(`Found ${masterRuns.length} master runs (took ${serverLoadTime} ms)`);
 
   // Filter out runs which we don't have locally.
+  console.log('Getting local set of runs from repo');
+  t0 = Date.now();
   const localRuns = await getLocalRuns(repo);
   const localRunsIds = new Set(localRuns.map(run => run.id));
   let runs = masterRuns.filter(run => localRunsIds.has(run.id));
-
-  console.log(`Found ${runs.length} local runs`);
+  const localRunsTime = Date.now() - t0;
+  console.log(`Found ${runs.length} local runs (took ${localRunsTime} ms)`);
 
   if (maxRuns) {
+    console.log(`Filtering to ${maxRuns} runs`);
     runs = runs.slice(0, maxRuns);
   }
 
   // Fully parallel loading is slower than loading one run after the other
   // probably because it's I/O bound. Also uses more memory. But loading a few
   // in parallel might be faster than this:
-  let t0 = Date.now();
+  console.log('Iterating over all runs, loading test results');
+  t0 = Date.now();
   const trees = new Array(runs.length);
   for (const i in runs) {
     const run = runs[i];
