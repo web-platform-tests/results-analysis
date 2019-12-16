@@ -5,10 +5,10 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/foolip/ad-hoc-wpt-results-analysis.git"
+    "url": "https://github.com/stephenmcgruer/ad-hoc-wpt-results-analysis.git"
   },
   "scripts": {
-    "install": "git clone --bare https://github.com/foolip/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:foolip/wpt-results.git || git --git-dir=wpt-results.git fetch --tags"
+    "install": "git clone --bare https://github.com/stephenmcgruer/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:stephenmcgruer/wpt-results.git || git --git-dir=wpt-results.git fetch --tags"
   },
   "dependencies": {
     "flags": "0.1.3",
