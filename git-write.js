@@ -139,7 +139,7 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
 }
 
 async function main() {
-  // bare clone of https://github.com/foolip/wpt-results
+  // bare clone of https://github.com/stephenmcgruer/wpt-results
   const repo = await Git.Repository.init('wpt-results.git', 1);
 
   const maxRuns = flags.get('max-runs');

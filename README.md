@@ -3,7 +3,7 @@
 This repository contains a set of scripts for doing analysis on results from
 runs of [web-platform-tests](https://web-platform-tests.org/) uploaded to
 [wpt.fyi](https://wpt.fyi). It utilizes a git repository,
-[wpt-results](https://github.com/foolip/wpt-results), as a storage and
+[wpt-results](https://github.com/stephenmcgruer/wpt-results), as a storage and
 compression mechanism for the results data.
 
 The analysis files are expected to be run via `node`, and should be
