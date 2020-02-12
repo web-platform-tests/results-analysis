@@ -1,11 +1,11 @@
 {
-  "name": "ad-hoc-wpt-results-analysis",
-  "description": "Ad hoc web-platform-tests results analysis",
+  "name": "wpt-results-analysis",
+  "description": "web-platform-tests results analysis",
   "version": "0.0.1",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephenmcgruer/ad-hoc-wpt-results-analysis.git"
+    "url": "https://github.com/stephenmcgruer/wpt-results-analysis.git"
   },
   "scripts": {
     "install": "git clone --bare https://github.com/stephenmcgruer/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:stephenmcgruer/wpt-results.git || git --git-dir=wpt-results.git fetch --tags"
