@@ -7,8 +7,9 @@
 
 <style>
 .chart {
-  /* Reserve vertical space to avoid layout pop. */
-  height: 400px;
+  /* Reserve vertical space to avoid layout pop. Should be kept in sync with
+     the JavaScript defined height. */
+  height: 350px;
 }
 </style>
 
@@ -18,9 +19,19 @@
 <h2>Browser Specific Failures</h2>
 <h3>Stable releases</h3>
 <div id="bsf-stable" class="chart"></div>
+<p>Notable dates:</p>
+<ul>
+  <li><b>Feb 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+</ul>
 
 <h3>Experimental releases</h3>
 <div id="bsf-experimental" class="chart"></div>
+<p>Notable dates:</p>
+<ul>
+  <li><b>Nov 17, 2019</b>: Safari Tech Preview 96</li>
+  <li><b>Jan 20, 2020</b>: Safari Tech Preview 97</li>
+  <li><b>Feb 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+</ul>
 
 <script>
 google.charts.load('current', {'packages':['corechart']});
@@ -62,9 +73,13 @@ async function drawBSFChart(div, url) {
 
   const options = {
     width: 800,
-    height: 400,
+    height: 350,
+    chartArea: {
+      height: '80%',
+    },
     hAxis: {
       title: "Date",
+      format: "MMM-YYYY",
     },
     vAxis: {
       title: "Tests that fail in exactly 1 browser",
