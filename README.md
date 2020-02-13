@@ -1,4 +1,4 @@
-# Ad-hoc WPT Results Analysis
+# WPT Results Analysis
 
 This repository contains a set of scripts for doing analysis on results from
 runs of [web-platform-tests](https://web-platform-tests.org/) uploaded to
