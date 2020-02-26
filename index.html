@@ -21,16 +21,16 @@
 <div id="bsf-stable" class="chart"></div>
 <p>Notable dates:</p>
 <ul>
-  <li><b>Feb 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+  <li><b>Jan 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
 </ul>
 
 <h3>Experimental releases</h3>
 <div id="bsf-experimental" class="chart"></div>
 <p>Notable dates:</p>
 <ul>
-  <li><b>Nov 17, 2019</b>: Safari Tech Preview 96</li>
-  <li><b>Jan 20, 2020</b>: Safari Tech Preview 97</li>
-  <li><b>Feb 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+  <li><b>Oct 17, 2019</b>: Safari Tech Preview 96</li>
+  <li><b>Dec 20, 2019</b>: Safari Tech Preview 97</li>
+  <li><b>Jan 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
 </ul>
 
 <script>
@@ -63,8 +63,9 @@ async function drawBSFChart(div, url) {
     if (i == 0)
       return columns;
 
-    const dateParts = columns[0].split('-');
-    columns[0] = new Date(dateParts[0], dateParts[1], dateParts[2]);
+    const dateParts = columns[0].split('-').map(x => parseInt(x));
+    // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
+    columns[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     for (let i = 1; i < columns.length; i++) {
       columns[i] = parseFloat(columns[i]);
     }
