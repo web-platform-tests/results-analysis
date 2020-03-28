@@ -389,4 +389,31 @@ describe('browser-specific.js', () => {
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
   });
+
+  describe('Filtering Tests', () => {
+    it('should ignore tests that are filtered', () => {
+      const expectedBrowsers = new Set(['chrome', 'firefox']);
+
+      let chromeTree = new TreeBuilder()
+          .addTest('TestA', 'PASS')
+          .addTest('TestB', 'FAIL')
+          .build();
+      let firefoxTree = new TreeBuilder()
+          .addTest('TestA', 'FAIL')
+          .addTest('TestB', 'PASS')
+          .build();
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'firefox', tree: firefoxTree },
+      ];
+
+      // This should be a BSF in each browser, but we filter TestA so there is
+      // only a BSF in Chrome.
+      let options = {
+          testFilter: (path) => { return path != '/TestA'; }
+      };
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers, options);
+      assert.deepEqual(scores, new Map([['chrome', 1], ['firefox', 0]]));
+    });
+  });
 });
