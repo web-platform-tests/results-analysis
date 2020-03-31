@@ -17,7 +17,7 @@ git checkout origin/gh-pages -- data/experimental-browser-specific-failures.csv 
 git checkout origin/gh-pages -- data/stable-browser-specific-failures.csv || true
 git reset HEAD data/experimental-browser-specific-failures.csv || true
 git reset HEAD data/stable-browser-specific-failures.csv || true
-mv data/ out/data || true
+mv data/* out/data/ || true
 echo
 
 echo "Updating wpt-results.git/"
