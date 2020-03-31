@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 rm -rf out/
-mkdir out/
+mkdir -p out/data/
 
 # Copy the static content
 cp -r static/* out/
@@ -41,7 +41,12 @@ update_csv() {
   node --max-old-space-size=8192 browser-specific-failures.js \
     ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE} \
     --output=tmp.csv
-  tail -n +3 tmp.csv >> "${1}"
+
+  local SKIP_LINES="+1"
+  if [[ -f "${1}" ]]; then
+    SKIP_LINES="+3"
+  fi
+  tail -n ${SKIP_LINES} tmp.csv >> "${1}"
   rm tmp.csv
 }
 
