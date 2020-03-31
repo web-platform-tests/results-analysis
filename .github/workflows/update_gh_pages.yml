@@ -1,0 +1,15 @@
+name: Update gh-pages
+on:
+  schedule:
+    - cron '*/15 * * * *'
+jobs:
+  update-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Build app
+      run: ./build.sh
+    - name: Deploy to gh-pages/
+      run: ./deploy.sh
