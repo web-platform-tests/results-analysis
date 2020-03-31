@@ -7,9 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Install dependencies
       run: npm install
+
     - name: Build app
       run: ./build.sh
+
     - name: Deploy to gh-pages/
-      run: ./deploy.sh
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: out
