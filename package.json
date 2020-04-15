@@ -5,10 +5,10 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephenmcgruer/wpt-results-analysis.git"
+    "url": "https://github.com/ecosystem-infra/wpt-results-analysis.git"
   },
   "scripts": {
-    "install": "git clone --bare https://github.com/stephenmcgruer/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:stephenmcgruer/wpt-results.git || git --git-dir=wpt-results.git fetch --tags",
+    "install": "git clone --bare https://github.com/ecosystem-infra/wpt-results.git && git --git-dir=wpt-results.git remote set-url --push origin git@github.com:ecosystem-infra/wpt-results.git || git --git-dir=wpt-results.git fetch --tags",
     "lint": "eslint browser-specific-failures.js lib/browser-specific.js",
     "test": "npm run lint && npm run test-unit",
     "test-unit": "mocha -u bdd ./test/*.js"
