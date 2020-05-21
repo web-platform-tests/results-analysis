@@ -9,6 +9,12 @@ compression mechanism for the results data.
 The analysis files are expected to be run via `node`, and should be
 independently documented inside the file.
 
+### gh-pages
+
+Some of the charts generated from this repository are displayed on our
+associated GitHub Pages page - https://ecosystem-infra.github.io/wpt-results-analysis/.
+They are updated regularly using a GitHub Action (see [update_gh_pages.yml](https://github.com/Ecosystem-Infra/wpt-results-analysis/blob/master/.github/workflows/update_gh_pages.yml))
+
 ## Setup
 
 Run `npm install`; this will install any necessary dependencies and clone the
