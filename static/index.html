@@ -59,11 +59,23 @@ async function drawBSFChart(div, url) {
   const csvLines = csvText.split('\n');
   csvLines.pop();  // Trailing empty line
 
-  const data = csvLines.map((line, i) => {
-    // We know the data is good, so being lazy with the parsing. The slice is
-    // to remove the leading SHA column.
-    const columns = line.split(',').slice(1);
-    if (i == 0)
+  const data = csvLines.map((line, rowIdx) => {
+    // We know the data is good, so being lazy with the parsing.
+
+    // The columns are:
+    //   sha, date, [product-version, product-score,]+
+    //
+    // We only need the date and product scores to produce the graph, so drop
+    // the other columns.
+    let columns = line.split(',');
+
+    // Drop the sha.
+    columns = columns.slice(1);
+
+    // Drop the version columns.
+    columns = columns.filter((c, i) => (i % 2) == 0);
+
+    if (rowIdx == 0)
       return columns;
 
     const dateParts = columns[0].split('-').map(x => parseInt(x));

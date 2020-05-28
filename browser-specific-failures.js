@@ -223,10 +223,11 @@ async function main() {
   for (const [date, runs] of alignedRuns.entries()) {
     // The SHA should be the same for all runs, so just grab the first.
     const sha = runs[0].full_revision_hash;
+    const versions = runs.map(run => run.browser_version);
     try {
       const scores = lib.browserSpecific.scoreBrowserSpecificFailures(
           runs, new Set(products), options);
-      dateToScores.set(date, {sha, scores});
+      dateToScores.set(date, {sha, versions, scores});
     } catch (e) {
       e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
       throw e;
@@ -244,12 +245,19 @@ async function main() {
   }
 
   console.log(`Writing data to ${outputFilename}`);
-  let data = `sha,date,${products.join(',')}\n`;
+
+  let data = 'sha,date';
+  for (const product of products) {
+    data += `,${product}-version,${product}`;
+  }
+  data += '\n';
+
   // ES6 maps iterate in insertion order, and we initially inserted in date
   // order, so we can just iterate |dateToScores|.
   for (const [date, shaAndScores] of dateToScores) {
     const sha = shaAndScores.sha;
     const scores = shaAndScores.scores;
+    const versions = shaAndScores.versions;
     if (!scores) {
       console.log(`ERROR: ${date} had no scores`);
       continue;
@@ -257,10 +265,11 @@ async function main() {
     const csvRecord = [
       sha,
       date.substr(0, 10),
-      scores.get('chrome'),
-      scores.get('firefox'),
-      scores.get('safari'),
     ];
+    for (let i = 0; i < products.length; i++) {
+      csvRecord.push(versions[i]);
+      csvRecord.push(scores.get(products[i]));
+    }
     data += csvRecord.join(',') + '\n';
   }
   await fs.promises.writeFile(outputFilename, data, 'utf-8');
