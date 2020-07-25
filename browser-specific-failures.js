@@ -38,11 +38,15 @@ const STABLE_BAD_RANGES = [
   // This was a safaridriver outage, resolved by
   // https://github.com/web-platform-tests/wpt/pull/18585
   [moment('2019-06-27'), moment('2019-08-23')],
+  // This was a general outage due to the Taskcluster Checks migration.
+  [moment('2020-07-08'), moment('2020-07-16')],
 ];
 const EXPERIMENTAL_BAD_RANGES = [
   // This was a safaridriver outage, resolved by
   // https://github.com/web-platform-tests/wpt/pull/18585
   [moment('2019-06-27'), moment('2019-08-23')],
+  // This was a general outage due to the Taskcluster Checks migration.
+  [moment('2020-07-08'), moment('2020-07-16')],
 ];
 
 // There have been periods where results cannot be considered valid and
