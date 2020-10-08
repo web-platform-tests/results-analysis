@@ -40,6 +40,8 @@ const STABLE_BAD_RANGES = [
   [moment('2019-06-27'), moment('2019-08-23')],
   // This was a general outage due to the Taskcluster Checks migration.
   [moment('2020-07-08'), moment('2020-07-16')],
+  // This was a Firefox outage which produced only partial test results.
+  [moment('2020-07-21'), moment('2020-08-15')],
 ];
 const EXPERIMENTAL_BAD_RANGES = [
   // This was a safaridriver outage, resolved by
