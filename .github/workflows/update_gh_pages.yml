@@ -1,7 +1,7 @@
 name: Update gh-pages
 on:
   schedule:
-    - cron: '0 12 * * 1,4'
+    - cron: '*/30 * * * 1,3,4'
 jobs:
   update-gh-pages:
     runs-on: ubuntu-latest
