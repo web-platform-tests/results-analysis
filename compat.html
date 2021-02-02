@@ -1,0 +1,162 @@
+<!doctype HTML>
+<meta charset="utf-8" /> 
+
+<title>2021 DevSat Compat Dashboard</title>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+
+<style>
+.chart {
+  /* Reserve vertical space to avoid layout pop. Should be kept in sync with
+     the JavaScript defined height. */
+  height: 350px;
+}
+</style>
+
+<h1>2021 DevSat Compat Dashboard</h1>
+<p>Click + drag on graphs to zoom, right click to un-zoom</p>
+
+<h2>css-flexbox</h2>
+<div id="failures-chart" class="chart"></div>
+
+<!-- TODO: add controls to select stable-vs-experimental -->
+<!-- TODO: add controls to select category -->
+
+<h3>Tests</h3>
+<table id="testsTable">
+  <thead>
+    <tr>
+      <th>Test name</th>
+      <th>Chrome</th>
+      <th>Firefox</th>
+      <th>Safari</th>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(async () => {
+  renderFailuresChart();
+});
+
+addEventListener('load', () => {
+  loadTestList();
+});
+
+async function loadTestList() {
+  // TODO: Lazy load the metadata, and cache it after load.
+  const productToMetadata = new Map();
+  for (const product of ['chrome', 'firefox', 'safari']) {
+    const resp = await fetch(`https://wpt.fyi/api/metadata?product=${product}`);
+    const metadata = await resp.json();
+    productToMetadata.set(product, metadata);
+  }
+
+  const testListData = await fetch('data/compat2021/css-flexbox-tests.txt');
+  const testListText = await testListData.text();
+  const testList = testListText.split('\n');
+  testList.pop();  // Trailing empty line
+
+  const newBody = document.createElement('tbody');
+  for (const test of testList) {
+    const row = newBody.insertRow();
+    const testnameCell = row.insertCell();
+    const link = document.createElement('a');
+    link.href = `https://wpt.fyi/results/${test}`;
+    link.innerText = test;
+    testnameCell.appendChild(link);
+
+    // TODO: Add results for each of the browsers.
+
+    const chromeCell = row.insertCell();
+    chromeCell.innerText = '0/0';
+    if (test in productToMetadata.get('chrome')) {
+      chromeCell.innerText = 'TRIAGED';
+    }
+
+    const firefoxCell = row.insertCell();
+    firefoxCell.innerText = '0/0';
+    if (test in productToMetadata.get('firefox')) {
+      firefoxCell.innerText = 'TRIAGED';
+    }
+
+    const safariCell = row.insertCell();
+    safariCell.innerText = '0/0';
+    if (test in productToMetadata.get('safari')) {
+      safariCell.innerText = 'TRIAGED';
+    }
+  }
+  
+  const table = document.getElementById('testsTable');
+  const oldBody = table.querySelector('tbody');
+  table.replaceChild(newBody, oldBody);
+}
+
+async function renderFailuresChart() {
+  drawBSFChart(document.getElementById("failures-chart"),
+      "data/compat2021/css-flexbox-experimental.csv");
+}
+
+async function drawBSFChart(div, url) {
+  const csvData = await fetch(url);
+  const csvText = await csvData.text();
+  const csvLines = csvText.split('\n');
+  csvLines.pop();  // Trailing empty line
+
+  const data = csvLines.map((line, rowIdx) => {
+    // We know the data is good, so being lazy with the parsing.
+
+    // The columns are:
+    //   sha, date, [product-version, product-score,]+
+    //
+    // We only need the date and product scores to produce the graph, so drop
+    // the other columns.
+    let columns = line.split(',');
+
+    // Drop the sha.
+    columns = columns.slice(1);
+
+    // Drop the version columns.
+    columns = columns.filter((c, i) => (i % 2) == 0);
+
+    if (rowIdx == 0)
+      return columns;
+
+    const dateParts = columns[0].split('-').map(x => parseInt(x));
+    // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
+    columns[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    for (let i = 1; i < columns.length; i++) {
+      columns[i] = parseFloat(columns[i]);
+    }
+    return columns;
+  });
+
+  const options = {
+    width: 800,
+    height: 350,
+    chartArea: {
+      height: '80%',
+    },
+    hAxis: {
+      title: "Date",
+      format: "MMM-YYYY",
+    },
+    vAxis: {
+      title: "Failing tests count",
+    },
+    explorer: {
+      actions: ['dragToZoom', 'rightClickToReset'],
+      axis: 'horizontal',
+      keepInBounds: true,
+      maxZoomIn: 4.0,
+    },
+    colors: ['#4285f4', '#ea4335', '#fbbc04'],
+  };
+
+  const chart = new google.visualization.LineChart(div);
+  chart.draw(google.visualization.arrayToDataTable(data), options);
+}
+
+</script>
