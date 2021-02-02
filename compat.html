@@ -17,12 +17,14 @@
 <p>Click + drag on graphs to zoom, right click to un-zoom</p>
 
 <h2>css-flexbox</h2>
-<div id="failures-chart" class="chart"></div>
 
+<h3>Chart</h2>
 <!-- TODO: add controls to select stable-vs-experimental -->
 <!-- TODO: add controls to select category -->
+<div id="failures-chart" class="chart"></div>
 
-<h3>Tests</h3>
+<h3>Tests</h2>
+<p>Results in this table are not live. For up-to-date results, visit <a href="https://wpt.fyi">wpt.fyi</a></p>
 <table id="testsTable">
   <thead>
     <tr>
@@ -54,13 +56,17 @@ async function loadTestList() {
     productToMetadata.set(product, metadata);
   }
 
-  const testListData = await fetch('data/compat2021/css-flexbox-tests.txt');
-  const testListText = await testListData.text();
-  const testList = testListText.split('\n');
-  testList.pop();  // Trailing empty line
+  const testResultsListData = await fetch('data/compat2021/css-flexbox-experimental-full-results.csv');
+  const testResultsListText = await testResultsListData.text();
+  const testResultsList = testResultsListText.split('\n');
+  testResultsList.shift();  // Header row
+  testResultsList.pop();  // Trailing empty line
 
   const newBody = document.createElement('tbody');
-  for (const test of testList) {
+  for (const testAndResults of testResultsList) {
+    const parts = testAndResults.split(',');
+    const test = parts[0];
+
     const row = newBody.insertRow();
     const testnameCell = row.insertCell();
     const link = document.createElement('a');
@@ -68,24 +74,22 @@ async function loadTestList() {
     link.innerText = test;
     testnameCell.appendChild(link);
 
-    // TODO: Add results for each of the browsers.
-
     const chromeCell = row.insertCell();
-    chromeCell.innerText = '0/0';
+    chromeCell.innerText = parts[1];
     if (test in productToMetadata.get('chrome')) {
-      chromeCell.innerText = 'TRIAGED';
+      chromeCell.innerText += ' (T)';
     }
 
     const firefoxCell = row.insertCell();
-    firefoxCell.innerText = '0/0';
+    firefoxCell.innerText = parts[2];
     if (test in productToMetadata.get('firefox')) {
-      firefoxCell.innerText = 'TRIAGED';
+      firefoxCell.innerText += ' (T)';
     }
 
     const safariCell = row.insertCell();
-    safariCell.innerText = '0/0';
+    safariCell.innerText = parts[3];
     if (test in productToMetadata.get('safari')) {
-      safariCell.innerText = 'TRIAGED';
+      safariCell.innerText += ' (T)';
     }
   }
   
