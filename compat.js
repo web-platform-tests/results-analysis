@@ -102,7 +102,8 @@ async function drawBSFChart(div, url) {
       format: "MMM-YYYY",
     },
     vAxis: {
-      title: "Failing tests count",
+      title: "Percentage of passing tests",
+      format: "percent",
     },
     explorer: {
       actions: ['dragToZoom', 'rightClickToReset'],
