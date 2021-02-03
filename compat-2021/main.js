@@ -128,7 +128,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
   return alignedRuns;
 }
 
-async function loadTestFilter(category) {
+async function loadAllTestsSet(category) {
   const filename = category + '-tests.txt'
   const contents = await fs.promises.readFile(filename, 'utf-8');
   let lines = contents.split('\n');
@@ -136,23 +136,22 @@ async function loadTestFilter(category) {
   return new Set(lines);
 }
 
-function scoreRuns(runs, testFilter) {
+function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testResults = new Map();
   try {
     for (const run of runs) {
       let passingTests = 0;
-      let totalTests = 0;
 
       lib.results.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
-        if (!testFilter.has(testname))
+        if (!allTestsSet.has(testname))
           return;
 
         if (!testResults.has(testname))
           testResults.set(testname, []);
 
-        // TODO: Validate the data, check that all statuses are known.
+        // TODO: Validate the data by checking that all statuses are recognized.
 
         let subtestPasses = 0;
         let subtestTotal = 1;
@@ -166,15 +165,33 @@ function scoreRuns(runs, testFilter) {
         } else if (results['status'] == 'PASS') {
           subtestPasses = 1;
         }
+
         if (subtestPasses == subtestTotal) {
           passingTests += 1;
         }
 
-        totalTests += 1;
-
         testResults.get(testname).push([subtestPasses, subtestTotal]);
       });
-      scores.push(passingTests / totalTests);
+
+      // We always normalize against the total number of 'important tests',
+      // rather than the total number of tests we found. The trade-off is all
+      // about new tests being added to the set.
+      //
+      // If a large chunk of tests are introduced at date X, and they fail in
+      // some browser, then runs after date X look worse if you're only
+      // counting total tests found - even though the tests would have failed
+      // before date X as well.
+      //
+      // Conversely, if a large chunk of tests are introduced at date X, and
+      // they pass in some browser, then runs after date X would get an
+      // artificial boost in pass-rate due to this - even if the tests would
+      // have passed before date X as well.
+      //
+      // We consider the former case worse than the latter, so optimize for it
+      // by always comparing against the full test list. This does mean that
+      // when tests are added to the set, previously generated data is no
+      // longer valid and this script should be re-run for all dates.
+      scores.push(passingTests / allTestsSet.size);
     }
   } catch (e) {
     e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
@@ -189,7 +206,7 @@ async function main() {
   const repo = await Git.Repository.open('../wpt-results.git');
 
   const category = flags.get('category')
-  const testFilter = await loadTestFilter(category);
+  const allTestsSet = await loadAllTestsSet(category);
 
   // First, grab aligned runs from the server for the dates that we are
   // interested in.
@@ -247,7 +264,7 @@ async function main() {
     // The SHA should be the same for all runs, so just grab the first.
     const sha = runs[0].full_revision_hash;
     const versions = runs.map(run => run.browser_version);
-    const [scores, testResults] = scoreRuns(runs, testFilter);
+    const [scores, testResults] = scoreRuns(runs, allTestsSet);
     dateToScores.set(date, {sha, versions, scores, testResults});
   }
   after = Date.now();
