@@ -131,7 +131,57 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 async function loadTestFilter(category) {
   const filename = category + '-tests.txt'
   const contents = await fs.promises.readFile(filename, 'utf-8');
-  return new Set(contents.split('\n'));
+  let lines = contents.split('\n');
+  lines = lines.filter(line => line.startsWith('/'));
+  return new Set(lines);
+}
+
+function scoreRuns(runs, testFilter) {
+  const scores = [];
+  const testResults = new Map();
+  try {
+    for (const run of runs) {
+      let passingTests = 0;
+      let totalTests = 0;
+
+      lib.results.walkTests(run.tree, (path, test, results) => {
+        const testname = path + '/' + test;
+        if (!testFilter.has(testname))
+          return;
+
+        if (!testResults.has(testname))
+          testResults.set(testname, []);
+
+        // TODO: Validate the data, check that all statuses are known.
+
+        let subtestPasses = 0;
+        let subtestTotal = 1;
+        if ('subtests' in results) {
+          subtestTotal = results['subtests'].length;
+          for (const subtest of results['subtests']) {
+            if (subtest['status'] == 'PASS') {
+              subtestPasses += 1;
+            }
+          }
+        } else if (results['status'] == 'PASS') {
+          subtestPasses = 1;
+        }
+        if (subtestPasses == subtestTotal) {
+          passingTests += 1;
+        }
+
+        totalTests += 1;
+
+        testResults.get(testname).push([subtestPasses, subtestTotal]);
+      });
+      scores.push(passingTests / totalTests);
+    }
+  } catch (e) {
+    e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
+    throw e;
+  }
+
+  return [scores, testResults];
 }
 
 async function main() {
@@ -190,56 +240,15 @@ async function main() {
   console.log(`Loading ${alignedRuns.size} sets of runs took ` +
       `${after - before} ms`);
 
+  // Score the test runs.
   before = Date.now();
   const dateToScores = new Map();
   for (const [date, runs] of alignedRuns.entries()) {
     // The SHA should be the same for all runs, so just grab the first.
     const sha = runs[0].full_revision_hash;
     const versions = runs.map(run => run.browser_version);
-    let scores = [];
-    // Map of testname --> [(x, y), ...], where x is the number of passes and y
-    // the total number of tests for the given testname.
-    let testResults = new Map();
-    try {
-      for (const run of runs) {
-        let failingTests = 0;
-
-        lib.results.walkTests(run.tree, (path, test, results) => {
-          const testname = path + '/' + test;
-          if (!testFilter.has(testname))
-            return;
-
-          if (!testResults.has(testname))
-            testResults.set(testname, []);
-
-          // TODO: Validate the data, check that all statuses are known.
-
-          // TODO: Do we want to treat subtest failingTests as % of a fail?
-          let passes = 0;
-          let total = 1;
-          if ('subtests' in results) {
-            total = results['subtests'].length;
-            for (const subtest of results['subtests']) {
-              if (subtest['status'] == 'PASS') {
-                passes += 1;
-              }
-            }
-          } else if (results['status'] == 'PASS') {
-            passes += 1;
-          }
-          if (passes < total) {
-            failingTests += 1;
-          }
-
-          testResults.get(testname).push([passes, total]);
-        });
-        scores.push(failingTests);
-      }
-      dateToScores.set(date, {sha, versions, scores, testResults});
-    } catch (e) {
-      e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
-      throw e;
-    }
+    const [scores, testResults] = scoreRuns(runs, testFilter);
+    dateToScores.set(date, {sha, versions, scores, testResults});
   }
   after = Date.now();
   console.log(`Done scoring (took ${after - before} ms)`);
@@ -250,6 +259,8 @@ async function main() {
   }
   data += '\n';
 
+  // First write out the summary results.
+  //
   // ES6 maps iterate in insertion order, and we initially inserted in date
   // order, so we can just iterate |dateToScores|.
   let testResults;
@@ -282,7 +293,9 @@ async function main() {
   await fs.promises.writeFile(csvFilename, data, 'utf-8');
   console.log(`Wrote results to ${csvFilename}`);
 
-  // Write out the full results for the latest run.
+  // Next, write out the full results for the latest run. This is what is
+  // displayed in the table at the bottom of
+  // https://ecosystem-infra.github.io/wpt-results-analysis/compat
   data = 'testname';
   for (const product of products) {
     data += `,${product}`;
@@ -299,7 +312,7 @@ async function main() {
 
   const resultsCsvFilename = experimental ?
       `${category}-experimental-full-results.csv` :
-    `${category}-stable-full-results.csv`;
+      `${category}-stable-full-results.csv`;
   await fs.promises.writeFile(resultsCsvFilename, data, 'utf-8');
   console.log(`Wrote latest run results to ${resultsCsvFilename}`);
 }
