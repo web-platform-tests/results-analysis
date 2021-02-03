@@ -15,12 +15,11 @@
 </style>
 
 <h1>2021 DevSat Compat Dashboard</h1>
-<p>Click + drag on graphs to zoom, right click to un-zoom</p>
 
 <h2>css-flexbox</h2>
 
 <h3>Chart</h2>
-<!-- TODO: add controls to select stable-vs-experimental -->
+<input id="stableVersionCheckbox" type="checkbox">Show results from Stable browser releases</input>
 <!-- TODO: add controls to select category -->
 <div id="failures-chart" class="chart"></div>
 
@@ -45,10 +44,15 @@
 <script>
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(async () => {
-  renderFailuresChart();
+  renderFailuresChart(stableVersionCheckbox.checked);
 });
 
 addEventListener('load', () => {
-  loadTestList();
+  loadTestList(stableVersionCheckbox.checked);
+});
+
+stableVersionCheckbox.addEventListener('change', () => {
+  renderFailuresChart(stableVersionCheckbox.checked);
+  loadTestList(stableVersionCheckbox.checked);
 });
 </script>

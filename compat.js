@@ -1,20 +1,14 @@
 'use strict';
 
-function makeResultsCell(row, test, results, metadata) {
-  const cell = row.insertCell();
-  // TODO: It would be nice to color-code the cell based on the pass rate (e.g.
-  // similar to wpt.fyi).
-  cell.innerText = results;
-
-  if (test in metadata) {
-    // TODO: Display a nice bug icon rather than a "T".
-    // TODO: Actually link to the url found in metadata[test].
-    cell.innerText += " (T)";
-  }
-  return cell;
+async function renderFailuresChart(stable) {
+  const label = stable ? 'stable' : 'experimental';
+  drawBSFChart(document.getElementById("failures-chart"),
+               `data/compat2021/css-flexbox-${label}.csv`);
 }
 
-async function loadTestList() {
+async function loadTestList(stable) {
+  const label = stable ? 'stable' : 'experimental';
+
   // TODO: Lazy-load the metadata, update the table in-place once it loads, and
   // cache it after load for each category.
   const productToMetadata = new Map();
@@ -24,7 +18,7 @@ async function loadTestList() {
     productToMetadata.set(product, metadata);
   }
 
-  const testResultsListData = await fetch('data/compat2021/css-flexbox-experimental-full-results.csv');
+  const testResultsListData = await fetch(`data/compat2021/css-flexbox-${label}-full-results.csv`);
   const testResultsListText = await testResultsListData.text();
   const testResultsList = testResultsListText.split('\n');
   testResultsList.shift();  // Header row
@@ -52,10 +46,20 @@ async function loadTestList() {
   table.replaceChild(newBody, oldBody);
 }
 
-async function renderFailuresChart() {
-  drawBSFChart(document.getElementById("failures-chart"),
-      "data/compat2021/css-flexbox-experimental.csv");
+function makeResultsCell(row, test, results, metadata) {
+  const cell = row.insertCell();
+  // TODO: It would be nice to color-code the cell based on the pass rate (e.g.
+  // similar to wpt.fyi).
+  cell.innerText = results;
+
+  if (test in metadata) {
+    // TODO: Display a nice bug icon rather than a "T".
+    // TODO: Actually link to the url found in metadata[test].
+    cell.innerText += " (T)";
+  }
+  return cell;
 }
+
 
 async function drawBSFChart(div, url) {
   const csvData = await fetch(url);
