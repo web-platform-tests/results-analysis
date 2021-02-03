@@ -1,69 +1,15 @@
 'use strict';
 
-async function renderFailuresChart(stable) {
+async function renderChart(feature, stable) {
+  const div = document.getElementById("failures-chart");
   const label = stable ? 'stable' : 'experimental';
-  drawBSFChart(document.getElementById("failures-chart"),
-               `data/compat2021/css-flexbox-${label}.csv`);
-}
+  const url = `data/compat2021/${feature}-${label}.csv`;
 
-async function loadTestList(stable) {
-  const label = stable ? 'stable' : 'experimental';
-
-  // TODO: Lazy-load the metadata, update the table in-place once it loads, and
-  // cache it after load for each category.
-  const productToMetadata = new Map();
-  for (const product of ['chrome', 'firefox', 'safari']) {
-    const resp = await fetch(`https://wpt.fyi/api/metadata?product=${product}`);
-    const metadata = await resp.json();
-    productToMetadata.set(product, metadata);
+  const csvResp = await fetch(url);
+  if (!csvResp.ok) {
+    throw new Error(`Fetching chart csv data failed: ${csvResp.status}`);
   }
-
-  const testResultsListData = await fetch(`data/compat2021/css-flexbox-${label}-full-results.csv`);
-  const testResultsListText = await testResultsListData.text();
-  const testResultsList = testResultsListText.split('\n');
-  testResultsList.shift();  // Header row
-  testResultsList.pop();  // Trailing empty line
-
-  const newBody = document.createElement('tbody');
-  for (const testAndResults of testResultsList) {
-    const parts = testAndResults.split(',');
-    const test = parts[0];
-
-    const row = newBody.insertRow();
-    const testnameCell = row.insertCell();
-    const link = document.createElement('a');
-    link.href = `https://wpt.fyi/results/${test}`;
-    link.innerText = test;
-    testnameCell.appendChild(link);
-
-    makeResultsCell(row, test, parts[1], productToMetadata.get('chrome'));
-    makeResultsCell(row, test, parts[2], productToMetadata.get('firefox'));
-    makeResultsCell(row, test, parts[3], productToMetadata.get('safari'));
-  }
-  
-  const table = document.getElementById('testsTable');
-  const oldBody = table.querySelector('tbody');
-  table.replaceChild(newBody, oldBody);
-}
-
-function makeResultsCell(row, test, results, metadata) {
-  const cell = row.insertCell();
-  // TODO: It would be nice to color-code the cell based on the pass rate (e.g.
-  // similar to wpt.fyi).
-  cell.innerText = results;
-
-  if (test in metadata) {
-    // TODO: Display a nice bug icon rather than a "T".
-    // TODO: Actually link to the url found in metadata[test].
-    cell.innerText += " (T)";
-  }
-  return cell;
-}
-
-
-async function drawBSFChart(div, url) {
-  const csvData = await fetch(url);
-  const csvText = await csvData.text();
+  const csvText = await csvResp.text();
   const csvLines = csvText.split('\n');
   csvLines.pop();  // Trailing empty line
 
@@ -120,4 +66,65 @@ async function drawBSFChart(div, url) {
 
   const chart = new google.visualization.LineChart(div);
   chart.draw(google.visualization.arrayToDataTable(data), options);
+}
+
+async function loadTestList(feature, stable) {
+  const label = stable ? 'stable' : 'experimental';
+
+  // TODO: Lazy-load the metadata, update the table in-place once it loads, and
+  // cache it after load for each category.
+  const productToMetadata = new Map();
+  for (const product of ['chrome', 'firefox', 'safari']) {
+    const resp = await fetch(`https://wpt.fyi/api/metadata?product=${product}`);
+    if (!resp.ok) {
+      // TODO: Should be a non-fatal error.
+      throw new Error(`Fetching metadata failed: ${resp.status}`);
+    }
+    const metadata = await resp.json();
+    productToMetadata.set(product, metadata);
+  }
+
+  const testResultsListResp = await fetch(`data/compat2021/${feature}-${label}-full-results.csv`);
+  if (!testResultsListResp.ok) {
+    throw new Error(`Fetching full test results failed: ${testResultsListResp.status}`);
+  }
+  const testResultsListText = await testResultsListResp.text();
+  const testResultsList = testResultsListText.split('\n');
+  testResultsList.shift();  // Header row
+  testResultsList.pop();  // Trailing empty line
+
+  const newBody = document.createElement('tbody');
+  for (const testAndResults of testResultsList) {
+    const parts = testAndResults.split(',');
+    const test = parts[0];
+
+    const row = newBody.insertRow();
+    const testnameCell = row.insertCell();
+    const link = document.createElement('a');
+    link.href = `https://wpt.fyi/results/${test}`;
+    link.innerText = test;
+    testnameCell.appendChild(link);
+
+    makeResultsCell(row, test, parts[1], productToMetadata.get('chrome'));
+    makeResultsCell(row, test, parts[2], productToMetadata.get('firefox'));
+    makeResultsCell(row, test, parts[3], productToMetadata.get('safari'));
+  }
+
+  const table = document.getElementById('testsTable');
+  const oldBody = table.querySelector('tbody');
+  table.replaceChild(newBody, oldBody);
+}
+
+function makeResultsCell(row, test, results, metadata) {
+  const cell = row.insertCell();
+  // TODO: It would be nice to color-code the cell based on the pass rate (e.g.
+  // similar to wpt.fyi).
+  cell.innerText = results;
+
+  if (test in metadata) {
+    // TODO: Display a nice bug icon rather than a "T".
+    // TODO: Actually link to the url found in metadata[test].
+    cell.innerText += " (T)";
+  }
+  return cell;
 }

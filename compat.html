@@ -16,10 +16,17 @@
 
 <h1>2021 DevSat Compat Dashboard</h1>
 
-<h2>css-flexbox</h2>
-
 <h3>Chart</h2>
-<input id="stableVersionCheckbox" type="checkbox">Show results from Stable browser releases</input>
+<div>
+  <label for="compat-feature">Focus area:</label>
+  <select name="compat-feature" id="featureSelect">
+    <option value="css-flexbox">css-flexbox</option>
+  </select>
+</div>
+
+<div>
+  <input id="stableVersionCheckbox" type="checkbox">Show results from Stable browser releases</input>
+</div>
 <!-- TODO: add controls to select category -->
 <div id="failures-chart" class="chart"></div>
 
@@ -44,15 +51,24 @@
 <script>
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(async () => {
-  renderFailuresChart(stableVersionCheckbox.checked);
+  renderChart(featureSelect.value, stableVersionCheckbox.checked);
 });
 
 addEventListener('load', () => {
-  loadTestList(stableVersionCheckbox.checked);
+  loadTestList(featureSelect.value, stableVersionCheckbox.checked);
+});
+
+featureSelect.addEventListener('change', () => {
+  const feature = featureSelect.value;
+  const stable = stableVersionCheckbox.checked;
+  renderChart(feature, stable);
+  loadTestList(feature, stable);
 });
 
 stableVersionCheckbox.addEventListener('change', () => {
-  renderFailuresChart(stableVersionCheckbox.checked);
-  loadTestList(stableVersionCheckbox.checked);
+  const feature = featureSelect.value;
+  const stable = stableVersionCheckbox.checked;
+  renderChart(feature, stable);
+  loadTestList(feature, stable);
 });
 </script>
