@@ -10,13 +10,20 @@ mkdir -p out/data/
 # Copy the static content
 cp -r static/* out/
 
+fetch_from_gh_pages() {
+  git checkout origin/gh-pages -- "${1}" || true
+  git reset HEAD "${1}" || true
+}
+
 # Try to do an incremental update, if possible.
 echo "Checking out existing CSV files from gh-pages/"
 git fetch origin || true
-git checkout origin/gh-pages -- data/experimental-browser-specific-failures.csv || true
-git checkout origin/gh-pages -- data/stable-browser-specific-failures.csv || true
-git reset HEAD data/experimental-browser-specific-failures.csv || true
-git reset HEAD data/stable-browser-specific-failures.csv || true
+fetch_from_gh_pages data/experimental-browser-specific-failures.csv
+fetch_from_gh_pages data/stable-browser-specific-failures.csv
+fetch_from_gh_pages data/compat2021/css-flexbox-experimental.csv
+fetch_from_gh_pages data/compat2021/css-flexbox-experimental-full-results.csv
+fetch_from_gh_pages data/compat2021/css-flexbox-stable.csv
+fetch_from_gh_pages data/compat2021/css-flexbox-stable-full-results.csv
 mv data/* out/data/ || true
 echo
 
@@ -27,7 +34,7 @@ cd ../
 
 TO_DATE=$(date -d "yesterday 13:00" '+%Y-%m-%d')
 
-update_csv() {
+update_bsf_csv() {
   local FROM_DATE="2018-06-01"
   if [[ -f "${1}" ]]; then
     FROM_DATE=$(tail "${1}" -n 1 | cut -f 2 -d ',')
@@ -50,5 +57,40 @@ update_csv() {
   rm tmp.csv
 }
 
-update_csv out/data/stable-browser-specific-failures.csv
-update_csv out/data/experimental-browser-specific-failures.csv
+update_bsf_csv out/data/stable-browser-specific-failures.csv
+update_bsf_csv out/data/experimental-browser-specific-failures.csv
+
+update_compat_2021() {
+  local FEATURE="${1}"
+  local LABEL="${2}"
+
+  local OUT_CSV="out/data/compat2021/${FEATURE}-${LABEL}.csv"
+
+  local FROM_DATE="2020-12-15"
+  if [[ -f "${OUT_CSV}" ]]; then
+    FROM_DATE=$(tail "${OUT_CSV}" -n 1 | cut -f 2 -d ',')
+  fi
+
+  local EXPERIMENTAL_FLAG=""
+  if [[ "${2}" == "experimental" ]]; then
+    EXPERIMENTAL_FLAG="--experimental"
+  fi
+
+  node compat-2021/main.js \
+    ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE}
+
+  local SKIP_LINES="+1"
+  if [[ -f "${OUT_CSV}" ]]; then
+    SKIP_LINES="+3"
+  fi
+  tail -n ${SKIP_LINES} "${FEATURE}-${LABEL}.csv" >> "${OUT_CSV}"
+  
+  # Mpve full results over.
+  mv "${FEATURE}-${LABEL}-full-results.csv" out/data/compat2021/
+
+  # Cleanup the temporary output file.
+  rm "${FEATURE}-${LABEL}.csv"
+}
+
+update_compat_2021 css-flexbox experimental
+update_compat_2021 css-flexbox stable

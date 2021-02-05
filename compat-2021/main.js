@@ -9,6 +9,7 @@ const fs = require('fs');
 const Git = require('nodegit');
 const lib = require('../lib');
 const moment = require('moment');
+const path = require('path');
 
 flags.defineString('category', 'css-flexbox',
     'Compat 2021 category to calculate data for');
@@ -18,6 +19,8 @@ flags.defineString('to', moment().format('YYYY-MM-DD'),
 flags.defineBoolean('experimental', false,
     'Calculate metrics for experimental runs.');
 flags.parse();
+
+const ROOT_DIR = path.join(__dirname, "..");
 
 // See documentation of advanceDateToSkipBadDataIfNecessary. These ranges are
 // inclusive, exclusive.
@@ -93,8 +96,8 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
     // Attempt to read the runs from the cache.
     // TODO: Consider https://github.com/tidoust/fetch-filecache-for-crawling
     let runs;
-    const cacheFile =
-        `../cache/${label}-${products.join('-')}-runs-${formattedFrom}.json`;
+    const cacheFile = path.join(ROOT_DIR,
+        `cache/${label}-${products.join('-')}-runs-${formattedFrom}.json`);
     try {
       runs = JSON.parse(await fs.promises.readFile(cacheFile));
       if (runs.length) {
@@ -129,7 +132,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 }
 
 async function loadAllTestsSet(category) {
-  const filename = category + '-tests.txt'
+  const filename = path.join(ROOT_DIR, 'compat-2021', category + '-tests.txt');
   const contents = await fs.promises.readFile(filename, 'utf-8');
   let lines = contents.split('\n');
   lines = lines.filter(line => line.startsWith('/'));
@@ -203,7 +206,8 @@ function scoreRuns(runs, allTestsSet) {
 
 async function main() {
   const products = ['chrome', 'firefox', 'safari'];
-  const repo = await Git.Repository.open('../wpt-results.git');
+  const repo = await Git.Repository.open(
+      path.join(ROOT_DIR, 'wpt-results.git'));
 
   const category = flags.get('category')
   const allTestsSet = await loadAllTestsSet(category);
