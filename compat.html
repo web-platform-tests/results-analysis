@@ -1,0 +1,79 @@
+<!doctype HTML>
+<meta charset="utf-8" /> 
+
+<title>2021 DevSat Compat Dashboard</title>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="compat.js"></script>
+
+<style>
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.chart {
+  /* Reserve vertical space to avoid layout pop. Should be kept in sync with
+     the JavaScript defined height. */
+  height: 350px;
+}
+</style>
+
+<h1>2021 DevSat Compat Dashboard</h1>
+
+<div>
+  <label for="featureSelect">Focus area:</label>
+  <select id="featureSelect">
+    <option value="css-flexbox">css-flexbox</option>
+  </select>
+</div>
+
+<div>
+  <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
+  <input id="stableVersionCheckbox" type="checkbox" />
+</div>
+<!-- TODO: add controls to select category -->
+<div id="failures-chart" class="chart"></div>
+
+<h3>Tests</h2>
+<p>Results in this table are not live. For up-to-date results, visit <a href="https://wpt.fyi">wpt.fyi</a></p>
+
+<!-- TODO: The table should be styled to be easier to read -->
+<!-- TODO: The table should be sortable -->
+<!-- TODO: The table should be filterable -->
+<table id="testsTable">
+  <thead>
+    <tr>
+      <th>Test name</th>
+      <th>Chrome</th>
+      <th>Firefox</th>
+      <th>Safari</th>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(async () => {
+  renderChart(featureSelect.value, stableVersionCheckbox.checked);
+});
+
+addEventListener('load', () => {
+  loadTestList(featureSelect.value, stableVersionCheckbox.checked);
+});
+
+featureSelect.addEventListener('change', () => {
+  const feature = featureSelect.value;
+  const stable = stableVersionCheckbox.checked;
+  renderChart(feature, stable);
+  loadTestList(feature, stable);
+});
+
+stableVersionCheckbox.addEventListener('change', () => {
+  const feature = featureSelect.value;
+  const stable = stableVersionCheckbox.checked;
+  renderChart(feature, stable);
+  loadTestList(feature, stable);
+});
+</script>
