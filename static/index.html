@@ -4,20 +4,37 @@
 <title>WPT Results Charts</title>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="index.js"></script>
 
 <style>
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 .chart {
   /* Reserve vertical space to avoid layout pop. Should be kept in sync with
      the JavaScript defined height. */
   height: 350px;
 }
+.code {
+  background-color:#EEEEEE;
+  font-family: monospace;
+}
 </style>
 
-<h1>WPT Results Charts</h1>
-<p>Click + drag on graphs to zoom, right click to un-zoom</p>
+<h1>Browser Specific Failures</h1>
 
-<h2>Browser Specific Failures</h2>
-<h3>Stable releases</h3>
+<p>These charts measure how many WPT tests fail in exactly one browser (of the
+three major engines - Chromium, Gecko, WebKit), or "Browser Specific Failures".
+Such tests are interesting as they mostly represent 'real' interop issues in
+agreed-upon web features.</p>
+
+<p>(Click + drag on graphs to zoom, right click to un-zoom)</p>
+
+<h2>Stable browser versions</h2>
+<p>Results are from stable releases of browsers at the given date, with a minimal set of flags passed to enable testing.</p>
+
+<a href="https://wpt.fyi/results/?label=master&label=stable&product=chrome&product=firefox&product=safari&aligned&q=count%3A2%28status%3Apass%29%20none%28status%3Amissing%7Cstatus%3Anotrun%29" target="_blank">wpt.fyi query</a>
 <div id="bsf-stable" class="chart"></div>
 <p>Notable dates:</p>
 <ul>
@@ -26,7 +43,9 @@
   <li><b>April 8, 2020</b>: Safari 13.1</li>
 </ul>
 
-<h3>Experimental releases</h3>
+<h2>Experimental browser versions</h2>
+<p>Results are from experimental releases of browsers at the given date, such as Safari Tech Preview. Where appropriate, experimental features are enabled (e.g. <span class="code">--enable-experimental-web-platform-features</span> for Chrome.)</p>
+<a href="https://wpt.fyi/results/?label=master&label=experimental&product=chrome&product=firefox&product=safari&aligned&q=count%3A2%28status%3Apass%29%20none%28status%3Amissing%7Cstatus%3Anotrun%29" target="_blank">wpt.fyi query</a>
 <div id="bsf-experimental" class="chart"></div>
 <p>Notable dates:</p>
 <ul>
@@ -42,75 +61,4 @@ google.charts.setOnLoadCallback(async () => {
   renderStableChart();
   renderExperimentalChart();
 });
-
-async function renderStableChart() {
-  drawBSFChart(document.getElementById("bsf-stable"),
-      "data/stable-browser-specific-failures.csv");
-}
-
-async function renderExperimentalChart() {
-  drawBSFChart(document.getElementById("bsf-experimental"),
-      "data/experimental-browser-specific-failures.csv");
-}
-
-async function drawBSFChart(div, url) {
-  const csvData = await fetch(url);
-  const csvText = await csvData.text();
-  const csvLines = csvText.split('\n');
-  csvLines.pop();  // Trailing empty line
-
-  const data = csvLines.map((line, rowIdx) => {
-    // We know the data is good, so being lazy with the parsing.
-
-    // The columns are:
-    //   sha, date, [product-version, product-score,]+
-    //
-    // We only need the date and product scores to produce the graph, so drop
-    // the other columns.
-    let columns = line.split(',');
-
-    // Drop the sha.
-    columns = columns.slice(1);
-
-    // Drop the version columns.
-    columns = columns.filter((c, i) => (i % 2) == 0);
-
-    if (rowIdx == 0)
-      return columns;
-
-    const dateParts = columns[0].split('-').map(x => parseInt(x));
-    // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
-    columns[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    for (let i = 1; i < columns.length; i++) {
-      columns[i] = parseFloat(columns[i]);
-    }
-    return columns;
-  });
-
-  const options = {
-    width: 800,
-    height: 350,
-    chartArea: {
-      height: '80%',
-    },
-    hAxis: {
-      title: "Date",
-      format: "MMM-YYYY",
-    },
-    vAxis: {
-      title: "Tests that fail in exactly 1 browser",
-    },
-    explorer: {
-      actions: ['dragToZoom', 'rightClickToReset'],
-      axis: 'horizontal',
-      keepInBounds: true,
-      maxZoomIn: 4.0,
-    },
-    colors: ['#4285f4', '#ea4335', '#fbbc04'],
-  };
-
-  const chart = new google.visualization.LineChart(div);
-  chart.draw(google.visualization.arrayToDataTable(data), options);
-}
-
 </script>
