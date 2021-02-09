@@ -1001,7 +1001,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/position-relative-percentage-top-003.html,1/1,1/1,1/1
 /css/css-flexbox/position-relative-with-scrollable-with-abspos-crash.html,1/1,1/1,1/1
 /css/css-flexbox/quirks-auto-block-size-with-percentage-item.html,1/1,1/1,1/1
-/css/css-flexbox/radiobutton-min-size.html,1/1,0/1,0/1
+/css/css-flexbox/radiobutton-min-size.html,1/1,1/1,0/1
 /css/css-flexbox/relayout-align-items.html,2/2,2/2,2/2
 /css/css-flexbox/relayout-image-load.html,1/1,1/1,1/1
 /css/css-flexbox/relayout-input.html,2/2,2/2,2/2
