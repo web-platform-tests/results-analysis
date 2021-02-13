@@ -24,6 +24,10 @@ fetch_from_gh_pages data/compat2021/css-flexbox-experimental.csv
 fetch_from_gh_pages data/compat2021/css-flexbox-experimental-full-results.csv
 fetch_from_gh_pages data/compat2021/css-flexbox-stable.csv
 fetch_from_gh_pages data/compat2021/css-flexbox-stable-full-results.csv
+fetch_from_gh_pages data/compat2021/position-sticky-experimental.csv
+fetch_from_gh_pages data/compat2021/position-sticky-experimental-full-results.csv
+fetch_from_gh_pages data/compat2021/position-sticky-stable.csv
+fetch_from_gh_pages data/compat2021/position-sticky-stable-full-results.csv
 mv data/* out/data/ || true
 echo
 
@@ -76,8 +80,8 @@ update_compat_2021() {
     EXPERIMENTAL_FLAG="--experimental"
   fi
 
-  node compat-2021/main.js \
-    ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE}
+  node compat-2021/main.js ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} \
+      --to=${TO_DATE} --category=${FEATURE}
 
   local SKIP_LINES="+1"
   if [[ -f "${OUT_CSV}" ]]; then
@@ -94,3 +98,5 @@ update_compat_2021() {
 
 update_compat_2021 css-flexbox experimental
 update_compat_2021 css-flexbox stable
+update_compat_2021 position-sticky experimental
+update_compat_2021 position-sticky stable
