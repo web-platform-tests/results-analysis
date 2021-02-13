@@ -29,8 +29,13 @@ async function renderChart(feature, stable) {
     // Drop the version columns.
     columns = columns.filter((c, i) => (i % 2) == 0);
 
-    if (rowIdx == 0)
-      return columns;
+    if (rowIdx == 0) {
+      // The data we have is for Chrome, but conceptually it represents Chrome
+      // and Edge (since they share the same engine). We could present data
+      // from both, but they likely overlap significantly, so instead we just
+      // show a combined label.
+      return columns.map(c => c == 'chrome' ? 'chrome/edge' : c);
+    }
 
     const dateParts = columns[0].split('-').map(x => parseInt(x));
     // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
