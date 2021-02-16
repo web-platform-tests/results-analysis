@@ -15,19 +15,12 @@ fetch_from_gh_pages() {
   git reset HEAD "${1}" || true
 }
 
-# Try to do an incremental update, if possible.
+# Try to do an incremental update for the BSFs, if possible, as they're slow to
+# re-create.
 echo "Checking out existing CSV files from gh-pages/"
 git fetch origin || true
 fetch_from_gh_pages data/experimental-browser-specific-failures.csv
 fetch_from_gh_pages data/stable-browser-specific-failures.csv
-fetch_from_gh_pages data/compat2021/css-flexbox-experimental.csv
-fetch_from_gh_pages data/compat2021/css-flexbox-experimental-full-results.csv
-fetch_from_gh_pages data/compat2021/css-flexbox-stable.csv
-fetch_from_gh_pages data/compat2021/css-flexbox-stable-full-results.csv
-fetch_from_gh_pages data/compat2021/position-sticky-experimental.csv
-fetch_from_gh_pages data/compat2021/position-sticky-experimental-full-results.csv
-fetch_from_gh_pages data/compat2021/position-sticky-stable.csv
-fetch_from_gh_pages data/compat2021/position-sticky-stable-full-results.csv
 mv data/* out/data/ || true
 echo
 
@@ -96,7 +89,16 @@ update_compat_2021() {
   rm "${FEATURE}-${LABEL}.csv"
 }
 
+mkdir -p out/data/compat2021/
+
+update_compat_2021 aspect-ratio experimental
 update_compat_2021 css-flexbox experimental
-update_compat_2021 css-flexbox stable
+update_compat_2021 css-grid experimental
+update_compat_2021 css-transforms experimental
 update_compat_2021 position-sticky experimental
+
+update_compat_2021 aspect-ratio stable
+update_compat_2021 css-flexbox stable
+update_compat_2021 css-grid stable
+update_compat_2021 css-transforms stable
 update_compat_2021 position-sticky stable
