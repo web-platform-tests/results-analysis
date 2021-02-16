@@ -279,7 +279,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/dynamic-bsize-change.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout-002.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout.html,1/1,1/1,1/1
-/css/css-flexbox/dynamic-grid-flex-abspos.html,8/8,8/8,6/8
+/css/css-flexbox/dynamic-grid-flex-abspos.html,8/8,8/8,8/8
 /css/css-flexbox/fieldset-as-item-overflow.html,1/1,1/1,1/1
 /css/css-flexbox/fit-content-item-001.html,1/1,1/1,1/1
 /css/css-flexbox/fit-content-item-002.html,1/1,1/1,1/1
