@@ -58,47 +58,34 @@ update_bsf_csv out/data/stable-browser-specific-failures.csv
 update_bsf_csv out/data/experimental-browser-specific-failures.csv
 
 update_compat_2021() {
-  local FEATURE="${1}"
-  local LABEL="${2}"
-
-  local OUT_CSV="out/data/compat2021/${FEATURE}-${LABEL}.csv"
+  local LABEL="${1}"
 
   local FROM_DATE="2020-12-15"
-  if [[ -f "${OUT_CSV}" ]]; then
-    FROM_DATE=$(tail "${OUT_CSV}" -n 1 | cut -f 2 -d ',')
-  fi
-
   local EXPERIMENTAL_FLAG=""
-  if [[ "${2}" == "experimental" ]]; then
+  if [[ "${LABEL}" == "experimental" ]]; then
     EXPERIMENTAL_FLAG="--experimental"
   fi
 
   node compat-2021/main.js ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} \
-      --to=${TO_DATE} --category=${FEATURE}
+      --to=${TO_DATE}
 
-  local SKIP_LINES="+1"
-  if [[ -f "${OUT_CSV}" ]]; then
-    SKIP_LINES="+3"
-  fi
-  tail -n ${SKIP_LINES} "${FEATURE}-${LABEL}.csv" >> "${OUT_CSV}"
-  
-  # Mpve full results over.
-  mv "${FEATURE}-${LABEL}-full-results.csv" out/data/compat2021/
+  for FEATURE in aspect-ratio css-flexbox css-grid css-transforms position-sticky; do
+    local OUT_CSV="out/data/compat2021/${FEATURE}-${LABEL}.csv"
 
-  # Cleanup the temporary output file.
-  rm "${FEATURE}-${LABEL}.csv"
+    local SKIP_LINES="+1"
+    if [[ -f "${OUT_CSV}" ]]; then
+      SKIP_LINES="+3"
+    fi
+    tail -n ${SKIP_LINES} "${FEATURE}-${LABEL}.csv" >> "${OUT_CSV}"
+
+    # Move full results over.
+    mv "${FEATURE}-${LABEL}-full-results.csv" out/data/compat2021/
+
+    # Cleanup the temporary output file.
+    rm "${FEATURE}-${LABEL}.csv"
+  done
 }
 
 mkdir -p out/data/compat2021/
-
-update_compat_2021 aspect-ratio experimental
-update_compat_2021 css-flexbox experimental
-update_compat_2021 css-grid experimental
-update_compat_2021 css-transforms experimental
-update_compat_2021 position-sticky experimental
-
-update_compat_2021 aspect-ratio stable
-update_compat_2021 css-flexbox stable
-update_compat_2021 css-grid stable
-update_compat_2021 css-transforms stable
-update_compat_2021 position-sticky stable
+update_compat_2021 experimental
+update_compat_2021 stable

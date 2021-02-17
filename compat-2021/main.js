@@ -11,8 +11,6 @@ const lib = require('../lib');
 const moment = require('moment');
 const path = require('path');
 
-flags.defineString('category', 'css-flexbox',
-    'Compat 2021 category to calculate data for');
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -21,6 +19,14 @@ flags.defineBoolean('experimental', false,
 flags.parse();
 
 const ROOT_DIR = path.join(__dirname, "..");
+
+const CATEGORIES = [
+  'aspect-ratio',
+  'css-flexbox',
+  'css-grid',
+  'css-transforms',
+  'position-sticky',
+];
 
 // See documentation of advanceDateToSkipBadDataIfNecessary. These ranges are
 // inclusive, exclusive.
@@ -204,65 +210,11 @@ function scoreRuns(runs, allTestsSet) {
   return [scores, testResults];
 }
 
-async function main() {
-  const products = ['chrome', 'firefox', 'safari'];
-  const repo = await Git.Repository.open(
-      path.join(ROOT_DIR, 'wpt-results.git'));
-
-  const category = flags.get('category')
+async function scoreCategory(category, experimental, products, alignedRuns) {
   const allTestsSet = await loadAllTestsSet(category);
 
-  // First, grab aligned runs from the server for the dates that we are
-  // interested in.
-  const from = moment(flags.get('from'));
-  const to = moment(flags.get('to'));
-  const experimental = flags.get('experimental');
-  const alignedRuns = await fetchAlignedRunsFromServer(
-		products, from, to, experimental);
-
-  // Verify that we have data for the fetched runs in the wpt-results repo.
-  console.log('Getting local set of run ids from repo');
-  let before = Date.now();
-  const localRunIds = await lib.results.getLocalRunIds(repo);
-  let after = Date.now();
-  console.log(`Found ${localRunIds.size} ids (took ${after - before} ms)`);
-
-  let hadErrors = false;
-  for (const [date, runs] of alignedRuns.entries()) {
-    for (const run of runs) {
-      if (!localRunIds.has(run.id)) {
-        // If you see this, you probably need to run git-write.js or just update
-        // your wpt-results.git repo; see the README.md.
-        console.error(`Run ${run.id} missing from local git repo (${date})`);
-        hadErrors = true;
-      }
-    }
-  }
-  if (hadErrors) {
-    throw new Error('Missing data for some runs (see errors logged above). ' +
-        'Try running "git fetch --all --tags" in wpt-results/');
-  }
-
-  // Load the test result trees into memory; creates a list of recursive tree
-  // structures: tree = { trees: [...], tests: [...] }. Each 'tree' represents a
-  // directory, each 'test' is the results from a given test file.
-  console.log('Iterating over all runs, loading test results');
-  before = Date.now();
-  for (const runs of alignedRuns.values()) {
-    for (const run of runs) {
-      // Just in case someone ever adds a 'tree' field to the JSON.
-      if (run.tree) {
-        throw new Error('Run JSON contains "tree" field; code needs changed.');
-      }
-      run.tree = await lib.results.getGitTree(repo, run);
-    }
-  }
-  after = Date.now();
-  console.log(`Loading ${alignedRuns.size} sets of runs took ` +
-      `${after - before} ms`);
-
   // Score the test runs.
-  before = Date.now();
+  const before = Date.now();
   const dateToScores = new Map();
   for (const [date, runs] of alignedRuns.entries()) {
     // The SHA should be the same for all runs, so just grab the first.
@@ -271,7 +223,7 @@ async function main() {
     const [scores, testResults] = scoreRuns(runs, allTestsSet);
     dateToScores.set(date, {sha, versions, scores, testResults});
   }
-  after = Date.now();
+  const after = Date.now();
   console.log(`Done scoring (took ${after - before} ms)`);
 
   let data = 'sha,date';
@@ -336,6 +288,69 @@ async function main() {
       `${category}-stable-full-results.csv`;
   await fs.promises.writeFile(resultsCsvFilename, data, 'utf-8');
   console.log(`Wrote latest run results to ${resultsCsvFilename}`);
+}
+
+async function main() {
+  const products = ['chrome', 'firefox', 'safari'];
+  const repo = await Git.Repository.open(
+      path.join(ROOT_DIR, 'wpt-results.git'));
+
+  // First, grab aligned runs from the server for the dates that we are
+  // interested in.
+  const from = moment(flags.get('from'));
+  const to = moment(flags.get('to'));
+  const experimental = flags.get('experimental');
+  const alignedRuns = await fetchAlignedRunsFromServer(
+      products, from, to, experimental);
+
+  // Verify that we have data for the fetched runs in the wpt-results repo.
+  console.log('Getting local set of run ids from repo');
+  let before = Date.now();
+  const localRunIds = await lib.results.getLocalRunIds(repo);
+  let after = Date.now();
+  console.log(`Found ${localRunIds.size} ids (took ${after - before} ms)`);
+
+  let hadErrors = false;
+  for (const [date, runs] of alignedRuns.entries()) {
+    for (const run of runs) {
+      if (!localRunIds.has(run.id)) {
+        // If you see this, you probably need to run git-write.js or just update
+        // your wpt-results.git repo; see the README.md.
+        console.error(`Run ${run.id} missing from local git repo (${date})`);
+        hadErrors = true;
+      }
+    }
+  }
+  if (hadErrors) {
+    throw new Error('Missing data for some runs (see errors logged above). ' +
+        'Try running "git fetch --all --tags" in wpt-results/');
+  }
+
+  // Load the test result trees into memory; creates a list of recursive tree
+  // structures: tree = { trees: [...], tests: [...] }. Each 'tree' represents a
+  // directory, each 'test' is the results from a given test file.
+  console.log('Iterating over all runs, loading test results');
+  before = Date.now();
+  for (const runs of alignedRuns.values()) {
+    for (const run of runs) {
+      // Just in case someone ever adds a 'tree' field to the JSON.
+      if (run.tree) {
+        throw new Error('Run JSON contains "tree" field; code needs changed.');
+      }
+      run.tree = await lib.results.getGitTree(repo, run);
+    }
+  }
+  after = Date.now();
+  console.log(`Loading ${alignedRuns.size} sets of runs took ` +
+      `${after - before} ms`);
+
+  for (const category of CATEGORIES) {
+    // These could technically be done in parallel (only the file
+    // reading/writing is async), but we do them in sequence to keep the logs
+    // understandable. So far the performance hit is fine.
+    console.log(`Scoring runs for ${category}`);
+    await scoreCategory(category, experimental, products, alignedRuns);
+  }
 }
 
 main().catch(reason => {
