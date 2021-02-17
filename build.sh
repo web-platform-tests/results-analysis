@@ -84,6 +84,8 @@ update_compat_2021() {
     # Cleanup the temporary output file.
     rm "${FEATURE}-${LABEL}.csv"
   done
+
+  mv "summary-${LABEL}.csv" out/data/compat2021/
 }
 
 mkdir -p out/data/compat2021/

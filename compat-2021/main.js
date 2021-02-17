@@ -236,7 +236,7 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
   //
   // ES6 maps iterate in insertion order, and we initially inserted in date
   // order, so we can just iterate |dateToScores|.
-  let testResults;
+  let latestShaAndScores;
   for (const [date, shaAndScores] of dateToScores) {
     const sha = shaAndScores.sha;
     const scores = shaAndScores.scores;
@@ -255,9 +255,9 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
     }
     data += csvRecord.join(',') + '\n';
 
-    // We only want to write out results for the latest dateToScores, so we
-    // just keep overriding it until the loop is over.
-    testResults = shaAndScores.testResults;
+    // We need just the latest shaAndScores for writing out the full results
+    // and for returning the latest summary.
+    latestShaAndScores = shaAndScores;
   }
 
   const csvFilename = experimental ?
@@ -275,7 +275,7 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
   }
   data += '\n';
 
-  for (const [testname, results] of testResults) {
+  for (const [testname, results] of latestShaAndScores.testResults) {
     const csvRecord = [testname];
     for (const result of results) {
       csvRecord.push(result.join('/'));
@@ -288,6 +288,11 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
       `${category}-stable-full-results.csv`;
   await fs.promises.writeFile(resultsCsvFilename, data, 'utf-8');
   console.log(`Wrote latest run results to ${resultsCsvFilename}`);
+
+  // And finally, we return the most recent *summary* results, so that we can
+  // create the summary-{stable, experimental}.csv file to power the top-level
+  // summary metric for each browser.
+  return latestShaAndScores.scores;
 }
 
 async function main() {
@@ -344,13 +349,19 @@ async function main() {
   console.log(`Loading ${alignedRuns.size} sets of runs took ` +
       `${after - before} ms`);
 
+  let summaryCsv = `feature,${products.join()}\n`;
+  const latestCategoryScores = [];
   for (const category of CATEGORIES) {
-    // These could technically be done in parallel (only the file
-    // reading/writing is async), but we do them in sequence to keep the logs
-    // understandable. So far the performance hit is fine.
     console.log(`Scoring runs for ${category}`);
-    await scoreCategory(category, experimental, products, alignedRuns);
+    let latestScores = await scoreCategory(
+        category, experimental, products, alignedRuns);
+    summaryCsv += `${category},${latestScores.join()}\n`;
   }
+
+  const summaryCsvFilename = experimental ?
+      `summary-experimental.csv` : `summary-stable.csv`;
+  await fs.promises.writeFile(summaryCsvFilename, summaryCsv, 'utf-8');
+  console.log(`Wrote latest summary to ${summaryCsvFilename}`);
 }
 
 main().catch(reason => {
