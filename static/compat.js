@@ -1,5 +1,39 @@
 'use strict';
 
+async function calculateSummaryScores(stable) {
+  const label = stable ? 'stable' : 'experimental';
+  const url = `data/compat2021/summary-${label}.csv`;
+  const csvResp = await fetch(url);
+  if (!csvResp.ok) {
+    throw new Error(`Fetching chart csv data failed: ${csvResp.status}`);
+  }
+  const csvText = await csvResp.text();
+  const csvLines = csvText.split('\n');
+  csvLines.shift();  // We don't need the CSV header.
+  csvLines.pop();  // Trailing empty line.
+  console.log(csvLines);
+
+  if (csvLines.length != 5) {
+    throw new Error(`${url} did not contain 5 results`);
+  }
+
+  let summaryScores = [0, 0, 0];
+  for (const line of csvLines) {
+    let parts = line.split(',');
+    if (parts.length != 4) {
+      throw new Error(`${url} had an invalid line`);
+    }
+
+    parts.shift();
+    for (let i = 0; i < parts.length; i++) {
+      let contribution = Math.round(parseFloat(parts[i]) * 20);
+      summaryScores[i] += contribution;
+    }
+  }
+
+  return summaryScores;
+}
+
 async function renderChart(feature, stable) {
   const div = document.getElementById("failures-chart");
   const label = stable ? 'stable' : 'experimental';
