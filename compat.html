@@ -8,7 +8,7 @@
 
 <style>
 body {
-  max-width: 1100px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -17,10 +17,42 @@ body {
      the JavaScript defined height. */
   height: 350px;
 }
+
+#summaryContainer {
+  padding-top: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.summary-number {
+  font-size: 5em;
+  font-family: monospace;
+}
+
+.summary-browser-name {
+  text-align: center;
+}
 </style>
 
 <h1>2021 DevSat Compat Dashboard</h1>
 
+<div id="summaryContainer">
+  <div>
+    <div class="summary-number">--</div>
+    <div class="summary-browser-name">Chrome/Edge</div>
+  </div>
+  <div>
+    <div class="summary-number">--</div>
+    <div class="summary-browser-name">Firefox</div>
+  </div>
+  <div>
+    <div class="summary-number">--</div>
+    <div class="summary-browser-name">Safari</div>
+  </div>
+</div>
+
+<h3>Individual Features</h3>
 <div>
   <label for="featureSelect">Focus area:</label>
   <select id="featureSelect">
@@ -36,7 +68,6 @@ body {
   <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
   <input id="stableVersionCheckbox" type="checkbox" />
 </div>
-<!-- TODO: add controls to select category -->
 <div id="failures-chart" class="chart"></div>
 
 <h3>Tests</h2>
@@ -75,11 +106,34 @@ google.charts.setOnLoadCallback(async () => {
   renderChart(featureSelect.value, stableVersionCheckbox.checked);
 });
 
+function calculateColor(score) {
+  // RGB values from https://material.io/design/color/
+  if (score >= 95)
+    return '#388E3C';  // Green 700
+  if (score > 75)
+    return '#689F38';  // Light Green 700
+  if (score > 50)
+    return '#FBC02D';  // Yellow 700
+  if (score > 25)
+    return '#F57C00';  // Orange 700
+  return '#D32F2F'; // Red 700
+}
+
+async function updateSummary() {
+  let scores = await calculateSummaryScores(stableVersionCheckbox.checked);
+  let numbers = summaryContainer.querySelectorAll('.summary-number');
+  for (let i = 0; i < scores.length; i++) {
+    numbers[i].innerText = scores[i];
+    numbers[i].style.color = calculateColor(scores[i]);
+  }
+}
+
 addEventListener('load', () => {
+  updateSummary();
   loadTestList(featureSelect.value, stableVersionCheckbox.checked);
 });
 
-function updatePage() {
+function updateChartAndDetails() {
   const feature = featureSelect.value;
   const stable = stableVersionCheckbox.checked;
 
@@ -94,6 +148,10 @@ function updatePage() {
   loadTestList(feature, stable);
 }
 
-featureSelect.addEventListener('change', updatePage);
-stableVersionCheckbox.addEventListener('change', updatePage);
+featureSelect.addEventListener('change', updateChartAndDetails);
+stableVersionCheckbox.addEventListener('change', () => {
+  updateChartAndDetails();
+  // The summary only changes based on stable-vs-experimental.
+  updateSummary();
+});
 </script>
