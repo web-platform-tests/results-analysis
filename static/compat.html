@@ -58,6 +58,18 @@ body {
 </table>
 
 <script>
+const params = (new URL(document.location)).searchParams;
+
+const initialFeature = params.get('feature');
+if (initialFeature != null) {
+  // TODO: This might not exist.
+  featureSelect.value = initialFeature;
+}
+
+if (params.get('stable') != null) {
+  stableVersionCheckbox.checked = true;
+}
+
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(async () => {
   renderChart(featureSelect.value, stableVersionCheckbox.checked);
@@ -67,17 +79,21 @@ addEventListener('load', () => {
   loadTestList(featureSelect.value, stableVersionCheckbox.checked);
 });
 
-featureSelect.addEventListener('change', () => {
+function updatePage() {
   const feature = featureSelect.value;
   const stable = stableVersionCheckbox.checked;
-  renderChart(feature, stable);
-  loadTestList(feature, stable);
-});
 
-stableVersionCheckbox.addEventListener('change', () => {
-  const feature = featureSelect.value;
-  const stable = stableVersionCheckbox.checked;
+  // Update the URL.
+  let queryString = '?feature=' + feature;
+  if (stable) {
+    queryString += '&stable';
+  }
+  history.pushState('', '', queryString);
+
   renderChart(feature, stable);
   loadTestList(feature, stable);
-});
+}
+
+featureSelect.addEventListener('change', updatePage);
+stableVersionCheckbox.addEventListener('change', updatePage);
 </script>
