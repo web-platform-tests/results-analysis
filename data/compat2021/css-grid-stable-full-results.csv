@@ -577,7 +577,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-definition/grid-template-rows-fit-content-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/anonymous-grid-item-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/explicitly-sized-grid-item-as-table.html,1/1,1/1,0/1
-/css/css-grid/grid-items/grid-auto-margin-and-replaced-item-001.html,0/1,1/1,0/1
+/css/css-grid/grid-items/grid-auto-margin-and-replaced-item-001.html,1/1,1/1,0/1
 /css/css-grid/grid-items/grid-automatic-minimum-intrinsic-aspect-ratio-001.html,14/14,14/14,14/14
 /css/css-grid/grid-items/grid-img-item-percent-max-height-001.html,1/1,1/1,0/1
 /css/css-grid/grid-items/grid-inline-items-001.html,1/1,1/1,1/1
