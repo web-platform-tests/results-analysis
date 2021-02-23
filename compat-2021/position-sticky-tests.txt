@@ -4,15 +4,15 @@
 /css/css-position/sticky/position-sticky-hyperlink.html
 /css/css-position/sticky/position-sticky-inline.html
 /css/css-position/sticky/position-sticky-large-top-2.tentative.html
-/css/css-position/sticky/position-sticky-large-top.tentative.html
-/css/css-position/sticky/position-sticky-nested-bottom.html
+# /css/css-position/sticky/position-sticky-large-top.tentative.html
+# /css/css-position/sticky/position-sticky-nested-bottom.html
 /css/css-position/sticky/position-sticky-nested-inline.html
-/css/css-position/sticky/position-sticky-nested-right.html
+# /css/css-position/sticky/position-sticky-nested-right.html
 /css/css-position/sticky/position-sticky-nested-table.html
 /css/css-position/sticky/position-sticky-offset-overflow.html
 /css/css-position/sticky/position-sticky-overflow-hidden.html
 /css/css-position/sticky/position-sticky-overflow-padding.html
-/css/css-position/sticky/position-sticky-parsing.html
+# /css/css-position/sticky/position-sticky-parsing.html
 /css/css-position/sticky/position-sticky-rendering.html
 /css/css-position/sticky/position-sticky-scrolled-remove-sibling.html
 /css/css-position/sticky/position-sticky-table-parts.html
