@@ -47,8 +47,8 @@
 /css/css-flexbox/abspos/flex-abspos-staticpos-margin-002.html
 /css/css-flexbox/abspos/position-absolute-001.html
 /css/css-flexbox/abspos/position-absolute-002.html
-/css/css-flexbox/abspos/position-absolute-012.html
-/css/css-flexbox/abspos/position-absolute-013.html
+# /css/css-flexbox/abspos/position-absolute-012.html
+# /css/css-flexbox/abspos/position-absolute-013.html
 /css/css-flexbox/abspos/position-absolute-014.html
 /css/css-flexbox/abspos/position-absolute-015.html
 /css/css-flexbox/animation/flex-basis-composition.html
@@ -56,7 +56,7 @@
 /css/css-flexbox/animation/flex-grow-interpolation.html
 /css/css-flexbox/animation/flex-shrink-interpolation.html
 /css/css-flexbox/animation/order-interpolation.html
-/css/css-flexbox/parsing/flex-basis-computed.html
+# /css/css-flexbox/parsing/flex-basis-computed.html
 /css/css-flexbox/parsing/flex-computed.html
 /css/css-flexbox/parsing/flex-flow-computed.html
 /css/css-flexbox/parsing/flex-grow-computed.html
@@ -68,18 +68,18 @@
 /css/css-flexbox/align-content-vert-001b.html
 /css/css-flexbox/align-content-vert-002.html
 /css/css-flexbox/align-content-wmvert-001.html
-/css/css-flexbox/align-items-baseline-overflow-non-visible.html
-/css/css-flexbox/anonymous-flex-item-005.html
+# /css/css-flexbox/align-items-baseline-overflow-non-visible.html
+# /css/css-flexbox/anonymous-flex-item-005.html
 /css/css-flexbox/break-nested-float-in-flex-item-001-print.html
 /css/css-flexbox/break-nested-float-in-flex-item-002-print.html
-/css/css-flexbox/canvas-dynamic-change-001.html
+# /css/css-flexbox/canvas-dynamic-change-001.html
 /css/css-flexbox/cross-axis-scrollbar.html
 /css/css-flexbox/css-flexbox-column-reverse-wrap-reverse.html
 /css/css-flexbox/css-flexbox-column-reverse-wrap.html
 /css/css-flexbox/css-flexbox-column-wrap-reverse.html
 /css/css-flexbox/css-flexbox-column-wrap.html
-/css/css-flexbox/dynamic-baseline-change-nested.html
-/css/css-flexbox/dynamic-baseline-change.html
+# /css/css-flexbox/dynamic-baseline-change-nested.html
+# /css/css-flexbox/dynamic-baseline-change.html
 /css/css-flexbox/dynamic-grid-flex-abspos.html
 /css/css-flexbox/flex-aspect-ratio-img-column-008.html
 /css/css-flexbox/flex-aspect-ratio-img-column-011.html
@@ -120,10 +120,10 @@
 /css/css-flexbox/flexbox-break-request-horiz-001b.html
 /css/css-flexbox/flexbox-break-request-vert-001a.html
 /css/css-flexbox/flexbox-break-request-vert-001b.html
-/css/css-flexbox/flexbox-collapsed-item-baseline-001.html
-/css/css-flexbox/flexbox-collapsed-item-horiz-001.html
-/css/css-flexbox/flexbox-collapsed-item-horiz-002.html
-/css/css-flexbox/flexbox-collapsed-item-horiz-003.html
+# /css/css-flexbox/flexbox-collapsed-item-baseline-001.html
+# /css/css-flexbox/flexbox-collapsed-item-horiz-001.html
+# /css/css-flexbox/flexbox-collapsed-item-horiz-002.html
+# /css/css-flexbox/flexbox-collapsed-item-horiz-003.html
 /css/css-flexbox/flexbox-flex-basis-content-001a.html
 /css/css-flexbox/flexbox-flex-basis-content-001b.html
 /css/css-flexbox/flexbox-flex-basis-content-002a.html
@@ -143,15 +143,15 @@
 /css/css-flexbox/flexbox-min-width-auto-002c.html
 /css/css-flexbox/flexbox-paint-ordering-002.xhtml
 /css/css-flexbox/flexbox-safe-overflow-position-001.html
-/css/css-flexbox/flexbox-writing-mode-013.html
-/css/css-flexbox/flexbox-writing-mode-014.html
-/css/css-flexbox/flexbox-writing-mode-015.html
-/css/css-flexbox/flexbox_align-items-stretch-3.html
+# /css/css-flexbox/flexbox-writing-mode-013.html
+# /css/css-flexbox/flexbox-writing-mode-014.html
+# /css/css-flexbox/flexbox-writing-mode-015.html
+# /css/css-flexbox/flexbox_align-items-stretch-3.html
 /css/css-flexbox/flexbox_direction-row-reverse.html
 /css/css-flexbox/flexbox_first-letter.html
-/css/css-flexbox/flexbox_visibility-collapse-line-wrapping.html
-/css/css-flexbox/flexbox_visibility-collapse.html
-/css/css-flexbox/intrinsic-width-orthogonal-writing-mode.html
+# /css/css-flexbox/flexbox_visibility-collapse-line-wrapping.html
+# /css/css-flexbox/flexbox_visibility-collapse.html
+# /css/css-flexbox/intrinsic-width-orthogonal-writing-mode.html
 /css/css-flexbox/negative-overflow.html
 /css/css-flexbox/ortho-table-item-001.html
 /css/css-flexbox/overflow-area-001.html
@@ -160,10 +160,10 @@
 /css/css-flexbox/percentage-heights-006.html
 /css/css-flexbox/percentage-heights-007.html
 /css/css-flexbox/percentage-heights-010.html
-/css/css-flexbox/percentage-heights-013.html
+# /css/css-flexbox/percentage-heights-013.html
 /css/css-flexbox/percentage-heights-014.html
 /css/css-flexbox/percentage-max-height-002.html
-/css/css-flexbox/percentage-size-quirks-002.html
+# /css/css-flexbox/percentage-size-quirks-002.html
 /css/css-flexbox/radiobutton-min-size.html
 /css/css-flexbox/scrollbars-auto.html
 /css/css-flexbox/scrollbars-no-margin.html
