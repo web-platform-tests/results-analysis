@@ -22,9 +22,9 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/block-aspect-ratio-001.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-002.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-003.html,1/1,1/1,0/1
-/css/css-sizing/aspect-ratio/block-aspect-ratio-004.html,0/1,1/1,0/1
+/css/css-sizing/aspect-ratio/block-aspect-ratio-004.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-005.html,1/1,1/1,0/1
-/css/css-sizing/aspect-ratio/block-aspect-ratio-006.html,0/1,1/1,0/1
+/css/css-sizing/aspect-ratio/block-aspect-ratio-006.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-007.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-008.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-009.html,1/1,1/1,1/1
@@ -143,7 +143,7 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/replaced-element-031.html,0/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-032.html,0/1,1/1,0/1
 /css/css-sizing/aspect-ratio/small-aspect-ratio-crash.html,1/1,1/1,1/1
-/css/css-sizing/aspect-ratio/table-element-001.html,0/1,1/1,0/1
+/css/css-sizing/aspect-ratio/table-element-001.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-001.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-002.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-003.html,1/1,1/1,1/1
@@ -159,8 +159,8 @@ testname,chrome,firefox,safari
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/embedded-and-images-presentational-hints-ascii-case-insensitive.html,2/3,3/3,2/3
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-alt-crash-001.html,1/1,1/1,1/1
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html,1/1,1/1,0/1
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,2/3,2/3,1/3
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html,1/1,1/1,1/1
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,3/3,2/3,1/3
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-dim.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-empty-alt-replaced.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-no-alt-replaced.html,1/1,1/1,0/1

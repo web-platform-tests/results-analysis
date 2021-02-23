@@ -1,6 +1,6 @@
 testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/parsing/aspect-ratio-computed.html,13/13,0/13,0/13
-/css/css-sizing/aspect-ratio/parsing/aspect-ratio-invalid.html,8/8,8/8,8/8
+/css/css-sizing/aspect-ratio/parsing/aspect-ratio-invalid.html,8/11,11/11,11/11
 /css/css-sizing/aspect-ratio/parsing/aspect-ratio-valid.html,14/14,0/14,0/14
 /css/css-sizing/aspect-ratio/abspos-001.html,1/1,0/1,0/1
 /css/css-sizing/aspect-ratio/abspos-002.html,1/1,0/1,0/1

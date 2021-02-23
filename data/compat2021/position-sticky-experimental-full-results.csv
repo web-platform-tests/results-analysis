@@ -25,7 +25,7 @@ testname,chrome,firefox,safari
 /css/css-position/sticky/position-sticky-offset-top-left.html,2/2,2/2,2/2
 /css/css-position/sticky/position-sticky-overflow-hidden.html,2/2,1/2,2/2
 /css/css-position/sticky/position-sticky-overflow-padding.html,3/3,2/3,3/3
-/css/css-position/sticky/position-sticky-parsing.html,0/1,0/1,0/1
+/css/css-position/sticky/position-sticky-parsing.html,1/1,0/1,0/1
 /css/css-position/sticky/position-sticky-rendering.html,1/1,1/1,0/1
 /css/css-position/sticky/position-sticky-right.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-root-scroller.html,1/1,1/1,1/1
@@ -34,14 +34,14 @@ testname,chrome,firefox,safari
 /css/css-position/sticky/position-sticky-scrolled-remove-sibling.html,1/1,0/1,1/1
 /css/css-position/sticky/position-sticky-stacking-context.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-parts.html,1/1,1/1,0/1
-/css/css-position/sticky/position-sticky-table-tfoot-bottom.html,0/1,1/1,1/1
+/css/css-position/sticky/position-sticky-table-tfoot-bottom.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-th-bottom.html,1/1,1/1,0/1
 /css/css-position/sticky/position-sticky-table-th-left.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-th-right.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-th-top.html,1/1,1/1,1/1
-/css/css-position/sticky/position-sticky-table-thead-top.html,0/1,1/1,1/1
-/css/css-position/sticky/position-sticky-table-tr-bottom.html,0/1,1/1,1/1
-/css/css-position/sticky/position-sticky-table-tr-top.html,0/1,1/1,1/1
+/css/css-position/sticky/position-sticky-table-thead-top.html,1/1,1/1,1/1
+/css/css-position/sticky/position-sticky-table-tr-bottom.html,1/1,1/1,1/1
+/css/css-position/sticky/position-sticky-table-tr-top.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-top.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-transforms-translate.html,3/3,3/3,2/3
 /css/css-position/sticky/position-sticky-transforms.html,3/3,3/3,3/3
