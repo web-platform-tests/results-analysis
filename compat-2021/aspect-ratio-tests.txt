@@ -145,7 +145,7 @@
 /css/css-sizing/aspect-ratio/replaced-element-031.html
 /css/css-sizing/aspect-ratio/replaced-element-032.html
 /css/css-sizing/aspect-ratio/small-aspect-ratio-crash.html
-/css/css-sizing/aspect-ratio/table-element-001.html
+# /css/css-sizing/aspect-ratio/table-element-001.html
 /css/css-sizing/aspect-ratio/zero-or-infinity-001.html
 /css/css-sizing/aspect-ratio/zero-or-infinity-002.html
 /css/css-sizing/aspect-ratio/zero-or-infinity-003.html
@@ -156,24 +156,8 @@
 /css/css-sizing/aspect-ratio/zero-or-infinity-008.html
 /css/css-sizing/aspect-ratio/zero-or-infinity-009.html
 /css/css-sizing/aspect-ratio/zero-or-infinity-010.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/align.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/canvas-aspect-ratio.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/embedded-and-images-presentational-hints-ascii-case-insensitive.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-alt-crash-001.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-dim.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-empty-alt-replaced.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-no-alt-replaced.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-replaced-box-while-loading.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-title-only-w-sizing.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img_border_percent.xhtml
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/input-align-right-1.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/input-align-right-2.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/input-image-content-crash.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/input-image-inline-alt.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/input-type-change-from-image-1.html
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/object_border_perc.xhtml
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/object_border_pixel.xhtml
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html
