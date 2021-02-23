@@ -93,6 +93,9 @@ async function renderChart(feature, stable) {
     vAxis: {
       title: "Percentage of passing tests",
       format: "percent",
+      viewWindow: {
+        max: 1,
+      }
     },
     explorer: {
       actions: ['dragToZoom', 'rightClickToReset'],
