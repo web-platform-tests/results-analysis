@@ -11,7 +11,6 @@ async function calculateSummaryScores(stable) {
   const csvLines = csvText.split('\n');
   csvLines.shift();  // We don't need the CSV header.
   csvLines.pop();  // Trailing empty line.
-  console.log(csvLines);
 
   if (csvLines.length != 5) {
     throw new Error(`${url} did not contain 5 results`);
