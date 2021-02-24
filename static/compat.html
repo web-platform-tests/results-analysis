@@ -60,6 +60,12 @@ possible score of 100 for each browser.</p>
 <p>The set of tests used is derived from the full wpt.fyi test suite for each
 feature, filtered by believed importance to web developers.</p>
 
+<!-- TODO: This would likely be clearer as a toggle of stable or experimental. -->
+<div>
+  <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
+  <input id="stableVersionCheckbox" type="checkbox" />
+</div>
+
 <h3>Individual Features</h3>
 <div>
   <label for="featureSelect">Focus area:</label>
@@ -72,10 +78,6 @@ feature, filtered by believed importance to web developers.</p>
   </select>
 </div>
 
-<div>
-  <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
-  <input id="stableVersionCheckbox" type="checkbox" />
-</div>
 <div id="failures-chart" class="chart"></div>
 
 <h3>Tests</h2>
