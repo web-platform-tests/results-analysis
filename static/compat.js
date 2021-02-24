@@ -44,39 +44,42 @@ async function renderChart(feature, stable) {
   }
   const csvText = await csvResp.text();
   const csvLines = csvText.split('\n');
+  csvLines.shift();  // We don't need the header line.
   csvLines.pop();  // Trailing empty line
 
-  const data = csvLines.map((line, rowIdx) => {
-    // We know the data is good, so being lazy with the parsing.
+  // Now convert the CSV into a datatable for use by Google Charts.
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn('date', 'Date')
+  dataTable.addColumn('number', 'Chrome/Edge')
+  dataTable.addColumn('number', 'Firefox')
+  dataTable.addColumn('number', 'Safari')
 
-    // The columns are:
+  csvLines.forEach(line => {
+    // We control the CSV data source, so are quite lazy with parsing it.
+
+    // The cells are:
     //   sha, date, [product-version, product-score,]+
     //
     // We only need the date and product scores to produce the graph, so drop
-    // the other columns.
-    let columns = line.split(',');
+    // the other cells.
+    let cells = line.split(',');
 
     // Drop the sha.
-    columns = columns.slice(1);
+    cells = cells.slice(1);
 
-    // Drop the version columns.
-    columns = columns.filter((c, i) => (i % 2) == 0);
+    // Drop the version cells.
+    cells = cells.filter((c, i) => (i % 2) == 0);
 
-    if (rowIdx == 0) {
-      // The data we have is for Chrome, but conceptually it represents Chrome
-      // and Edge (since they share the same engine). We could present data
-      // from both, but they likely overlap significantly, so instead we just
-      // show a combined label.
-      return columns.map(c => c == 'chrome' ? 'chrome/edge' : c);
+    // The first cell is a date. Javascript Date objects use 0-indexed months,
+    // whilst the CSV is 1-indexed, so adjust for that.
+    const dateParts = cells[0].split('-').map(x => parseInt(x));
+    cells[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+
+    // The rest of the cells are floats.
+    for (let i = 1; i < cells.length; i++) {
+      cells[i] = parseFloat(cells[i]);
     }
-
-    const dateParts = columns[0].split('-').map(x => parseInt(x));
-    // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
-    columns[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    for (let i = 1; i < columns.length; i++) {
-      columns[i] = parseFloat(columns[i]);
-    }
-    return columns;
+    dataTable.addRow(cells);
   });
 
   const options = {
@@ -106,7 +109,7 @@ async function renderChart(feature, stable) {
   };
 
   const chart = new google.visualization.LineChart(div);
-  chart.draw(google.visualization.arrayToDataTable(data), options);
+  chart.draw(dataTable, options);
 }
 
 async function loadTestList(feature, stable) {
