@@ -125,17 +125,6 @@ async function renderChart(feature, stable) {
 }
 
 function createTooltip(browser, version, score) {
-  // Chrome has very long version strings; cut them to just the major version.
-  if (browser == 'Chrome') {
-    const parts = version.split(' ');
-    parts[0] = parts[0].split('.')[0];
-    version = parts.join(' ');
-  }
-  // Safari stable has a long sub-version string too, which can be cut.
-  if (browser == 'Safari' && !version.includes('preview')) {
-    version = version.split(' ')[0];
-  }
-
   return `${browser} ${version}: ${score.toFixed(3)}`;
 }
 
