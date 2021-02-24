@@ -100,6 +100,9 @@ async function renderChart(feature, stable) {
     chartArea: {
       height: '80%',
     },
+    tooltip: {
+      trigger: 'both',
+    },
     hAxis: {
       title: "Date",
       format: "MMM-YYYY",
