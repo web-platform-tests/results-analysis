@@ -219,7 +219,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/align-items-007.html,1/1,1/1,1/1
 /css/css-flexbox/align-items-008.html,1/1,1/1,1/1
 /css/css-flexbox/align-items-009.html,1/1,1/1,1/1
-/css/css-flexbox/align-items-baseline-overflow-non-visible.html,1/1,0/1,1/1
 /css/css-flexbox/align-self-001.html,1/1,1/1,1/1
 /css/css-flexbox/align-self-002.html,1/1,1/1,1/1
 /css/css-flexbox/align-self-003.html,1/1,1/1,1/1
@@ -238,7 +237,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/anonymous-flex-item-002.html,1/1,1/1,1/1
 /css/css-flexbox/anonymous-flex-item-003.html,1/1,1/1,1/1
 /css/css-flexbox/anonymous-flex-item-004.html,1/1,1/1,1/1
-/css/css-flexbox/anonymous-flex-item-005.html,0/1,1/1,0/1
 /css/css-flexbox/anonymous-flex-item-006.html,1/1,1/1,1/1
 /css/css-flexbox/auto-height-column-with-border-and-padding.html,1/1,1/1,1/1
 /css/css-flexbox/auto-height-with-flex.html,1/1,1/1,1/1
@@ -249,7 +247,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/box-sizing-min-max-sizes-001.html,2/2,2/2,2/2
 /css/css-flexbox/break-nested-float-in-flex-item-001-print.html,1/1,1/1
 /css/css-flexbox/break-nested-float-in-flex-item-002-print.html,1/1,1/1
-/css/css-flexbox/canvas-dynamic-change-001.html,1/1,1/1,0/1
 /css/css-flexbox/change-column-flex-width.html,1/1,1/1,1/1
 /css/css-flexbox/column-flex-child-with-overflow-scroll.html,2/2,2/2,2/2
 /css/css-flexbox/columns-height-set-via-top-bottom.html,2/2,2/2,2/2
@@ -274,8 +271,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/display-flex-001.htm,1/1,1/1,1/1
 /css/css-flexbox/display_flex_exist.html,1/1,1/1,1/1
 /css/css-flexbox/display_inline-flex_exist.html,1/1,1/1,1/1
-/css/css-flexbox/dynamic-baseline-change-nested.html,1/1,0/1,0/1
-/css/css-flexbox/dynamic-baseline-change.html,1/1,0/1,0/1
 /css/css-flexbox/dynamic-bsize-change.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout-002.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout.html,1/1,1/1,1/1
@@ -515,10 +510,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-break-request-vert-001b.html,0/1,1/1,0/1
 /css/css-flexbox/flexbox-break-request-vert-002a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-break-request-vert-002b.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-collapsed-item-baseline-001.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox-collapsed-item-horiz-001.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox-collapsed-item-horiz-002.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox-collapsed-item-horiz-003.html,0/1,1/1,0/1
 /css/css-flexbox/flexbox-column-row-gap-001.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-column-row-gap-002.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-column-row-gap-003.html,1/1,1/1,0/1
@@ -643,9 +634,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-writing-mode-010.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-writing-mode-011.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-writing-mode-012.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-writing-mode-013.html,1/1,1/1,0/1
-/css/css-flexbox/flexbox-writing-mode-014.html,1/1,1/1,0/1
-/css/css-flexbox/flexbox-writing-mode-015.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-writing-mode-016.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-content-center.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-content-flexend.html,1/1,1/1,1/1
@@ -662,7 +650,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_align-items-flexstart-2.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-items-flexstart.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-items-stretch-2.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_align-items-stretch-3.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox_align-items-stretch-4.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-items-stretch.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_align-self-auto.html,1/1,1/1,1/1
@@ -839,8 +826,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_stf-table-singleline.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox_stf-table.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_table-fixed-layout.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_visibility-collapse-line-wrapping.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox_visibility-collapse.html,0/1,1/1,0/1
 /css/css-flexbox/flexbox_width-change-and-relayout-children.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_width-overflow.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_width-wrapping-column.html,1/1,1/1,1/1
@@ -989,7 +974,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-max-height-003.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-max-width-cross-axis.html,2/2,2/2,2/2
 /css/css-flexbox/percentage-padding-001.html,1/1,1/1,1/1
-/css/css-flexbox/percentage-size-quirks-002.html,2/2,2/2,0/2
 /css/css-flexbox/percentage-size-quirks.html,8/8,8/8,6/8
 /css/css-flexbox/percentage-size-subitems-001.html,1/1,1/1,0/1
 /css/css-flexbox/percentage-size.html,8/8,8/8,8/8

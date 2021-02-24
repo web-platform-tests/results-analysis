@@ -52,6 +52,14 @@ body {
   </div>
 </div>
 
+<p>These scores represent how well browser engines are doing on the 2021 Compat Focus Areas,
+as measured by <a href="https://wpt.fyi" target="_blank">wpt.fyi</a> test results. Each feature
+contributes up to 20 points to the score, based on passing-test percentage, giving a maximum
+possible score of 100 for each browser.</p>
+
+<p>The set of tests used is derived from the full wpt.fyi test suite for each
+feature, filtered by believed importance to web developers.</p>
+
 <h3>Individual Features</h3>
 <div>
   <label for="featureSelect">Focus area:</label>
@@ -91,11 +99,9 @@ body {
 <script>
 const params = (new URL(document.location)).searchParams;
 
-const initialFeature = params.get('feature');
-if (initialFeature != null) {
-  // TODO: This might not exist.
-  featureSelect.value = initialFeature;
-}
+// The default behavior of the page (when loaded with no params) is to not
+// select any graph, so we can directly set `value` from the param here.
+featureSelect.value = params.get('feature');
 
 if (params.get('stable') != null) {
   stableVersionCheckbox.checked = true;

@@ -205,7 +205,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
 /css/css-transforms/parsing/rotate-parsing-valid.html,13/13,13/13,13/13
 /css/css-transforms/parsing/scale-parsing-invalid.html,2/2,2/2,2/2
-/css/css-transforms/parsing/scale-parsing-valid.html,8/20,20/20,11/20
+/css/css-transforms/parsing/scale-parsing-valid.html,9/21,21/21,12/21
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
 /css/css-transforms/parsing/transform-box-invalid.html,3/3,3/3,3/3
 /css/css-transforms/parsing/transform-box-valid.html,2/5,3/5,5/5
@@ -542,7 +542,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
-/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
+/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,0/1
 /css/css-transforms/inheritance.html,19/20,18/20,16/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
