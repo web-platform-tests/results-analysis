@@ -11,7 +11,6 @@ async function calculateSummaryScores(stable) {
   const csvLines = csvText.split('\n');
   csvLines.shift();  // We don't need the CSV header.
   csvLines.pop();  // Trailing empty line.
-  console.log(csvLines);
 
   if (csvLines.length != 5) {
     throw new Error(`${url} did not contain 5 results`);
@@ -45,39 +44,54 @@ async function renderChart(feature, stable) {
   }
   const csvText = await csvResp.text();
   const csvLines = csvText.split('\n');
+  csvLines.shift();  // We don't need the header line.
   csvLines.pop();  // Trailing empty line
 
-  const data = csvLines.map((line, rowIdx) => {
-    // We know the data is good, so being lazy with the parsing.
+  // Now convert the CSV into a datatable for use by Google Charts.
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn('date', 'Date')
+  dataTable.addColumn('number', 'Chrome/Edge');
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
+  dataTable.addColumn('number', 'Firefox')
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
+  dataTable.addColumn('number', 'Safari')
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
 
-    // The columns are:
-    //   sha, date, [product-version, product-score,]+
+  // We list Chrome/Edge on the legend, but when creating the tooltip we
+  // include the version information and so should be clear about which browser
+  // exactly gave the results.
+  const tooltipBrowserNames = [
+    'Chrome',
+    'Firefox',
+    'Safari',
+  ];
+
+  csvLines.forEach(line => {
+    // We control the CSV data source, so are quite lazy with parsing it.
     //
-    // We only need the date and product scores to produce the graph, so drop
-    // the other columns.
-    let columns = line.split(',');
+    // The CSV columns are:
+    //   sha, date, [product-version, product-score,]+
 
-    // Drop the sha.
-    columns = columns.slice(1);
+    let csvValues = line.split(',');
+    let dataTableCells = [];
 
-    // Drop the version columns.
-    columns = columns.filter((c, i) => (i % 2) == 0);
+    // The first datatable cell is the date. Javascript Date objects use
+    // 0-indexed months, whilst the CSV is 1-indexed, so adjust for that.
+    const dateParts = csvValues[1].split('-').map(x => parseInt(x));
+    dataTableCells.push(new Date(dateParts[0], dateParts[1] - 1, dateParts[2]));
 
-    if (rowIdx == 0) {
-      // The data we have is for Chrome, but conceptually it represents Chrome
-      // and Edge (since they share the same engine). We could present data
-      // from both, but they likely overlap significantly, so instead we just
-      // show a combined label.
-      return columns.map(c => c == 'chrome' ? 'chrome/edge' : c);
+    // Now handle each of the browsers. For each there is a version column,
+    // then a score column. We use the version to create the tooltip.
+    for (let i = 2; i < csvValues.length; i += 2) {
+      const version = csvValues[i];
+      const score = parseFloat(csvValues[i + 1]);
+      const browserName = tooltipBrowserNames[(i / 2) - 1];
+      const tooltip = createTooltip(browserName, version, score)
+
+      dataTableCells.push(score);
+      dataTableCells.push(tooltip);
     }
-
-    const dateParts = columns[0].split('-').map(x => parseInt(x));
-    // Javascript Date objects take 0-indexed months, whilst the CSV is 1-indexed.
-    columns[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    for (let i = 1; i < columns.length; i++) {
-      columns[i] = parseFloat(columns[i]);
-    }
-    return columns;
+    dataTable.addRow(dataTableCells);
   });
 
   const options = {
@@ -107,7 +121,22 @@ async function renderChart(feature, stable) {
   };
 
   const chart = new google.visualization.LineChart(div);
-  chart.draw(google.visualization.arrayToDataTable(data), options);
+  chart.draw(dataTable, options);
+}
+
+function createTooltip(browser, version, score) {
+  // Chrome has very long version strings; cut them to just the major version.
+  if (browser == 'Chrome') {
+    const parts = version.split(' ');
+    parts[0] = parts[0].split('.')[0];
+    version = parts.join(' ');
+  }
+  // Safari stable has a long sub-version string too, which can be cut.
+  if (browser == 'Safari' && !version.includes('preview')) {
+    version = version.split(' ')[0];
+  }
+
+  return `${browser} ${version}: ${score.toFixed(3)}`;
 }
 
 async function loadTestList(feature, stable) {

@@ -25,9 +25,14 @@ body {
   gap: 30px;
 }
 
+.summary-flex-item {
+  width: 125px;
+}
+
 .summary-number {
   font-size: 5em;
   font-family: monospace;
+  text-align: center;
 }
 
 .summary-browser-name {
@@ -38,17 +43,20 @@ body {
 <h1>2021 DevSat Compat Dashboard</h1>
 
 <div id="summaryContainer">
-  <div>
+  <!-- Chrome/Edge -->
+  <div class="summary-flex-item">
     <div class="summary-number">--</div>
-    <div class="summary-browser-name">Chrome/Edge</div>
+    <div class="summary-browser-name"></div>
   </div>
-  <div>
+  <!-- Firefox -->
+  <div class="summary-flex-item">
     <div class="summary-number">--</div>
-    <div class="summary-browser-name">Firefox</div>
+    <div class="summary-browser-name"></div>
   </div>
-  <div>
+  <!-- Safari -->
+  <div class="summary-flex-item">
     <div class="summary-number">--</div>
-    <div class="summary-browser-name">Safari</div>
+    <div class="summary-browser-name"></div>
   </div>
 </div>
 
@@ -59,6 +67,12 @@ possible score of 100 for each browser.</p>
 
 <p>The set of tests used is derived from the full wpt.fyi test suite for each
 feature, filtered by believed importance to web developers.</p>
+
+<!-- TODO: This would likely be clearer as a toggle of stable or experimental. -->
+<div>
+  <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
+  <input id="stableVersionCheckbox" type="checkbox" />
+</div>
 
 <h3>Individual Features</h3>
 <div>
@@ -72,10 +86,6 @@ feature, filtered by believed importance to web developers.</p>
   </select>
 </div>
 
-<div>
-  <label for="stableVersionCheckbox">Show results from Stable browser releases:</label>
-  <input id="stableVersionCheckbox" type="checkbox" />
-</div>
 <div id="failures-chart" class="chart"></div>
 
 <h3>Tests</h2>
@@ -97,6 +107,20 @@ feature, filtered by believed importance to web developers.</p>
 </table>
 
 <script>
+'use strict';
+
+const STABLE_TITLES = [
+  'Chrome/Edge Stable',
+  'Firefox Stable',
+  'Safari Stable',
+];
+
+const EXPERIMENTAL_TITLES = [
+  'Chrome/Edge Dev',
+  'Firefox Nightly',
+  'Safari Tech Preview',
+];
+
 const params = (new URL(document.location)).searchParams;
 
 // The default behavior of the page (when loaded with no params) is to not
@@ -107,9 +131,26 @@ if (params.get('stable') != null) {
   stableVersionCheckbox.checked = true;
 }
 
+// To avoid layout shift, set the summary titles without waiting on page load
+// or data to be fetched.
+updateSummaryTitles();
+
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(async () => {
-  renderChart(featureSelect.value, stableVersionCheckbox.checked);
+  // There may not be a feature set initially, so we may not want to load the
+  // chart yet.
+  if (featureSelect.value) {
+    renderChart(featureSelect.value, stableVersionCheckbox.checked);
+  }
+});
+
+addEventListener('load', () => {
+  updateSummary();
+  // There may not be a feature set initially, so we may not want to load the
+  // test list.
+  if (featureSelect.value) {
+    loadTestList(featureSelect.value, stableVersionCheckbox.checked);
+  }
 });
 
 function calculateColor(score) {
@@ -132,12 +173,16 @@ async function updateSummary() {
     numbers[i].innerText = scores[i];
     numbers[i].style.color = calculateColor(scores[i]);
   }
+  updateSummaryTitles();
 }
 
-addEventListener('load', () => {
-  updateSummary();
-  loadTestList(featureSelect.value, stableVersionCheckbox.checked);
-});
+function updateSummaryTitles() {
+  let titleDivs = summaryContainer.querySelectorAll('.summary-browser-name');
+  let titles = stableVersionCheckbox.checked ? STABLE_TITLES : EXPERIMENTAL_TITLES;
+  for (let i = 0; i < titleDivs.length; i++) {
+    titleDivs[i].innerText = titles[i];
+  }
+}
 
 function updateChartAndDetails() {
   const feature = featureSelect.value;
