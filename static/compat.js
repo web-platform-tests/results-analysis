@@ -50,36 +50,48 @@ async function renderChart(feature, stable) {
   // Now convert the CSV into a datatable for use by Google Charts.
   const dataTable = new google.visualization.DataTable();
   dataTable.addColumn('date', 'Date')
-  dataTable.addColumn('number', 'Chrome/Edge')
+  dataTable.addColumn('number', 'Chrome/Edge');
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
   dataTable.addColumn('number', 'Firefox')
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
   dataTable.addColumn('number', 'Safari')
+  dataTable.addColumn({type: 'string', role: 'tooltip'});
+
+  // We list Chrome/Edge on the legend, but when creating the tooltip we
+  // include the version information and so should be clear about which browser
+  // exactly gave the results.
+  const tooltipBrowserNames = [
+    'Chrome',
+    'Firefox',
+    'Safari',
+  ];
 
   csvLines.forEach(line => {
     // We control the CSV data source, so are quite lazy with parsing it.
-
-    // The cells are:
-    //   sha, date, [product-version, product-score,]+
     //
-    // We only need the date and product scores to produce the graph, so drop
-    // the other cells.
-    let cells = line.split(',');
+    // The CSV columns are:
+    //   sha, date, [product-version, product-score,]+
 
-    // Drop the sha.
-    cells = cells.slice(1);
+    let csvValues = line.split(',');
+    let dataTableCells = [];
 
-    // Drop the version cells.
-    cells = cells.filter((c, i) => (i % 2) == 0);
+    // The first datatable cell is the date. Javascript Date objects use
+    // 0-indexed months, whilst the CSV is 1-indexed, so adjust for that.
+    const dateParts = csvValues[1].split('-').map(x => parseInt(x));
+    dataTableCells.push(new Date(dateParts[0], dateParts[1] - 1, dateParts[2]));
 
-    // The first cell is a date. Javascript Date objects use 0-indexed months,
-    // whilst the CSV is 1-indexed, so adjust for that.
-    const dateParts = cells[0].split('-').map(x => parseInt(x));
-    cells[0] = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    // Now handle each of the browsers. For each there is a version column,
+    // then a score column. We use the version to create the tooltip.
+    for (let i = 2; i < csvValues.length; i += 2) {
+      const version = csvValues[i];
+      const score = parseFloat(csvValues[i + 1]);
+      const browserName = tooltipBrowserNames[(i / 2) - 1];
+      const tooltip = createTooltip(browserName, version, score)
 
-    // The rest of the cells are floats.
-    for (let i = 1; i < cells.length; i++) {
-      cells[i] = parseFloat(cells[i]);
+      dataTableCells.push(score);
+      dataTableCells.push(tooltip);
     }
-    dataTable.addRow(cells);
+    dataTable.addRow(dataTableCells);
   });
 
   const options = {
@@ -110,6 +122,21 @@ async function renderChart(feature, stable) {
 
   const chart = new google.visualization.LineChart(div);
   chart.draw(dataTable, options);
+}
+
+function createTooltip(browser, version, score) {
+  // Chrome has very long version strings; cut them to just the major version.
+  if (browser == 'Chrome') {
+    const parts = version.split(' ');
+    parts[0] = parts[0].split('.')[0];
+    version = parts.join(' ');
+  }
+  // Safari stable has a long sub-version string too, which can be cut.
+  if (browser == 'Safari' && !version.includes('preview')) {
+    version = version.split(' ')[0];
+  }
+
+  return `${browser} ${version}: ${score.toFixed(3)}`;
 }
 
 async function loadTestList(feature, stable) {
