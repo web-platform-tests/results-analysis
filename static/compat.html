@@ -99,11 +99,9 @@ feature, filtered by believed importance to web developers.</p>
 <script>
 const params = (new URL(document.location)).searchParams;
 
-const initialFeature = params.get('feature');
-if (initialFeature != null) {
-  // TODO: This might not exist.
-  featureSelect.value = initialFeature;
-}
+// The default behavior of the page (when loaded with no params) is to not
+// select any graph, so we can directly set `value` from the param here.
+featureSelect.value = params.get('feature');
 
 if (params.get('stable') != null) {
   stableVersionCheckbox.checked = true;
