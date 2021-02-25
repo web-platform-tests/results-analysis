@@ -143,8 +143,10 @@ async function renderChart(feature, stable) {
       let column = selection[0].column;
 
       // Not implemented for Firefox or Safari yet.
-      if (column !== 1)
+      if (column !== 1) {
+        alert('Diff only supported for Chrome currently');
         return;
+      }
 
       // Map from the selected column to the browser index. In the datatable
       // Chrome is 1, Firefox is 3, Safari is 5 => these must map to [0, 1, 2].
