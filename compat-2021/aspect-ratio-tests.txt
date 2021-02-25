@@ -160,4 +160,5 @@
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html
