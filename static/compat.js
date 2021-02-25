@@ -66,6 +66,10 @@ async function renderChart(feature, stable) {
     'Safari',
   ];
 
+  // We store a lookup table of browser versions to help with the 'show
+  // revision diff' tooltip action below.
+  const browserVersions = [[], [], []];
+
   csvLines.forEach(line => {
     // We control the CSV data source, so are quite lazy with parsing it.
     //
@@ -90,6 +94,10 @@ async function renderChart(feature, stable) {
 
       dataTableCells.push(score);
       dataTableCells.push(tooltip);
+
+      // Update the browser versions lookup table; used for the revision-diff
+      // tooltip action.
+      browserVersions[(i / 2) - 1].push(version);
     }
     dataTable.addRow(dataTableCells);
   });
@@ -124,7 +132,44 @@ async function renderChart(feature, stable) {
   };
 
   const chart = new google.visualization.LineChart(div);
+
+  // Setup the tooltips to show revision diff.
+  chart.setAction({
+    id: 'revisionDiff',
+    text: 'Show diff from previous release',
+    action: () => {
+      let selection = chart.getSelection();
+      let row = selection[0].row;
+      let column = selection[0].column;
+
+      // Not implemented for Firefox or Safari yet.
+      if (column !== 1)
+        return;
+
+      // Map from the selected column to the browser index. In the datatable
+      // Chrome is 1, Firefox is 3, Safari is 5 => these must map to [0, 1, 2].
+      let browserIdx = (column - 1) / 2;
+
+      let version = browserVersions[browserIdx][row];
+      let lastVersion = version;
+      while (row > 0 && lastVersion === version) {
+        row -= 1;
+        lastVersion = browserVersions[browserIdx][row];
+      }
+      // TODO: If row == -1, we've failed, but we should grey out the
+      // option instead in that case.
+      window.open(getChromeDiffUrl(lastVersion, version));
+    },
+  });
+
   chart.draw(dataTable, options);
+}
+
+function getChromeDiffUrl(fromVersion, toVersion) {
+  // Strip off the 'dev' suffix if there.
+  fromVersion = fromVersion.split(' ')[0];
+  toVersion = toVersion.split(' ')[0];
+  return `https://chromium.googlesource.com/chromium/src/+log/${fromVersion}..${toVersion}?pretty=fuller&n=10000`
 }
 
 function createTooltip(browser, version, score) {
