@@ -22,7 +22,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,0/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
-/css/css-transforms/animation/transform-interpolation-skew.html,1/1,0/1,1/1
+/css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-translate-em.html,0/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,7/56
@@ -562,7 +562,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-zero-2.html,1/1,1/1,1/1
 /css/css-transforms/perspective-zero.html,1/1,1/1,1/1
 /css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.tentative.html,0/1,0/1,0/1
-/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,8/10,6/10
+/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,6/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-overflow-percent.html,1/1,1/1,1/1

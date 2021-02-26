@@ -903,7 +903,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-auto-columns-invalid.html,15/15,15/15,15/15
 /css/css-grid/parsing/grid-auto-columns-valid.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-auto-flow-computed.html,4/7,7/7,4/7
-/css/css-grid/parsing/grid-auto-flow-invalid.html,3/3,3/3,0/1
+/css/css-grid/parsing/grid-auto-flow-invalid.html,3/3,3/3,3/3
 /css/css-grid/parsing/grid-auto-flow-valid.html,5/7,7/7,5/7
 /css/css-grid/parsing/grid-auto-rows-computed.html,25/25,25/25,25/25
 /css/css-grid/parsing/grid-auto-rows-invalid.html,14/14,14/14,14/14
