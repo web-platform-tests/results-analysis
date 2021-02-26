@@ -1,5 +1,4 @@
-# For now we're just listing all files under css/css-grid - to be filtered by
-# importance later.
+# Based on https://docs.google.com/document/d/1kK3bnZdM-y49gbKPD5RUBz_PsHjvGtQ_8qrDcSu4DVg/edit
 /css/css-grid/abspos/absolute-positioning-changing-containing-block-001.html
 /css/css-grid/abspos/absolute-positioning-definite-sizes-001.html
 /css/css-grid/abspos/absolute-positioning-grid-container-containing-block-001.html
@@ -558,7 +557,7 @@
 /css/css-grid/grid-definition/grid-inline-support-named-grid-lines-001.html
 /css/css-grid/grid-definition/grid-inline-support-repeat-001.html
 /css/css-grid/grid-definition/grid-inline-template-columns-rows-resolved-values-001.html
-/css/css-grid/grid-definition/grid-inline-template-columns-rows-resolved-values-001.tentative.html
+# /css/css-grid/grid-definition/grid-inline-template-columns-rows-resolved-values-001.tentative.html
 /css/css-grid/grid-definition/grid-layout-auto-tracks.html
 /css/css-grid/grid-definition/grid-layout-basic.html
 /css/css-grid/grid-definition/grid-layout-repeat-notation.html
@@ -578,7 +577,7 @@
 /css/css-grid/grid-definition/grid-template-columns-fit-content-001.html
 /css/css-grid/grid-definition/grid-template-columns-rows-changes-001.html
 /css/css-grid/grid-definition/grid-template-columns-rows-resolved-values-001.html
-/css/css-grid/grid-definition/grid-template-columns-rows-resolved-values-001.tentative.html
+# /css/css-grid/grid-definition/grid-template-columns-rows-resolved-values-001.tentative.html
 /css/css-grid/grid-definition/grid-template-rows-fit-content-001.html
 /css/css-grid/grid-item-non-auto-height-stretch-001.html
 /css/css-grid/grid-item-non-auto-height-stretch-002.html
@@ -750,9 +749,9 @@
 /css/css-grid/grid-model/display-grid.html
 /css/css-grid/grid-model/display-inline-grid.html
 /css/css-grid/grid-model/fixed-width-intrinsic-width-should-exclude-scrollbar-001.html
-/css/css-grid/grid-model/grid-areas-overflowing-grid-container-001.html
-/css/css-grid/grid-model/grid-areas-overflowing-grid-container-002.html
-/css/css-grid/grid-model/grid-areas-overflowing-grid-container-003.html
+# /css/css-grid/grid-model/grid-areas-overflowing-grid-container-001.html
+# /css/css-grid/grid-model/grid-areas-overflowing-grid-container-002.html
+# /css/css-grid/grid-model/grid-areas-overflowing-grid-container-003.html
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-004.html
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-005.html
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-006.html
@@ -805,7 +804,7 @@
 /css/css-grid/grid-model/grid-margins-no-collapse-002.html
 /css/css-grid/grid-model/grid-min-max-height-001.html
 /css/css-grid/grid-model/grid-multicol-001.html
-/css/css-grid/grid-model/grid-overflow-padding-001.html
+# /css/css-grid/grid-model/grid-overflow-padding-001.html
 /css/css-grid/grid-model/grid-overflow-padding-002.html
 /css/css-grid/grid-model/grid-size-shrink-to-fit-001.html
 /css/css-grid/grid-model/grid-support-display-001.html
@@ -861,54 +860,54 @@
 /css/css-grid/layout-algorithm/grid-percent-rows-filled-shrinkwrap-001.html
 /css/css-grid/layout-algorithm/grid-percent-rows-spanned-shrinkwrap-001.html
 /css/css-grid/layout-algorithm/grid-stretch-respects-min-size-001.html
-/css/css-grid/masonry/tentative/masonry-align-content-001.html
-/css/css-grid/masonry/tentative/masonry-align-content-002.html
-/css/css-grid/masonry/tentative/masonry-align-content-003.html
-/css/css-grid/masonry/tentative/masonry-align-content-004.html
-/css/css-grid/masonry/tentative/masonry-align-tracks-001.html
-/css/css-grid/masonry/tentative/masonry-align-tracks-multi-001.html
-/css/css-grid/masonry/tentative/masonry-align-tracks-stretch-001.html
-/css/css-grid/masonry/tentative/masonry-align-tracks-stretch-002.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-001.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-002.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-003.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-004.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-005.html
-/css/css-grid/masonry/tentative/masonry-fragmentation-006.html
-/css/css-grid/masonry/tentative/masonry-gap-001.html
-/css/css-grid/masonry/tentative/masonry-grid-item-content-baseline-001.html
-/css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-001.html
-/css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-002a.html
-/css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-002b.html
-/css/css-grid/masonry/tentative/masonry-grid-placement-named-lines-001.html
-/css/css-grid/masonry/tentative/masonry-grid-placement-named-lines-002.html
-/css/css-grid/masonry/tentative/masonry-grid-template-columns-computed-withcontent.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-001.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-002.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-003.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-004.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-005.html
-/css/css-grid/masonry/tentative/masonry-intrinsic-sizing-006.html
-/css/css-grid/masonry/tentative/masonry-item-placement-001.html
-/css/css-grid/masonry/tentative/masonry-item-placement-002.html
-/css/css-grid/masonry/tentative/masonry-item-placement-003.html
-/css/css-grid/masonry/tentative/masonry-item-placement-004.html
-/css/css-grid/masonry/tentative/masonry-item-placement-005.html
-/css/css-grid/masonry/tentative/masonry-item-placement-006.html
-/css/css-grid/masonry/tentative/masonry-item-placement-007.html
-/css/css-grid/masonry/tentative/masonry-justify-content-001.html
-/css/css-grid/masonry/tentative/masonry-justify-content-002.html
-/css/css-grid/masonry/tentative/masonry-justify-content-003.html
-/css/css-grid/masonry/tentative/masonry-justify-content-004.html
-/css/css-grid/masonry/tentative/masonry-justify-tracks-001.html
-/css/css-grid/masonry/tentative/masonry-justify-tracks-multi-001.html
-/css/css-grid/masonry/tentative/masonry-justify-tracks-stretch-001.html
-/css/css-grid/masonry/tentative/masonry-justify-tracks-stretch-002.html
-/css/css-grid/masonry/tentative/masonry-order-001.html
-/css/css-grid/masonry/tentative/masonry-order-002.html
-/css/css-grid/masonry/tentative/masonry-parsing.html
-/css/css-grid/masonry/tentative/masonry-subgrid-001.html
-/css/css-grid/masonry/tentative/masonry-subgrid-002.html
+# /css/css-grid/masonry/tentative/masonry-align-content-001.html
+# /css/css-grid/masonry/tentative/masonry-align-content-002.html
+# /css/css-grid/masonry/tentative/masonry-align-content-003.html
+# /css/css-grid/masonry/tentative/masonry-align-content-004.html
+# /css/css-grid/masonry/tentative/masonry-align-tracks-001.html
+# /css/css-grid/masonry/tentative/masonry-align-tracks-multi-001.html
+# /css/css-grid/masonry/tentative/masonry-align-tracks-stretch-001.html
+# /css/css-grid/masonry/tentative/masonry-align-tracks-stretch-002.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-001.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-002.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-003.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-004.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-005.html
+# /css/css-grid/masonry/tentative/masonry-fragmentation-006.html
+# /css/css-grid/masonry/tentative/masonry-gap-001.html
+# /css/css-grid/masonry/tentative/masonry-grid-item-content-baseline-001.html
+# /css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-001.html
+# /css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-002a.html
+# /css/css-grid/masonry/tentative/masonry-grid-item-self-baseline-002b.html
+# /css/css-grid/masonry/tentative/masonry-grid-placement-named-lines-001.html
+# /css/css-grid/masonry/tentative/masonry-grid-placement-named-lines-002.html
+# /css/css-grid/masonry/tentative/masonry-grid-template-columns-computed-withcontent.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-001.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-002.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-003.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-004.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-005.html
+# /css/css-grid/masonry/tentative/masonry-intrinsic-sizing-006.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-001.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-002.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-003.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-004.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-005.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-006.html
+# /css/css-grid/masonry/tentative/masonry-item-placement-007.html
+# /css/css-grid/masonry/tentative/masonry-justify-content-001.html
+# /css/css-grid/masonry/tentative/masonry-justify-content-002.html
+# /css/css-grid/masonry/tentative/masonry-justify-content-003.html
+# /css/css-grid/masonry/tentative/masonry-justify-content-004.html
+# /css/css-grid/masonry/tentative/masonry-justify-tracks-001.html
+# /css/css-grid/masonry/tentative/masonry-justify-tracks-multi-001.html
+# /css/css-grid/masonry/tentative/masonry-justify-tracks-stretch-001.html
+# /css/css-grid/masonry/tentative/masonry-justify-tracks-stretch-002.html
+# /css/css-grid/masonry/tentative/masonry-order-001.html
+# /css/css-grid/masonry/tentative/masonry-order-002.html
+# /css/css-grid/masonry/tentative/masonry-parsing.html
+# /css/css-grid/masonry/tentative/masonry-subgrid-001.html
+# /css/css-grid/masonry/tentative/masonry-subgrid-002.html
 /css/css-grid/parsing/grid-area-computed.html
 /css/css-grid/parsing/grid-area-invalid.html
 /css/css-grid/parsing/grid-area-shorthand.html
@@ -967,55 +966,55 @@
 /css/css-grid/placement/grid-placement-using-named-grid-lines-009.html
 /css/css-grid/placement/grid-template-areas-must-keep-named-columns-order-001.html
 /css/css-grid/relative-grandchild.html
-/css/css-grid/subgrid/abs-pos-001.html
-/css/css-grid/subgrid/abs-pos-002.html
-/css/css-grid/subgrid/abs-pos-003.html
-/css/css-grid/subgrid/abs-pos-004.html
-/css/css-grid/subgrid/auto-track-sizing-001.html
-/css/css-grid/subgrid/baseline-001.html
-/css/css-grid/subgrid/contain-strict-nested-subgrid-crash.html
-/css/css-grid/subgrid/contain-strict-subgrid-crash.html
-/css/css-grid/subgrid/grid-gap-001.html
-/css/css-grid/subgrid/grid-gap-002.html
-/css/css-grid/subgrid/grid-gap-003.html
-/css/css-grid/subgrid/grid-gap-004.html
-/css/css-grid/subgrid/grid-gap-005.html
-/css/css-grid/subgrid/grid-gap-006.html
-/css/css-grid/subgrid/grid-gap-007.html
-/css/css-grid/subgrid/grid-gap-008.html
-/css/css-grid/subgrid/grid-gap-009.html
-/css/css-grid/subgrid/grid-gap-larger-001.html
-/css/css-grid/subgrid/grid-gap-larger-002.html
-/css/css-grid/subgrid/grid-gap-normal-001.html
-/css/css-grid/subgrid/grid-gap-smaller-001.html
-/css/css-grid/subgrid/grid-template-computed-nogrid.html
-/css/css-grid/subgrid/item-percentage-height-001.html
-/css/css-grid/subgrid/line-names-001.html
-/css/css-grid/subgrid/line-names-002.html
-/css/css-grid/subgrid/line-names-003.html
-/css/css-grid/subgrid/line-names-004.html
-/css/css-grid/subgrid/line-names-005.html
-/css/css-grid/subgrid/line-names-006.html
-/css/css-grid/subgrid/line-names-007.html
-/css/css-grid/subgrid/line-names-008.html
-/css/css-grid/subgrid/orthogonal-writing-mode-001.html
-/css/css-grid/subgrid/orthogonal-writing-mode-002.html
-/css/css-grid/subgrid/orthogonal-writing-mode-003.html
-/css/css-grid/subgrid/orthogonal-writing-mode-004.html
-/css/css-grid/subgrid/parent-repeat-auto-fit-001.html
-/css/css-grid/subgrid/parent-repeat-auto-fit-002.html
-/css/css-grid/subgrid/repeat-auto-fill-001.html
-/css/css-grid/subgrid/repeat-auto-fill-002.html
-/css/css-grid/subgrid/repeat-auto-fill-003.html
-/css/css-grid/subgrid/repeat-auto-fill-004.html
-/css/css-grid/subgrid/repeat-auto-fill-005.html
-/css/css-grid/subgrid/repeat-auto-fill-006.html
-/css/css-grid/subgrid/repeat-auto-fill-007.html
-/css/css-grid/subgrid/repeat-auto-fill-008.html
-/css/css-grid/subgrid/subgrid-item-block-size-001.html
-/css/css-grid/subgrid/subgrid-mbp-overflow-001.html
-/css/css-grid/subgrid/subgrid-mbp-overflow-002.html
-/css/css-grid/subgrid/subgrid-mbp-overflow-003.html
+# /css/css-grid/subgrid/abs-pos-001.html
+# /css/css-grid/subgrid/abs-pos-002.html
+# /css/css-grid/subgrid/abs-pos-003.html
+# /css/css-grid/subgrid/abs-pos-004.html
+# /css/css-grid/subgrid/auto-track-sizing-001.html
+# /css/css-grid/subgrid/baseline-001.html
+# /css/css-grid/subgrid/contain-strict-nested-subgrid-crash.html
+# /css/css-grid/subgrid/contain-strict-subgrid-crash.html
+# /css/css-grid/subgrid/grid-gap-001.html
+# /css/css-grid/subgrid/grid-gap-002.html
+# /css/css-grid/subgrid/grid-gap-003.html
+# /css/css-grid/subgrid/grid-gap-004.html
+# /css/css-grid/subgrid/grid-gap-005.html
+# /css/css-grid/subgrid/grid-gap-006.html
+# /css/css-grid/subgrid/grid-gap-007.html
+# /css/css-grid/subgrid/grid-gap-008.html
+# /css/css-grid/subgrid/grid-gap-009.html
+# /css/css-grid/subgrid/grid-gap-larger-001.html
+# /css/css-grid/subgrid/grid-gap-larger-002.html
+# /css/css-grid/subgrid/grid-gap-normal-001.html
+# /css/css-grid/subgrid/grid-gap-smaller-001.html
+# /css/css-grid/subgrid/grid-template-computed-nogrid.html
+# /css/css-grid/subgrid/item-percentage-height-001.html
+# /css/css-grid/subgrid/line-names-001.html
+# /css/css-grid/subgrid/line-names-002.html
+# /css/css-grid/subgrid/line-names-003.html
+# /css/css-grid/subgrid/line-names-004.html
+# /css/css-grid/subgrid/line-names-005.html
+# /css/css-grid/subgrid/line-names-006.html
+# /css/css-grid/subgrid/line-names-007.html
+# /css/css-grid/subgrid/line-names-008.html
+# /css/css-grid/subgrid/orthogonal-writing-mode-001.html
+# /css/css-grid/subgrid/orthogonal-writing-mode-002.html
+# /css/css-grid/subgrid/orthogonal-writing-mode-003.html
+# /css/css-grid/subgrid/orthogonal-writing-mode-004.html
+# /css/css-grid/subgrid/parent-repeat-auto-fit-001.html
+# /css/css-grid/subgrid/parent-repeat-auto-fit-002.html
+# /css/css-grid/subgrid/repeat-auto-fill-001.html
+# /css/css-grid/subgrid/repeat-auto-fill-002.html
+# /css/css-grid/subgrid/repeat-auto-fill-003.html
+# /css/css-grid/subgrid/repeat-auto-fill-004.html
+# /css/css-grid/subgrid/repeat-auto-fill-005.html
+# /css/css-grid/subgrid/repeat-auto-fill-006.html
+# /css/css-grid/subgrid/repeat-auto-fill-007.html
+# /css/css-grid/subgrid/repeat-auto-fill-008.html
+# /css/css-grid/subgrid/subgrid-item-block-size-001.html
+# /css/css-grid/subgrid/subgrid-mbp-overflow-001.html
+# /css/css-grid/subgrid/subgrid-mbp-overflow-002.html
+# /css/css-grid/subgrid/subgrid-mbp-overflow-003.html
 /css/css-grid/table-grid-item-dynamic-001.html
 /css/css-grid/table-grid-item-dynamic-002.html
 /css/css-grid/table-grid-item-dynamic-003.html
