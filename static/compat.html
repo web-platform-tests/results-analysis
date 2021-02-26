@@ -66,7 +66,9 @@ contributes up to 20 points to the score, based on passing-test percentage, givi
 possible score of 100 for each browser.</p>
 
 <p>The set of tests used is derived from the full wpt.fyi test suite for each
-feature, filtered by believed importance to web developers.</p>
+feature, filtered by believed importance to web developers. <span id="experimentalResultsText">The results
+shown here are from developer preview builds with experimental features
+enabled.</span></p>
 
 <!-- TODO: This would likely be clearer as a toggle of stable or experimental. -->
 <div>
@@ -182,6 +184,7 @@ function updateSummaryTitles() {
   for (let i = 0; i < titleDivs.length; i++) {
     titleDivs[i].innerText = titles[i];
   }
+  experimentalResultsText.style.display = stableVersionCheckbox.checked ? 'none' : '';
 }
 
 function updateChartAndDetails() {
