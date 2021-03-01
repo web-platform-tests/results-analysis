@@ -193,9 +193,9 @@
 /css/css-grid/alignment/grid-baseline-002.html
 /css/css-grid/alignment/grid-baseline-003.html
 /css/css-grid/alignment/grid-baseline-004.html
-/css/css-grid/alignment/grid-baseline-align-001.html
+# /css/css-grid/alignment/grid-baseline-align-001.html
 /css/css-grid/alignment/grid-baseline-align-cycles-001.html
-/css/css-grid/alignment/grid-baseline-justify-001.html
+# /css/css-grid/alignment/grid-baseline-justify-001.html
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-001.html
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-002.html
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-003.html
@@ -323,14 +323,14 @@
 /css/css-grid/alignment/grid-item-auto-margins-alignment-vertical-lr.html
 /css/css-grid/alignment/grid-item-auto-margins-alignment-vertical-rl.html
 /css/css-grid/alignment/grid-item-auto-margins-alignment.html
-/css/css-grid/alignment/grid-item-content-baseline-001.html
-/css/css-grid/alignment/grid-item-content-baseline-002.html
-/css/css-grid/alignment/grid-item-content-baseline-003.html
-/css/css-grid/alignment/grid-item-content-baseline-004.html
-/css/css-grid/alignment/grid-item-mixed-baseline-001.html
-/css/css-grid/alignment/grid-item-mixed-baseline-002.html
-/css/css-grid/alignment/grid-item-mixed-baseline-003.html
-/css/css-grid/alignment/grid-item-mixed-baseline-004.html
+# /css/css-grid/alignment/grid-item-content-baseline-001.html
+# /css/css-grid/alignment/grid-item-content-baseline-002.html
+# /css/css-grid/alignment/grid-item-content-baseline-003.html
+# /css/css-grid/alignment/grid-item-content-baseline-004.html
+# /css/css-grid/alignment/grid-item-mixed-baseline-001.html
+# /css/css-grid/alignment/grid-item-mixed-baseline-002.html
+# /css/css-grid/alignment/grid-item-mixed-baseline-003.html
+# /css/css-grid/alignment/grid-item-mixed-baseline-004.html
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-1.html
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-10.html
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-2.html
@@ -805,7 +805,7 @@
 /css/css-grid/grid-model/grid-min-max-height-001.html
 /css/css-grid/grid-model/grid-multicol-001.html
 # /css/css-grid/grid-model/grid-overflow-padding-001.html
-/css/css-grid/grid-model/grid-overflow-padding-002.html
+# /css/css-grid/grid-model/grid-overflow-padding-002.html
 /css/css-grid/grid-model/grid-size-shrink-to-fit-001.html
 /css/css-grid/grid-model/grid-support-display-001.html
 /css/css-grid/grid-model/grid-vertical-align-001.html
