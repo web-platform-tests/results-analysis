@@ -235,9 +235,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-baseline-002.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-003.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-004.html,15/18,11/18,13/18
-/css/css-grid/alignment/grid-baseline-align-001.html,0/1,1/1,0/1
 /css/css-grid/alignment/grid-baseline-align-cycles-001.html,0/1,0/1,0/1
-/css/css-grid/alignment/grid-baseline-justify-001.html,0/1,0/1,0/1
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-001.html,2/2,2/2,2/2
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-002.html,2/2,2/2,2/2
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-003.html,2/2,2/2,2/2
@@ -365,14 +363,6 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-item-auto-margins-alignment-vertical-lr.html,8/8,8/8,8/8
 /css/css-grid/alignment/grid-item-auto-margins-alignment-vertical-rl.html,8/8,8/8,8/8
 /css/css-grid/alignment/grid-item-auto-margins-alignment.html,8/8,8/8,8/8
-/css/css-grid/alignment/grid-item-content-baseline-001.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-content-baseline-002.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-content-baseline-003.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-content-baseline-004.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-mixed-baseline-001.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-mixed-baseline-002.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-mixed-baseline-003.html,0/1,1/1,0/1
-/css/css-grid/alignment/grid-item-mixed-baseline-004.html,0/1,1/1,0/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-1.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-10.html,0/1,1/1,0/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-2.html,1/1,1/1,1/1
@@ -788,7 +778,6 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-model/grid-margins-no-collapse-002.html,1/1,1/1,1/1
 /css/css-grid/grid-model/grid-min-max-height-001.html,12/12,12/12,12/12
 /css/css-grid/grid-model/grid-multicol-001.html,1/1,1/1,1/1
-/css/css-grid/grid-model/grid-overflow-padding-002.html,0/1,0/1,0/1
 /css/css-grid/grid-model/grid-size-shrink-to-fit-001.html,4/4,4/4,4/4
 /css/css-grid/grid-model/grid-support-display-001.html,6/6,6/6,6/6
 /css/css-grid/grid-model/grid-vertical-align-001.html,1/1,1/1,1/1
