@@ -254,12 +254,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/content-height-with-scrollbars.html,1/1,1/1,1/1
 /css/css-flexbox/cross-axis-scrollbar.html,1/1,0/1,1/1
 /css/css-flexbox/css-box-justify-content.html,1/1,1/1,1/1
-/css/css-flexbox/css-flexbox-column-reverse-wrap-reverse.html,0/1,0/1,1/1
-/css/css-flexbox/css-flexbox-column-reverse-wrap.html,0/1,0/1,1/1
-/css/css-flexbox/css-flexbox-column-reverse.html,1/1,1/1,1/1
-/css/css-flexbox/css-flexbox-column-wrap-reverse.html,0/1,0/1,1/1
-/css/css-flexbox/css-flexbox-column-wrap.html,0/1,0/1,1/1
-/css/css-flexbox/css-flexbox-column.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-img-expand-evenly.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-row-reverse-wrap-reverse.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-row-reverse-wrap.html,1/1,1/1,1/1
