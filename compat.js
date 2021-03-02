@@ -102,6 +102,13 @@ async function renderChart(feature, stable) {
     dataTable.addRow(dataTableCells);
   });
 
+  // We set a global minimum value for the y-axis to keep the graphs consistent
+  // when you switch features. Currently the lowest value is aspect-ratio, with
+  // a ~25% pass-rate on Safari STP, Safari Stable, and Firefox Stable.
+  //
+  // TODO(#37): Detect the global minimum from data rather than hard-coding it.
+  const yMin = 0.2;
+
   const options = {
     width: 800,
     height: 350,
@@ -119,6 +126,7 @@ async function renderChart(feature, stable) {
       title: "Percentage of passing tests",
       format: "percent",
       viewWindow: {
+        min: yMin,
         max: 1,
       }
     },
