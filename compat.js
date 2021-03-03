@@ -16,21 +16,28 @@ async function calculateSummaryScores(stable) {
     throw new Error(`${url} did not contain 5 results`);
   }
 
-  let summaryScores = [0, 0, 0];
+  let scores = [
+    { total: 0, breakdown: new Map() },
+    { total: 0, breakdown: new Map() },
+    { total: 0, breakdown: new Map() },
+  ]
   for (const line of csvLines) {
     let parts = line.split(',');
     if (parts.length != 4) {
       throw new Error(`${url} had an invalid line`);
     }
 
-    parts.shift();
+    const feature = parts.shift();
     for (let i = 0; i < parts.length; i++) {
-      let contribution = Math.round(parseFloat(parts[i]) * 20);
-      summaryScores[i] += contribution;
+      // Use floor rather than round to avoid claiming the full 20 points until
+      // definitely there.
+      let contribution = Math.floor(parseFloat(parts[i]) * 20);
+      scores[i].total += contribution;
+      scores[i].breakdown.set(feature, contribution);
     }
   }
 
-  return summaryScores;
+  return scores;
 }
 
 async function renderChart(feature, stable) {
