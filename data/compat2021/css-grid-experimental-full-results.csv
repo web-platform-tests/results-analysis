@@ -231,7 +231,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-alignment-style-changes-006.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-007.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-008.html,6/6,6/6,6/6
-/css/css-grid/alignment/grid-baseline-001.html,1/1,0/1,1/1
+/css/css-grid/alignment/grid-baseline-001.html,0/1,0/1,1/1
 /css/css-grid/alignment/grid-baseline-002.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-003.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-004.html,15/18,11/18,13/18
