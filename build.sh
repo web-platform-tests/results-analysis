@@ -85,6 +85,7 @@ update_compat_2021() {
     rm "${FEATURE}-${LABEL}.csv"
   done
 
+  mv "unified-scores-${LABEL}.csv" out/data/compat2021/
   mv "summary-${LABEL}.csv" out/data/compat2021/
 }
 

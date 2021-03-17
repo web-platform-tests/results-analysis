@@ -238,7 +238,7 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
   //
   // ES6 maps iterate in insertion order, and we initially inserted in date
   // order, so we can just iterate |dateToScores|.
-  let latestShaAndScores;
+  let latestTestResults;
   for (const [date, shaAndScores] of dateToScores) {
     const sha = shaAndScores.sha;
     const scores = shaAndScores.scores;
@@ -257,9 +257,8 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
     }
     data += csvRecord.join(',') + '\n';
 
-    // We need just the latest shaAndScores for writing out the full results
-    // and for returning the latest summary.
-    latestShaAndScores = shaAndScores;
+    // We need just the latest test results for writing out the full results.
+    latestTestResults = shaAndScores.testResults;
   }
 
   const csvFilename = experimental ?
@@ -277,7 +276,7 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
   }
   data += '\n';
 
-  for (const [testname, results] of latestShaAndScores.testResults) {
+  for (const [testname, results] of latestTestResults) {
     const csvRecord = [testname];
     for (const result of results) {
       csvRecord.push(result.join('/'));
@@ -291,10 +290,9 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
   await fs.promises.writeFile(resultsCsvFilename, data, 'utf-8');
   console.log(`Wrote latest run results to ${resultsCsvFilename}`);
 
-  // And finally, we return the most recent *summary* results, so that we can
-  // create the summary-{stable, experimental}.csv file to power the top-level
-  // summary metric for each browser.
-  return latestShaAndScores.scores;
+  // Return dateToScores, so that our caller can calculate the summary across
+  // multiple categories.
+  return dateToScores;
 }
 
 async function main() {
@@ -352,18 +350,58 @@ async function main() {
       `${after - before} ms`);
 
   let summaryCsv = `feature,${products.join()}\n`;
-  const latestCategoryScores = [];
+  const dateToScoresMaps = new Map();
   for (const category of CATEGORIES) {
     console.log(`Scoring runs for ${category}`);
-    let latestScores = await scoreCategory(
-        category, experimental, products, alignedRuns);
-    summaryCsv += `${category},${latestScores.join()}\n`;
-  }
+    const dateToScores = await scoreCategory(
+      category, experimental, products, alignedRuns);
 
+    // Grab the latest dateToScores to produce the summary of recent results.
+    const latestEntry = Array.from(dateToScores.values()).pop();
+    summaryCsv += `${category},${latestEntry.scores.join()}\n`;
+
+    // Store the entire dateToScores for producing the unified CSV later.
+    dateToScoresMaps.set(category, dateToScores);
+  }
   const summaryCsvFilename = experimental ?
       `summary-experimental.csv` : `summary-stable.csv`;
   await fs.promises.writeFile(summaryCsvFilename, summaryCsv, 'utf-8');
   console.log(`Wrote latest summary to ${summaryCsvFilename}`);
+
+  // TODO(smcgruer): Once the other score CSVs are no longer used, we can push
+  // some of this logic into scoreCategory and simplify things.
+  let unifiedCsv = 'date';
+  for (const product of products) {
+    const categoryLabels = CATEGORIES.map(c => `${product}-${c}`);
+    unifiedCsv += `,${product}-version,${categoryLabels.join()}`;
+  }
+  unifiedCsv += '\n';
+
+  // We know that all dateToScoresMaps have the same dates (as they come from
+  // the same runs), so we can just iterate the keys from the first.
+  for (const date of dateToScoresMaps.get(CATEGORIES[0]).keys()) {
+    let csvLine = [date.substr(0, 10)];
+    // This is essentially an inversion loop; we have the data mapped by
+    // individual categories, but we need it mapped by product.
+    for (let browserIdx = 0; browserIdx < products.length; browserIdx++) {
+      let version;
+      let productScores = [];
+      for (const category of CATEGORIES) {
+        const {sha, versions, scores, testResults} = dateToScoresMaps.get(category).get(date);
+        productScores.push(scores[browserIdx]);
+        // The versions should all be the same, so we just grab the latest one.
+        version = versions[browserIdx];
+      }
+      csvLine.push(version);
+      csvLine = csvLine.concat(productScores);
+    }
+    unifiedCsv += `${csvLine.join()}\n`;
+  }
+
+  const unifiedCsvFilename = experimental ?
+      `unified-scores-experimental.csv` : `unified-scores-stable.csv`;
+  await fs.promises.writeFile(unifiedCsvFilename, unifiedCsv, 'utf-8');
+  console.log(`Wrote unified scores to ${unifiedCsvFilename}`);
 }
 
 main().catch(reason => {
