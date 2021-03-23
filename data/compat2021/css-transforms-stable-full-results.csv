@@ -499,7 +499,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/2d-rotate-js.html,1/1,1/1,0/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
-/css/css-transforms/3d-rendering-context-behavior.tentative.html,6/8,6/8,6/8
+/css/css-transforms/3d-rendering-context-behavior.tentative.html,6/10,6/10,6/10
 /css/css-transforms/backface-visibility-001.html,0/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-001.html,0/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-002.tentative.html,1/1,1/1,0/1

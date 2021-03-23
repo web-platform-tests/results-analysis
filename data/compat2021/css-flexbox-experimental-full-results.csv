@@ -935,8 +935,8 @@ testname,chrome,firefox,safari
 /css/css-flexbox/ortho-table-item-001.html,1/1,1/1,1/1
 /css/css-flexbox/orthogonal-flex-item-crash.html,1/1,1/1,1/1
 /css/css-flexbox/orthogonal-writing-modes-and-intrinsic-sizing.html,2/2,2/2,2/2
-/css/css-flexbox/overflow-area-001.html,0/1,0/1,0/1
-/css/css-flexbox/overflow-area-002.html,0/1,0/1,0/1
+/css/css-flexbox/overflow-area-001.html,1/1,0/1,0/1
+/css/css-flexbox/overflow-area-002.html,1/1,0/1,0/1
 /css/css-flexbox/overflow-auto-001.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-002.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-003.html,1/1,1/1,1/1
@@ -945,7 +945,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-top-left.html,1/1,1/1,1/1
+/css/css-flexbox/overflow-top-left.html,0/1,1/1,1/1
 /css/css-flexbox/padding-overflow-crash.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-000.html,6/6,6/6,6/6
 /css/css-flexbox/percentage-heights-001.html,13/13,13/13,13/13
@@ -985,9 +985,9 @@ testname,chrome,firefox,safari
 /css/css-flexbox/relayout-input.html,2/2,2/2,2/2
 /css/css-flexbox/remove-out-of-flow-child-crash.html,1/1,1/1,1/1
 /css/css-flexbox/scrollbars-auto-min-content-sizing.html,1/1,1/1,1/1
-/css/css-flexbox/scrollbars-auto.html,1/1,0/1,0/1
+/css/css-flexbox/scrollbars-auto.html,0/1,0/1,0/1
 /css/css-flexbox/scrollbars-no-margin.html,1/1,1/1,0/1
-/css/css-flexbox/scrollbars.html,1/1,0/1,0/1
+/css/css-flexbox/scrollbars.html,0/1,0/1,0/1
 /css/css-flexbox/select-element-zero-height-001.html,1/1,1/1,0/1
 /css/css-flexbox/select-element-zero-height-002.html,1/1,1/1,0/1
 /css/css-flexbox/shrinking-column-flexbox.html,1/1,1/1,1/1
