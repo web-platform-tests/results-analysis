@@ -928,15 +928,15 @@ testname,chrome,firefox,safari
 /css/css-flexbox/negative-item-margins-002-crash.html,1/1,1/1,1/1
 /css/css-flexbox/negative-item-margins-crash.html,1/1,1/1,1/1
 /css/css-flexbox/negative-margins-001.html,1/1,1/1,1/1
-/css/css-flexbox/negative-overflow.html,11/11,6/11,11/11
+/css/css-flexbox/negative-overflow.html,11/11,9/11,11/11
 /css/css-flexbox/nested-orthogonal-flexbox-relayout.html,1/1,1/1,1/1
 /css/css-flexbox/order-painting.html,1/1,1/1,1/1
 /css/css-flexbox/order_value.html,1/1,1/1,1/1
 /css/css-flexbox/ortho-table-item-001.html,1/1,1/1,1/1
 /css/css-flexbox/orthogonal-flex-item-crash.html,1/1,1/1,1/1
 /css/css-flexbox/orthogonal-writing-modes-and-intrinsic-sizing.html,2/2,2/2,2/2
-/css/css-flexbox/overflow-area-001.html,1/1,0/1,0/1
-/css/css-flexbox/overflow-area-002.html,1/1,0/1,0/1
+/css/css-flexbox/overflow-area-001.html,1/1,1/1,0/1
+/css/css-flexbox/overflow-area-002.html,1/1,1/1,0/1
 /css/css-flexbox/overflow-auto-001.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-002.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-003.html,1/1,1/1,1/1
@@ -945,7 +945,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-top-left.html,0/1,1/1,1/1
+/css/css-flexbox/overflow-top-left.html,0/1,0/1,1/1
 /css/css-flexbox/padding-overflow-crash.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-000.html,6/6,6/6,6/6
 /css/css-flexbox/percentage-heights-001.html,13/13,13/13,13/13
