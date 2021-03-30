@@ -205,7 +205,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
 /css/css-transforms/parsing/rotate-parsing-valid.html,13/13,13/13,13/13
 /css/css-transforms/parsing/scale-parsing-invalid.html,2/2,2/2,2/2
-/css/css-transforms/parsing/scale-parsing-valid.html,9/21,21/21,12/21
+/css/css-transforms/parsing/scale-parsing-valid.html,9/22,22/22,12/22
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
 /css/css-transforms/parsing/transform-box-invalid.html,3/3,3/3,3/3
 /css/css-transforms/parsing/transform-box-valid.html,2/5,3/5,5/5
@@ -213,7 +213,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/transform-origin-computed.html,23/23,23/23,23/23
 /css/css-transforms/parsing/transform-origin-invalid.html,10/10,10/10,9/10
 /css/css-transforms/parsing/transform-origin-valid.html,16/16,16/16,16/16
-/css/css-transforms/parsing/transform-valid.html,27/35,35/35,27/35
+/css/css-transforms/parsing/transform-valid.html,28/39,39/39,28/39
 /css/css-transforms/parsing/translate-parsing-invalid.html,3/3,3/3,3/3
 /css/css-transforms/parsing/translate-parsing-valid.html,12/16,16/16,16/16
 /css/css-transforms/patternTransform/svg-patternTransform-001.html,1/1,1/1,1/1
@@ -574,7 +574,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/scale-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/scale-zero-001.html,1/1,1/1,1/1
 /css/css-transforms/scalex.html,1/1,1/1,1/1
-/css/css-transforms/scaley.html,0/1,0/1,0/1
+/css/css-transforms/scaley.html,1/1,1/1,1/1
 /css/css-transforms/scrolalble-hidden-3d-transform-z.html,1/1,1/1,0/1
 /css/css-transforms/scrolalble-scroll-3d-transform-z.html,1/1,1/1,0/1
 /css/css-transforms/size-change-under-backface-visibility-hidden.html,1/1,1/1,1/1
