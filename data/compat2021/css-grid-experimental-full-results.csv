@@ -710,7 +710,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-items/grid-z-axis-ordering-overlapped-items-005.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-z-axis-ordering-overlapped-items-006.html,1/1,1/1,1/1
 /css/css-grid/grid-items/item-with-table-with-infinite-max-intrinsic-width.html,1/1,1/1,1/1
-/css/css-grid/grid-items/percentage-size-indefinite-replaced.html,1/1,1/1,0/1
+/css/css-grid/grid-items/percentage-size-indefinite-replaced.html,1/1,1/1,1/1
 /css/css-grid/grid-items/percentage-size-replaced-subitems-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/percentage-size-subitems-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/percentage-size-subitems-002.html,1/1,1/1,1/1
@@ -895,7 +895,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-item-non-auto-height-stretch-002.html,1/1,1/1,1/1
 /css/css-grid/grid-item-non-auto-height-stretch-003.html,1/1,1/1,1/1
 /css/css-grid/grid-item-non-auto-height-stretch-004.html,1/1,1/1,1/1
-/css/css-grid/grid-item-percentage-quirk-001.html,1/1,1/1,0/1
+/css/css-grid/grid-item-percentage-quirk-001.html,1/1,1/1,1/1
 /css/css-grid/grid-item-percentage-quirk-002.html,1/1,1/1,1/1
 /css/css-grid/grid-layout-properties.html,119/140,98/140,119/140
 /css/css-grid/grid-tracks-stretched-with-different-flex-factors-sum.html,2/2,2/2,2/2

@@ -75,7 +75,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/abspos/position-absolute-containing-block-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/position-absolute-containing-block-002.html,1/1,1/1,1/1
 /css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,4/25
-/css/css-flexbox/animation/flex-basis-interpolation.html,152/152,152/152,138/152
+/css/css-flexbox/animation/flex-basis-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-grow-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-shrink-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/order-interpolation.html,168/168,168/168,168/168
@@ -396,7 +396,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-minimum-height-flex-items-020.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-021.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-022.html,1/1,1/1,1/1
-/css/css-flexbox/flex-minimum-height-flex-items-023.html,1/1,1/1,0/1
+/css/css-flexbox/flex-minimum-height-flex-items-023.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-024.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-size-001.html,6/6,6/6,6/6
 /css/css-flexbox/flex-minimum-size-002.html,1/1,1/1,1/1
@@ -485,7 +485,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-basic-canvas-horiz-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-canvas-horiz-001v.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-canvas-vert-001.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-basic-canvas-vert-001v.xhtml,1/1,1/1,0/1
+/css/css-flexbox/flexbox-basic-canvas-vert-001v.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-fieldset-horiz-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-fieldset-vert-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-iframe-horiz-001.xhtml,1/1,1/1,1/1
@@ -979,7 +979,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/position-relative-percentage-top-003.html,1/1,1/1,1/1
 /css/css-flexbox/position-relative-with-scrollable-with-abspos-crash.html,1/1,1/1,1/1
 /css/css-flexbox/quirks-auto-block-size-with-percentage-item.html,1/1,1/1,1/1
-/css/css-flexbox/radiobutton-min-size.html,1/1,1/1,0/1
+/css/css-flexbox/radiobutton-min-size.html,1/1,1/1,1/1
 /css/css-flexbox/relayout-align-items.html,2/2,2/2,2/2
 /css/css-flexbox/relayout-image-load.html,1/1,1/1,1/1
 /css/css-flexbox/relayout-input.html,2/2,2/2,2/2
