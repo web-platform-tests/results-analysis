@@ -928,7 +928,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/negative-item-margins-002-crash.html,1/1,1/1,1/1
 /css/css-flexbox/negative-item-margins-crash.html,1/1,1/1,1/1
 /css/css-flexbox/negative-margins-001.html,1/1,1/1,1/1
-/css/css-flexbox/negative-overflow.html,11/11,9/11,11/11
+/css/css-flexbox/negative-overflow.html,9/11,11/11,9/11
 /css/css-flexbox/nested-orthogonal-flexbox-relayout.html,1/1,1/1,1/1
 /css/css-flexbox/order-painting.html,1/1,1/1,1/1
 /css/css-flexbox/order_value.html,1/1,1/1,1/1
