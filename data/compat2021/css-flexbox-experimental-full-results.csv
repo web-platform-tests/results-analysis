@@ -945,7 +945,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-top-left.html,0/1,0/1,1/1
+/css/css-flexbox/overflow-top-left.html,1/1,1/1,1/1
 /css/css-flexbox/padding-overflow-crash.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-000.html,6/6,6/6,6/6
 /css/css-flexbox/percentage-heights-001.html,13/13,13/13,13/13
