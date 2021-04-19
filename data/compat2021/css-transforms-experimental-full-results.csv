@@ -525,7 +525,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-inherit-002.html,1/1,1/1,1/1
 /css/css-transforms/transform-inherit-origin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-inherit-origin-002.html,1/1,1/1,1/1
-/css/css-transforms/transform-inline-001.html,0/1,1/1,1/1
+/css/css-transforms/transform-inline-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-001.html,1/1,0/1,1/1
 /css/css-transforms/transform-input-002.html,1/1,0/1,1/1
 /css/css-transforms/transform-input-003.html,1/1,0/1,1/1

@@ -1010,10 +1010,10 @@ testname,chrome,firefox,safari
 /css/css-flexbox/table-as-item-fixed-min-width-2.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-fixed-min-width-3.html,1/1,1/1,0/1
 /css/css-flexbox/table-as-item-fixed-min-width.html,1/1,1/1,1/1
-/css/css-flexbox/table-as-item-flex-cross-size.html,1/1,1/1,0/1
+/css/css-flexbox/table-as-item-flex-cross-size.html,0/1,1/1,0/1
 /css/css-flexbox/table-as-item-narrow-content.html,1/1,1/1,1/1
-/css/css-flexbox/table-as-item-specified-width.html,1/1,1/1,0/1
-/css/css-flexbox/table-as-item-stretch-cross-size.html,1/1,1/1,0/1
+/css/css-flexbox/table-as-item-specified-width.html,0/1,1/1,0/1
+/css/css-flexbox/table-as-item-stretch-cross-size.html,0/1,1/1,0/1
 /css/css-flexbox/table-as-item-wide-content.html,1/1,1/1,1/1
 /css/css-flexbox/table-item-flex-percentage-width.html,1/1,1/1,0/1
 /css/css-flexbox/table-with-float-paint.html,1/1,1/1,1/1

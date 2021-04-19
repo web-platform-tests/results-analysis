@@ -487,8 +487,8 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-001.html,0/1,0/1,0/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-002.html,0/1,0/1,0/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-003.tentative.html,1/1,1/1,1/1
-/css/css-grid/alignment/replaced-alignment-with-aspect-ratio-004.html,0/1,1/1,1/1
-/css/css-grid/alignment/replaced-alignment-with-aspect-ratio-005.html,0/1,1/1,1/1
+/css/css-grid/alignment/replaced-alignment-with-aspect-ratio-004.html,1/1,1/1,1/1
+/css/css-grid/alignment/replaced-alignment-with-aspect-ratio-005.html,1/1,1/1,1/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-006.html,0/1,0/1,0/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-007.html,0/1,0/1,0/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-008.html,0/1,0/1,0/1
@@ -807,7 +807,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-container-percentage-001.html,20/20,20/20,20/20
 /css/css-grid/layout-algorithm/grid-container-percentage-002.html,24/24,5/24,24/24
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-001.html,1/1,1/1,1/1
-/css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-002.html,1/1,0/1,1/1
+/css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-002.html,0/1,0/1,0/1
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-003.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-004.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-find-fr-size-gutters-001.html,17/17,17/17,17/17
