@@ -253,12 +253,14 @@ testname,chrome,firefox,safari
 /css/css-transforms/skewX/svg-skewx-011.html,1/1,1/1,1/1
 /css/css-transforms/skewX/svg-skewx-016.html,1/1,1/1,1/1
 /css/css-transforms/skewX/svg-skewx-021.html,1/1,1/1,1/1
+/css/css-transforms/skewX/svg-skewx-with-units.html,1/1,1/1,1/1
 /css/css-transforms/skewX/svg-skewxy-001.html,1/1,1/1,1/1
 /css/css-transforms/skewY/svg-skewy-001.html,1/1,1/1,1/1
 /css/css-transforms/skewY/svg-skewy-006.html,1/1,1/1,1/1
 /css/css-transforms/skewY/svg-skewy-011.html,1/1,1/1,1/1
 /css/css-transforms/skewY/svg-skewy-016.html,1/1,1/1,1/1
 /css/css-transforms/skewY/svg-skewy-021.html,1/1,1/1,1/1
+/css/css-transforms/skewY/svg-skewy-with-units.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/cssbox-border-box.html,0/1,1/1,1/1
 /css/css-transforms/transform-box/cssbox-content-box.html,0/1,0/1,1/1
 /css/css-transforms/transform-box/cssbox-fill-box.html,0/1,0/1,1/1
