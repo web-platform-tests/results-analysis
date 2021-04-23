@@ -941,7 +941,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-002.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-003.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-004.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-auto-005.html,1/1,0/1,0/1
+/css/css-flexbox/overflow-auto-005.html,1/1,1/1,0/1
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
