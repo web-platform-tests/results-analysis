@@ -542,7 +542,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-input-012.html,0/1,0/1,1/1
 /css/css-transforms/transform-input-013.html,1/1,0/1,1/1
 /css/css-transforms/transform-input-014.html,1/1,0/1,1/1
-/css/css-transforms/transform-input-015.html,0/1,1/1,1/1
+/css/css-transforms/transform-input-015.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-016.html,0/1,1/1,1/1
 /css/css-transforms/transform-input-017.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-018.html,1/1,1/1,1/1

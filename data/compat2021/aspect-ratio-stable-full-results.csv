@@ -156,6 +156,6 @@ testname,chrome,firefox,safari
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/canvas-aspect-ratio.html,12/12,1/12,2/12
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html,1/1,1/1,0/1
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,31/31,1/31,0/31
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html,11/11,0/11,0/11
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,40/40,10/40,6/40
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html,15/15,1/15,1/15
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html,11/11,0/11,0/11
