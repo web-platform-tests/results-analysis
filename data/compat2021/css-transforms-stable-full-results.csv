@@ -6,7 +6,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/perspective-interpolation.html,164/180,180/180,94/180
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,79/120
 /css/css-transforms/animation/rotate-composition.html,0/66,53/66,0/66
-/css/css-transforms/animation/rotate-interpolation.html,0/360,360/360,0/360
+/css/css-transforms/animation/rotate-interpolation.html,0/360,356/360,0/360
 /css/css-transforms/animation/rotate-transform-equivalent.html,0/1,1/1,0/1
 /css/css-transforms/animation/scale-composition.html,0/40,38/40,0/40
 /css/css-transforms/animation/scale-interpolation.html,0/360,360/360,0/360
@@ -203,7 +203,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/perspective-origin-invalid.html,12/12,12/12,12/12
 /css/css-transforms/parsing/perspective-origin-valid.html,18/18,18/18,18/18
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
-/css/css-transforms/parsing/rotate-parsing-valid.html,0/13,13/13,0/13
+/css/css-transforms/parsing/rotate-parsing-valid.html,0/17,13/17,0/17
 /css/css-transforms/parsing/scale-parsing-invalid.html,2/2,2/2,2/2
 /css/css-transforms/parsing/scale-parsing-valid.html,0/22,22/22,0/22
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
@@ -699,10 +699,10 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-preserve3d-007.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-008.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-009.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-preserve3d-010.html,0/1,0/1,0/1
+/css/css-transforms/transform3d-preserve3d-010.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-preserve3d-011.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-preserve3d-012.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-preserve3d-013.html,0/1,1/1,0/1
+/css/css-transforms/transform3d-preserve3d-013.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-rotate3d-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotate3d-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-001.html,1/1,1/1,1/1
