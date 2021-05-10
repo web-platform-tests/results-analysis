@@ -466,8 +466,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/rotateY-180deg-with-overflow-scroll.html,1/1,1/1,0/1
 /css/css-transforms/rotateY.html,1/1,1/1,1/1
 /css/css-transforms/rotate_45deg.html,0/1,0/1,0/1
-/css/css-transforms/rotate_x_45deg.html,0/1,0/1,0/1
-/css/css-transforms/rotate_y_45deg.html,0/1,0/1,0/1
+/css/css-transforms/rotate_x_45deg.html,0/1,0/1,1/1
+/css/css-transforms/rotate_y_45deg.html,0/1,0/1,1/1
 /css/css-transforms/scale-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/scale-zero-001.html,1/1,1/1,1/1
 /css/css-transforms/scalex.html,1/1,1/1,1/1
@@ -674,7 +674,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-backface-visibility-008.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-image-scale-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-image-scale-002.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-matrix3d-001.html,0/1,1/1,1/1
+/css/css-transforms/transform3d-matrix3d-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-matrix3d-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-matrix3d-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-matrix3d-004.html,1/1,1/1,1/1

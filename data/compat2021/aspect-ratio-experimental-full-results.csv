@@ -142,7 +142,7 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/replaced-element-030.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-031.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-032.html,1/1,1/1,1/1
-/css/css-sizing/aspect-ratio/small-aspect-ratio-crash.html,1/1,1/1,0/1
+/css/css-sizing/aspect-ratio/small-aspect-ratio-crash.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-001.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-002.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-003.html,1/1,1/1,1/1
