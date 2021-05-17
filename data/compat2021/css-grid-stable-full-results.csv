@@ -6,7 +6,7 @@ testname,chrome,firefox,safari
 /css/css-grid/abspos/descendant-static-position-001.html,0/1,1/1,0/1
 /css/css-grid/abspos/descendant-static-position-002.html,0/1,1/1,0/1
 /css/css-grid/abspos/descendant-static-position-003.html,0/1,1/1,0/1
-/css/css-grid/abspos/descendant-static-position-004.html,1/1,1/1,0/1
+/css/css-grid/abspos/descendant-static-position-004.html,1/1,1/1,1/1
 /css/css-grid/abspos/empty-grid-001.html,9/9,9/9,9/9
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-002.html,0/1,0/1,0/1

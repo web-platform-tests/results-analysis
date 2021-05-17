@@ -153,7 +153,7 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/zero-or-infinity-008.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-009.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/zero-or-infinity-010.html,1/1,1/1,1/1
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/canvas-aspect-ratio.html,12/12,1/12,2/12
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/canvas-aspect-ratio.html,10/12,1/12,2/12
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.tentative.html,1/1,1/1,0/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,40/40,10/40,6/40
