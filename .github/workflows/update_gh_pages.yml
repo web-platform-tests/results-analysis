@@ -1,7 +1,9 @@
 name: Update gh-pages
 on:
+  # Trigger on UTC noon on Mon+Wed+Fri, or manually.
   schedule:
     - cron: '0 12 * * 1,3,5'
+  workflow_dispatch:
 jobs:
   update-gh-pages:
     runs-on: ubuntu-latest
