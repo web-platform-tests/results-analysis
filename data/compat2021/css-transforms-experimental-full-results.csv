@@ -439,7 +439,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
-/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
+/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,0/1
 /css/css-transforms/inheritance.html,19/20,18/20,16/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
@@ -747,7 +747,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/translate-getComputedStyle.html,1/1,1/1,0/1
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/translate.html,0/1,0/1,0/1
-/css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html,0/1,0/1,0/1
+/css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-css-3d-polygon-cycle.html,0/1,0/1,0/1
 /css/css-transforms/ttwf-reftest-rotate.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-transform-skewx-001.html,0/1,0/1,0/1
