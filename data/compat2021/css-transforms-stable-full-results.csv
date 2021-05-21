@@ -748,7 +748,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/translate.html,0/1,0/1,0/1
 /css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html,1/1,1/1,1/1
-/css/css-transforms/ttwf-css-3d-polygon-cycle.html,0/1,0/1,0/1
+/css/css-transforms/ttwf-css-3d-polygon-cycle.html,0/1,1/1,0/1
 /css/css-transforms/ttwf-reftest-rotate.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-transform-skewx-001.html,0/1,0/1,0/1
 /css/css-transforms/ttwf-transform-skewy-001.html,0/1,0/1,0/1
