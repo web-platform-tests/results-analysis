@@ -335,7 +335,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-basis-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-basis-011.html,1/1,1/1,0/1
+/css/css-flexbox/flex-basis-011.html,0/1,0/1,1/1
 /css/css-flexbox/flex-basis-item-margins-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-box-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/flex-child-percent-basis-resize-1.html,1/1,1/1,1/1
