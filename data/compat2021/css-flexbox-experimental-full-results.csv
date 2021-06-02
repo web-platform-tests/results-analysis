@@ -160,7 +160,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/getcomputedstyle/flexbox_computedstyle_order.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-column-reverse.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-row-reverse.html,1/1,1/1,1/1
-/css/css-flexbox/parsing/flex-basis-computed.html,7/8,8/8,7/8
+/css/css-flexbox/parsing/flex-basis-computed.html,7/8,8/8,8/8
 /css/css-flexbox/parsing/flex-basis-invalid.html,5/5,5/5,5/5
 /css/css-flexbox/parsing/flex-basis-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-computed.html,8/8,0/8,8/8
@@ -321,7 +321,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-aspect-ratio-img-row-010.html,1/1,1/1,0/1
 /css/css-flexbox/flex-aspect-ratio-img-row-011.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-012.html,1/1,1/1,1/1
-/css/css-flexbox/flex-aspect-ratio-img-row-013.html,5/5,5/5,2/5
+/css/css-flexbox/flex-aspect-ratio-img-row-013.html,5/5,5/5,5/5
 /css/css-flexbox/flex-aspect-ratio-img-row-014.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-015.html,1/1,1/1,0/1
 /css/css-flexbox/flex-base.html,1/1,1/1,1/1
@@ -335,7 +335,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-basis-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-basis-011.html,0/1,0/1,1/1
+/css/css-flexbox/flex-basis-011.html,0/1,0/1,0/1
 /css/css-flexbox/flex-basis-item-margins-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-box-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/flex-child-percent-basis-resize-1.html,1/1,1/1,1/1
@@ -972,7 +972,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-002.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-003.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-004.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-auto-005.html,1/1,1/1,0/1
+/css/css-flexbox/overflow-auto-005.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
@@ -985,8 +985,8 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-heights-003.html,7/7,7/7,7/7
 /css/css-flexbox/percentage-heights-004.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-005.html,1/1,1/1,1/1
-/css/css-flexbox/percentage-heights-006.html,1/1,1/1,0/1
-/css/css-flexbox/percentage-heights-007.html,0/1,1/1,0/1
+/css/css-flexbox/percentage-heights-006.html,1/1,1/1,1/1
+/css/css-flexbox/percentage-heights-007.html,0/1,1/1,1/1
 /css/css-flexbox/percentage-heights-008.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-009.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-010.html,1/1,0/1,1/1
@@ -1001,7 +1001,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-max-height-004.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-max-width-cross-axis.html,2/2,2/2,2/2
 /css/css-flexbox/percentage-padding-001.html,1/1,1/1,1/1
-/css/css-flexbox/percentage-padding-002.html,1/1,1/1,0/1
+/css/css-flexbox/percentage-padding-002.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-size-quirks.html,8/8,8/8,8/8
 /css/css-flexbox/percentage-size-subitems-001.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-size.html,8/8,8/8,8/8
@@ -1048,7 +1048,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/table-as-item-narrow-content.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-stretch-cross-size-3.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-stretch-cross-size-4.html,1/1,1/1,1/1
-/css/css-flexbox/table-as-item-stretch-cross-size.html,0/1,1/1,0/1
+/css/css-flexbox/table-as-item-stretch-cross-size.html,0/1,1/1,1/1
 /css/css-flexbox/table-as-item-wide-content.html,1/1,1/1,1/1
 /css/css-flexbox/table-item-flex-percentage-min-width.html,1/1,1/1,1/1
 /css/css-flexbox/table-with-float-paint.html,1/1,1/1,1/1
