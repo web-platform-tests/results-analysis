@@ -235,7 +235,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-baseline-002.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-003.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-004.html,15/18,11/18,13/18
-/css/css-grid/alignment/grid-baseline-align-cycles-001.html,0/1,0/1,0/1
+/css/css-grid/alignment/grid-baseline-align-cycles-001.html,1/1,0/1,0/1
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-001.html,2/2,2/2,2/2
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-002.html,2/2,2/2,2/2
 /css/css-grid/alignment/grid-block-axis-alignment-auto-margins-003.html,2/2,2/2,2/2
@@ -394,9 +394,9 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-row-axis-alignment-positioned-items-017.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-row-axis-alignment-sticky-positioned-items-001.html,2/2,2/2,2/2
 /css/css-grid/alignment/grid-row-axis-alignment-sticky-positioned-items-002.html,2/2,2/2,2/2
-/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-001.html,4/4,0/4,4/4
-/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-002.html,4/4,0/4,4/4
-/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-003.html,4/4,0/4,4/4
+/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-001.html,3/4,0/4,3/4
+/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-002.html,3/4,0/4,3/4
+/css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-003.html,3/4,0/4,3/4
 /css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-004.html,4/4,0/4,4/4
 /css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-005.html,2/2,0/2,2/2
 /css/css-grid/alignment/grid-self-alignment-baseline-with-grid-001.html,0/1,1/1,0/1
@@ -482,7 +482,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-self-alignment-stretch-vertical-rl-016.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-self-alignment.html,72/72,72/72,72/72
 /css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-001.html,12/12,4/12,7/12
-/css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-002.html,24/24,0/24,24/24
+/css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-002.html,23/24,0/24,23/24
 /css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-003.html,6/6,0/6,6/6
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-001.html,0/1,0/1,0/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-002.html,0/1,0/1,0/1
