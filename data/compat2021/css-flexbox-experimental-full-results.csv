@@ -243,7 +243,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/aspect-ratio-intrinsic-size-003.html,1/1,0/1,0/1
 /css/css-flexbox/aspect-ratio-intrinsic-size-004.html,1/1,0/1,0/1
 /css/css-flexbox/aspect-ratio-intrinsic-size-005.html,1/1,0/1,0/1
-/css/css-flexbox/aspect-ratio-intrinsic-size-006.html,0/1,0/1,0/1
+/css/css-flexbox/aspect-ratio-intrinsic-size-006.html,1/1,0/1,0/1
 /css/css-flexbox/auto-height-column-with-border-and-padding.html,1/1,1/1,1/1
 /css/css-flexbox/auto-height-with-flex.html,1/1,1/1,1/1
 /css/css-flexbox/auto-margins-001.html,1/1,1/1,1/1
@@ -335,7 +335,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-basis-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-basis-011.html,0/1,0/1,0/1
+/css/css-flexbox/flex-basis-011.html,1/1,0/1,0/1
 /css/css-flexbox/flex-basis-item-margins-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-box-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/flex-child-percent-basis-resize-1.html,1/1,1/1,1/1
@@ -1048,7 +1048,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/table-as-item-narrow-content.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-stretch-cross-size-3.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-stretch-cross-size-4.html,1/1,1/1,1/1
-/css/css-flexbox/table-as-item-stretch-cross-size.html,0/1,1/1,1/1
+/css/css-flexbox/table-as-item-stretch-cross-size.html,1/1,1/1,1/1
 /css/css-flexbox/table-as-item-wide-content.html,1/1,1/1,1/1
 /css/css-flexbox/table-item-flex-percentage-min-width.html,1/1,1/1,1/1
 /css/css-flexbox/table-with-float-paint.html,1/1,1/1,1/1

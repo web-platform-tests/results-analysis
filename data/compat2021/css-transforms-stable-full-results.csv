@@ -113,10 +113,10 @@ testname,chrome,firefox,safari
 /css/css-transforms/individual-transform/stacking-context-001.html,0/1,1/1,1/1
 /css/css-transforms/individual-transform/translate-fill-box.html,0/1,1/1,1/1
 /css/css-transforms/individual-transform/translate-view-box.html,0/1,1/1,1/1
-/css/css-transforms/inline-styles/svg-inline-styles-001.html,0/1,0/1,0/1
-/css/css-transforms/inline-styles/svg-inline-styles-002.html,0/1,0/1,0/1
-/css/css-transforms/inline-styles/svg-inline-styles-003.html,0/1,0/1,0/1
-/css/css-transforms/inline-styles/svg-inline-styles-004.html,0/1,0/1,0/1
+/css/css-transforms/inline-styles/svg-inline-styles-001.html,1/1,1/1,1/1
+/css/css-transforms/inline-styles/svg-inline-styles-002.html,1/1,1/1,1/1
+/css/css-transforms/inline-styles/svg-inline-styles-003.html,1/1,1/1,1/1
+/css/css-transforms/inline-styles/svg-inline-styles-004.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-005.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-006.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-007.html,1/1,1/1,1/1
@@ -124,8 +124,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/inline-styles/svg-inline-styles-009.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-010.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-011.html,1/1,1/1,1/1
-/css/css-transforms/inline-styles/svg-inline-styles-012.html,0/1,0/1,0/1
-/css/css-transforms/inline-styles/svg-inline-styles-013.html,0/1,0/1,0/1
+/css/css-transforms/inline-styles/svg-inline-styles-012.html,1/1,1/1,1/1
+/css/css-transforms/inline-styles/svg-inline-styles-013.html,1/1,1/1,1/1
 /css/css-transforms/inline-styles/svg-inline-styles-014.html,1/1,1/1,1/1
 /css/css-transforms/matrix/svg-matrix-001.html,1/1,1/1,1/1
 /css/css-transforms/matrix/svg-matrix-002.html,1/1,1/1,1/1
@@ -398,7 +398,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
 /css/css-transforms/3d-rendering-context-behavior.tentative.html,6/10,6/10,6/10
 /css/css-transforms/backface-visibility-001.html,0/1,1/1,1/1
-/css/css-transforms/backface-visibility-hidden-001.html,0/1,1/1,0/1
+/css/css-transforms/backface-visibility-hidden-001.html,1/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-002.tentative.html,1/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-003.tentative.html,1/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-004.tentative.html,0/1,0/1,1/1
@@ -451,7 +451,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-origin-006.html,1/1,1/1,0/1
 /css/css-transforms/perspective-origin-x.html,1/1,1/1,0/1
 /css/css-transforms/perspective-origin-xy.html,1/1,1/1,0/1
-/css/css-transforms/perspective-transforms-equivalence.html,0/1,0/1,1/1
+/css/css-transforms/perspective-transforms-equivalence.html,1/1,0/1,1/1
 /css/css-transforms/perspective-translateZ-0.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,0/1
@@ -466,8 +466,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/rotateY-180deg-with-overflow-scroll.html,1/1,1/1,0/1
 /css/css-transforms/rotateY.html,1/1,1/1,1/1
 /css/css-transforms/rotate_45deg.html,0/1,0/1,0/1
-/css/css-transforms/rotate_x_45deg.html,0/1,0/1,1/1
-/css/css-transforms/rotate_y_45deg.html,0/1,0/1,1/1
+/css/css-transforms/rotate_x_45deg.html,1/1,0/1,1/1
+/css/css-transforms/rotate_y_45deg.html,1/1,0/1,1/1
 /css/css-transforms/scale-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/scale-zero-001.html,1/1,1/1,1/1
 /css/css-transforms/scalex.html,1/1,1/1,1/1
@@ -485,7 +485,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/text-perspective-001.html,1/1,1/1,0/1
 /css/css-transforms/transform-2d-getComputedStyle-001.html,5/5,5/5,5/5
 /css/css-transforms/transform-3d-rotateY-stair-above-001.xht,1/1,1/1,0/1
-/css/css-transforms/transform-3d-rotateY-stair-below-001.xht,0/1,0/1,0/1
+/css/css-transforms/transform-3d-rotateY-stair-below-001.xht,1/1,0/1,0/1
 /css/css-transforms/transform-abspos-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-abspos-002.html,1/1,1/1,1/1
 /css/css-transforms/transform-abspos-003.html,1/1,1/1,1/1
@@ -708,7 +708,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-rotatex-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-perspective-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-perspective-002.html,1/1,1/1,0/1
-/css/css-transforms/transform3d-rotatex-perspective-003.html,0/1,1/1,1/1
+/css/css-transforms/transform3d-rotatex-perspective-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-ref.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-transformorigin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatey-001.html,1/1,1/1,1/1
@@ -748,7 +748,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1
 /css/css-transforms/translate.html,0/1,0/1,0/1
 /css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html,1/1,1/1,1/1
-/css/css-transforms/ttwf-css-3d-polygon-cycle.html,0/1,1/1,0/1
+/css/css-transforms/ttwf-css-3d-polygon-cycle.html,1/1,1/1,0/1
 /css/css-transforms/ttwf-reftest-rotate.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-transform-skewx-001.html,0/1,0/1,0/1
 /css/css-transforms/ttwf-transform-skewy-001.html,0/1,0/1,0/1
