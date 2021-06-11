@@ -3,7 +3,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/list-interpolation.html,74/76,76/76,22/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,4/20
-/css/css-transforms/animation/perspective-interpolation.html,164/212,212/212,212/212
+/css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
 /css/css-transforms/animation/rotate-composition.html,63/66,53/66,22/66
 /css/css-transforms/animation/rotate-interpolation.html,312/360,356/360,348/360
@@ -456,8 +456,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,0/1
 /css/css-transforms/perspective-untransformable-no-stacking-context.html,1/1,1/1,1/1
-/css/css-transforms/perspective-zero-2.html,0/1,0/1,0/1
-/css/css-transforms/perspective-zero.html,0/1,0/1,0/1
+/css/css-transforms/perspective-zero-2.html,1/1,0/1,0/1
+/css/css-transforms/perspective-zero.html,1/1,0/1,0/1
 /css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.tentative.html,1/2,2/2,0/2
 /css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,6/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
@@ -683,7 +683,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-perspective-002.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-003.html,0/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-004.html,0/1,1/1,1/1
-/css/css-transforms/transform3d-perspective-005.html,0/1,0/1,0/1
+/css/css-transforms/transform3d-perspective-005.html,1/1,0/1,0/1
 /css/css-transforms/transform3d-perspective-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-007.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-008.html,1/1,1/1,1/1

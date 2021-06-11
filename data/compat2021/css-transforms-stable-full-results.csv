@@ -3,7 +3,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/list-interpolation.html,74/76,76/76,22/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,3/20
-/css/css-transforms/animation/perspective-interpolation.html,164/180,180/180,99/180
+/css/css-transforms/animation/perspective-interpolation.html,164/212,212/212,99/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,79/120
 /css/css-transforms/animation/rotate-composition.html,0/66,53/66,11/66
 /css/css-transforms/animation/rotate-interpolation.html,0/360,356/360,243/360
@@ -11,7 +11,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/scale-composition.html,0/40,38/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,0/360,360/360,336/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,1/28
-/css/css-transforms/animation/transform-interpolation-001.html,408/408,408/408,376/408
+/css/css-transforms/animation/transform-interpolation-001.html,408/408,408/408,328/408
 /css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,200/216
 /css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
@@ -20,7 +20,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-computed-value.html,60/96,27/96,0/96
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
-/css/css-transforms/animation/transform-interpolation-rotate.html,1/1,0/1,0/1
+/css/css-transforms/animation/transform-interpolation-rotate.html,0/1,0/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-translate-em.html,0/1,1/1,0/1
@@ -456,8 +456,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,0/1
 /css/css-transforms/perspective-untransformable-no-stacking-context.html,1/1,1/1,1/1
-/css/css-transforms/perspective-zero-2.html,1/1,1/1,1/1
-/css/css-transforms/perspective-zero.html,1/1,1/1,1/1
+/css/css-transforms/perspective-zero-2.html,0/1,0/1,0/1
+/css/css-transforms/perspective-zero.html,0/1,0/1,0/1
 /css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.tentative.html,1/2,2/2,0/2
 /css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,6/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
@@ -683,7 +683,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-perspective-002.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-003.html,0/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-004.html,0/1,1/1,1/1
-/css/css-transforms/transform3d-perspective-005.html,0/1,1/1,1/1
+/css/css-transforms/transform3d-perspective-005.html,0/1,0/1,0/1
 /css/css-transforms/transform3d-perspective-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-007.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-008.html,1/1,1/1,1/1

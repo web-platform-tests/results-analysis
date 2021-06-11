@@ -726,8 +726,8 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-model/display-grid.html,1/1,1/1,1/1
 /css/css-grid/grid-model/display-inline-grid.html,1/1,1/1,1/1
 /css/css-grid/grid-model/fixed-width-intrinsic-width-should-exclude-scrollbar-001.html,2/2,2/2,2/2
-/css/css-grid/grid-model/grid-areas-overflowing-grid-container-004.html,1/1,1/1,1/1
-/css/css-grid/grid-model/grid-areas-overflowing-grid-container-005.html,1/1,1/1,1/1
+/css/css-grid/grid-model/grid-areas-overflowing-grid-container-004.html,1/1,0/1,1/1
+/css/css-grid/grid-model/grid-areas-overflowing-grid-container-005.html,1/1,0/1,1/1
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-006.html,1/1,1/1,1/1
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-007.html,1/1,1/1,1/1
 /css/css-grid/grid-model/grid-areas-overflowing-grid-container-008.html,1/1,1/1,1/1
