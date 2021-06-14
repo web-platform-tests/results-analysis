@@ -112,7 +112,7 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/quirks-mode-003.html,1/1,0/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-001.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-002.html,1/1,1/1,0/1
-/css/css-sizing/aspect-ratio/replaced-element-003.html,1/1,1/1,1/1
+/css/css-sizing/aspect-ratio/replaced-element-003.html,0/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-004.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-005.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-006.html,1/1,1/1,0/1
