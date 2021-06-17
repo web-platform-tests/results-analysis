@@ -659,7 +659,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-items/grid-items-percentage-paddings-vertical-rl-002.html,8/8,8/8,4/8
 /css/css-grid/grid-items/grid-items-relative-offsets-001.html,6/6,6/6,6/6
 /css/css-grid/grid-items/grid-items-relative-offsets-002.html,6/6,6/6,6/6
-/css/css-grid/grid-items/grid-items-sizing-alignment-001.html,1/1,0/1,1/1
+/css/css-grid/grid-items/grid-items-sizing-alignment-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-grid-in-grid.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-z-order-a.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-z-order-b.html,1/1,1/1,1/1
