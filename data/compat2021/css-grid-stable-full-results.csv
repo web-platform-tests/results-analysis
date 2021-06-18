@@ -816,7 +816,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-001.html,17/30,17/30,17/30
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-002.html,1/5,1/5,1/5
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-003.html,78/102,78/102,78/102
-/css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html,7/7,0/7,7/7
+/css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html,1/7,0/7,1/7
 /css/css-grid/layout-algorithm/grid-intrinsic-track-sizes-001.html,31/31,18/31,31/31
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-001.html,4/4,4/4,4/4
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-vertical-lr-001.html,4/4,4/4,4/4
