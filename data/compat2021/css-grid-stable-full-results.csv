@@ -11,7 +11,7 @@ testname,chrome,firefox,safari
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-002.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-img-001.html,1/1,1/1,1/1
-/css/css-grid/abspos/grid-abspos-staticpos-align-self-img-002.html,0/1,1/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-align-self-img-002.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-rtl-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-rtl-002.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-rtl-003.html,0/1,0/1,0/1
@@ -24,7 +24,7 @@ testname,chrome,firefox,safari
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-002.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-001.html,1/1,1/1,1/1
-/css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-002.html,0/1,1/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-002.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-rtl-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-rtl-002.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-rtl-003.html,0/1,0/1,0/1
