@@ -19,8 +19,8 @@ testname,chrome,firefox,safari
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-safe-001.html,0/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-002.html,1/1,1/1,1/1
-/css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-003.html,0/1,1/1,0/1
-/css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-004.html,0/1,1/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-003.html,0/1,0/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-align-self-vertWM-004.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-002.html,1/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-001.html,1/1,1/1,1/1
@@ -31,8 +31,8 @@ testname,chrome,firefox,safari
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-rtl-004.html,1/1,0/1,0/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-002.html,1/1,1/1,1/1
-/css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-003.html,0/1,1/1,0/1
-/css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-004.html,0/1,1/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-003.html,0/1,0/1,0/1
+/css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-004.html,0/1,0/1,0/1
 /css/css-grid/abspos/grid-item-absolute-positioning-dynamic-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-paint-positioned-children-001.html,1/1,1/1,1/1
 /css/css-grid/abspos/grid-positioned-children-writing-modes-001.html,1/1,1/1,1/1
@@ -816,7 +816,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-001.html,30/30,17/30,17/30
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-002.html,5/5,1/5,1/5
 /css/css-grid/layout-algorithm/grid-flex-track-intrinsic-sizes-003.html,102/102,78/102,78/102
-/css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html,1/7,0/7,1/7
+/css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html,7/7,0/7,1/7
 /css/css-grid/layout-algorithm/grid-intrinsic-track-sizes-001.html,31/31,18/31,31/31
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-001.html,4/4,4/4,4/4
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-vertical-lr-001.html,4/4,4/4,4/4

@@ -396,7 +396,6 @@ testname,chrome,firefox,safari
 /css/css-transforms/2d-rotate-js.html,1/1,1/1,0/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
-/css/css-transforms/3d-rendering-context-behavior.tentative.html,6/10,10/10,6/10
 /css/css-transforms/backface-visibility-001.html,0/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-001.html,1/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-002.tentative.html,1/1,1/1,0/1
@@ -439,7 +438,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
-/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
+/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,0/1
 /css/css-transforms/inheritance.html,19/20,18/20,17/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
