@@ -48,7 +48,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-rtl-001.html,20/24,24/24,20/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-rtl-002.html,22/24,24/24,22/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-001.html,20/24,24/24,20/24
-/css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-002.html,22/24,24/24,22/24
+/css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-002.html,20/24,22/24,20/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-self-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/flex-abspos-staticpos-margin-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/flex-abspos-staticpos-margin-002.html,1/1,1/1,0/1
@@ -861,7 +861,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexitem-stretch-image.html,1/1,1/1,1/1
 /css/css-flexbox/flexitem-stretch-range.html,1/1,1/1,1/1
 /css/css-flexbox/floated-flexitem.html,1/1,1/1,1/1
-/css/css-flexbox/frameset-crash.html,1/1,1/1,1/1
+/css/css-flexbox/frameset-crash.html,1/1,0/1,1/1
 /css/css-flexbox/gap-001-lr.html,1/1,1/1,1/1
 /css/css-flexbox/gap-001-ltr.html,1/1,1/1,1/1
 /css/css-flexbox/gap-001-rl.html,1/1,1/1,1/1
