@@ -20,7 +20,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-computed-value.html,60/96,27/96,0/96
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
-/css/css-transforms/animation/transform-interpolation-rotate.html,0/1,0/1,0/1
+/css/css-transforms/animation/transform-interpolation-rotate.html,1/1,0/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-translate-em.html,0/1,1/1,0/1
