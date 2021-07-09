@@ -27,7 +27,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,8/56
 /css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,139/168
-/css/css-transforms/animation/transform-perspective-composition.html,14/14,14/14,0/14
+/css/css-transforms/animation/transform-perspective-composition.html,13/14,13/14,0/14
 /css/css-transforms/animation/transform-rotate-composition.html,63/63,63/63,0/63
 /css/css-transforms/animation/transform-scale-composition.html,49/49,49/49,0/49
 /css/css-transforms/animation/transform-skew-composition.html,43/43,43/43,0/43
