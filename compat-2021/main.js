@@ -147,6 +147,33 @@ async function loadAllTestsSet(category) {
   return new Set(lines);
 }
 
+// Score a set of runs (independently) on a set of tests. The runs are presumed
+// to be aligned in some way (i.e. they were all run at the same WPT SHA).
+//
+// Returns an array of [scores, testResults], where:
+//
+//   * scores is an array of top-level score for each corresponding input run
+//   * testResults is a map from a specific test (represented by its full path)
+//     to an array of (passing subtest count, total subtest count) for each
+//     corresponding input run.
+//
+// To get the top-level score for a run, each test in that run that is present
+// in |allTestsSet| is examined. A single test can contribute a test score of
+// [0-1], based on the fraction of its subtests that pass (reftests score
+// either 0 or 1). These test scores are then summed and divided by the size of
+// |allTestsSet|.
+//
+// This methodology has several consequences:
+//
+//   1. Individual tests do have a heavier weight than subtests. This could be
+//   gamed, by splitting passing tests into multiple files rather than using
+//   subtests (or conversely by combining failing tests into subtests in a
+//   single file).
+//
+//   2. If |allTestsSet| is constant across runs *through time*, older runs may
+//   not have entries for tests were only added recently and will be penalized
+//   for that. This is deliberate - see the comment block later in this
+//   function for why.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testResults = new Map();
@@ -177,10 +204,14 @@ function scoreRuns(runs, allTestsSet) {
           subtestPasses = 1;
         }
 
-        if (subtestPasses == subtestTotal) {
-          passingTests += 1;
-        }
+        // A single test is scored based on how many of its subtests pass;
+        // these fractional values are then summed and normalized against the
+        // total number of tests to get the overall score.
+        passingTests += subtestPasses / subtestTotal;
 
+        // TODO: I suspect this doesn't handle missing test results properly,
+        // as we assume every run has every test so that the testResults arrays
+        // align with |runs|?
         testResults.get(testname).push([subtestPasses, subtestTotal]);
       });
 
