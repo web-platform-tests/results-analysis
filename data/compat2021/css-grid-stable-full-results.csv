@@ -231,7 +231,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-alignment-style-changes-006.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-007.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-008.html,6/6,6/6,6/6
-/css/css-grid/alignment/grid-baseline-001.html,0/1,0/1,1/1
+/css/css-grid/alignment/grid-baseline-001.html,1/1,0/1,1/1
 /css/css-grid/alignment/grid-baseline-002.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-003.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-baseline-004.html,15/18,11/18,13/18
@@ -406,10 +406,10 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-005.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-006.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-007.html,4/4,4/4,4/4
-/css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-008.html,1/4,4/4,1/4
+/css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-008.html,4/4,4/4,1/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-009.html,4/4,4/4,1/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-010.html,4/4,4/4,1/4
-/css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-011.html,1/4,4/4,1/4
+/css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-011.html,4/4,4/4,1/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-012.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-positioned-items-with-margin-border-padding-001.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-positioned-items-with-margin-border-padding-002.html,4/4,4/4,4/4
@@ -655,7 +655,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-items/grid-items-percentage-paddings-vertical-rl-002.html,8/8,8/8,4/8
 /css/css-grid/grid-items/grid-items-relative-offsets-001.html,6/6,6/6,6/6
 /css/css-grid/grid-items/grid-items-relative-offsets-002.html,6/6,6/6,6/6
-/css/css-grid/grid-items/grid-items-sizing-alignment-001.html,1/1,0/1,1/1
+/css/css-grid/grid-items/grid-items-sizing-alignment-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-grid-in-grid.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-z-order-a.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-layout-z-order-b.html,1/1,1/1,1/1
