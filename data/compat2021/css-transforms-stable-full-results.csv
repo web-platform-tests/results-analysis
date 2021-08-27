@@ -11,7 +11,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/scale-composition.html,0/40,38/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,0/360,360/360,336/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,1/28
-/css/css-transforms/animation/transform-interpolation-001.html,408/408,408/408,328/408
+/css/css-transforms/animation/transform-interpolation-001.html,428/448,428/448,344/448
 /css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,200/216
 /css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
@@ -27,7 +27,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,8/56
 /css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,139/168
-/css/css-transforms/animation/transform-perspective-composition.html,13/14,13/14,0/14
+/css/css-transforms/animation/transform-perspective-composition.html,14/14,14/14,0/14
 /css/css-transforms/animation/transform-rotate-composition.html,63/63,63/63,0/63
 /css/css-transforms/animation/transform-scale-composition.html,49/49,49/49,0/49
 /css/css-transforms/animation/transform-skew-composition.html,43/43,43/43,0/43
@@ -213,7 +213,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/transform-origin-computed.html,23/23,23/23,23/23
 /css/css-transforms/parsing/transform-origin-invalid.html,10/10,10/10,9/10
 /css/css-transforms/parsing/transform-origin-valid.html,16/16,16/16,16/16
-/css/css-transforms/parsing/transform-valid.html,39/39,39/39,28/39
+/css/css-transforms/parsing/transform-valid.html,40/41,40/41,29/41
 /css/css-transforms/parsing/translate-parsing-invalid.html,3/3,3/3,3/3
 /css/css-transforms/parsing/translate-parsing-valid.html,0/16,16/16,16/16
 /css/css-transforms/patternTransform/svg-patternTransform-001.html,1/1,1/1,1/1
@@ -470,8 +470,6 @@ testname,chrome,firefox,safari
 /css/css-transforms/scale-zero-001.html,1/1,1/1,1/1
 /css/css-transforms/scalex.html,1/1,1/1,1/1
 /css/css-transforms/scaley.html,1/1,1/1,1/1
-/css/css-transforms/scrolalble-hidden-3d-transform-z.html,1/1,1/1,0/1
-/css/css-transforms/scrolalble-scroll-3d-transform-z.html,1/1,1/1,0/1
 /css/css-transforms/size-change-under-backface-visibility-hidden.html,1/1,1/1,1/1
 /css/css-transforms/skew-test1.html,0/1,0/1,0/1
 /css/css-transforms/subpixel-perspective-backface-hidden.html,1/1,1/1,1/1
