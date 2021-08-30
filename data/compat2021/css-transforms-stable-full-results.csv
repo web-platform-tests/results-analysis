@@ -742,7 +742,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transforms-support-calc.html,4/7,7/7,6/7
 /css/css-transforms/translate-getComputedStyle.html,0/1,1/1,0/1
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1
-/css/css-transforms/translate.html,0/1,0/1,0/1
+/css/css-transforms/translate.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html,1/1,1/1,1/1
 /css/css-transforms/ttwf-css-3d-polygon-cycle.html,1/1,1/1,0/1
 /css/css-transforms/ttwf-reftest-rotate.html,1/1,1/1,1/1
