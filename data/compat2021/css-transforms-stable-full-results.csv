@@ -396,6 +396,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/2d-rotate-js.html,1/1,1/1,0/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
+/css/css-transforms/3d-rendering-context-behavior.html,6/12,12/12,8/12
 /css/css-transforms/backface-visibility-001.html,0/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-001.html,1/1,1/1,0/1
 /css/css-transforms/backface-visibility-hidden-002.tentative.html,1/1,1/1,0/1
@@ -457,6 +458,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-untransformable-no-stacking-context.html,1/1,1/1,1/1
 /css/css-transforms/perspective-zero-2.html,1/1,0/1,0/1
 /css/css-transforms/perspective-zero.html,1/1,0/1,0/1
+/css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html,1/2,2/2,0/2
 /css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,6/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
@@ -470,6 +472,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/scale-zero-001.html,1/1,1/1,1/1
 /css/css-transforms/scalex.html,1/1,1/1,1/1
 /css/css-transforms/scaley.html,1/1,1/1,1/1
+/css/css-transforms/scrollable-hidden-3d-transform-z.html,1/1,1/1,0/1
+/css/css-transforms/scrollable-scroll-3d-transform-z.html,1/1,1/1,0/1
 /css/css-transforms/size-change-under-backface-visibility-hidden.html,1/1,1/1,1/1
 /css/css-transforms/skew-test1.html,0/1,0/1,0/1
 /css/css-transforms/subpixel-perspective-backface-hidden.html,1/1,1/1,1/1
