@@ -88,7 +88,6 @@
 /css/css-sizing/aspect-ratio/grid-aspect-ratio-010.html
 /css/css-sizing/aspect-ratio/grid-aspect-ratio-011.html
 /css/css-sizing/aspect-ratio/grid-aspect-ratio-012.html
-/css/css-sizing/aspect-ratio/grid-aspect-ratio-013.html
 /css/css-sizing/aspect-ratio/grid-aspect-ratio-014.html
 /css/css-sizing/aspect-ratio/intrinsic-size-001.html
 /css/css-sizing/aspect-ratio/intrinsic-size-002.html

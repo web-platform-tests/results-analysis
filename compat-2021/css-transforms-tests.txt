@@ -4,7 +4,7 @@
 /css/css-transforms/2d-rotate-js.html
 /css/css-transforms/2d-rotate-notref.html
 /css/css-transforms/2d-rotate-ref.html
-/css/css-transforms/3d-rendering-context-behavior.tentative.html
+/css/css-transforms/3d-rendering-context-behavior.html
 /css/css-transforms/animation/composited-transform.html
 /css/css-transforms/animation/list-interpolation.html
 /css/css-transforms/animation/matrix-interpolation.html
@@ -285,7 +285,7 @@
 /css/css-transforms/perspective-untransformable-no-stacking-context.html
 /css/css-transforms/perspective-zero-2.html
 /css/css-transforms/perspective-zero.html
-/css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.tentative.html
+/css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html
 /css/css-transforms/preserve-3d-flat-grouping-properties.html
 /css/css-transforms/preserve3d-button.html
 /css/css-transforms/preserve3d-nested-perspective.html
@@ -329,8 +329,8 @@
 /css/css-transforms/scale/svg-scale-017.html
 /css/css-transforms/scalex.html
 /css/css-transforms/scaley.html
-/css/css-transforms/scrolalble-hidden-3d-transform-z.html
-/css/css-transforms/scrolalble-scroll-3d-transform-z.html
+/css/css-transforms/scrollable-hidden-3d-transform-z.html
+/css/css-transforms/scrollable-scroll-3d-transform-z.html
 /css/css-transforms/size-change-under-backface-visibility-hidden.html
 /css/css-transforms/skew-test1.html
 /css/css-transforms/skewX/svg-skewx-001.html
