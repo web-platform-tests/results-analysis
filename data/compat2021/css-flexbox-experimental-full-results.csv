@@ -270,8 +270,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/css-flexbox-row.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-test1.html,1/1,1/1,1/1
 /css/css-flexbox/display-flex-001.htm,1/1,1/1,1/1
-/css/css-flexbox/display_flex_exist.html,1/1,1/1,1/1
-/css/css-flexbox/display_inline-flex_exist.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-bsize-change.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout-002.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout.html,1/1,1/1,1/1
@@ -324,7 +322,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-aspect-ratio-img-row-013.html,5/5,5/5,5/5
 /css/css-flexbox/flex-aspect-ratio-img-row-014.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-015.html,1/1,1/1,0/1
-/css/css-flexbox/flex-base.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-002.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-003.html,1/1,1/1,1/1
@@ -350,8 +347,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-direction-with-element-insert.html,1/1,1/1,1/1
 /css/css-flexbox/flex-direction.html,1/1,1/1,1/1
 /css/css-flexbox/flex-factor-less-than-one.html,22/22,22/22,22/22
-/css/css-flexbox/flex-flexitem-childmargin.html,1/1,1/1,1/1
-/css/css-flexbox/flex-flexitem-percentage-prescation.html,1/1,1/1,1/1
 /css/css-flexbox/flex-flow-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-flow-002.html,1/1,1/1,1/1
 /css/css-flexbox/flex-flow-003.html,1/1,1/1,1/1
@@ -860,7 +855,6 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexitem-no-margin-collapsing.html,1/1,1/1,1/1
 /css/css-flexbox/flexitem-stretch-image.html,1/1,1/1,1/1
 /css/css-flexbox/flexitem-stretch-range.html,1/1,1/1,1/1
-/css/css-flexbox/floated-flexitem.html,1/1,1/1,1/1
 /css/css-flexbox/frameset-crash.html,1/1,1/1,1/1
 /css/css-flexbox/gap-001-lr.html,1/1,1/1,1/1
 /css/css-flexbox/gap-001-ltr.html,1/1,1/1,1/1
