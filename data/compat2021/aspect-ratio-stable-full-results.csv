@@ -71,8 +71,8 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-018.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-019.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-020.html,1/1,1/1,0/1
-/css/css-sizing/aspect-ratio/flex-aspect-ratio-021.html,0/1,1/1,0/1
-/css/css-sizing/aspect-ratio/flex-aspect-ratio-022.html,0/1,1/1,0/1
+/css/css-sizing/aspect-ratio/flex-aspect-ratio-021.html,1/1,1/1,0/1
+/css/css-sizing/aspect-ratio/flex-aspect-ratio-022.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-023.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-024.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-025.html,0/1,1/1,0/1
@@ -111,7 +111,7 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/quirks-mode-003.html,1/1,0/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-001.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-002.html,1/1,1/1,0/1
-/css/css-sizing/aspect-ratio/replaced-element-003.html,0/1,1/1,1/1
+/css/css-sizing/aspect-ratio/replaced-element-003.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-004.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-005.html,1/1,1/1,0/1
 /css/css-sizing/aspect-ratio/replaced-element-006.html,1/1,1/1,0/1
