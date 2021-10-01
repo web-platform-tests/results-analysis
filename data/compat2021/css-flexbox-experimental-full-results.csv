@@ -160,9 +160,9 @@ testname,chrome,firefox,safari
 /css/css-flexbox/getcomputedstyle/flexbox_computedstyle_order.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-column-reverse.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-row-reverse.html,1/1,1/1,1/1
-/css/css-flexbox/parsing/flex-basis-computed.html,11/12,11/12,8/12
+/css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,8/12
 /css/css-flexbox/parsing/flex-basis-invalid.html,5/5,5/5,5/5
-/css/css-flexbox/parsing/flex-basis-valid.html,8/8,7/8,4/8
+/css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,4/8
 /css/css-flexbox/parsing/flex-computed.html,8/8,0/8,8/8
 /css/css-flexbox/parsing/flex-direction-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-direction-invalid.html,2/2,2/2,2/2
@@ -175,7 +175,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/parsing/flex-grow-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-grow-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-invalid.html,4/4,4/4,4/4
-/css/css-flexbox/parsing/flex-shorthand.html,36/36,32/36,24/36
+/css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,24/36
 /css/css-flexbox/parsing/flex-shrink-computed.html,4/4,2/4,2/4
 /css/css-flexbox/parsing/flex-shrink-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-valid.html,4/4,4/4,4/4

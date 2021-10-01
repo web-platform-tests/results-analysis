@@ -801,7 +801,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-as-flex-item-should-not-shrink-to-fit-008.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-automatic-minimum-for-auto-columns-001.html,4/4,4/4,4/4
 /css/css-grid/layout-algorithm/grid-container-percentage-001.html,20/20,20/20,20/20
-/css/css-grid/layout-algorithm/grid-container-percentage-002.html,24/24,5/24,24/24
+/css/css-grid/layout-algorithm/grid-container-percentage-002.html,24/24,9/24,24/24
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-001.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-002.html,1/1,0/1,0/1
 /css/css-grid/layout-algorithm/grid-content-distribution-must-account-for-track-sizing-003.html,1/1,1/1,1/1
