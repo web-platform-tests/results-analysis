@@ -171,12 +171,12 @@ testname,chrome,firefox,safari
 /css/css-flexbox/parsing/flex-flow-invalid.html,2/2,2/2,2/2
 /css/css-flexbox/parsing/flex-flow-shorthand.html,6/6,6/6,6/6
 /css/css-flexbox/parsing/flex-flow-valid.html,3/3,3/3,3/3
-/css/css-flexbox/parsing/flex-grow-computed.html,4/4,2/4,2/4
+/css/css-flexbox/parsing/flex-grow-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-grow-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-grow-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,24/36
-/css/css-flexbox/parsing/flex-shrink-computed.html,4/4,2/4,2/4
+/css/css-flexbox/parsing/flex-shrink-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-valid.html,6/6,6/6,6/6

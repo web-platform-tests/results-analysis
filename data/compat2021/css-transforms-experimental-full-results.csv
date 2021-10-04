@@ -11,13 +11,13 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/scale-composition.html,40/40,40/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,360/360,360/360,360/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,1/28
-/css/css-transforms/animation/transform-interpolation-001.html,422/448,448/448,360/448
+/css/css-transforms/animation/transform-interpolation-001.html,428/448,448/448,360/448
 /css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,200/216
 /css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
-/css/css-transforms/animation/transform-interpolation-computed-value.html,60/96,27/96,0/96
+/css/css-transforms/animation/transform-interpolation-computed-value.html,63/102,29/102,0/102
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,0/1,0/1,0/1
@@ -459,7 +459,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-zero-2.html,1/1,1/1,0/1
 /css/css-transforms/perspective-zero.html,1/1,1/1,0/1
 /css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html,2/2,2/2,0/2
-/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,10/10,6/10
+/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,6/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-overflow-percent.html,1/1,1/1,1/1
