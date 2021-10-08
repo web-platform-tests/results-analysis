@@ -332,7 +332,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-basis-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-basis-011.html,1/1,0/1,1/1
+/css/css-flexbox/flex-basis-011.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-item-margins-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-box-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/flex-child-percent-basis-resize-1.html,1/1,1/1,1/1
@@ -983,7 +983,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-heights-007.html,0/1,1/1,0/1
 /css/css-flexbox/percentage-heights-008.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-009.html,1/1,1/1,1/1
-/css/css-flexbox/percentage-heights-010.html,1/1,0/1,1/1
+/css/css-flexbox/percentage-heights-010.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-011.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-012.html,10/10,10/10,10/10
 /css/css-flexbox/percentage-heights-013.html,4/4,3/4,4/4
