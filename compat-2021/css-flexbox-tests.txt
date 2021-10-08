@@ -370,8 +370,6 @@
 /css/css-flexbox/css-flexbox-row.html
 /css/css-flexbox/css-flexbox-test1.html
 /css/css-flexbox/display-flex-001.htm
-/css/css-flexbox/display_flex_exist.html
-/css/css-flexbox/display_inline-flex_exist.html
 /css/css-flexbox/dynamic-bsize-change.html
 /css/css-flexbox/dynamic-change-simplified-layout-002.html
 /css/css-flexbox/dynamic-change-simplified-layout.html
@@ -412,7 +410,6 @@
 /css/css-flexbox/flex-aspect-ratio-img-row-011.html
 /css/css-flexbox/flex-aspect-ratio-img-row-012.html
 /css/css-flexbox/flex-aspect-ratio-img-row-014.html
-/css/css-flexbox/flex-base.html
 /css/css-flexbox/flex-basis-001.html
 /css/css-flexbox/flex-basis-002.html
 /css/css-flexbox/flex-basis-003.html
@@ -437,8 +434,6 @@
 /css/css-flexbox/flex-direction-with-element-insert.html
 /css/css-flexbox/flex-direction.html
 /css/css-flexbox/flex-factor-less-than-one.html
-/css/css-flexbox/flex-flexitem-childmargin.html
-/css/css-flexbox/flex-flexitem-percentage-prescation.html
 /css/css-flexbox/flex-flow-001.html
 /css/css-flexbox/flex-flow-002.html
 /css/css-flexbox/flex-flow-003.html
@@ -878,7 +873,6 @@
 /css/css-flexbox/flexitem-no-margin-collapsing.html
 /css/css-flexbox/flexitem-stretch-image.html
 /css/css-flexbox/flexitem-stretch-range.html
-/css/css-flexbox/floated-flexitem.html
 /css/css-flexbox/gap-001-lr.html
 /css/css-flexbox/gap-001-ltr.html
 /css/css-flexbox/gap-001-rl.html
