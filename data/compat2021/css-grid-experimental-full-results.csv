@@ -833,9 +833,9 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-auto-columns-computed.html,25/25,25/25,25/25
 /css/css-grid/parsing/grid-auto-columns-invalid.html,15/15,15/15,15/15
 /css/css-grid/parsing/grid-auto-columns-valid.html,30/30,30/30,30/30
-/css/css-grid/parsing/grid-auto-flow-computed.html,4/7,7/7,4/7
+/css/css-grid/parsing/grid-auto-flow-computed.html,7/7,7/7,4/7
 /css/css-grid/parsing/grid-auto-flow-invalid.html,3/3,3/3,3/3
-/css/css-grid/parsing/grid-auto-flow-valid.html,5/7,7/7,5/7
+/css/css-grid/parsing/grid-auto-flow-valid.html,7/7,7/7,5/7
 /css/css-grid/parsing/grid-auto-rows-computed.html,25/25,25/25,25/25
 /css/css-grid/parsing/grid-auto-rows-invalid.html,14/14,14/14,14/14
 /css/css-grid/parsing/grid-auto-rows-valid.html,30/30,30/30,30/30
@@ -893,7 +893,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-item-non-auto-height-stretch-004.html,1/1,1/1,1/1
 /css/css-grid/grid-item-percentage-quirk-001.html,1/1,1/1,1/1
 /css/css-grid/grid-item-percentage-quirk-002.html,1/1,1/1,1/1
-/css/css-grid/grid-layout-properties.html,119/140,98/140,119/140
+/css/css-grid/grid-layout-properties.html,121/140,98/140,119/140
 /css/css-grid/grid-tracks-stretched-with-different-flex-factors-sum.html,2/2,2/2,2/2
 /css/css-grid/inheritance.html,20/20,20/20,20/20
 /css/css-grid/relative-grandchild.html,1/1,1/1,1/1

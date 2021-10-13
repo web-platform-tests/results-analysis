@@ -1,12 +1,12 @@
 testname,chrome,firefox,safari
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,0/1
-/css/css-transforms/animation/list-interpolation.html,74/76,76/76,22/76
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,22/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,4/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
-/css/css-transforms/animation/rotate-composition.html,61/66,53/66,22/66
-/css/css-transforms/animation/rotate-interpolation.html,360/360,356/360,348/360
+/css/css-transforms/animation/rotate-composition.html,64/66,53/66,22/66
+/css/css-transforms/animation/rotate-interpolation.html,360/360,360/360,348/360
 /css/css-transforms/animation/rotate-transform-equivalent.html,1/1,0/1,0/1
 /css/css-transforms/animation/scale-composition.html,40/40,40/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,360/360,360/360,360/360
@@ -17,7 +17,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
-/css/css-transforms/animation/transform-interpolation-computed-value.html,63/102,29/102,0/102
+/css/css-transforms/animation/transform-interpolation-computed-value.html,71/105,30/105,0/105
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,0/1,0/1,0/1
@@ -203,7 +203,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/perspective-origin-invalid.html,12/12,12/12,12/12
 /css/css-transforms/parsing/perspective-origin-valid.html,18/18,18/18,18/18
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
-/css/css-transforms/parsing/rotate-parsing-valid.html,17/17,13/17,17/17
+/css/css-transforms/parsing/rotate-parsing-valid.html,17/17,17/17,17/17
 /css/css-transforms/parsing/scale-parsing-invalid.html,2/2,2/2,2/2
 /css/css-transforms/parsing/scale-parsing-valid.html,22/22,22/22,12/22
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
