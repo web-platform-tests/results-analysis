@@ -2,11 +2,13 @@
 
 const fetch = require('node-fetch');
 const flags = require('flags');
+const moment = require('moment');
 const Git = require('nodegit');
 const runs = require('./lib/runs');
 
 flags.defineInteger('max-runs', 0, 'Write at most this many runs');
 flags.defineInteger('max-time', 0, 'Run for at most this many seconds');
+flags.defineInteger('max-age-days', 0, 'Don\'t process any runs older than this many days');
 flags.parse();
 
 async function writeRunToGit(run, repo) {
@@ -144,10 +146,12 @@ async function main() {
 
   const maxRuns = flags.get('max-runs');
   const maxTime = flags.get('max-time');
+  const maxAgeDays = flags.get('max-age-days');
 
   let totalRuns = 0;
   let writtenRuns = 0;
   const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
+  const maxAge = maxAgeDays ? moment().subtract(maxAgeDays, 'days') : null;
 
   const products = ['chrome', 'edge', 'firefox', 'safari', 'webkitgtk'];
   for (const product of products) {
@@ -172,6 +176,10 @@ async function main() {
       if (maxTime && Date.now() >= deadline) {
         console.log(`Stopping because limit of ${maxTime} seconds was reached`);
         stop = true;
+        break;
+      }
+      if (maxAge && moment(run.created_at) < maxAge) {
+        console.log(`Moving to next product because limit of ${maxAgeDays} days old was reached`);
         break;
       }
     }
