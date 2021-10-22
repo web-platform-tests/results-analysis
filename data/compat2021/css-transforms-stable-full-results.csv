@@ -17,7 +17,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,87/96
-/css/css-transforms/animation/transform-interpolation-computed-value.html,66/70,0/70,0/70
+/css/css-transforms/animation/transform-interpolation-computed-value.html,76/82,0/82,0/82
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1
@@ -440,7 +440,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
 /css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
-/css/css-transforms/inheritance.html,13/20,18/20,16/20
+/css/css-transforms/inheritance.html,14/20,19/20,17/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
 /css/css-transforms/perspective-origin-001.html,1/1,1/1,0/1
