@@ -299,7 +299,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-aspect-ratio-img-column-008.html,1/1,0/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-aspect-ratio-img-column-011.html,9/10,9/10,9/10
+/css/css-flexbox/flex-aspect-ratio-img-column-011.html,10/10,9/10,9/10
 /css/css-flexbox/flex-aspect-ratio-img-column-012.html,1/1,1/1,0/1
 /css/css-flexbox/flex-aspect-ratio-img-column-013.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-014.html,1/1,1/1,1/1
@@ -399,7 +399,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-minimum-height-flex-items-020.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-021.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-022.html,1/1,1/1,1/1
-/css/css-flexbox/flex-minimum-height-flex-items-023.html,0/1,0/1,0/1
+/css/css-flexbox/flex-minimum-height-flex-items-023.html,1/1,0/1,0/1
 /css/css-flexbox/flex-minimum-height-flex-items-024.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-height-flex-items-025.html,4/4,4/4,1/4
 /css/css-flexbox/flex-minimum-height-flex-items-026.html,1/1,1/1,0/1
@@ -422,7 +422,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-minimum-width-flex-items-010.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-width-flex-items-011.html,1/1,1/1,1/1
 /css/css-flexbox/flex-minimum-width-flex-items-012.html,1/1,1/1,1/1
-/css/css-flexbox/flex-minimum-width-flex-items-013.html,0/1,0/1,0/1
+/css/css-flexbox/flex-minimum-width-flex-items-013.html,1/1,0/1,0/1
 /css/css-flexbox/flex-minimum-width-flex-items-014.html,6/6,6/6,6/6
 /css/css-flexbox/flex-minimum-width-flex-items-015.html,1/1,1/1,0/1
 /css/css-flexbox/flex-minimum-width-flex-items-016.html,1/1,1/1,1/1
@@ -980,7 +980,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-heights-004.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-005.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-006.html,1/1,1/1,1/1
-/css/css-flexbox/percentage-heights-007.html,0/1,1/1,1/1
+/css/css-flexbox/percentage-heights-007.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-008.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-009.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-010.html,1/1,1/1,1/1
