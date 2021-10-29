@@ -113,8 +113,12 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
         cachedCount++;
       }
     } catch (e) {
-      // No cache hit; load from the server instead.
-      const url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
+      let url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
+      // HACK: Handle WebKitGTK runs being delayed vs other runs by extending
+      // the search radius if WebKitGTK is being requested.
+      if (products.includes('webkitgtk')) {
+        url = `${runsUri}&from=${formattedFrom}T00:00:00Z&to=${formattedTo}T23:59:59Z`;
+      }
       const response = await fetch(url);
       // Many days do not have an aligned set of runs, but we always write to
       // the cache to speed up future executions of this code.
