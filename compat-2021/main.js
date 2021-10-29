@@ -11,6 +11,7 @@ const lib = require('../lib');
 const moment = require('moment');
 const path = require('path');
 
+flags.defineStringList('products', ['chrome','firefox','safari'], 'Products to include (comma-separated)');
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -327,7 +328,7 @@ async function scoreCategory(category, experimental, products, alignedRuns) {
 }
 
 async function main() {
-  const products = ['chrome', 'firefox', 'safari'];
+  const products = flags.get('products');
   const repo = await Git.Repository.open(
       path.join(ROOT_DIR, 'wpt-results.git'));
 

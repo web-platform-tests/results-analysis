@@ -58,7 +58,9 @@ update_bsf_csv out/data/stable-browser-specific-failures.csv
 update_bsf_csv out/data/experimental-browser-specific-failures.csv
 
 update_compat_2021() {
-  local LABEL="${1}"
+  local PRODUCTS="${1}"
+  local LABEL="${2}"
+  local OUTDIR="${3}"
 
   local FROM_DATE="2020-12-15"
   local EXPERIMENTAL_FLAG=""
@@ -66,11 +68,11 @@ update_compat_2021() {
     EXPERIMENTAL_FLAG="--experimental"
   fi
 
-  node compat-2021/main.js ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} \
-      --to=${TO_DATE}
+  node compat-2021/main.js --products=${PRODUCTS} ${EXPERIMENTAL_FLAG} \
+      --from=${FROM_DATE} --to=${TO_DATE}
 
   for FEATURE in aspect-ratio css-flexbox css-grid css-transforms position-sticky; do
-    local OUT_CSV="out/data/compat2021/${FEATURE}-${LABEL}.csv"
+    local OUT_CSV="${OUTDIR}/${FEATURE}-${LABEL}.csv"
 
     local SKIP_LINES="+1"
     if [[ -f "${OUT_CSV}" ]]; then
@@ -79,16 +81,22 @@ update_compat_2021() {
     tail -n ${SKIP_LINES} "${FEATURE}-${LABEL}.csv" >> "${OUT_CSV}"
 
     # Move full results over.
-    mv "${FEATURE}-${LABEL}-full-results.csv" out/data/compat2021/
+    mv "${FEATURE}-${LABEL}-full-results.csv" ${OUTDIR}
 
     # Cleanup the temporary output file.
     rm "${FEATURE}-${LABEL}.csv"
   done
 
-  mv "unified-scores-${LABEL}.csv" out/data/compat2021/
-  mv "summary-${LABEL}.csv" out/data/compat2021/
+  mv "unified-scores-${LABEL}.csv" ${OUTDIR}
+  mv "summary-${LABEL}.csv" ${OUTDIR}
 }
 
+# Main page
 mkdir -p out/data/compat2021/
-update_compat_2021 experimental
-update_compat_2021 stable
+update_compat_2021 chrome,firefox,safari experimental out/data/compat2021
+update_compat_2021 chrome,firefox,safari stable out/data/compat2021
+
+# WebKitGTK 'stand-in' page
+mkdir -p out/data/compat2021/webkitgtk
+update_compat_2021 chrome,firefox,webkitgtk experimental out/data/compat2021/webkitgtk
+update_compat_2021 chrome,firefox,webkitgtk stable out/data/compat2021/webkitgtk
