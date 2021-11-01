@@ -23,7 +23,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
-/css/css-transforms/animation/transform-interpolation-translate-em.html,0/1,1/1,0/1
+/css/css-transforms/animation/transform-interpolation-translate-em.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,8/56
 /css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,164/168
@@ -439,7 +439,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
-/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,0/1
+/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
 /css/css-transforms/inheritance.html,20/20,19/20,18/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
@@ -606,7 +606,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-rounding-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-scale-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-scale-002.html,1/1,1/1,1/1
-/css/css-transforms/transform-scale-hittest.html,2/2,1/2,1/2
+/css/css-transforms/transform-scale-hittest.html,2/2,2/2,2/2
 /css/css-transforms/transform-scale-percent-001.html,1/1,1/1,0/1
 /css/css-transforms/transform-scale-test.html,1/1,1/1,1/1
 /css/css-transforms/transform-scalex-001.html,1/1,1/1,1/1
@@ -724,7 +724,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-sorting-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-004.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-005.html,1/1,1/1,0/1
-/css/css-transforms/transform3d-sorting-006.html,1/1,0/1,0/1
+/css/css-transforms/transform3d-sorting-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-translate3d-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-translatez-001.html,1/1,1/1,1/1
 /css/css-transforms/transform_translate.html,1/1,1/1,1/1
