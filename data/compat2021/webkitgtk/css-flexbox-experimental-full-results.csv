@@ -160,9 +160,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/getcomputedstyle/flexbox_computedstyle_order.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-column-reverse.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-row-reverse.html,1/1,1/1,1/1
-/css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,9/12
+/css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,8/12
 /css/css-flexbox/parsing/flex-basis-invalid.html,5/5,5/5,5/5
-/css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,5/8
+/css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,4/8
 /css/css-flexbox/parsing/flex-computed.html,8/8,0/8,8/8
 /css/css-flexbox/parsing/flex-direction-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-direction-invalid.html,2/2,2/2,2/2
@@ -175,7 +175,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/parsing/flex-grow-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-grow-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-invalid.html,4/4,4/4,4/4
-/css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,28/36
+/css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,24/36
 /css/css-flexbox/parsing/flex-shrink-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-valid.html,4/4,4/4,4/4
@@ -300,7 +300,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flex-aspect-ratio-img-column-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-010.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-011.html,10/10,9/10,9/10
-/css/css-flexbox/flex-aspect-ratio-img-column-012.html,1/1,1/1,1/1
+/css/css-flexbox/flex-aspect-ratio-img-column-012.html,1/1,1/1,0/1
 /css/css-flexbox/flex-aspect-ratio-img-column-013.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-014.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-column-015.html,1/1,1/1,0/1
@@ -313,7 +313,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flex-aspect-ratio-img-row-004.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-005.html,4/4,4/4,4/4
 /css/css-flexbox/flex-aspect-ratio-img-row-006.html,1/1,1/1,1/1
-/css/css-flexbox/flex-aspect-ratio-img-row-007.html,1/1,1/1,1/1
+/css/css-flexbox/flex-aspect-ratio-img-row-007.html,1/1,1/1,0/1
 /css/css-flexbox/flex-aspect-ratio-img-row-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-010.html,1/1,1/1,0/1
@@ -332,7 +332,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flex-basis-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-basis-010.html,1/1,1/1,1/1
-/css/css-flexbox/flex-basis-011.html,1/1,1/1,1/1
+/css/css-flexbox/flex-basis-011.html,1/1,1/1,0/1
 /css/css-flexbox/flex-basis-item-margins-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-box-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/flex-child-percent-basis-resize-1.html,1/1,1/1,1/1
@@ -526,13 +526,13 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flexbox-definite-sizes-005.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-definite-sizes-006.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-dyn-resize-001.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-001a.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-001b.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-002a.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-002b.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-003a.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox-flex-basis-content-001a.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-flex-basis-content-001b.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-flex-basis-content-002a.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-flex-basis-content-002b.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-flex-basis-content-003a.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-flex-basis-content-003b.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-flex-basis-content-004a.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox-flex-basis-content-004a.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-flex-basis-content-004b.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-flex-direction-column-percentage-ignored.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-flex-direction-column-reverse.htm,1/1,1/1,1/1

@@ -606,7 +606,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-rounding-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-scale-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-scale-002.html,1/1,1/1,1/1
-/css/css-transforms/transform-scale-hittest.html,2/2,1/2,1/2
+/css/css-transforms/transform-scale-hittest.html,2/2,2/2,2/2
 /css/css-transforms/transform-scale-percent-001.html,1/1,1/1,0/1
 /css/css-transforms/transform-scale-test.html,1/1,1/1,1/1
 /css/css-transforms/transform-scalex-001.html,1/1,1/1,1/1
@@ -724,7 +724,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform3d-sorting-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-004.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-sorting-005.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-sorting-006.html,1/1,0/1,0/1
+/css/css-transforms/transform3d-sorting-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-translate3d-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-translatez-001.html,1/1,1/1,1/1
 /css/css-transforms/transform_translate.html,1/1,1/1,1/1
