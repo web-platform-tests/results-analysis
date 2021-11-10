@@ -214,7 +214,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/parsing/transform-origin-invalid.html,10/10,10/10,9/10
 /css/css-transforms/parsing/transform-origin-valid.html,16/16,16/16,16/16
 /css/css-transforms/parsing/transform-valid.html,40/41,41/41,29/41
-/css/css-transforms/parsing/translate-parsing-invalid.html,3/3,3/3,3/3
+/css/css-transforms/parsing/translate-parsing-invalid.html,6/6,6/6,6/6
 /css/css-transforms/parsing/translate-parsing-valid.html,0/20,20/20,17/20
 /css/css-transforms/patternTransform/svg-patternTransform-001.html,1/1,1/1,1/1
 /css/css-transforms/patternTransform/svg-patternTransform-combination-001.html,1/1,1/1,1/1

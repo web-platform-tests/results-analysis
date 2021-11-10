@@ -33,7 +33,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-skew-composition.html,43/43,43/43,0/43
 /css/css-transforms/animation/transform-translate-composition.html,56/56,56/56,1/56
 /css/css-transforms/animation/translate-composition.html,56/56,56/56,28/56
-/css/css-transforms/animation/translate-interpolation.html,408/408,404/408,408/408
+/css/css-transforms/animation/translate-interpolation.html,408/408,408/408,408/408
 /css/css-transforms/document-styles/svg-document-styles-001.html,1/1,1/1,1/1
 /css/css-transforms/document-styles/svg-document-styles-002.html,1/1,1/1,1/1
 /css/css-transforms/document-styles/svg-document-styles-003.html,1/1,1/1,1/1
@@ -204,7 +204,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/perspective-origin-valid.html,18/18,18/18,18/18
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
 /css/css-transforms/parsing/rotate-parsing-valid.html,17/17,17/17,17/17
-/css/css-transforms/parsing/scale-parsing-invalid.html,2/2,2/2,2/2
+/css/css-transforms/parsing/scale-parsing-invalid.html,5/5,5/5,5/5
 /css/css-transforms/parsing/scale-parsing-valid.html,22/22,22/22,12/22
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
 /css/css-transforms/parsing/transform-box-invalid.html,3/3,3/3,3/3
