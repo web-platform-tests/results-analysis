@@ -74,7 +74,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/abspos/position-absolute-015.html,1/1,1/1,0/1
 /css/css-flexbox/abspos/position-absolute-containing-block-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/position-absolute-containing-block-002.html,1/1,1/1,1/1
-/css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,4/25
+/css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,25/25
 /css/css-flexbox/animation/flex-basis-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-grow-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-shrink-interpolation.html,152/152,152/152,152/152
