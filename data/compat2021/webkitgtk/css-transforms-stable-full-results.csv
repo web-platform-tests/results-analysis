@@ -1,6 +1,6 @@
 testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,0/1
-/css/css-transforms/animation/list-interpolation.html,74/76,76/76,22/76
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,22/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,4/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
@@ -17,7 +17,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
-/css/css-transforms/animation/transform-interpolation-computed-value.html,76/82,0/82,0/82
+/css/css-transforms/animation/transform-interpolation-computed-value.html,80/82,0/82,0/82
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,0/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1
