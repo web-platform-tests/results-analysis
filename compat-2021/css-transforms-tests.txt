@@ -23,7 +23,7 @@
 /css/css-transforms/animation/transform-interpolation-004.html
 /css/css-transforms/animation/transform-interpolation-005.html
 /css/css-transforms/animation/transform-interpolation-006.html
-/css/css-transforms/animation/transform-interpolation-computed-value.html
+# /css/css-transforms/animation/transform-interpolation-computed-value.html
 /css/css-transforms/animation/transform-interpolation-matrix.html
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html
 /css/css-transforms/animation/transform-interpolation-rotate.html
