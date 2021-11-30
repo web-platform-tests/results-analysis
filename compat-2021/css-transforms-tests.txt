@@ -42,10 +42,10 @@
 /css/css-transforms/animation/translate-interpolation.html
 /css/css-transforms/backface-visibility-001.html
 /css/css-transforms/backface-visibility-hidden-001.html
-/css/css-transforms/backface-visibility-hidden-002.tentative.html
-/css/css-transforms/backface-visibility-hidden-003.tentative.html
-/css/css-transforms/backface-visibility-hidden-004.tentative.html
-/css/css-transforms/backface-visibility-hidden-005.tentative.html
+# /css/css-transforms/backface-visibility-hidden-002.tentative.html
+# /css/css-transforms/backface-visibility-hidden-003.tentative.html
+# /css/css-transforms/backface-visibility-hidden-004.tentative.html
+# /css/css-transforms/backface-visibility-hidden-005.tentative.html
 /css/css-transforms/backface-visibility-hidden-006.html
 /css/css-transforms/backface-visibility-hidden-animated-001.html
 /css/css-transforms/backface-visibility-hidden-animated-002.html

@@ -450,7 +450,7 @@
 /css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-003.html
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-001.html
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-002.html
-/css/css-grid/alignment/replaced-alignment-with-aspect-ratio-003.tentative.html
+# /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-003.tentative.html
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-004.html
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-005.html
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-006.html

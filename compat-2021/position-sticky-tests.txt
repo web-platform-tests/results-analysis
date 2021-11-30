@@ -3,7 +3,7 @@
 /css/css-position/sticky/position-sticky-fixed-ancestor.html
 /css/css-position/sticky/position-sticky-hyperlink.html
 /css/css-position/sticky/position-sticky-inline.html
-/css/css-position/sticky/position-sticky-large-top-2.tentative.html
+# /css/css-position/sticky/position-sticky-large-top-2.tentative.html
 # /css/css-position/sticky/position-sticky-large-top.tentative.html
 # /css/css-position/sticky/position-sticky-nested-bottom.html
 /css/css-position/sticky/position-sticky-nested-inline.html
