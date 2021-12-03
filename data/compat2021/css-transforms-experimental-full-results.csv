@@ -17,7 +17,6 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
-/css/css-transforms/animation/transform-interpolation-computed-value.html,82/82,0/82,0/82
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1

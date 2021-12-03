@@ -849,7 +849,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-areas-one-cell.html,6/6,6/6,6/6
 /css/css-grid/parsing/grid-template-areas-valid.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-columns-computed-implicit-track.html,24/24,24/24,24/24
-/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,18/24,24/24,18/24
+/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,24/24,24/24,18/24
 /css/css-grid/parsing/grid-template-columns-computed-withcontent.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-template-columns-computed.html,24/24,24/24,24/24
 /css/css-grid/parsing/grid-template-columns-invalid.html,15/15,15/15,15/15
@@ -857,7 +857,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-repeat-auto-computed-withcontent-001.html,12/12,12/12,12/12
 /css/css-grid/parsing/grid-template-repeat-auto-computed-withcontent-002.html,17/17,17/17,17/17
 /css/css-grid/parsing/grid-template-rows-computed-implicit-track.html,24/24,24/24,24/24
-/css/css-grid/parsing/grid-template-rows-computed-nogrid.html,18/24,24/24,18/24
+/css/css-grid/parsing/grid-template-rows-computed-nogrid.html,24/24,24/24,18/24
 /css/css-grid/parsing/grid-template-rows-computed-withcontent.html,27/27,27/27,27/27
 /css/css-grid/parsing/grid-template-rows-computed.html,24/24,24/24,24/24
 /css/css-grid/parsing/grid-template-rows-invalid.html,15/15,15/15,15/15
