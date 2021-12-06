@@ -10,7 +10,6 @@ testname,chrome,firefox,webkitgtk
 /css/css-position/sticky/position-sticky-hyperlink.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-inflow-position.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-inline.html,1/1,1/1,1/1
-/css/css-position/sticky/position-sticky-input-box-gets-focused-after-scroll.html,1/1,0/1,0/1
 /css/css-position/sticky/position-sticky-large-top-2.tentative.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-left.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-margins.html,3/3,3/3,3/3
