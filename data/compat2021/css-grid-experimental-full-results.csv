@@ -542,7 +542,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-definition/grid-layout-auto-tracks.html,1/1,1/1,1/1
 /css/css-grid/grid-definition/grid-layout-basic.html,1/1,1/1,1/1
 /css/css-grid/grid-definition/grid-layout-repeat-notation.html,1/1,1/1,1/1
-/css/css-grid/grid-definition/grid-limits-001.html,2/2,2/2,0/1
+/css/css-grid/grid-definition/grid-limits-001.html,2/2,2/2,2/2
 /css/css-grid/grid-definition/grid-minimum-contribution-with-percentages.html,16/16,16/16,16/16
 /css/css-grid/grid-definition/grid-percentage-rows-indefinite-height-001.html,120/120,16/120,120/120
 /css/css-grid/grid-definition/grid-percentage-rows-indefinite-height-002.html,4/4,0/4,4/4
@@ -826,7 +826,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-percent-rows-filled-shrinkwrap-001.html,1/1,0/1,1/1
 /css/css-grid/layout-algorithm/grid-percent-rows-spanned-shrinkwrap-001.html,1/1,0/1,1/1
 /css/css-grid/layout-algorithm/grid-stretch-respects-min-size-001.html,1/1,1/1,1/1
-/css/css-grid/parsing/grid-area-computed.html,27/29,15/29,27/29
+/css/css-grid/parsing/grid-area-computed.html,27/29,19/29,27/29
 /css/css-grid/parsing/grid-area-invalid.html,25/25,25/25,25/25
 /css/css-grid/parsing/grid-area-shorthand.html,53/53,53/53,53/53
 /css/css-grid/parsing/grid-area-valid.html,24/56,56/56,24/56
@@ -893,7 +893,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-item-non-auto-height-stretch-004.html,1/1,1/1,1/1
 /css/css-grid/grid-item-percentage-quirk-001.html,1/1,1/1,1/1
 /css/css-grid/grid-item-percentage-quirk-002.html,1/1,1/1,1/1
-/css/css-grid/grid-layout-properties.html,121/140,98/140,121/140
+/css/css-grid/grid-layout-properties.html,121/140,128/140,121/140
 /css/css-grid/grid-tracks-stretched-with-different-flex-factors-sum.html,2/2,2/2,2/2
 /css/css-grid/inheritance.html,20/20,20/20,20/20
 /css/css-grid/relative-grandchild.html,1/1,1/1,1/1
