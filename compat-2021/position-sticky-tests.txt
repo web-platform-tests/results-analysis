@@ -63,7 +63,6 @@
 /css/css-position/sticky/position-sticky-get-bounding-client-rect.html
 /css/css-position/sticky/position-sticky-grid.html
 /css/css-position/sticky/position-sticky-inflow-position.html
-/css/css-position/sticky/position-sticky-input-box-gets-focused-after-scroll.html
 /css/css-position/sticky/position-sticky-left.html
 /css/css-position/sticky/position-sticky-margins.html
 /css/css-position/sticky/position-sticky-nested-left.html
