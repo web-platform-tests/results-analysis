@@ -1015,7 +1015,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/scrollbars-auto-min-content-sizing.html,1/1,1/1,1/1
 /css/css-flexbox/scrollbars-auto.html,1/1,0/1,0/1
 /css/css-flexbox/scrollbars-no-margin.html,1/1,1/1,0/1
-/css/css-flexbox/scrollbars.html,1/1,0/1,0/1
+/css/css-flexbox/scrollbars.html,1/1,1/1,0/1
 /css/css-flexbox/select-element-zero-height-001.html,1/1,1/1,0/1
 /css/css-flexbox/select-element-zero-height-002.html,1/1,1/1,0/1
 /css/css-flexbox/shrinking-column-flexbox.html,1/1,1/1,1/1
