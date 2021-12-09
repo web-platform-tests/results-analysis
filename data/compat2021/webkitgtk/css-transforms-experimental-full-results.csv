@@ -719,7 +719,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform3d-scale-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-scale-007.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-001.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-sorting-002.html,0/1,1/1,1/1
+/css/css-transforms/transform3d-sorting-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-004.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-sorting-005.html,1/1,1/1,1/1
