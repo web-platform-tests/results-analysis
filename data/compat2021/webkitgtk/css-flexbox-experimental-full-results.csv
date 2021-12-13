@@ -48,7 +48,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-rtl-001.html,24/24,24/24,24/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-rtl-002.html,24/24,24/24,24/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-001.html,24/24,24/24,24/24
-/css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-002.html,24/24,22/24,24/24
+/css/css-flexbox/abspos/flex-abspos-staticpos-justify-content-vertWM-002.html,24/24,24/24,24/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-justify-self-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/flex-abspos-staticpos-margin-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/flex-abspos-staticpos-margin-002.html,1/1,1/1,0/1
@@ -253,7 +253,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/box-sizing-min-max-sizes-001.html,2/2,2/2,2/2
 /css/css-flexbox/break-nested-float-in-flex-item-001-print.html,1/1,1/1
 /css/css-flexbox/break-nested-float-in-flex-item-002-print.html,1/1,1/1
-/css/css-flexbox/canvas-contain-size.html,1/1,1/1,1/1
+/css/css-flexbox/canvas-contain-size.html,1/1,1/1,0/1
 /css/css-flexbox/change-column-flex-width.html,1/1,1/1,1/1
 /css/css-flexbox/column-flex-child-with-overflow-scroll.html,2/2,2/2,2/2
 /css/css-flexbox/columns-height-set-via-top-bottom.html,2/2,2/2,2/2
@@ -373,7 +373,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flex-item-compressible-001.html,13/15,15/15,13/15
 /css/css-flexbox/flex-item-compressible-002.html,4/15,15/15,4/15
 /css/css-flexbox/flex-item-contains-size-layout-001.html,1/1,1/1,1/1
-/css/css-flexbox/flex-item-contains-strict.html,8/8,8/8,4/8
+/css/css-flexbox/flex-item-contains-strict.html,8/8,8/8,8/8
 /css/css-flexbox/flex-item-vertical-align.html,1/1,1/1,1/1
 /css/css-flexbox/flex-item-z-ordering-001.html,1/1,1/1,1/1
 /css/css-flexbox/flex-margin-no-collapse.html,1/1,1/1,1/1
