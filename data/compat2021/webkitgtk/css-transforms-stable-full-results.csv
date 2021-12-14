@@ -5,8 +5,8 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,4/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
-/css/css-transforms/animation/rotate-composition.html,0/66,53/66,22/66
-/css/css-transforms/animation/rotate-interpolation.html,0/360,356/360,348/360
+/css/css-transforms/animation/rotate-composition.html,0/66,55/66,22/66
+/css/css-transforms/animation/rotate-interpolation.html,0/360,360/360,348/360
 /css/css-transforms/animation/rotate-transform-equivalent.html,0/1,1/1,0/1
 /css/css-transforms/animation/scale-composition.html,0/40,40/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,0/360,360/360,360/360
@@ -202,7 +202,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/parsing/perspective-origin-invalid.html,12/12,12/12,12/12
 /css/css-transforms/parsing/perspective-origin-valid.html,18/18,18/18,18/18
 /css/css-transforms/parsing/rotate-parsing-invalid.html,9/9,9/9,9/9
-/css/css-transforms/parsing/rotate-parsing-valid.html,0/17,13/17,17/17
+/css/css-transforms/parsing/rotate-parsing-valid.html,0/17,17/17,17/17
 /css/css-transforms/parsing/scale-parsing-invalid.html,5/5,5/5,5/5
 /css/css-transforms/parsing/scale-parsing-valid.html,0/22,22/22,12/22
 /css/css-transforms/parsing/transform-box-computed.html,2/5,3/5,5/5
