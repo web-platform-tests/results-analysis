@@ -1028,7 +1028,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/stretching-orthogonal-flows.html,1/1,1/1,1/1
 /css/css-flexbox/svg-root-as-flex-item-001.html,1/1,1/1,1/1
 /css/css-flexbox/svg-root-as-flex-item-002.html,1/1,1/1,0/1
-/css/css-flexbox/svg-root-as-flex-item-003.html,1/1,1/1,0/1
+/css/css-flexbox/svg-root-as-flex-item-003.html,1/1,1/1,1/1
 /css/css-flexbox/svg-root-as-flex-item-004.html,1/1,1/1,1/1
 /css/css-flexbox/svg-root-as-flex-item-005.html,1/1,1/1,1/1
 /css/css-flexbox/svg-root-as-flex-item-006.html,1/1,1/1,1/1

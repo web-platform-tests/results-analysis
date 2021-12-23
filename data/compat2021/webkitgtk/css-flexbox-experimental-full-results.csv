@@ -929,7 +929,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/inline-flex-min-content-height.html,1/1,1/1,1/1
 /css/css-flexbox/inline-flex.html,1/1,1/1,1/1
 /css/css-flexbox/inline-flexbox-wrap-vertically-width-calculation.html,16/16,16/16,16/16
-/css/css-flexbox/intrinsic-width-orthogonal-writing-mode.html,3/3,1/3,1/3
+/css/css-flexbox/intrinsic-width-orthogonal-writing-mode.html,3/3,1/3,3/3
 /css/css-flexbox/item-with-max-height-and-scrollbar.html,1/1,1/1,1/1
 /css/css-flexbox/item-with-table-with-infinite-max-intrinsic-width.html,1/1,1/1,1/1
 /css/css-flexbox/justify-content-001.htm,1/1,1/1,1/1
