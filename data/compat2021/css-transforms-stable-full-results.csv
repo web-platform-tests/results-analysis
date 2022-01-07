@@ -11,7 +11,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/scale-composition.html,0/40,40/40,15/40
 /css/css-transforms/animation/scale-interpolation.html,0/360,360/360,360/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,1/28
-/css/css-transforms/animation/transform-interpolation-001.html,428/448,448/448,360/448
+/css/css-transforms/animation/transform-interpolation-001.html,448/448,448/448,360/448
 /css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,200/216
 /css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
@@ -22,7 +22,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
-/css/css-transforms/animation/transform-interpolation-translate-em.html,0/1,1/1,0/1
+/css/css-transforms/animation/transform-interpolation-translate-em.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,8/56
 /css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,164/168
@@ -212,7 +212,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/transform-origin-computed.html,23/23,23/23,23/23
 /css/css-transforms/parsing/transform-origin-invalid.html,10/10,10/10,9/10
 /css/css-transforms/parsing/transform-origin-valid.html,16/16,16/16,16/16
-/css/css-transforms/parsing/transform-valid.html,40/41,41/41,29/41
+/css/css-transforms/parsing/transform-valid.html,41/41,41/41,29/41
 /css/css-transforms/parsing/translate-parsing-invalid.html,6/6,6/6,6/6
 /css/css-transforms/parsing/translate-parsing-valid.html,0/20,20/20,17/20
 /css/css-transforms/patternTransform/svg-patternTransform-001.html,1/1,1/1,1/1

@@ -628,7 +628,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-whitespace-handling-002.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-with-multi-column-property.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-with-pseudo-elements-001.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-with-pseudo-elements-002.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox-with-pseudo-elements-002.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox-with-pseudo-elements-003.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-writing-mode-001.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-writing-mode-002.html,1/1,1/1,1/1
