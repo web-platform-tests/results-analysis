@@ -412,7 +412,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/css-rotate-2d-3d-001.html,1/1,1/1,1/1
 /css/css-transforms/css-scale-nested-001.html,1/1,1/1,1/1
 /css/css-transforms/css-skew-001.html,1/1,1/1,1/1
-/css/css-transforms/css-skew-002.html,1/1,1/1,1/1
+/css/css-transforms/css-skew-002.html,1/1,0/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-X-negative.html,1/1,1/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-X-positive.html,1/1,1/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-Y-negative.html,1/1,1/1,1/1
@@ -457,7 +457,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/perspective-untransformable-no-stacking-context.html,1/1,1/1,1/1
 /css/css-transforms/perspective-zero-2.html,1/1,1/1,0/1
 /css/css-transforms/perspective-zero.html,1/1,1/1,1/1
-/css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html,2/2,2/2,0/2
+/css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html,2/2,2/2,1/2
 /css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,9/10,9/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
@@ -483,8 +483,8 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/subpixel-transform-changes-004.html,1/1,1/1,1/1
 /css/css-transforms/text-perspective-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-2d-getComputedStyle-001.html,5/5,5/5,5/5
-/css/css-transforms/transform-3d-rotateY-stair-above-001.xht,1/1,1/1,0/1
-/css/css-transforms/transform-3d-rotateY-stair-below-001.xht,1/1,1/1,1/1
+/css/css-transforms/transform-3d-rotateY-stair-above-001.xht,1/1,0/1,0/1
+/css/css-transforms/transform-3d-rotateY-stair-below-001.xht,1/1,0/1,1/1
 /css/css-transforms/transform-abspos-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-abspos-002.html,1/1,1/1,1/1
 /css/css-transforms/transform-abspos-003.html,1/1,1/1,1/1
@@ -588,7 +588,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-percent-006.html,1/1,1/1,1/1
 /css/css-transforms/transform-percent-007.html,1/1,1/1,1/1
 /css/css-transforms/transform-percent-008.html,1/1,1/1,1/1
-/css/css-transforms/transform-percent-009.html,4/4,4/4,0/4
+/css/css-transforms/transform-percent-009.html,4/4,4/4,4/4
 /css/css-transforms/transform-percent-010.html,1/1,1/1,0/1
 /css/css-transforms/transform-propagate-inherit-boolean-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-root-bg-001.html,1/1,0/1,0/1
@@ -736,12 +736,12 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transformed-preserve-3d-1.html,1/1,1/1,1/1
 /css/css-transforms/transformed-rotateX-3.html,1/1,1/1,1/1
 /css/css-transforms/transformed-rotateY-1.html,1/1,1/1,1/1
-/css/css-transforms/transforms-rotate-degree-45.html,1/1,1/1,1/1
+/css/css-transforms/transforms-rotate-degree-45.html,1/1,0/1,1/1
 /css/css-transforms/transforms-rotate-degree-90.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotate-translate-scale.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotateY-degree-60.html,1/1,1/1,1/1
-/css/css-transforms/transforms-skewX.html,1/1,1/1,0/1
-/css/css-transforms/transforms-skewY.html,1/1,1/1,1/1
+/css/css-transforms/transforms-skewX.html,1/1,0/1,0/1
+/css/css-transforms/transforms-skewY.html,1/1,0/1,1/1
 /css/css-transforms/transforms-support-calc.html,7/7,7/7,7/7
 /css/css-transforms/translate-getComputedStyle.html,1/1,1/1,1/1
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1
