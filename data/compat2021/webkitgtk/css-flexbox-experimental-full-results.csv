@@ -259,7 +259,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/columns-height-set-via-top-bottom.html,2/2,2/2,2/2
 /css/css-flexbox/contain-size-layout-abspos-flex-container-crash.html,1/1,1/1,1/1
 /css/css-flexbox/content-height-with-scrollbars.html,1/1,1/1,0/1
-/css/css-flexbox/cross-axis-scrollbar.html,1/1,0/1,1/1
+/css/css-flexbox/cross-axis-scrollbar.html,1/1,1/1,1/1
 /css/css-flexbox/css-box-justify-content.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-img-expand-evenly.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-row-reverse-wrap-reverse.html,1/1,1/1,1/1
