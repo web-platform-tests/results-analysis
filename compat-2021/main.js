@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // TODO: There's a lot of reused code from browser-specific-failures.js here,
 // that could be put into lib/
@@ -11,7 +11,7 @@ const lib = require('../lib');
 const moment = require('moment');
 const path = require('path');
 
-flags.defineStringList('products', ['chrome','firefox','safari'], 'Products to include (comma-separated)');
+flags.defineStringList('products', ['chrome', 'firefox', 'safari'], 'Products to include (comma-separated)');
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -19,7 +19,7 @@ flags.defineBoolean('experimental', false,
     'Calculate metrics for experimental runs.');
 flags.parse();
 
-const ROOT_DIR = path.join(__dirname, "..");
+const ROOT_DIR = path.join(__dirname, '..');
 
 const CATEGORIES = [
   'aspect-ratio',
@@ -84,12 +84,12 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
   let params = `&label=master&label=${label}`;
   for (const product of products) {
     params += `&product=${product}`;
-  } 
+  }
   const runsUri = `${RUNS_URI}${params}`;
 
   console.log(`Fetching aligned runs from ${from.format('YYYY-MM-DD')} ` +
       `to ${to.format('YYYY-MM-DD')}`);
-    
+
   let cachedCount = 0;
   const before = moment();
   const alignedRuns = new Map();
@@ -97,11 +97,11 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
     const formattedFrom = from.format('YYYY-MM-DD');
     from.add(1, 'days');
     const formattedTo = from.format('YYYY-MM-DD');
-      
+
     // We advance the date (if necessary) before doing anything more, so that
     // code later in the loop body can just 'continue' without checking.
     from = advanceDateToSkipBadDataIfNecessary(from, experimental);
-    
+
     // Attempt to read the runs from the cache.
     // TODO: Consider https://github.com/tidoust/fetch-filecache-for-crawling
     let runs;
@@ -140,7 +140,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
   const after = moment();
   console.log(`Fetched ${alignedRuns.size} sets of runs in ` +
       `${after - before} ms (${cachedCount} cached)`);
-  
+
   return alignedRuns;
 }
 
@@ -188,11 +188,13 @@ function scoreRuns(runs, allTestsSet) {
 
       lib.results.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
-        if (!allTestsSet.has(testname))
+        if (!allTestsSet.has(testname)) {
           return;
+        }
 
-        if (!testResults.has(testname))
+        if (!testResults.has(testname)) {
           testResults.set(testname, []);
+        }
 
         // TODO: Validate the data by checking that all statuses are recognized.
 
@@ -390,7 +392,7 @@ async function main() {
   for (const category of CATEGORIES) {
     console.log(`Scoring runs for ${category}`);
     const dateToScores = await scoreCategory(
-      category, experimental, products, alignedRuns);
+        category, experimental, products, alignedRuns);
 
     // Grab the latest dateToScores to produce the summary of recent results.
     const latestEntry = Array.from(dateToScores.values()).pop();
@@ -421,7 +423,7 @@ async function main() {
     // individual categories, but we need it mapped by product.
     for (let browserIdx = 0; browserIdx < products.length; browserIdx++) {
       let version;
-      let productScores = [];
+      const productScores = [];
       for (const category of CATEGORIES) {
         const {sha, versions, scores, testResults} = dateToScoresMaps.get(category).get(date);
         productScores.push(scores[browserIdx]);
@@ -443,4 +445,4 @@ async function main() {
 main().catch(reason => {
   console.error(reason);
   process.exit(1);
-}); 
+});
