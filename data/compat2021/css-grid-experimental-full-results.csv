@@ -841,8 +841,8 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-auto-rows-valid.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-columns-rows-get-set-multiple.html,39/40,39/40,40/40
 /css/css-grid/parsing/grid-content-sized-columns-resolution.html,42/42,42/42,42/42
-/css/css-grid/parsing/grid-shorthand-invalid.html,30/30,30/30,30/30
-/css/css-grid/parsing/grid-shorthand-valid.html,0/46,46/46,0/46
+/css/css-grid/parsing/grid-shorthand-invalid.html,33/33,33/33,33/33
+/css/css-grid/parsing/grid-shorthand-valid.html,0/49,49/49,0/49
 /css/css-grid/parsing/grid-shorthand.html,56/56,56/56,31/56
 /css/css-grid/parsing/grid-template-areas-computed.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-areas-invalid.html,11/11,11/11,11/11

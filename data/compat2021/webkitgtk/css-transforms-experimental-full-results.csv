@@ -392,7 +392,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/translate/svg-translate-multiple-001.html,1/1,1/1,1/1
 /css/css-transforms/translate/svg-translate-multiple-002.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-001.html,1/1,1/1,0/1
-/css/css-transforms/2d-rotate-js.html,1/1,1/1,0/1
+/css/css-transforms/2d-rotate-js.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
 /css/css-transforms/3d-rendering-context-behavior.html,12/12,12/12,8/12
@@ -643,7 +643,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-transformed-tfoot-contains-fixed-position.html,1/1,1/1,0/1
 /css/css-transforms/transform-transformed-th-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-thead-contains-fixed-position.html,1/1,1/1,0/1
-/css/css-transforms/transform-transformed-tr-contains-fixed-position.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformed-tr-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-tr-percent-height-child.html,1/1,1/1,0/1
 /css/css-transforms/transform-translate-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-translate-002.html,1/1,1/1,1/1
