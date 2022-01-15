@@ -1,6 +1,6 @@
 testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,1/1
-/css/css-transforms/animation/list-interpolation.html,76/76,76/76,22/76
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,24/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
