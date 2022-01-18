@@ -163,11 +163,11 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,8/12
 /css/css-flexbox/parsing/flex-basis-invalid.html,5/5,5/5,5/5
 /css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,4/8
-/css/css-flexbox/parsing/flex-computed.html,8/8,0/8,8/8
+/css/css-flexbox/parsing/flex-computed.html,8/8,8/8,8/8
 /css/css-flexbox/parsing/flex-direction-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-direction-invalid.html,2/2,2/2,2/2
 /css/css-flexbox/parsing/flex-direction-valid.html,4/4,4/4,4/4
-/css/css-flexbox/parsing/flex-flow-computed.html,2/2,0/2,2/2
+/css/css-flexbox/parsing/flex-flow-computed.html,2/2,2/2,2/2
 /css/css-flexbox/parsing/flex-flow-invalid.html,2/2,2/2,2/2
 /css/css-flexbox/parsing/flex-flow-shorthand.html,6/6,6/6,6/6
 /css/css-flexbox/parsing/flex-flow-valid.html,3/3,3/3,3/3
