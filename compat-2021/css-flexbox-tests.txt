@@ -70,8 +70,8 @@
 /css/css-flexbox/align-content-wmvert-001.html
 # /css/css-flexbox/align-items-baseline-overflow-non-visible.html
 # /css/css-flexbox/anonymous-flex-item-005.html
-/css/css-flexbox/break-nested-float-in-flex-item-001-print.html
-/css/css-flexbox/break-nested-float-in-flex-item-002-print.html
+# /css/css-flexbox/break-nested-float-in-flex-item-001-print.html
+# /css/css-flexbox/break-nested-float-in-flex-item-002-print.html
 # /css/css-flexbox/canvas-dynamic-change-001.html
 /css/css-flexbox/cross-axis-scrollbar.html
 # /css/css-flexbox/dynamic-baseline-change-nested.html
