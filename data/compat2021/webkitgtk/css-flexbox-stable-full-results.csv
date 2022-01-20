@@ -251,8 +251,6 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/auto-margins-003.html,1/1,1/1,1/1
 /css/css-flexbox/box-sizing-001.html,10/10,10/10,10/10
 /css/css-flexbox/box-sizing-min-max-sizes-001.html,2/2,2/2,2/2
-/css/css-flexbox/break-nested-float-in-flex-item-001-print.html,1/1,1/1
-/css/css-flexbox/break-nested-float-in-flex-item-002-print.html,1/1,1/1
 /css/css-flexbox/canvas-contain-size.html,1/1,1/1,1/1
 /css/css-flexbox/change-column-flex-width.html,1/1,1/1,1/1
 /css/css-flexbox/column-flex-child-with-overflow-scroll.html,2/2,2/2,2/2
