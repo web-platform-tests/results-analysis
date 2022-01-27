@@ -42,6 +42,9 @@ const STABLE_BAD_RANGES = [
   [moment('2020-07-08'), moment('2020-07-16')],
   // This was a Firefox outage which produced only partial test results.
   [moment('2020-07-21'), moment('2020-08-15')],
+  // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
+  // fixed by https://github.com/web-platform-tests/wpt/pull/32540
+  [moment('2022-01-25'), moment('2022-01-27')],
 ];
 const EXPERIMENTAL_BAD_RANGES = [
   // This was a safaridriver outage, resolved by
@@ -51,6 +54,9 @@ const EXPERIMENTAL_BAD_RANGES = [
   [moment('2020-07-08'), moment('2020-07-16')],
   // Something went wrong with the Firefox run on this date.
   [moment('2021-03-08'), moment('2021-03-09')],
+  // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
+  // fixed by https://github.com/web-platform-tests/wpt/pull/32540
+  [moment('2022-01-25'), moment('2022-01-27')],
 ];
 
 // There have been periods where results cannot be considered valid and
