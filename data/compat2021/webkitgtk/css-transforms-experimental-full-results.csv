@@ -1,7 +1,7 @@
 testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,1/1
-/css/css-transforms/animation/list-interpolation.html,76/76,76/76,24/76
-/css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,44/76
+/css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,4/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
@@ -11,14 +11,14 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/scale-composition.html,40/40,40/40,40/40
 /css/css-transforms/animation/scale-interpolation.html,360/360,360/360,360/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,23/28
-/css/css-transforms/animation/transform-interpolation-001.html,448/448,448/448,428/448
-/css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,200/216
+/css/css-transforms/animation/transform-interpolation-001.html,448/448,448/448,444/448
+/css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,216/216
 /css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
 /css/css-transforms/animation/transform-interpolation-matrix.html,1/1,1/1,0/1
-/css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,0/1
+/css/css-transforms/animation/transform-interpolation-rotate-slerp.html,1/1,0/1,1/1
 /css/css-transforms/animation/transform-interpolation-rotate.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-scale.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-interpolation-skew.html,1/1,1/1,1/1
@@ -30,7 +30,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/transform-rotate-composition.html,63/63,63/63,56/63
 /css/css-transforms/animation/transform-scale-composition.html,49/49,49/49,49/49
 /css/css-transforms/animation/transform-skew-composition.html,43/43,43/43,42/43
-/css/css-transforms/animation/transform-translate-composition.html,56/56,56/56,42/56
+/css/css-transforms/animation/transform-translate-composition.html,56/56,56/56,49/56
 /css/css-transforms/animation/translate-composition.html,56/56,56/56,49/56
 /css/css-transforms/animation/translate-interpolation.html,408/408,408/408,408/408
 /css/css-transforms/document-styles/svg-document-styles-001.html,1/1,1/1,1/1
@@ -223,9 +223,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/rotate/svg-rotate-3args-invalid-003.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-004.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-005.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-001.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-011.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-022.html,1/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-001.html,0/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-011.html,0/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-022.html,0/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-001.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-006.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-011.html,1/1,1/1,1/1
@@ -278,7 +278,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-box/svgbox-view-box.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/value-changed.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/view-box-mutation-001.html,0/1,1/1,0/1
-/css/css-transforms/transform-box/view-box-mutation-002.html,1/1,1/1,0/1
+/css/css-transforms/transform-box/view-box-mutation-002.html,0/1,1/1,0/1
 /css/css-transforms/transform-box/view-box-mutation-003.html,1/1,1/1,0/1
 /css/css-transforms/transform-box/view-box-nested.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/view-box-viewbox-nested.html,1/1,1/1,1/1
@@ -450,7 +450,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/perspective-origin-006.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-x.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-xy.html,1/1,1/1,1/1
-/css/css-transforms/perspective-transforms-equivalence.html,1/1,1/1,0/1
+/css/css-transforms/perspective-transforms-equivalence.html,0/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-0.html,1/1,1/1,1/1
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,1/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,1/1
