@@ -12,6 +12,8 @@ const Git = require('nodegit');
 const lib = require('./lib');
 const moment = require('moment');
 
+const {advanceDateToSkipBadDataIfNecessary} = require('./bad-ranges');
+
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -28,51 +30,6 @@ flags.parse();
 
 // YYYY-MM-DD
 const BASELINE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-
-// See documentation of advanceDateToSkipBadDataIfNecessary. These ranges are
-// inclusive, exclusive.
-const STABLE_BAD_RANGES = [
-  // This was some form of Safari outage, undiagnosed but a clear erroneous
-  // spike in failure rates.
-  [moment('2019-02-06'), moment('2019-03-04')],
-  // This was a safaridriver outage, resolved by
-  // https://github.com/web-platform-tests/wpt/pull/18585
-  [moment('2019-06-27'), moment('2019-08-23')],
-  // This was a general outage due to the Taskcluster Checks migration.
-  [moment('2020-07-08'), moment('2020-07-16')],
-  // This was a Firefox outage which produced only partial test results.
-  [moment('2020-07-21'), moment('2020-08-15')],
-  // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
-  // fixed by https://github.com/web-platform-tests/wpt/pull/32540
-  [moment('2022-01-25'), moment('2022-01-27')],
-];
-const EXPERIMENTAL_BAD_RANGES = [
-  // This was a safaridriver outage, resolved by
-  // https://github.com/web-platform-tests/wpt/pull/18585
-  [moment('2019-06-27'), moment('2019-08-23')],
-  // This was a general outage due to the Taskcluster Checks migration.
-  [moment('2020-07-08'), moment('2020-07-16')],
-  // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
-  // fixed by https://github.com/web-platform-tests/wpt/pull/32540
-  [moment('2022-01-25'), moment('2022-01-27')],
-];
-
-// There have been periods where results cannot be considered valid and
-// contribute noise to the metrics. Given a date, this function advances it as
-// necessary to avoid bad data.
-//
-// TODO(smcgruer): Take into account --products being used.
-function advanceDateToSkipBadDataIfNecessary(date, experimental) {
-  const ranges = experimental ? EXPERIMENTAL_BAD_RANGES : STABLE_BAD_RANGES;
-  for (const range of ranges) {
-    if (date >= range[0] && date < range[1]) {
-      console.log(`Skipping from ${date.format('YYYY-MM-DD')} to ` +
-          `${range[1].format('YYYY-MM-DD')} due to bad data`);
-      return range[1];
-    }
-  }
-  return date;
-}
 
 const RUNS_URI = 'https://wpt.fyi/api/runs?aligned=true&max-count=1';
 
