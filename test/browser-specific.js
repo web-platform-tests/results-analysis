@@ -316,6 +316,50 @@ describe('browser-specific.js', () => {
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
 
+    it('should ignore tests that arent in all browsers, with confusing IDs', () => {
+      const expectedBrowsers = new Set(['chrome', 'firefox']);
+
+      // In the real code, the IDs are from git blob IDs, and thus all identical
+      // statuses have the same ID.
+      const PASS = {
+        "status": "PASS",
+        "id": ++uniqueId
+      };
+
+      const FAIL = {
+        "status": "FAIL",
+        "id": ++uniqueId
+      };
+
+      let chromeTree = {
+        "trees": {},
+        "tests": {
+          "block-end-aligned-abspos-with-overflow.html": PASS
+        },
+        "id": ++uniqueId
+      };
+
+      let firefoxTree = {
+        "trees": {},
+        "tests": {
+          // note that block-002-wm-vrl-print.html and
+          // block-end-aligned-abspos-with-overflow.html above have the same PASS object
+          // for their results
+          "block-002-wm-vrl-print.html": PASS,
+          "block-end-aligned-abspos-with-overflow.html": FAIL
+        },
+        "id": ++uniqueId
+      };
+
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'firefox', tree: firefoxTree },
+      ];
+
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
+      assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 1]]));
+    });
+
     it('should ignore subtrees that arent in all browsers', () => {
       const expectedBrowsers = new Set(['chrome', 'firefox']);
 
