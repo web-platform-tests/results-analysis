@@ -16,7 +16,7 @@
   "dependencies": {
     "flags": "0.1.3",
     "moment": "^2.24.0",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "nodegit": "^0.27.0"
   },
   "devDependencies": {
