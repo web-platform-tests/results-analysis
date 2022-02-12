@@ -391,7 +391,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/translate/svg-translate-055.html,1/1,1/1,1/1
 /css/css-transforms/translate/svg-translate-multiple-001.html,1/1,1/1,1/1
 /css/css-transforms/translate/svg-translate-multiple-002.html,1/1,1/1,1/1
-/css/css-transforms/2d-rotate-001.html,1/1,1/1,0/1
+/css/css-transforms/2d-rotate-001.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-js.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
@@ -474,7 +474,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/scrollable-hidden-3d-transform-z.html,1/1,1/1,1/1
 /css/css-transforms/scrollable-scroll-3d-transform-z.html,1/1,1/1,0/1
 /css/css-transforms/size-change-under-backface-visibility-hidden.html,1/1,1/1,1/1
-/css/css-transforms/skew-test1.html,1/1,1/1,0/1
+/css/css-transforms/skew-test1.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-backface-hidden.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-translate-z-0.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-transform-changes-001.html,1/1,1/1,1/1
@@ -494,8 +494,8 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-abspos-007.html,1/1,1/1,1/1
 /css/css-transforms/transform-applies-to-001.xht,1/1,1/1,1/1
 /css/css-transforms/transform-applies-to-002.xht,1/1,1/1,1/1
-/css/css-transforms/transform-background-001.html,1/1,1/1,0/1
-/css/css-transforms/transform-background-002.html,1/1,1/1,0/1
+/css/css-transforms/transform-background-001.html,1/1,1/1,1/1
+/css/css-transforms/transform-background-002.html,1/1,1/1,1/1
 /css/css-transforms/transform-background-003.html,1/1,1/1,1/1
 /css/css-transforms/transform-background-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-background-005.html,1/1,1/1,1/1
@@ -624,9 +624,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-table-006.html,1/1,1/1,0/1
 /css/css-transforms/transform-table-007.html,1/1,1/1,0/1
 /css/css-transforms/transform-table-008.html,1/1,1/1,0/1
-/css/css-transforms/transform-table-009.html,1/1,0/1,1/1
-/css/css-transforms/transform-table-010.html,1/1,0/1,1/1
-/css/css-transforms/transform-table-011.html,1/1,0/1,1/1
+/css/css-transforms/transform-table-009.html,0/1,0/1,0/1
+/css/css-transforms/transform-table-010.html,0/1,0/1,0/1
+/css/css-transforms/transform-table-011.html,0/1,0/1,0/1
 /css/css-transforms/transform-transformable-inline-block.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-inline-table.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-list-item.html,1/1,1/1,1/1
@@ -689,7 +689,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform3d-perspective-009.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-origin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-origin-ref.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-preserve3d-001.html,1/1,1/1,1/1
+/css/css-transforms/transform3d-preserve3d-001.html,1/1,0/1,1/1
 /css/css-transforms/transform3d-preserve3d-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-004.html,1/1,1/1,1/1
@@ -740,7 +740,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transforms-rotate-degree-90.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotate-translate-scale.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotateY-degree-60.html,1/1,1/1,1/1
-/css/css-transforms/transforms-skewX.html,1/1,0/1,0/1
+/css/css-transforms/transforms-skewX.html,1/1,0/1,1/1
 /css/css-transforms/transforms-skewY.html,1/1,0/1,1/1
 /css/css-transforms/transforms-support-calc.html,7/7,7/7,7/7
 /css/css-transforms/translate-getComputedStyle.html,1/1,1/1,1/1
