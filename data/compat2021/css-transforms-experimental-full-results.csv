@@ -1,6 +1,6 @@
 testname,chrome,firefox,safari
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,1/1
-/css/css-transforms/animation/list-interpolation.html,76/76,76/76,22/76
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,24/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,0/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
@@ -392,7 +392,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/translate/svg-translate-multiple-001.html,1/1,1/1,1/1
 /css/css-transforms/translate/svg-translate-multiple-002.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-001.html,1/1,1/1,1/1
-/css/css-transforms/2d-rotate-js.html,1/1,1/1,0/1
+/css/css-transforms/2d-rotate-js.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
 /css/css-transforms/3d-rendering-context-behavior.html,12/12,12/12,8/12
@@ -643,7 +643,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-transformed-tfoot-contains-fixed-position.html,1/1,1/1,0/1
 /css/css-transforms/transform-transformed-th-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-thead-contains-fixed-position.html,1/1,1/1,0/1
-/css/css-transforms/transform-transformed-tr-contains-fixed-position.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformed-tr-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-tr-percent-height-child.html,1/1,1/1,0/1
 /css/css-transforms/transform-translate-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-translate-002.html,1/1,1/1,1/1
