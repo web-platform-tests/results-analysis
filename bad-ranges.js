@@ -28,6 +28,8 @@ const EXPERIMENTAL_BAD_RANGES = [
   [moment('2019-06-27'), moment('2019-08-23')],
   // This was a general outage due to the Taskcluster Checks migration.
   [moment('2020-07-08'), moment('2020-07-16')],
+  // Something went wrong with the Firefox run on this date.
+  [moment('2021-03-08'), moment('2021-03-09')],
   // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
   // fixed by https://github.com/web-platform-tests/wpt/pull/32540
   [moment('2022-01-25'), moment('2022-01-27')],
