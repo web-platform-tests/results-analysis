@@ -689,7 +689,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-perspective-009.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-perspective-origin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-origin-ref.html,1/1,1/1,0/1
-/css/css-transforms/transform3d-preserve3d-001.html,1/1,0/1,0/1
+/css/css-transforms/transform3d-preserve3d-001.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-preserve3d-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-004.html,1/1,1/1,1/1

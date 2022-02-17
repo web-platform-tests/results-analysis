@@ -1,6 +1,6 @@
 testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/composited-transform.html,1/1,1/1,1/1
-/css/css-transforms/animation/list-interpolation.html,76/76,76/76,44/76
+/css/css-transforms/animation/list-interpolation.html,76/76,76/76,52/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,4/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
 /css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
@@ -11,9 +11,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/animation/scale-composition.html,40/40,40/40,40/40
 /css/css-transforms/animation/scale-interpolation.html,360/360,360/360,360/360
 /css/css-transforms/animation/transform-composition.html,28/28,28/28,23/28
-/css/css-transforms/animation/transform-interpolation-001.html,448/448,448/448,444/448
+/css/css-transforms/animation/transform-interpolation-001.html,448/448,448/448,448/448
 /css/css-transforms/animation/transform-interpolation-002.html,216/216,216/216,216/216
-/css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,152/168
+/css/css-transforms/animation/transform-interpolation-003.html,168/168,168/168,168/168
 /css/css-transforms/animation/transform-interpolation-004.html,288/288,288/288,264/288
 /css/css-transforms/animation/transform-interpolation-005.html,356/356,352/356,252/356
 /css/css-transforms/animation/transform-interpolation-006.html,96/96,96/96,96/96
@@ -689,7 +689,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform3d-perspective-009.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-origin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-origin-ref.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-preserve3d-001.html,1/1,0/1,1/1
+/css/css-transforms/transform3d-preserve3d-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-003.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-preserve3d-004.html,1/1,1/1,1/1
