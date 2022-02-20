@@ -366,9 +366,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-1.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-2.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-3.html,1/1,1/1,1/1
-/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-4.html,1/1,0/1,1/1
-/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-5.html,1/1,0/1,1/1
-/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-6.html,1/1,0/1,1/1
+/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-4.html,1/1,0/1,0/1
+/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-5.html,1/1,0/1,0/1
+/css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-6.html,1/1,0/1,0/1
 /css/css-grid/alignment/grid-item-self-baseline-001.html,0/1,1/1,0/1
 /css/css-grid/alignment/grid-place-content-001.html,20/20,20/20,20/20
 /css/css-grid/alignment/grid-row-axis-alignment-positioned-items-001.html,4/4,4/4,4/4
