@@ -162,17 +162,15 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 //
 // Returns an array of [scores, testResults], where:
 //
-//   * scores is an array of top-level score  (integer 0-1000) for each
-//     corresponding input run.
+//   * scores is an array of scores [0, 1] in the same order as |runs|.
 //   * testResults is a map from a specific test (represented by its full path)
 //     to an array of (passing subtest count, total subtest count) for each
 //     corresponding input run.
 //
 // To get the top-level score for a run, each test in that run that is present
-// in |allTestsSet| is examined. Each test is scored 0-1000 based on the
-// fraction of its subtests that pass, with rounding down so that 1000 means
-// all subtests pass. Reftests score either 0 or 1000. These test scores are
-// then summed and divided by the size of |allTestsSet|, again rounding down.
+// in |allTestsSet| is examined. Each test is scored [0, 1] based on the
+// fraction of its subtests that pass. Reftests are scored as either 0 or 1.
+// These test scores are then summed and divided by the size of |allTestsSet|.
 //
 // This methodology has several consequences:
 //
@@ -185,19 +183,12 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 //   not have entries for tests were only added recently and will be penalized
 //   for that. This is deliberate - see the comment block later in this
 //   function for why.
-//
-//   3. We could show (on wpt.fyi) scores at both the test and category level as
-//   a percentage with one decimal point, and what a user would see would be the
-//   same numbers that go into the total score, with no hidden rounding error.
-//
-//   4. Because we round down twice, the score for a category can end up lower
-//   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testResults = new Map();
   try {
     for (const run of runs) {
-      // Sum of the integer 0-1000 scores for each test.
+      // Sum of the [0, 1] scores for each test.
       let score = 0;
 
       lib.results.walkTests(run.tree, (path, test, results) => {
@@ -228,9 +219,9 @@ function scoreRuns(runs, allTestsSet) {
           subtestPasses = 1;
         }
 
-        // A single test is scored 0-1000 based on how many of its subtests
-        // pass, rounding down so that 1000 always means fully passing.
-        score += Math.floor(1000 * subtestPasses / subtestTotal);
+        // A single test is scored [0, 1] based on how many of its subtests
+        // pass.
+        score += subtestPasses / subtestTotal;
 
         // TODO: I suspect this doesn't handle missing test results properly,
         // as we assume every run has every test so that the testResults arrays
@@ -256,7 +247,7 @@ function scoreRuns(runs, allTestsSet) {
       // by always comparing against the full test list. This does mean that
       // when tests are added to the set, previously generated data is no
       // longer valid and this script should be re-run for all dates.
-      scores.push(Math.floor(score / allTestsSet.size));
+      scores.push(score / allTestsSet.size);
     }
   } catch (e) {
     e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
@@ -392,7 +383,7 @@ async function main() {
       for (const category of CATEGORIES) {
         const {versions, scores} = dateToScoresMaps.get(category).get(date);
         const score = scores[browserIdx];
-        productScores.push(score);
+        productScores.push(Math.floor(1000 * score));
         // The versions should all be the same, so we just grab the latest one.
         version = versions[browserIdx];
       }
