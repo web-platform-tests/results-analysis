@@ -100,3 +100,15 @@ update_compat_2021 chrome,firefox,safari stable out/data/compat2021
 mkdir -p out/data/compat2021/webkitgtk
 update_compat_2021 chrome,firefox,webkitgtk experimental out/data/compat2021/webkitgtk
 update_compat_2021 chrome,firefox,webkitgtk stable out/data/compat2021/webkitgtk
+
+update_interop_2022() {
+  local OUTDIR="${1}"
+
+  node interop-2022/main.js --to=${TO_DATE}
+  node interop-2022/main.js --to=${TO_DATE} --experimental
+
+  mv interop-2022-*.csv "${OUTDIR}"
+}
+
+mkdir -p out/data/interop-2022/
+update_interop_2022 out/data/interop-2022/
