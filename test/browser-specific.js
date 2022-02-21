@@ -294,6 +294,32 @@ describe('browser-specific.js', () => {
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
 
+    it('should treat duplicate subtests as one', () => {
+      const expectedBrowsers = new Set(['chrome', 'safari']);
+
+      // This can happen due to, e.g., https://github.com/web-platform-tests/wpt/issues/12632
+      let chromeTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'test 1', 'PASS')
+          .addSubtest('TestA', 'test 2', 'FAIL')
+          .build();
+
+      let safariTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'test 1', 'FAIL')
+          .addSubtest('TestA', 'test 1', 'ERROR')
+          .addSubtest('TestA', 'test 2', 'FAIL')
+          .build();
+
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'safari', tree: safariTree },
+      ];
+
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
+      assert.deepEqual(scores, new Map([['chrome', 0.0], ['safari', 0.5]]));
+    });
+
     it('should ignore tests that arent in all browsers', () => {
       const expectedBrowsers = new Set(['chrome', 'firefox']);
 
