@@ -162,16 +162,17 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 //
 // Returns an array of [scores, testResults], where:
 //
-//   * scores is an array of top-level score for each corresponding input run
+//   * scores is an array of top-level score  (integer 0-1000) for each
+//     corresponding input run.
 //   * testResults is a map from a specific test (represented by its full path)
 //     to an array of (passing subtest count, total subtest count) for each
 //     corresponding input run.
 //
 // To get the top-level score for a run, each test in that run that is present
-// in |allTestsSet| is examined. A single test can contribute a test score of
-// [0-1], based on the fraction of its subtests that pass (reftests score
-// either 0 or 1). These test scores are then summed and divided by the size of
-// |allTestsSet|.
+// in |allTestsSet| is examined. Each test is scored 0-1000 based on the
+// fraction of its subtests that pass, with rounding down so that 1000 means
+// all subtests pass. Reftests score either 0 or 1000. These test scores are
+// then summed and divided by the size of |allTestsSet|, again rounding down.
 //
 // This methodology has several consequences:
 //
@@ -184,12 +185,20 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 //   not have entries for tests were only added recently and will be penalized
 //   for that. This is deliberate - see the comment block later in this
 //   function for why.
+//
+//   3. We could show (on wpt.fyi) scores at both the test and category level as
+//   a percentage with one decimal point, and what a user would see would be the
+//   same numbers that go into the total score, with no hidden rounding error.
+//
+//   4. Because we round down twice, the score for a category can end up lower
+//   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testResults = new Map();
   try {
     for (const run of runs) {
-      let passingTests = 0;
+      // Sum of the integer 0-1000 scores for each test.
+      let score = 0;
 
       lib.results.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
@@ -219,10 +228,9 @@ function scoreRuns(runs, allTestsSet) {
           subtestPasses = 1;
         }
 
-        // A single test is scored based on how many of its subtests pass;
-        // these fractional values are then summed and normalized against the
-        // total number of tests to get the overall score.
-        passingTests += subtestPasses / subtestTotal;
+        // A single test is scored 0-1000 based on how many of its subtests
+        // pass, rounding down so that 1000 always means fully passing.
+        score += Math.floor(1000 * subtestPasses / subtestTotal);
 
         // TODO: I suspect this doesn't handle missing test results properly,
         // as we assume every run has every test so that the testResults arrays
@@ -230,7 +238,7 @@ function scoreRuns(runs, allTestsSet) {
         testResults.get(testname).push([subtestPasses, subtestTotal]);
       });
 
-      // We always normalize against the total number of 'important tests',
+      // We always normalize against the number of tests we are looking for,
       // rather than the total number of tests we found. The trade-off is all
       // about new tests being added to the set.
       //
@@ -248,7 +256,7 @@ function scoreRuns(runs, allTestsSet) {
       // by always comparing against the full test list. This does mean that
       // when tests are added to the set, previously generated data is no
       // longer valid and this script should be re-run for all dates.
-      scores.push(passingTests / allTestsSet.size);
+      scores.push(Math.floor(score / allTestsSet.size));
     }
   } catch (e) {
     e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
@@ -383,8 +391,7 @@ async function main() {
       const productScores = [];
       for (const category of CATEGORIES) {
         const {versions, scores} = dateToScoresMaps.get(category).get(date);
-        // TODO: push integer math all the way down
-        const score = Math.floor(1000 * scores[browserIdx]);
+        const score = scores[browserIdx];
         productScores.push(score);
         // The versions should all be the same, so we just grab the latest one.
         version = versions[browserIdx];
