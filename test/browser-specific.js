@@ -458,35 +458,6 @@ describe('browser-specific.js', () => {
       let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
-
-    it('should handle tests that arent in all (three) browsers', () => {
-      const expectedBrowsers = new Set(['chrome', 'firefox', 'safari']);
-
-      let chromeTree = new TreeBuilder()
-          .addTest('TestA', 'OK')
-          .addSubtest('TestA', 'TEST (upper)', 'PASS')
-          .build();
-
-      let firefoxTree = new TreeBuilder()
-          .addTest('TestA', 'OK')
-          .addSubtest('TestA', 'test (lower)', 'PASS')
-          .build();
-
-      let safariTree = new TreeBuilder()
-          .addTest('TestA', 'OK')
-          .addSubtest('TestA', 'TEST (upper)', 'PASS')
-          .addSubtest('TestA', 'test (lower)', 'PASS')
-          .build();
-
-      let runs = [
-          { browser_name: 'chrome', tree: chromeTree },
-          { browser_name: 'firefox', tree: firefoxTree },
-          { browser_name: 'safari', tree: safariTree },
-      ];
-
-      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
-      assert.deepEqual(scores, new Map([['chrome', 0.5], ['firefox', 0.5], ['safari', 0.0]]));
-    });
   });
 
   describe('Filtering Tests', () => {
