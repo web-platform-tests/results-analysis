@@ -458,6 +458,90 @@ describe('browser-specific.js', () => {
       let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
+
+    it('should handle tests differing by case', () => {
+      const expectedBrowsers = new Set(['chrome', 'firefox', 'safari']);
+
+      let chromeTree = new TreeBuilder()
+          .addTest('TEST (upper)', 'FAIL')
+          .addTest('test (lower)', 'PASS')
+          .build();
+
+      let firefoxTree = new TreeBuilder()
+          .addTest('TEST (upper)', 'PASS')
+          .build();
+
+      let safariTree = new TreeBuilder()
+          .addTest('TEST (upper)', 'PASS')
+          .build();
+
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'firefox', tree: firefoxTree },
+          { browser_name: 'safari', tree: safariTree },
+      ];
+
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
+      assert.deepEqual(scores, new Map([['chrome', 1], ['firefox', 0], ['safari', 0]]));
+    });
+
+    it('should handle subtests differing by case', () => {
+      const expectedBrowsers = new Set(['chrome', 'firefox', 'safari']);
+
+      let chromeTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'TEST (upper)', 'PASS')
+          .build();
+
+      let firefoxTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'test (lower)', 'PASS')
+          .build();
+
+      let safariTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'TEST (upper)', 'PASS')
+          .addSubtest('TestA', 'test (lower)', 'PASS')
+          .build();
+
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'firefox', tree: firefoxTree },
+          { browser_name: 'safari', tree: safariTree },
+      ];
+
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
+      assert.deepEqual(scores, new Map([['chrome', 0.5], ['firefox', 0.5], ['safari', 0.0]]));
+    });
+
+    it('should handle subtests differing by case 2', () => {
+      const expectedBrowsers = new Set(['chrome', 'firefox', 'safari']);
+
+      let chromeTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'TEST (upper)', 'PASS')
+          .build();
+
+      let firefoxTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'test (lower)', 'PASS')
+          .build();
+
+      let safariTree = new TreeBuilder()
+          .addTest('TestA', 'OK')
+          .addSubtest('TestA', 'test (lower)', 'PASS')
+          .addSubtest('TestA', 'TEST (upper)', 'PASS')
+          .build();
+
+      let runs = [
+          { browser_name: 'chrome', tree: chromeTree },
+          { browser_name: 'firefox', tree: firefoxTree },
+          { browser_name: 'safari', tree: safariTree },
+      ];
+
+      let scores = browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
+      assert.deepEqual(scores, new Map([['chrome', 0.5], ['firefox', 0.5], ['safari', 0.0]]));
+    });
   });
 
   describe('Filtering Tests', () => {
