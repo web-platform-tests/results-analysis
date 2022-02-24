@@ -32,11 +32,9 @@ cd ../
 TO_DATE=$(date -d "yesterday 13:00" '+%Y-%m-%d')
 
 update_bsf_csv() {
-  local FROM_DATE="2018-06-01"
-  if [[ -f "${1}" ]]; then
-    FROM_DATE=$(tail "${1}" -n 1 | cut -f 2 -d ',')
-  fi
+  local OUTPUT="${1}"
 
+  local FROM_DATE="2018-06-01"
   local EXPERIMENTAL_FLAG=""
   if [[ $1 == *"experimental"* ]]; then
     EXPERIMENTAL_FLAG="--experimental"
@@ -44,14 +42,7 @@ update_bsf_csv() {
 
   node --max-old-space-size=8192 browser-specific-failures.js \
     ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE} \
-    --output=tmp.csv
-
-  local SKIP_LINES="+1"
-  if [[ -f "${1}" ]]; then
-    SKIP_LINES="+3"
-  fi
-  tail -n ${SKIP_LINES} tmp.csv >> "${1}"
-  rm tmp.csv
+    --output=${OUTPUT}
 }
 
 update_bsf_csv out/data/stable-browser-specific-failures.csv
