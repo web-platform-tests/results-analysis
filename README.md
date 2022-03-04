@@ -43,9 +43,6 @@ Options:
     (default: "2018-07-01")
   --to: Ending date (exclusive)
     (default: "2020-05-21")
-  --baseline: A YYYY-MM-DD date to 'pin' WPT to. Any test name not in 
-    existence on the baseline date will be ignored. 
-    (default: null)
   --products: Browsers to compare. Must match the products used on 
     wpt.fyi 
     (default: ["chrome","firefox","safari"])

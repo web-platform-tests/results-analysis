@@ -17,8 +17,6 @@ const {advanceDateToSkipBadDataIfNecessary} = require('./bad-ranges');
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
-flags.defineString('baseline', null, 'A YYYY-MM-DD date to \'pin\' WPT to. ' +
-    'Any test name not in existence on the baseline date will be ignored.');
 flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
     'Browsers to compare. Must match the products used on wpt.fyi');
 flags.defineString('output', null,
@@ -27,9 +25,6 @@ flags.defineString('output', null,
 flags.defineBoolean('experimental', false,
     'Calculate metrics for experimental runs.');
 flags.parse();
-
-// YYYY-MM-DD
-const BASELINE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 const RUNS_URI = 'https://wpt.fyi/api/runs?aligned=true&max-count=1';
 
@@ -102,11 +97,6 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 }
 
 async function main() {
-  const baseline = flags.get('baseline');
-  if (baseline != null && !BASELINE_REGEX.test(baseline)) {
-    throw new Error('--baseline must be in the form YYYY-MM-DD');
-  }
-
   // Sort the products so that output files are consistent.
   const products = flags.get('products');
   if (products.length < 2) {
@@ -165,26 +155,6 @@ async function main() {
   console.log(`Loading ${alignedRuns.size} sets of runs took ` +
       `${after - before} ms`);
 
-  const options = {};
-
-  if (baseline) {
-    // Gather the union of all test names known to the 'base' run.
-    console.log(`Determining the set of base 'known' tests.`);
-    // TODO(smcgruer): Use nearest next date instead.
-    if (!alignedRuns.has(baseline)) {
-      throw new Error(`Baseline date ${baseline} not present in test data.`);
-    }
-
-    const testNames = new Set();
-    for (const run of alignedRuns.get(baseline)) {
-      lib.results.walkTests(run.tree, (path, test, _) => {
-        testNames.add(path + '/' + test);
-      });
-    }
-    console.log(`Found ${testNames.size} tests for the base set.`);
-    options.testFilter = testPath => testNames.has(testPath);
-  }
-
   // We're ready to score the runs now!
   console.log('Calculating browser-specific failures for the runs');
   before = Date.now();
@@ -195,7 +165,7 @@ async function main() {
     const versions = runs.map(run => run.browser_version);
     try {
       const scores = lib.browserSpecific.scoreBrowserSpecificFailures(
-          runs, new Set(products), options);
+          runs, new Set(products));
       dateToScores.set(date, {sha, versions, scores});
     } catch (e) {
       e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
