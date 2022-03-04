@@ -26,8 +26,14 @@ const EXPERIMENTAL_BAD_RANGES = [
   // This was a safaridriver outage, resolved by
   // https://github.com/web-platform-tests/wpt/pull/18585
   [moment('2019-06-27'), moment('2019-08-23')],
+  // Bad Firefox run:
+  // https://wpt.fyi/results/?diff&filter=ADC&run_id=387040002&run_id=404070001
+  [moment('2019-12-25'), moment('2019-12-26')],
   // This was a general outage due to the Taskcluster Checks migration.
   [moment('2020-07-08'), moment('2020-07-16')],
+  // Bad Chrome run:
+  // https://wpt.fyi/results/?diff&filter=ADC&run_id=622910001&run_id=634430001
+  [moment('2020-07-31'), moment('2020-08-01')],
   // Something went wrong with the Firefox run on this date.
   [moment('2021-03-08'), moment('2021-03-09')],
   // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
