@@ -511,12 +511,12 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-display-003.html,1/1,1/1,1/1
 /css/css-transforms/transform-display-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-fixed-bg-001.html,1/1,1/1,1/1
-/css/css-transforms/transform-fixed-bg-002.html,0/1,1/1,0/1
+/css/css-transforms/transform-fixed-bg-002.html,1/1,1/1,0/1
 /css/css-transforms/transform-fixed-bg-003.html,1/1,1/1,1/1
-/css/css-transforms/transform-fixed-bg-004.html,0/1,1/1,0/1
-/css/css-transforms/transform-fixed-bg-005.html,0/1,1/1,0/1
-/css/css-transforms/transform-fixed-bg-006.html,0/1,1/1,0/1
-/css/css-transforms/transform-fixed-bg-007.html,0/1,1/1,0/1
+/css/css-transforms/transform-fixed-bg-004.html,1/1,1/1,0/1
+/css/css-transforms/transform-fixed-bg-005.html,1/1,1/1,0/1
+/css/css-transforms/transform-fixed-bg-006.html,1/1,1/1,0/1
+/css/css-transforms/transform-fixed-bg-007.html,1/1,1/1,0/1
 /css/css-transforms/transform-flattening-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-generated-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-generated-002.html,1/1,1/1,1/1
