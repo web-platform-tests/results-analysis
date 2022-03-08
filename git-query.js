@@ -41,8 +41,8 @@ function queryTree(tree) {
 async function main() {
   const maxRuns = flags.get('max-runs');
 
-  // bare clone of https://github.com/ecosystem-infra/wpt-results
-  const repo = await Git.Repository.open('wpt-results.git');
+  // bare clone of https://github.com/web-platform-tests/results-analysis-cache
+  const repo = await Git.Repository.open('results-analysis-cache.git');
 
   console.log('Getting master set of runs from server');
   let t0 = Date.now();
