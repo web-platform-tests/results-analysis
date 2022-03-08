@@ -111,7 +111,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-sizing/aspect-ratio/quirks-mode-003.html,1/1,0/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-001.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-002.html,1/1,1/1,1/1
-/css/css-sizing/aspect-ratio/replaced-element-003.html,1/1,1/1,1/1
+/css/css-sizing/aspect-ratio/replaced-element-003.html,0/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-004.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-005.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/replaced-element-006.html,1/1,1/1,1/1
@@ -154,7 +154,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-sizing/aspect-ratio/zero-or-infinity-010.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/canvas-aspect-ratio.html,13/13,13/13,7/13
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/content-aspect-ratio.html,1/1,1/1,1/1
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.html,1/1,1/1,0/1
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,40/41,41/41,40/41
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html,15/15,4/15,14/15
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html,15/15,4/15,15/15
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html,11/11,11/11,10/11
