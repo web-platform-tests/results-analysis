@@ -126,12 +126,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
         cachedCount++;
       }
     } catch (e) {
-      let url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
-      // HACK: Handle WebKitGTK runs being delayed vs other runs by extending
-      // the search radius if WebKitGTK is being requested.
-      if (products.includes('webkitgtk')) {
-        url = `${runsUri}&from=${formattedFrom}T00:00:00Z&to=${formattedTo}T23:59:59Z`;
-      }
+      const url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
       const response = await fetch(url);
       // Many days do not have an aligned set of runs, but we always write to
       // the cache to speed up future executions of this code.
@@ -160,13 +155,8 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 // Score a set of runs (independently) on a set of tests. The runs are presumed
 // to be aligned in some way (i.e. they were all run at the same WPT SHA).
 //
-// Returns an array of [scores, testResults], where:
-//
-//   * scores is an array of top-level score  (integer 0-1000) for each
-//     corresponding input run.
-//   * testResults is a map from a specific test (represented by its full path)
-//     to an array of (passing subtest count, total subtest count) for each
-//     corresponding input run.
+// Returns an array of scores, which is the top-level score (integer 0-1000) for
+// each corresponding input run.
 //
 // To get the top-level score for a run, each test in that run that is present
 // in |allTestsSet| is examined. Each test is scored 0-1000 based on the
@@ -194,7 +184,6 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
-  const testResults = new Map();
   try {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
@@ -204,10 +193,6 @@ function scoreRuns(runs, allTestsSet) {
         const testname = path + '/' + test;
         if (!allTestsSet.has(testname)) {
           return;
-        }
-
-        if (!testResults.has(testname)) {
-          testResults.set(testname, []);
         }
 
         // TODO: Validate the data by checking that all statuses are recognized.
@@ -231,11 +216,6 @@ function scoreRuns(runs, allTestsSet) {
         // A single test is scored 0-1000 based on how many of its subtests
         // pass, rounding down so that 1000 always means fully passing.
         score += Math.floor(1000 * subtestPasses / subtestTotal);
-
-        // TODO: I suspect this doesn't handle missing test results properly,
-        // as we assume every run has every test so that the testResults arrays
-        // align with |runs|?
-        testResults.get(testname).push([subtestPasses, subtestTotal]);
       });
 
       // We always normalize against the number of tests we are looking for,
@@ -263,7 +243,7 @@ function scoreRuns(runs, allTestsSet) {
     throw e;
   }
 
-  return [scores, testResults];
+  return scores;
 }
 
 async function scoreCategory(category, experimental, products, alignedRuns,
@@ -272,11 +252,9 @@ async function scoreCategory(category, experimental, products, alignedRuns,
   const before = Date.now();
   const dateToScores = new Map();
   for (const [date, runs] of alignedRuns.entries()) {
-    // The SHA should be the same for all runs, so just grab the first.
-    const sha = runs[0].full_revision_hash;
     const versions = runs.map(run => run.browser_version);
-    const [scores, testResults] = scoreRuns(runs, testsSet);
-    dateToScores.set(date, {sha, versions, scores, testResults});
+    const scores = scoreRuns(runs, testsSet);
+    dateToScores.set(date, {versions, scores});
   }
   const after = Date.now();
   console.log(`Done scoring (took ${after - before} ms)`);
