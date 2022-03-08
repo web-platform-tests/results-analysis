@@ -7,7 +7,7 @@ set -o pipefail
 COMMIT="$(git rev-parse HEAD)"
 
 rm -rf gh-pages
-git clone --branch gh-pages git@github.com:ecosystem-infra/wpt-results-analysis gh-pages
+git clone --branch gh-pages git@github.com:web-platform-tests/results-analysis gh-pages
 
 rm -rf gh-pages/*
 cp -r out/* gh-pages/

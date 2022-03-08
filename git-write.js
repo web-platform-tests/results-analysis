@@ -141,8 +141,8 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
 }
 
 async function main() {
-  // bare clone of https://github.com/ecosystem-infra/wpt-results
-  const repo = await Git.Repository.init('wpt-results.git', 1);
+  // bare clone of https://github.com/web-platform-tests/results-analysis-cache
+  const repo = await Git.Repository.init('results-analysis-cache.git', 1);
 
   const maxRuns = flags.get('max-runs');
   const maxTime = flags.get('max-time');

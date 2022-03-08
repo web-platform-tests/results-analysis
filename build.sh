@@ -24,8 +24,8 @@ fetch_from_gh_pages data/stable-browser-specific-failures.csv
 mv data/* out/data/ || true
 echo
 
-echo "Updating wpt-results.git/"
-cd wpt-results.git/
+echo "Updating results-analysis-cache.git/"
+cd results-analysis-cache.git/
 git fetch --all --tags
 cd ../
 
