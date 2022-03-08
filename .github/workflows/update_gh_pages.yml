@@ -1,0 +1,29 @@
+name: Update gh-pages
+on:
+  # Trigger on UTC noon daily, or manually.
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+jobs:
+  update-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build app
+      run: ./build.sh
+
+    - name: Deploy to gh-pages/
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: out

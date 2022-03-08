@@ -1,0 +1,64 @@
+<!doctype HTML>
+<meta charset="utf-8" /> 
+
+<title>WPT Results Charts</title>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="index.js"></script>
+
+<style>
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.chart {
+  /* Reserve vertical space to avoid layout pop. Should be kept in sync with
+     the JavaScript defined height. */
+  height: 350px;
+}
+.code {
+  background-color:#EEEEEE;
+  font-family: monospace;
+}
+</style>
+
+<h1>Browser Specific Failures</h1>
+
+<p>These charts measure how many WPT tests fail in exactly one browser (of the
+three major engines - Chromium, Gecko, WebKit), or "Browser Specific Failures".
+Such tests are interesting as they mostly represent 'real' interop issues in
+agreed-upon web features.</p>
+
+<p>(Click + drag on graphs to zoom, right click to un-zoom)</p>
+
+<h2>Stable browser versions</h2>
+<p>Results are from stable releases of browsers at the given date, with a minimal set of flags passed to enable testing.</p>
+
+<a href="https://wpt.fyi/results/?label=master&label=stable&product=chrome&product=firefox&product=safari&aligned&q=count%3A2%28status%3Apass%29%20none%28status%3Amissing%7Cstatus%3Anotrun%29" target="_blank">wpt.fyi query</a>
+<div id="bsf-stable" class="chart"></div>
+<p>Notable dates:</p>
+<ul>
+  <li><b>Jan 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+  <li><b>~March 18, 2020</b>: Large numbers of referrer-policy/ tests combined into fewer files</li>
+  <li><b>April 8, 2020</b>: Safari 13.1</li>
+</ul>
+
+<h2>Experimental browser versions</h2>
+<p>Results are from experimental releases of browsers at the given date, such as Safari Tech Preview. Where appropriate, experimental features are enabled (e.g. <span class="code">--enable-experimental-web-platform-features</span> for Chrome.)</p>
+<a href="https://wpt.fyi/results/?label=master&label=experimental&product=chrome&product=firefox&product=safari&aligned&q=count%3A2%28status%3Apass%29%20none%28status%3Amissing%7Cstatus%3Anotrun%29" target="_blank">wpt.fyi query</a>
+<div id="bsf-experimental" class="chart"></div>
+<p>Notable dates:</p>
+<ul>
+  <li><b>Oct 17, 2019</b>: Safari Tech Preview 96</li>
+  <li><b>Dec 20, 2019</b>: Safari Tech Preview 97</li>
+  <li><b>Jan 23-29, 2020</b>: Large numbers of referrer-policy/ tests added</li>
+  <li><b>~March 18, 2020</b>: Large numbers of referrer-policy/ tests combined into fewer files</li>
+</ul>
+
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(async () => {
+  renderStableChart();
+  renderExperimentalChart();
+});
+</script>
