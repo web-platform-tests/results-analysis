@@ -114,7 +114,8 @@ async function main() {
   const alignedRuns = await fetchAlignedRunsFromServer(
       products, from, to, experimental);
 
-  // Verify that we have data for the fetched runs in the results-analysis-cache repo.
+  // Verify that we have data for the fetched runs in the results-analysis-cache
+  // repo.
   console.log('Getting local set of run ids from repo');
   let before = Date.now();
   const localRunIds = await lib.results.getLocalRunIds(repo);
