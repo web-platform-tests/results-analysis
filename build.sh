@@ -7,23 +7,6 @@ set -o pipefail
 rm -rf out/
 mkdir -p out/data/
 
-# Copy the static content
-cp -r static/* out/
-
-fetch_from_gh_pages() {
-  git checkout origin/gh-pages -- "${1}" || true
-  git reset HEAD "${1}" || true
-}
-
-# Try to do an incremental update for the BSFs, if possible, as they're slow to
-# re-create.
-echo "Checking out existing CSV files from gh-pages/"
-git fetch origin || true
-fetch_from_gh_pages data/experimental-browser-specific-failures.csv
-fetch_from_gh_pages data/stable-browser-specific-failures.csv
-mv data/* out/data/ || true
-echo
-
 echo "Updating results-analysis-cache.git/"
 cd results-analysis-cache.git/
 git fetch --all --tags
