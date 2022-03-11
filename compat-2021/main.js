@@ -13,7 +13,8 @@ const path = require('path');
 
 const {advanceDateToSkipBadDataIfNecessary} = require('../bad-ranges');
 
-flags.defineStringList('products', ['chrome', 'firefox', 'safari'], 'Products to include (comma-separated)');
+flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
+    'Products to include (comma-separated)');
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -78,6 +79,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
       // HACK: Handle WebKitGTK runs being delayed vs other runs by extending
       // the search radius if WebKitGTK is being requested.
       if (products.includes('webkitgtk')) {
+        // eslint-disable-next-line max-len
         url = `${runsUri}&from=${formattedFrom}T00:00:00Z&to=${formattedTo}T23:59:59Z`;
       }
       const response = await fetch(url);
@@ -305,7 +307,8 @@ async function main() {
   const alignedRuns = await fetchAlignedRunsFromServer(
       products, from, to, experimental);
 
-  // Verify that we have data for the fetched runs in the results-analysis-cache repo.
+  // Verify that we have data for the fetched runs in the results-analysis-cache
+  // repo.
   console.log('Getting local set of run ids from repo');
   let before = Date.now();
   const localRunIds = await lib.results.getLocalRunIds(repo);
@@ -384,7 +387,7 @@ async function main() {
       let version;
       const productScores = [];
       for (const category of CATEGORIES) {
-        const {sha, versions, scores, testResults} = dateToScoresMaps.get(category).get(date);
+        const {versions, scores} = dateToScoresMaps.get(category).get(date);
         productScores.push(scores[browserIdx]);
         // The versions should all be the same, so we just grab the latest one.
         version = versions[browserIdx];
