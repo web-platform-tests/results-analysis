@@ -10,7 +10,7 @@ testname,chrome,firefox,safari
 /css/css-position/sticky/position-sticky-hyperlink.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-inflow-position.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-inline.html,1/1,1/1,1/1
-/css/css-position/sticky/position-sticky-large-top-2.tentative.html,1/1,1/1,0/1
+/css/css-position/sticky/position-sticky-large-top-2.tentative.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-left.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-margins.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-nested-inline.html,1/1,1/1,1/1
@@ -38,6 +38,6 @@ testname,chrome,firefox,safari
 /css/css-position/sticky/position-sticky-table-tr-bottom.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-tr-top.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-top.html,3/3,3/3,3/3
-/css/css-position/sticky/position-sticky-transforms-translate.html,3/3,3/3,2/3
+/css/css-position/sticky/position-sticky-transforms-translate.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-transforms.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-writing-modes.html,1/1,0/1,1/1
