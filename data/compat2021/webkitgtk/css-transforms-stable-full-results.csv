@@ -223,9 +223,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/rotate/svg-rotate-3args-invalid-003.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-004.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-005.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-001.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-011.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-022.html,1/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-001.html,0/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-011.html,0/1,1/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-022.html,0/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-001.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-006.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-011.html,1/1,1/1,1/1
@@ -278,7 +278,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-box/svgbox-view-box.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/value-changed.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/view-box-mutation-001.html,0/1,1/1,0/1
-/css/css-transforms/transform-box/view-box-mutation-002.html,1/1,1/1,0/1
+/css/css-transforms/transform-box/view-box-mutation-002.html,0/1,1/1,0/1
 /css/css-transforms/transform-box/view-box-mutation-003.html,1/1,1/1,0/1
 /css/css-transforms/transform-box/view-box-nested.html,1/1,1/1,1/1
 /css/css-transforms/transform-box/view-box-viewbox-nested.html,1/1,1/1,1/1
@@ -450,7 +450,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/perspective-origin-006.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-x.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-xy.html,1/1,1/1,1/1
-/css/css-transforms/perspective-transforms-equivalence.html,1/1,1/1,0/1
+/css/css-transforms/perspective-transforms-equivalence.html,0/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-0.html,1/1,1/1,1/1
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,1/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,1/1
