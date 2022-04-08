@@ -1,8 +1,8 @@
 name: Update gh-pages
 on:
-  # Trigger on UTC noon daily, or manually.
+  # Trigger on every three hours, or manually.
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '20 /3 * * *'
   workflow_dispatch:
 jobs:
   update-gh-pages:
