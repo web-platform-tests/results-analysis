@@ -12,7 +12,7 @@ cd results-analysis-cache.git/
 git fetch --all --tags
 cd ../
 
-TO_DATE=$(date -d "tomorrow 13:00" '+%Y-%m-%d')
+TO_DATE=$(date -d "yesterday 13:00" '+%Y-%m-%d')
 
 update_bsf_csv() {
   local OUTPUT="${1}"
