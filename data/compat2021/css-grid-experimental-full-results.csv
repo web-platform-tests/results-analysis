@@ -542,7 +542,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-definition/grid-layout-auto-tracks.html,1/1,1/1,1/1
 /css/css-grid/grid-definition/grid-layout-basic.html,1/1,1/1,1/1
 /css/css-grid/grid-definition/grid-layout-repeat-notation.html,1/1,1/1,1/1
-/css/css-grid/grid-definition/grid-limits-001.html,2/2,2/2,2/2
+/css/css-grid/grid-definition/grid-limits-001.html,2/2,2/2,0/1
 /css/css-grid/grid-definition/grid-minimum-contribution-with-percentages.html,16/16,16/16,16/16
 /css/css-grid/grid-definition/grid-percentage-rows-indefinite-height-001.html,120/120,16/120,120/120
 /css/css-grid/grid-definition/grid-percentage-rows-indefinite-height-002.html,4/4,0/4,4/4
@@ -842,7 +842,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-columns-rows-get-set-multiple.html,39/40,39/40,40/40
 /css/css-grid/parsing/grid-content-sized-columns-resolution.html,42/42,42/42,42/42
 /css/css-grid/parsing/grid-shorthand-invalid.html,33/33,33/33,33/33
-/css/css-grid/parsing/grid-shorthand-valid.html,49/49,49/49,0/49
+/css/css-grid/parsing/grid-shorthand-valid.html,33/49,49/49,0/49
 /css/css-grid/parsing/grid-shorthand.html,56/56,56/56,56/56
 /css/css-grid/parsing/grid-template-areas-computed.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-areas-invalid.html,11/11,11/11,11/11
@@ -863,7 +863,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-rows-invalid.html,15/15,15/15,15/15
 /css/css-grid/parsing/grid-template-rows-valid.html,34/34,34/34,34/34
 /css/css-grid/parsing/grid-template-shorthand-invalid.html,30/30,30/30,30/30
-/css/css-grid/parsing/grid-template-shorthand-valid.html,38/39,38/39,0/39
+/css/css-grid/parsing/grid-template-shorthand-valid.html,23/39,38/39,0/39
 /css/css-grid/parsing/grid-template-shorthand.html,24/24,24/24,24/24
 /css/css-grid/placement/grid-auto-flow-sparse-001.html,8/8,8/8,8/8
 /css/css-grid/placement/grid-auto-placement-implicit-tracks-001.html,12/12,12/12,12/12
