@@ -201,18 +201,20 @@ function scoreRuns(runs, allTestsSet) {
 
         let subtestPasses = 0;
         let subtestTotal = 1;
-        if ('subtests' in results) {
-          if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
-            throw new Error(`Unexpected non-OK status for test: ${testname}`);
+        if (results.status == 'OK') {
+          if (!results.subtests) {
+            throw new Error(`Expected subtests not found for test: ${testname}`);
           }
-          subtestTotal = results['subtests'].length;
-          for (const subtest of results['subtests']) {
-            if (subtest['status'] == 'PASS') {
+          subtestTotal = results.subtests.length;
+          for (const subtest of results.subtests) {
+            if (subtest.status == 'PASS') {
               subtestPasses += 1;
             }
           }
-        } else if (results['status'] == 'PASS') {
+        } else if (results.status == 'PASS') {
           subtestPasses = 1;
+        } else if (!KNOWN_TEST_STATUSES.has(testname)) {
+          throw new Error(`Unexpected non-OK/PASS status for test: ${testname}`);
         }
 
         // A single test is scored 0-1000 based on how many of its subtests
