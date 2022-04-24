@@ -740,8 +740,8 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transforms-rotate-degree-90.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotate-translate-scale.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotateY-degree-60.html,1/1,1/1,1/1
-/css/css-transforms/transforms-skewX.html,1/1,0/1,1/1
-/css/css-transforms/transforms-skewY.html,1/1,0/1,1/1
+/css/css-transforms/transforms-skewX.html,1/1,1/1,1/1
+/css/css-transforms/transforms-skewY.html,1/1,1/1,1/1
 /css/css-transforms/transforms-support-calc.html,7/7,7/7,7/7
 /css/css-transforms/translate-getComputedStyle.html,1/1,1/1,1/1
 /css/css-transforms/translate-optional-second-001.html,1/1,1/1,1/1

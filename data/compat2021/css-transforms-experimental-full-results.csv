@@ -450,7 +450,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-origin-006.html,1/1,1/1,0/1
 /css/css-transforms/perspective-origin-x.html,1/1,1/1,0/1
 /css/css-transforms/perspective-origin-xy.html,1/1,1/1,0/1
-/css/css-transforms/perspective-transforms-equivalence.html,0/1,0/1,1/1
+/css/css-transforms/perspective-transforms-equivalence.html,0/1,1/1,1/1
 /css/css-transforms/perspective-translateZ-0.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-negative.html,1/1,1/1,0/1
 /css/css-transforms/perspective-translateZ-positive.html,1/1,1/1,0/1
