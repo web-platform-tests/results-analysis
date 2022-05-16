@@ -624,9 +624,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform-table-006.html,1/1,1/1,0/1
 /css/css-transforms/transform-table-007.html,1/1,1/1,0/1
 /css/css-transforms/transform-table-008.html,1/1,1/1,0/1
-/css/css-transforms/transform-table-009.html,0/1,0/1,0/1
-/css/css-transforms/transform-table-010.html,0/1,0/1,0/1
-/css/css-transforms/transform-table-011.html,0/1,0/1,0/1
+/css/css-transforms/transform-table-009.html,1/1,0/1,1/1
+/css/css-transforms/transform-table-010.html,1/1,0/1,1/1
+/css/css-transforms/transform-table-011.html,1/1,0/1,1/1
 /css/css-transforms/transform-transformable-inline-block.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-inline-table.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-list-item.html,1/1,1/1,1/1
