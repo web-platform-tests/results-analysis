@@ -463,7 +463,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-overflow-percent.html,1/1,1/1,1/1
 /css/css-transforms/rotateY-180deg-with-overflow-scroll.html,1/1,1/1,0/1
-/css/css-transforms/rotateY.html,1/1,1/1,1/1
+/css/css-transforms/rotateY.html,1/1,1/1,0/1
 /css/css-transforms/rotate_45deg.html,1/1,1/1,1/1
 /css/css-transforms/rotate_x_45deg.html,1/1,1/1,1/1
 /css/css-transforms/rotate_y_45deg.html,1/1,1/1,1/1
