@@ -490,9 +490,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-008.html,1/1,0/1,1/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-009.html,1/1,0/1,1/1
 /css/css-grid/animation/grid-template-columns-001.html,0/1,1/1,0/1
-/css/css-grid/animation/grid-template-columns-interpolation.html,322/448,448/448,320/448
+/css/css-grid/animation/grid-template-columns-interpolation.html,382/544,544/544,380/544
 /css/css-grid/animation/grid-template-rows-001.html,0/1,1/1,0/1
-/css/css-grid/animation/grid-template-rows-interpolation.html,322/448,448/448,320/448
+/css/css-grid/animation/grid-template-rows-interpolation.html,382/544,544/544,380/544
 /css/css-grid/grid-definition/explicit-grid-size-001.html,11/11,11/11,11/11
 /css/css-grid/grid-definition/flex-content-distribution-001.html,6/6,6/6,6/6
 /css/css-grid/grid-definition/flex-content-resolution-columns-001.html,15/15,15/15,15/15
@@ -842,7 +842,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/parsing/grid-columns-rows-get-set-multiple.html,39/40,39/40,40/40
 /css/css-grid/parsing/grid-content-sized-columns-resolution.html,42/42,42/42,42/42
 /css/css-grid/parsing/grid-shorthand-invalid.html,33/33,33/33,33/33
-/css/css-grid/parsing/grid-shorthand-valid.html,49/49,49/49,0/49
+/css/css-grid/parsing/grid-shorthand-valid.html,33/49,49/49,0/49
 /css/css-grid/parsing/grid-shorthand.html,56/56,56/56,56/56
 /css/css-grid/parsing/grid-template-areas-computed.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-areas-invalid.html,11/11,11/11,11/11
@@ -863,7 +863,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/parsing/grid-template-rows-invalid.html,15/15,15/15,15/15
 /css/css-grid/parsing/grid-template-rows-valid.html,34/34,34/34,34/34
 /css/css-grid/parsing/grid-template-shorthand-invalid.html,30/30,30/30,30/30
-/css/css-grid/parsing/grid-template-shorthand-valid.html,38/39,38/39,0/39
+/css/css-grid/parsing/grid-template-shorthand-valid.html,23/39,38/39,0/39
 /css/css-grid/parsing/grid-template-shorthand.html,24/24,24/24,24/24
 /css/css-grid/placement/grid-auto-flow-sparse-001.html,8/8,8/8,8/8
 /css/css-grid/placement/grid-auto-placement-implicit-tracks-001.html,12/12,12/12,12/12
