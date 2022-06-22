@@ -707,7 +707,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/transform3d-rotatex-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-perspective-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-perspective-002.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-rotatex-perspective-003.html,1/1,1/1,1/1
+/css/css-transforms/transform3d-rotatex-perspective-003.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-rotatex-ref.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatex-transformorigin-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-rotatey-001.html,1/1,1/1,1/1
