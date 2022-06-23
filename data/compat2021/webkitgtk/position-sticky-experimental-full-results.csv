@@ -26,7 +26,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-position/sticky/position-sticky-root-scroller.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-scroll-reposition.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-scroll-with-clip-and-abspos.html,1/1,1/1,1/1
-/css/css-position/sticky/position-sticky-scrolled-remove-sibling.html,1/1,0/1,1/1
+/css/css-position/sticky/position-sticky-scrolled-remove-sibling.html,2/2,0/2,2/2
 /css/css-position/sticky/position-sticky-stacking-context.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-parts.html,1/1,1/1,1/1
 /css/css-position/sticky/position-sticky-table-tfoot-bottom.html,1/1,1/1,1/1
