@@ -489,10 +489,10 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-007.html,1/1,0/1,1/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-008.html,1/1,0/1,1/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-009.html,1/1,0/1,1/1
-/css/css-grid/animation/grid-template-columns-001.html,0/1,1/1,1/1
-/css/css-grid/animation/grid-template-columns-interpolation.html,382/544,544/544,544/544
-/css/css-grid/animation/grid-template-rows-001.html,0/1,1/1,1/1
-/css/css-grid/animation/grid-template-rows-interpolation.html,382/544,544/544,544/544
+/css/css-grid/animation/grid-template-columns-001.html,1/1,1/1,1/1
+/css/css-grid/animation/grid-template-columns-interpolation.html,544/544,544/544,544/544
+/css/css-grid/animation/grid-template-rows-001.html,1/1,1/1,1/1
+/css/css-grid/animation/grid-template-rows-interpolation.html,544/544,544/544,544/544
 /css/css-grid/grid-definition/explicit-grid-size-001.html,11/11,11/11,11/11
 /css/css-grid/grid-definition/flex-content-distribution-001.html,6/6,6/6,6/6
 /css/css-grid/grid-definition/flex-content-resolution-columns-001.html,15/15,15/15,15/15
