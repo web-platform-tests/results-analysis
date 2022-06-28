@@ -477,7 +477,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/skew-test1.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-backface-hidden.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-translate-z-0.html,1/1,1/1,1/1
-/css/css-transforms/subpixel-transform-changes-001.html,1/1,1/1,1/1
+/css/css-transforms/subpixel-transform-changes-001.html,1/1,1/1,0/1
 /css/css-transforms/subpixel-transform-changes-002.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-transform-changes-003.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-transform-changes-004.html,1/1,1/1,1/1
