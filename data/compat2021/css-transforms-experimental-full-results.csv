@@ -438,7 +438,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
 /css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
-/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,0/1
+/css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
 /css/css-transforms/inheritance.html,20/20,19/20,20/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
