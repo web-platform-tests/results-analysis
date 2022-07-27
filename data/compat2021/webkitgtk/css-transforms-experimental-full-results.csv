@@ -1,5 +1,5 @@
 testname,chrome,firefox,webkitgtk
-/css/css-transforms/animation/composited-transform.html,1/1,1/1,0/1
+/css/css-transforms/animation/composited-transform.html,1/1,1/1,1/1
 /css/css-transforms/animation/list-interpolation.html,76/76,76/76,76/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,4/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
@@ -437,11 +437,11 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/css3-transform-rotateY.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale-002.html,1/1,1/1,1/1
 /css/css-transforms/css3-transform-scale.html,1/1,1/1,1/1
-/css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,0/1
+/css/css-transforms/dynamic-fixed-pos-cb-change.html,1/1,1/1,1/1
 /css/css-transforms/huge-length-tiny-scale.html,1/1,1/1,1/1
 /css/css-transforms/inheritance.html,20/20,19/20,20/20
 /css/css-transforms/perspective-containing-block-dynamic-1a.html,1/1,1/1,1/1
-/css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,0/1
+/css/css-transforms/perspective-containing-block-dynamic-1b.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-001.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-002.html,1/1,1/1,1/1
 /css/css-transforms/perspective-origin-003.html,1/1,1/1,1/1
@@ -477,9 +477,9 @@ testname,chrome,firefox,webkitgtk
 /css/css-transforms/skew-test1.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-backface-hidden.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-perspective-translate-z-0.html,1/1,1/1,1/1
-/css/css-transforms/subpixel-transform-changes-001.html,1/1,1/1,0/1
+/css/css-transforms/subpixel-transform-changes-001.html,1/1,1/1,1/1
 /css/css-transforms/subpixel-transform-changes-002.html,1/1,1/1,1/1
-/css/css-transforms/subpixel-transform-changes-003.html,1/1,1/1,1/1
+/css/css-transforms/subpixel-transform-changes-003.html,1/1,1/1,0/1
 /css/css-transforms/subpixel-transform-changes-004.html,1/1,1/1,1/1
 /css/css-transforms/text-perspective-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-2d-getComputedStyle-001.html,5/5,5/5,5/5
