@@ -19,7 +19,7 @@ const path = require('path');
 
 const {advanceDateToSkipBadDataIfNecessary} = require('../bad-ranges');
 
-flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
+flags.defineStringList('products', ['chrome', 'firefox', 'safari', 'edge'],
     'Products to include (comma-separated)');
 flags.defineString('from', '2022-01-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
