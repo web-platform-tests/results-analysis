@@ -735,8 +735,8 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-model/grid-container-ignores-first-line-001.html,12/12,8/12,12/12
 /css/css-grid/grid-model/grid-container-margin-border-padding-scrollbar-001.html,16/16,16/16,16/16
 /css/css-grid/grid-model/grid-container-scrollbar-001.html,1/1,1/1,1/1
-/css/css-grid/grid-model/grid-container-scrollbar-vertical-lr-001.html,1/1,1/1,1/1
-/css/css-grid/grid-model/grid-container-scrollbar-vertical-rl-001.html,1/1,1/1,1/1
+/css/css-grid/grid-model/grid-container-scrollbar-vertical-lr-001.html,1/1,1/1,0/1
+/css/css-grid/grid-model/grid-container-scrollbar-vertical-rl-001.html,1/1,1/1,0/1
 /css/css-grid/grid-model/grid-container-scrollbars-sizing-001.html,1/1,1/1,1/1
 /css/css-grid/grid-model/grid-container-scrollbars-sizing-002.html,1/1,1/1,1/1
 /css/css-grid/grid-model/grid-container-sizing-constraints-001.html,15/15,15/15,15/15
