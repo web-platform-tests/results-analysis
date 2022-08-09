@@ -5,14 +5,11 @@
  * time.
  */
 
-const fetch = require('node-fetch');
 const fs = require('fs');
 const flags = require('flags');
 const Git = require('nodegit');
 const lib = require('./lib');
 const moment = require('moment');
-
-const {advanceDateToSkipBadDataIfNecessary} = require('./bad-ranges');
 
 flags.defineString('from', '2018-07-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
@@ -26,75 +23,6 @@ flags.defineBoolean('experimental', false,
     'Calculate metrics for experimental runs.');
 flags.parse();
 
-const RUNS_URI = 'https://wpt.fyi/api/runs?aligned=true&max-count=1';
-
-// Fetches aligned runs from the wpt.fyi server, between the |from| and |to|
-// dates. If |experimental| is true fetch experimental runs, else stable runs.
-// Returns a map of date to list of runs for that date (one per product)
-//
-// TODO: Known problem: there are periods of time, mostly mid-late 2018, where
-// we ran both Safari 11.1 and 12.1, and the results are massively different.
-// We should fetch multiple runs for each browser and have upgrade logic.
-async function fetchAlignedRunsFromServer(products, from, to, experimental) {
-  const label = experimental ? 'experimental' : 'stable';
-  let params = `&label=master&label=${label}`;
-  for (const product of products) {
-    params += `&product=${product}`;
-  }
-  const runsUri = `${RUNS_URI}${params}`;
-
-  console.log(`Fetching aligned runs from ${from.format('YYYY-MM-DD')} ` +
-      `to ${to.format('YYYY-MM-DD')}`);
-
-  let cachedCount = 0;
-  const before = moment();
-  const alignedRuns = new Map();
-  while (from < to) {
-    const formattedFrom = from.format('YYYY-MM-DD');
-    from.add(1, 'days');
-    const formattedTo = from.format('YYYY-MM-DD');
-
-    // We advance the date (if necessary) before doing anything more, so that
-    // code later in the loop body can just 'continue' without checking.
-    from = advanceDateToSkipBadDataIfNecessary(from, experimental);
-
-    // Attempt to read the runs from the cache.
-    // TODO: Consider https://github.com/tidoust/fetch-filecache-for-crawling
-    let runs;
-    const cacheFile =
-        `cache/${label}-${products.join('-')}-runs-${formattedFrom}.json`;
-    try {
-      runs = JSON.parse(await fs.promises.readFile(cacheFile));
-      if (runs.length) {
-        cachedCount++;
-      }
-    } catch (e) {
-      // No cache hit; load from the server instead.
-      const url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
-      const response = await fetch(url);
-      // Many days do not have an aligned set of runs, but we always write to
-      // the cache to speed up future executions of this code.
-      runs = await response.json();
-      await fs.promises.writeFile(cacheFile, JSON.stringify(runs));
-    }
-
-    if (!runs.length) {
-      continue;
-    }
-
-    if (runs.length !== products.length) {
-      throw new Error(
-          `Fetched ${runs.length} runs, expected ${products.length}`);
-    }
-
-    alignedRuns.set(formattedFrom, runs);
-  }
-  const after = moment();
-  console.log(`Fetched ${alignedRuns.size} sets of runs in ` +
-      `${after - before} ms (${cachedCount} cached)`);
-
-  return alignedRuns;
-}
 
 async function main() {
   // Sort the products so that output files are consistent.
@@ -111,7 +39,7 @@ async function main() {
   const from = moment(flags.get('from'));
   const to = moment(flags.get('to'));
   const experimental = flags.get('experimental');
-  const alignedRuns = await fetchAlignedRunsFromServer(
+  const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);
 
   // Verify that we have data for the fetched runs in the results-analysis-cache
