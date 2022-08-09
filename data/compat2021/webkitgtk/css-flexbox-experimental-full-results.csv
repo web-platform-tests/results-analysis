@@ -505,12 +505,12 @@ testname,chrome,firefox,webkitgtk
 /css/css-flexbox/flexbox-basic-textarea-vert-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-video-horiz-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-video-vert-001.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-break-request-horiz-001a.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox-break-request-horiz-001b.html,0/1,1/1,0/1
+/css/css-flexbox/flexbox-break-request-horiz-001a.html,1/1,0/1,1/1
+/css/css-flexbox/flexbox-break-request-horiz-001b.html,1/1,0/1,1/1
 /css/css-flexbox/flexbox-break-request-horiz-002a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-break-request-horiz-002b.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-break-request-vert-001a.html,0/1,1/1,0/1
-/css/css-flexbox/flexbox-break-request-vert-001b.html,0/1,1/1,0/1
+/css/css-flexbox/flexbox-break-request-vert-001a.html,1/1,0/1,1/1
+/css/css-flexbox/flexbox-break-request-vert-001b.html,1/1,0/1,1/1
 /css/css-flexbox/flexbox-break-request-vert-002a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-break-request-vert-002b.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-column-row-gap-001.html,1/1,1/1,1/1
