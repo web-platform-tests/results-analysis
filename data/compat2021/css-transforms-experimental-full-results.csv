@@ -458,7 +458,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/perspective-zero-2.html,1/1,1/1,0/1
 /css/css-transforms/perspective-zero.html,1/1,1/1,1/1
 /css/css-transforms/preserve-3d-flat-grouping-properties-containing-block.html,2/2,2/2,2/2
-/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,10/10,9/10
+/css/css-transforms/preserve-3d-flat-grouping-properties.html,10/10,10/10,10/10
 /css/css-transforms/preserve3d-button.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-nested-perspective.html,1/1,1/1,1/1
 /css/css-transforms/preserve3d-overflow-percent.html,1/1,1/1,1/1
