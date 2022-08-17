@@ -225,8 +225,8 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/alignment/grid-alignment-implies-size-change-036.html,2/2,1/2,2/2
 /css/css-grid/alignment/grid-alignment-style-changes-001.html,6/6,3/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-002.html,6/6,3/6,6/6
-/css/css-grid/alignment/grid-alignment-style-changes-003.html,6/6,1/6,6/6
-/css/css-grid/alignment/grid-alignment-style-changes-004.html,6/6,1/6,6/6
+/css/css-grid/alignment/grid-alignment-style-changes-003.html,3/6,1/6,3/6
+/css/css-grid/alignment/grid-alignment-style-changes-004.html,3/6,1/6,3/6
 /css/css-grid/alignment/grid-alignment-style-changes-005.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-006.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-007.html,6/6,6/6,6/6
