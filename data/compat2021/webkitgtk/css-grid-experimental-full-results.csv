@@ -269,7 +269,7 @@ testname,chrome,firefox,webkitgtk
 /css/css-grid/alignment/grid-column-axis-self-baseline-synthesized-004.html,3/3,0/3,3/3
 /css/css-grid/alignment/grid-column-axis-self-baseline-synthesized-005.html,2/2,0/2,2/2
 /css/css-grid/alignment/grid-container-auto-margins-scrollbars-001.html,1/1,1/1,1/1
-/css/css-grid/alignment/grid-container-baseline-001.html,11/11,0/11,11/11
+/css/css-grid/alignment/grid-container-baseline-001.html,7/11,0/11,7/11
 /css/css-grid/alignment/grid-content-alignment-and-self-alignment-001.html,24/24,24/24,24/24
 /css/css-grid/alignment/grid-content-alignment-and-self-alignment-002.html,32/32,32/32,32/32
 /css/css-grid/alignment/grid-content-alignment-auto-sized-tracks-001.html,8/8,8/8,8/8
