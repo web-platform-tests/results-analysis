@@ -225,8 +225,8 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-alignment-implies-size-change-036.html,2/2,1/2,2/2
 /css/css-grid/alignment/grid-alignment-style-changes-001.html,6/6,3/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-002.html,6/6,3/6,6/6
-/css/css-grid/alignment/grid-alignment-style-changes-003.html,3/6,1/6,3/6
-/css/css-grid/alignment/grid-alignment-style-changes-004.html,3/6,1/6,3/6
+/css/css-grid/alignment/grid-alignment-style-changes-003.html,6/6,1/6,3/6
+/css/css-grid/alignment/grid-alignment-style-changes-004.html,6/6,1/6,3/6
 /css/css-grid/alignment/grid-alignment-style-changes-005.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-006.html,6/6,6/6,6/6
 /css/css-grid/alignment/grid-alignment-style-changes-007.html,6/6,6/6,6/6
@@ -269,7 +269,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-column-axis-self-baseline-synthesized-004.html,3/3,0/3,3/3
 /css/css-grid/alignment/grid-column-axis-self-baseline-synthesized-005.html,2/2,0/2,2/2
 /css/css-grid/alignment/grid-container-auto-margins-scrollbars-001.html,1/1,1/1,1/1
-/css/css-grid/alignment/grid-container-baseline-001.html,7/11,0/11,7/11
+/css/css-grid/alignment/grid-container-baseline-001.html,11/11,0/11,7/11
 /css/css-grid/alignment/grid-content-alignment-and-self-alignment-001.html,24/24,24/24,24/24
 /css/css-grid/alignment/grid-content-alignment-and-self-alignment-002.html,32/32,32/32,32/32
 /css/css-grid/alignment/grid-content-alignment-auto-sized-tracks-001.html,8/8,8/8,8/8
