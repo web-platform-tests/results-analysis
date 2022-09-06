@@ -212,9 +212,9 @@ testname,chrome,firefox,safari
 /css/css-transforms/parsing/transform-origin-computed.html,23/23,23/23,23/23
 /css/css-transforms/parsing/transform-origin-invalid.html,10/10,10/10,10/10
 /css/css-transforms/parsing/transform-origin-valid.html,16/16,16/16,16/16
-/css/css-transforms/parsing/transform-valid.html,41/41,41/41,41/41
+/css/css-transforms/parsing/transform-valid.html,42/42,42/42,42/42
 /css/css-transforms/parsing/translate-parsing-invalid.html,6/6,6/6,6/6
-/css/css-transforms/parsing/translate-parsing-valid.html,19/20,20/20,20/20
+/css/css-transforms/parsing/translate-parsing-valid.html,18/20,20/20,19/20
 /css/css-transforms/patternTransform/svg-patternTransform-001.html,1/1,1/1,1/1
 /css/css-transforms/patternTransform/svg-patternTransform-combination-001.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-002.html,1/1,1/1,1/1
