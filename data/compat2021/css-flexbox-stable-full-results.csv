@@ -74,7 +74,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/abspos/position-absolute-015.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/position-absolute-containing-block-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/position-absolute-containing-block-002.html,1/1,1/1,1/1
-/css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,4/25
+/css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,25/25
 /css/css-flexbox/animation/flex-basis-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-grow-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-shrink-interpolation.html,152/152,152/152,152/152
@@ -160,9 +160,9 @@ testname,chrome,firefox,safari
 /css/css-flexbox/getcomputedstyle/flexbox_computedstyle_order.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-column-reverse.html,1/1,1/1,1/1
 /css/css-flexbox/order/order-with-row-reverse.html,1/1,1/1,1/1
-/css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,9/12
+/css/css-flexbox/parsing/flex-basis-computed.html,11/12,12/12,12/12
 /css/css-flexbox/parsing/flex-basis-invalid.html,5/5,5/5,5/5
-/css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,5/8
+/css/css-flexbox/parsing/flex-basis-valid.html,8/8,8/8,8/8
 /css/css-flexbox/parsing/flex-computed.html,8/8,8/8,8/8
 /css/css-flexbox/parsing/flex-direction-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-direction-invalid.html,2/2,2/2,2/2
@@ -175,7 +175,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/parsing/flex-grow-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-grow-valid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-invalid.html,4/4,4/4,4/4
-/css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,28/36
+/css/css-flexbox/parsing/flex-shorthand.html,36/36,36/36,36/36
 /css/css-flexbox/parsing/flex-shrink-computed.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-invalid.html,4/4,4/4,4/4
 /css/css-flexbox/parsing/flex-shrink-valid.html,4/4,4/4,4/4
@@ -251,7 +251,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/auto-margins-003.html,1/1,1/1,1/1
 /css/css-flexbox/box-sizing-001.html,10/10,10/10,10/10
 /css/css-flexbox/box-sizing-min-max-sizes-001.html,2/2,2/2,2/2
-/css/css-flexbox/canvas-contain-size.html,1/1,1/1,0/1
+/css/css-flexbox/canvas-contain-size.html,1/1,1/1,1/1
 /css/css-flexbox/change-column-flex-width.html,1/1,1/1,1/1
 /css/css-flexbox/column-flex-child-with-overflow-scroll.html,2/2,2/2,2/2
 /css/css-flexbox/columns-height-set-via-top-bottom.html,2/2,2/2,2/2
@@ -964,11 +964,11 @@ testname,chrome,firefox,safari
 /css/css-flexbox/overflow-auto-002.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-003.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-004.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-auto-005.html,1/1,1/1,1/1
+/css/css-flexbox/overflow-auto-005.html,1/1,1/1,0/1
 /css/css-flexbox/overflow-auto-006.html,10/10,10/10,10/10
 /css/css-flexbox/overflow-auto-007.html,1/1,1/1,1/1
 /css/css-flexbox/overflow-auto-008.html,1/1,1/1,1/1
-/css/css-flexbox/overflow-top-left.html,1/1,1/1,1/1
+/css/css-flexbox/overflow-top-left.html,1/1,1/1,0/1
 /css/css-flexbox/padding-overflow-crash.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-descendant-of-anonymous-flex-item.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-000.html,6/6,6/6,6/6
