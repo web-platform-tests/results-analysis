@@ -186,7 +186,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/parsing/order-computed.html,3/3,3/3,3/3
 /css/css-flexbox/parsing/order-invalid.html,3/3,3/3,3/3
 /css/css-flexbox/parsing/order-valid.html,3/3,3/3,3/3
-/css/css-flexbox/align-baseline.html,1/1,1/1,1/1
+/css/css-flexbox/align-baseline.html,0/1,0/1,0/1
 /css/css-flexbox/align-content-001.htm,1/1,1/1,1/1
 /css/css-flexbox/align-content-002.htm,1/1,1/1,1/1
 /css/css-flexbox/align-content-003.htm,1/1,1/1,1/1
