@@ -816,7 +816,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_margin-left-ex.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_margin.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_nested-flex.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_object.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox_object.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox_order-abspos-space-around.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-box.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-noninteger-invalid.html,1/1,1/1,1/1
