@@ -223,9 +223,9 @@ testname,chrome,firefox,safari
 /css/css-transforms/rotate/svg-rotate-3args-invalid-003.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-004.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-3args-invalid-005.html,1/1,1/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-001.html,0/1,0/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-011.html,0/1,0/1,1/1
-/css/css-transforms/rotate/svg-rotate-angle-45-022.html,0/1,0/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-001.html,1/1,0/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-011.html,1/1,0/1,1/1
+/css/css-transforms/rotate/svg-rotate-angle-45-022.html,1/1,0/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-001.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-006.html,1/1,1/1,1/1
 /css/css-transforms/rotate/svg-rotate-angle-90-011.html,1/1,1/1,1/1
