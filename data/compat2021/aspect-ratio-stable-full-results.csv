@@ -157,4 +157,4 @@ testname,chrome,firefox,safari
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio-lazy.html,1/1,1/1,1/1
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/img-aspect-ratio.html,40/41,41/41,40/41
 /html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html,15/15,4/15,15/15
-/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html,0/1,0/1,0/1
+/html/rendering/replaced-elements/attributes-for-embedded-content-and-images/video-aspect-ratio.html,0/1,11/11,0/1
