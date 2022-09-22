@@ -638,11 +638,11 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-transformable-table-row.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-table.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-caption-contains-fixed-position.html,1/1,1/1,1/1
-/css/css-transforms/transform-transformed-tbody-contains-fixed-position.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformed-tbody-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-td-contains-fixed-position.html,1/1,1/1,1/1
-/css/css-transforms/transform-transformed-tfoot-contains-fixed-position.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformed-tfoot-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-th-contains-fixed-position.html,1/1,1/1,1/1
-/css/css-transforms/transform-transformed-thead-contains-fixed-position.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformed-thead-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-tr-contains-fixed-position.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformed-tr-percent-height-child.html,1/1,1/1,0/1
 /css/css-transforms/transform-translate-001.html,1/1,1/1,1/1
