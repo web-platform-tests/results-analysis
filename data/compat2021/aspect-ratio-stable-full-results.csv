@@ -52,9 +52,9 @@ testname,chrome,firefox,safari
 /css/css-sizing/aspect-ratio/block-aspect-ratio-with-margin-collapsing-001.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/block-aspect-ratio-with-margin-collapsing-002.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-001.html,1/1,1/1,1/1
-/css/css-sizing/aspect-ratio/flex-aspect-ratio-002.html,1/1,0/1,0/1
+/css/css-sizing/aspect-ratio/flex-aspect-ratio-002.html,0/1,1/1,1/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-003.html,1/1,1/1,1/1
-/css/css-sizing/aspect-ratio/flex-aspect-ratio-004.html,0/1,0/1,0/1
+/css/css-sizing/aspect-ratio/flex-aspect-ratio-004.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-005.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-006.html,1/1,1/1,1/1
 /css/css-sizing/aspect-ratio/flex-aspect-ratio-007.html,1/1,1/1,1/1
