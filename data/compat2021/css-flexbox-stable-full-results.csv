@@ -468,11 +468,11 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-baseline-multi-item-vert-001a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-multi-item-vert-001b.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-multi-line-horiz-001.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-baseline-multi-line-horiz-002.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox-baseline-multi-line-horiz-002.html,0/1,0/1,0/1
 /css/css-flexbox/flexbox-baseline-multi-line-horiz-003.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-multi-line-horiz-004.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-multi-line-vert-001.html,1/1,1/1,0/1
-/css/css-flexbox/flexbox-baseline-multi-line-vert-002.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-baseline-multi-line-vert-002.html,0/1,0/1,0/1
 /css/css-flexbox/flexbox-baseline-single-item-001a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-single-item-001b.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-block-horiz-001.xhtml,1/1,1/1,1/1
