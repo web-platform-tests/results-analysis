@@ -255,7 +255,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/css-flexbox-row-wrap.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-row.html,1/1,1/1,1/1
 /css/css-flexbox/css-flexbox-test1.html,1/1,1/1,1/1
-/css/css-flexbox/display-flex-001.htm,1/1,1/1,1/1
+/css/css-flexbox/display-flex-001.htm,1/1,1/1,0/1
 /css/css-flexbox/dynamic-bsize-change.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout-002.html,1/1,1/1,1/1
 /css/css-flexbox/dynamic-change-simplified-layout.html,1/1,1/1,1/1
