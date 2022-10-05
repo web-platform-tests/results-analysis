@@ -438,7 +438,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-align-self-baseline-horiz-003.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-004.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-005.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-baseline-horiz-006.xhtml,0/1,1/1,0/1
+/css/css-flexbox/flexbox-align-self-baseline-horiz-006.xhtml,1/1,0/1,0/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-007.xhtml,1/1,1/1,0/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-008.xhtml,0/1,1/1,0/1
 /css/css-flexbox/flexbox-align-self-horiz-001-block.xhtml,1/1,1/1,1/1
@@ -804,7 +804,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_margin-left-ex.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_margin.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_nested-flex.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_object.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox_object.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-abspos-space-around.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-box.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-noninteger-invalid.html,1/1,1/1,1/1
