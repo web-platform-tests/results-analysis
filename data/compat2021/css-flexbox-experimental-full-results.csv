@@ -6,7 +6,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/abspos/abspos-autopos-vrl-ltr.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/abspos-autopos-vrl-rtl.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/abspos-descendent-001.html,1/1,1/1,1/1
-/css/css-flexbox/abspos/flex-abspos-staticpos-align-content-001.html,24/24,24/24,10/24
+/css/css-flexbox/abspos/flex-abspos-staticpos-align-content-001.html,24/24,24/24,24/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-align-self-001.html,24/24,24/24,22/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-align-self-002.html,24/24,24/24,22/24
 /css/css-flexbox/abspos/flex-abspos-staticpos-align-self-003.html,24/24,24/24,22/24
@@ -804,7 +804,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_margin-left-ex.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_margin.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_nested-flex.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_object.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox_object.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-abspos-space-around.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-box.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-noninteger-invalid.html,1/1,1/1,1/1
