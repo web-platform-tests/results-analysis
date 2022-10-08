@@ -453,11 +453,11 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-align-self-vert-002.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-vert-003.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-vert-004.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-vert-rtl-001.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-vert-rtl-002.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-vert-rtl-003.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-vert-rtl-004.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-vert-rtl-005.xhtml,1/1,1/1,1/1
+/css/css-flexbox/flexbox-align-self-vert-rtl-001.xhtml,0/1,0/1,0/1
+/css/css-flexbox/flexbox-align-self-vert-rtl-002.xhtml,0/1,0/1,0/1
+/css/css-flexbox/flexbox-align-self-vert-rtl-003.xhtml,0/1,0/1,0/1
+/css/css-flexbox/flexbox-align-self-vert-rtl-004.xhtml,0/1,0/1,0/1
+/css/css-flexbox/flexbox-align-self-vert-rtl-005.xhtml,0/1,0/1,0/1
 /css/css-flexbox/flexbox-anonymous-items-001.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-align-self-baseline-horiz-001.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-baseline-align-self-baseline-vert-001.html,1/1,1/1,1/1
