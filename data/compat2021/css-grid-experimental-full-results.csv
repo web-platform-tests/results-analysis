@@ -822,7 +822,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-minimum-contribution-baseline-shim-vertical-rl.html,6/6,4/6,3/6
 /css/css-grid/layout-algorithm/grid-minimum-contribution-baseline-shim.html,6/6,4/6,6/6
 /css/css-grid/layout-algorithm/grid-percent-cols-filled-shrinkwrap-001.html,1/1,1/1,1/1
-/css/css-grid/layout-algorithm/grid-percent-cols-spanned-shrinkwrap-001.html,1/1,1/1,0/1
+/css/css-grid/layout-algorithm/grid-percent-cols-spanned-shrinkwrap-001.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-percent-rows-filled-shrinkwrap-001.html,1/1,0/1,1/1
 /css/css-grid/layout-algorithm/grid-percent-rows-spanned-shrinkwrap-001.html,1/1,0/1,1/1
 /css/css-grid/layout-algorithm/grid-stretch-respects-min-size-001.html,1/1,1/1,1/1
