@@ -650,8 +650,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-translate-003.html,1/1,1/1,1/1
 /css/css-transforms/transform-translate-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-translate-005.html,1/1,1/1,1/1
-/css/css-transforms/transform-translate-background-001.html,0/1,0/1,0/1
-/css/css-transforms/transform-translate-background-002.html,0/1,0/1,0/1
+/css/css-transforms/transform-translate-background-001.html,0/1,1/1,0/1
+/css/css-transforms/transform-translate-background-002.html,0/1,1/1,0/1
 /css/css-transforms/transform-translatex-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-translatex-002.html,1/1,1/1,1/1
 /css/css-transforms/transform-translatex-003.html,1/1,1/1,1/1
