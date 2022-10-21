@@ -412,7 +412,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/css-rotate-2d-3d-001.html,1/1,1/1,1/1
 /css/css-transforms/css-scale-nested-001.html,1/1,1/1,1/1
 /css/css-transforms/css-skew-001.html,1/1,1/1,1/1
-/css/css-transforms/css-skew-002.html,1/1,0/1,1/1
+/css/css-transforms/css-skew-002.html,1/1,1/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-X-negative.html,1/1,1/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-X-positive.html,1/1,1/1,1/1
 /css/css-transforms/css-transform-3d-rotate3d-Y-negative.html,1/1,1/1,1/1
@@ -736,7 +736,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transformed-preserve-3d-1.html,1/1,1/1,1/1
 /css/css-transforms/transformed-rotateX-3.html,1/1,1/1,1/1
 /css/css-transforms/transformed-rotateY-1.html,1/1,1/1,1/1
-/css/css-transforms/transforms-rotate-degree-45.html,1/1,0/1,1/1
+/css/css-transforms/transforms-rotate-degree-45.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotate-degree-90.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotate-translate-scale.html,1/1,1/1,1/1
 /css/css-transforms/transforms-rotateY-degree-60.html,1/1,1/1,1/1
