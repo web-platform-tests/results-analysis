@@ -607,7 +607,7 @@ testname,chrome,firefox,safari
 /css/css-grid/grid-items/grid-items-001.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-items-002.html,1/1,1/1,1/1
 /css/css-grid/grid-items/grid-items-003.html,1/1,1/1,1/1
-/css/css-grid/grid-items/grid-items-inline-blocks-001.html,1/1,1/1,1/1
+/css/css-grid/grid-items/grid-items-inline-blocks-001.html,1/1,1/1,0/1
 /css/css-grid/grid-items/grid-items-minimum-height-orthogonal-001.html,46/46,46/46,46/46
 /css/css-grid/grid-items/grid-items-minimum-width-001.html,44/44,44/44,44/44
 /css/css-grid/grid-items/grid-items-minimum-width-002.html,44/44,44/44,44/44
