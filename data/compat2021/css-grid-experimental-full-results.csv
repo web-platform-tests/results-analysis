@@ -369,7 +369,7 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-4.html,1/1,0/1,0/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-5.html,1/1,0/1,0/1
 /css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-6.html,1/1,0/1,0/1
-/css/css-grid/alignment/grid-item-self-baseline-001.html,1/1,1/1,0/1
+/css/css-grid/alignment/grid-item-self-baseline-001.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-place-content-001.html,20/20,20/20,20/20
 /css/css-grid/alignment/grid-row-axis-alignment-positioned-items-001.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-row-axis-alignment-positioned-items-002.html,4/4,4/4,4/4
@@ -395,10 +395,10 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-003.html,4/4,0/4,3/4
 /css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-004.html,4/4,0/4,3/4
 /css/css-grid/alignment/grid-row-axis-self-baseline-synthesized-005.html,2/2,0/2,2/2
-/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-001.html,1/1,1/1,0/1
-/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-002.html,1/1,1/1,0/1
-/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-003.html,1/1,1/1,0/1
-/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-004.html,1/1,1/1,0/1
+/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-001.html,1/1,1/1,1/1
+/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-002.html,1/1,1/1,1/1
+/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-003.html,1/1,1/1,1/1
+/css/css-grid/alignment/grid-self-alignment-baseline-with-grid-004.html,1/1,1/1,1/1
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-001.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-002.html,4/4,4/4,4/4
 /css/css-grid/alignment/grid-self-alignment-non-static-positioned-items-003.html,4/4,4/4,4/4

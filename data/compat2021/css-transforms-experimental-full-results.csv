@@ -405,7 +405,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/backface-visibility-hidden-006.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-animated-001.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-animated-002.html,0/1,0/1,0/1
-/css/css-transforms/change-scale-wide-range.html,1/1,1/1,0/1
+/css/css-transforms/change-scale-wide-range.html,1/1,1/1,1/1
 /css/css-transforms/composited-under-rotateY-180deg-clip-perspective.html,1/1,1/1,1/1
 /css/css-transforms/composited-under-rotateY-180deg-clip.html,0/1,1/1,1/1
 /css/css-transforms/composited-under-rotateY-180deg.html,0/1,1/1,1/1
