@@ -598,7 +598,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-paint-ordering-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-paint-ordering-002.xhtml,0/1,1/1,0/1
 /css/css-flexbox/flexbox-paint-ordering-003.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-root-node-001a.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox-root-node-001a.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-root-node-001b.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-safe-overflow-position-001.html,0/1,1/1,0/1
 /css/css-flexbox/flexbox-single-line-clamp-1.html,1/1,1/1,1/1
@@ -804,7 +804,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_margin-left-ex.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_margin.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_nested-flex.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_object.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox_object.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-abspos-space-around.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-box.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-noninteger-invalid.html,1/1,1/1,1/1
