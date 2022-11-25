@@ -630,7 +630,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-transformable-inline-block.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-inline-table.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-list-item.html,1/1,1/1,1/1
-/css/css-transforms/transform-transformable-table-caption.html,1/1,1/1,0/1
+/css/css-transforms/transform-transformable-table-caption.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-table-cell.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-table-footer-group.html,1/1,1/1,1/1
 /css/css-transforms/transform-transformable-table-header-group.html,1/1,1/1,1/1
