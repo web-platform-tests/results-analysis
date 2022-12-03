@@ -590,7 +590,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-percent-008.html,1/1,1/1,1/1
 /css/css-transforms/transform-percent-009.html,4/4,4/4,4/4
 /css/css-transforms/transform-percent-010.html,1/1,1/1,1/1
-/css/css-transforms/transform-propagate-inherit-boolean-001.html,1/1,1/1,1/1
+/css/css-transforms/transform-propagate-inherit-boolean-001.html,1/1,1/1,0/1
 /css/css-transforms/transform-root-bg-001.html,0/1,1/1,0/1
 /css/css-transforms/transform-root-bg-002.html,0/1,1/1,0/1
 /css/css-transforms/transform-root-bg-003.html,0/1,1/1,0/1
