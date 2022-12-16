@@ -712,7 +712,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_flex-1-1-N-shrink.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_flex-1-1-N.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_flex-1-1-Npercent-shrink.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_flex-1-1-Npercent.html,1/1,1/1,1/1
+/css/css-flexbox/flexbox_flex-1-1-Npercent.html,1/1,1/1,0/1
 /css/css-flexbox/flexbox_flex-1-1-auto-shrink.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_flex-1-1-auto.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_flex-1-1.html,1/1,1/1,1/1
