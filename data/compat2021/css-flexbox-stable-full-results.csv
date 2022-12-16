@@ -299,7 +299,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-aspect-ratio-img-row-004.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-005.html,4/4,4/4,4/4
 /css/css-flexbox/flex-aspect-ratio-img-row-006.html,1/1,1/1,1/1
-/css/css-flexbox/flex-aspect-ratio-img-row-007.html,1/1,1/1,0/1
+/css/css-flexbox/flex-aspect-ratio-img-row-007.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-008.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-009.html,1/1,1/1,1/1
 /css/css-flexbox/flex-aspect-ratio-img-row-010.html,1/1,1/1,0/1
@@ -432,14 +432,14 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flex-wrap-005.html,1/1,1/1,1/1
 /css/css-flexbox/flex-wrap-006.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-items-center-nested-001.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox-align-self-baseline-horiz-001a.xhtml,1/1,1/1,0/1
-/css/css-flexbox/flexbox-align-self-baseline-horiz-001b.xhtml,1/1,1/1,0/1
+/css/css-flexbox/flexbox-align-self-baseline-horiz-001a.xhtml,1/1,1/1,1/1
+/css/css-flexbox/flexbox-align-self-baseline-horiz-001b.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-002.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-003.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-004.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-005.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-006.xhtml,1/1,0/1,0/1
-/css/css-flexbox/flexbox-align-self-baseline-horiz-007.xhtml,1/1,1/1,0/1
+/css/css-flexbox/flexbox-align-self-baseline-horiz-007.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-baseline-horiz-008.xhtml,0/1,1/1,0/1
 /css/css-flexbox/flexbox-align-self-horiz-001-block.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-align-self-horiz-001-table.xhtml,1/1,1/1,1/1
