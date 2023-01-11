@@ -40,4 +40,4 @@ testname,chrome,firefox,safari
 /css/css-position/sticky/position-sticky-top.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-transforms-translate.html,3/3,3/3,3/3
 /css/css-position/sticky/position-sticky-transforms.html,3/3,3/3,3/3
-/css/css-position/sticky/position-sticky-writing-modes.html,1/1,0/1,1/1
+/css/css-position/sticky/position-sticky-writing-modes.html,1/1,1/1,1/1
