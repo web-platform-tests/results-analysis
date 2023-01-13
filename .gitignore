@@ -3,3 +3,5 @@ gh-pages/
 
 node_modules/
 results-analysis-cache.git/
+
+interop-*.csv

@@ -16,9 +16,11 @@ const Git = require('nodegit');
 const lib = require('../lib');
 const moment = require('moment');
 const path = require('path');
+const interopData = require('./category-data.json');
 
 flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
     'Products to include (comma-separated)');
+flags.defineString('year', '2022', 'Interop year to calculate');
 flags.defineString('from', '2022-01-01', 'Starting date (inclusive)');
 flags.defineString('to', moment().format('YYYY-MM-DD'),
     'Ending date (exclusive)');
@@ -27,24 +29,6 @@ flags.defineBoolean('experimental', false,
 flags.parse();
 
 const ROOT_DIR = path.join(__dirname, '..');
-
-const CATEGORIES = [
-  'interop-2021-aspect-ratio',
-  'interop-2021-flexbox',
-  'interop-2021-grid',
-  'interop-2021-position-sticky',
-  'interop-2021-transforms',
-  'interop-2022-cascade',
-  'interop-2022-color',
-  'interop-2022-contain',
-  'interop-2022-dialog',
-  'interop-2022-forms',
-  'interop-2022-scrolling',
-  'interop-2022-subgrid',
-  'interop-2022-text',
-  'interop-2022-viewport',
-  'interop-2022-webcompat',
-];
 
 // All non-OK harness statuses. Any non-OK harness status should be investigated
 // before being added to this list, so that we don't score tests in the wrong
@@ -85,8 +69,59 @@ const KNOWN_TEST_STATUSES = new Set([
   '/html/semantics/forms/the-input-element/range-restore-oninput-onchange-event.html',
   // TIMEOUT in STP 137, since fixed
   '/html/semantics/interactive-elements/the-dialog-element/backdrop-receives-element-events.html',
+
+
+  /**
+   * The tests below cause errors for interop 2023 and should be investigated
+   * to determine if they should actually be added to this list or if action
+   * needs to be taken to repair them.
+   */
+  // interop-2023-contain
+  '/css/css-contain/container-queries/nested-query-containers.html',
+  '/css/css-contain/content-visibility/content-visibility-input-image.html',
+  '/css/css-contain/content-visibility/content-visibility-031.html',
+  '/css/css-contain/content-visibility/content-visibility-auto-state-changed.html',
+  '/css/selectors/invalidation/fullscreen-pseudo-class-in-has.html',
+  '/css/selectors/invalidation/modal-pseudo-class-in-has.html',
+  '/css/selectors/invalidation/user-action-pseudo-classes-in-has.html',
+  // interop-2023-offscreencanvas
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.outside.html',
+  '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
+  '/html/canvas/offscreen/manual/convert-to-blob/offscreencanvas.convert.to.blob.w.html',
+  '/html/canvas/offscreen/manual/draw-generic-family/2d.text.draw.generic.family.w.html',
+  '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
+  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.commit.w.html',
+  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transfer.to.imagebitmap.w.html',
+  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transferrable.w.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.basic.html',
+  '/html/canvas/offscreen/drawing-images-to-the-canvas/2d.drawImage.animated.poster.html',
+  // interop-2023-webcomponents
+  '/shadow-dom/focus/focus-shadowhost-display-none.html',
+  '/custom-elements/form-associated/ElementInternals-labels.html',
+  '/custom-elements/form-associated/ElementInternals-setFormValue.html',
+  '/custom-elements/form-associated/ElementInternals-validation.html',
+  '/custom-elements/form-associated/form-disabled-callback.html',
 ]);
 
+
+function aggregateInteropTestScores(interopScores, numRuns) {
+  if (interopScores.length === 0) return 0;
+
+  const aggregateScore = interopScores.map(test => {
+    let subtestTotal = 0;
+    let subtestsAllPassing = 0;
+    Object.keys(test).forEach(subtestName => {
+      subtestTotal += 1;
+      // A subtest passes if it is marked as passing for every array.
+      // The length is checked to make sure there was no missing value for a browser.
+      if (test[subtestName].length === numRuns && test[subtestName].every(isPassed => isPassed)) {
+        subtestsAllPassing += 1;
+      }
+    });
+    return Math.floor(1000 * subtestsAllPassing / subtestTotal);
+  }).reduce((a, b) => a + b, 0);
+  return Math.floor(aggregateScore / interopScores.length);
+}
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
 // to be aligned in some way (i.e. they were all run at the same WPT SHA).
@@ -120,11 +155,13 @@ const KNOWN_TEST_STATUSES = new Set([
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
+  const interopScores = [];
   try {
+    let isFirstCalcedRun = true;
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
       let score = 0;
-
+      let i = 0;
       lib.results.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
         if (!allTestsSet.has(testname)) {
@@ -135,25 +172,45 @@ function scoreRuns(runs, allTestsSet) {
 
         let subtestPasses = 0;
         let subtestTotal = 1;
+
+        // Keep subtest data for every test in order to calculate interop scores.
+        // A test entry is created for each test in the first run.
+        if (isFirstCalcedRun) {
+          interopScores.push({});
+        }
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
             throw new Error(`Unexpected non-OK status for test: ${testname}`);
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
+            // Keep a boolean array that represents whether each browser passed the subtest.
+            if (!(subtest.name in interopScores[i])) {
+              interopScores[i][subtest.name] = [];
+            }
             if (subtest['status'] == 'PASS') {
               subtestPasses += 1;
             }
+            // Push the pass/fail result to the subtest array.
+            interopScores[i][subtest.name].push(subtest['status'] == 'PASS');
           }
-        } else if (results['status'] == 'PASS') {
-          subtestPasses = 1;
+        } else {
+          // If there are no subtests, just keep a single "overall" prop
+          // in the subtests object to determine interop score for the test.
+          if (!('overall' in interopScores[i])) {
+            interopScores[i].overall = [];
+          }
+          interopScores[i].overall.push(results['status'] == 'PASS');
+          if (results['status'] == 'PASS') {
+            subtestPasses = 1;
+          }
         }
-
+        i++;
         // A single test is scored 0-1000 based on how many of its subtests
         // pass, rounding down so that 1000 always means fully passing.
         score += Math.floor(1000 * subtestPasses / subtestTotal);
       });
-
+      isFirstCalcedRun = false;
       // We always normalize against the number of tests we are looking for,
       // rather than the total number of tests we found. The trade-off is all
       // about new tests being added to the set.
@@ -178,7 +235,9 @@ function scoreRuns(runs, allTestsSet) {
     e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
     throw e;
   }
-
+  // Calculate the interop scores that have been saved and add
+  // The interop score to the end of the browsers' scores array.
+  scores.push(aggregateInteropTestScores(interopScores, runs.length));
   return scores;
 }
 
@@ -201,14 +260,20 @@ async function scoreCategory(category, experimental, products, alignedRuns,
 }
 
 async function main() {
+  const year = (flags.isSet('year')) ? flags.get('year') : '2022';
+  if (!year in interopData) {
+    throw new Error(`Categories not defined for year ${year}`);
+  }
+  const categories = interopData[year].categories;
+
   const products = flags.get('products');
   const repo = await Git.Repository.open(
       path.join(ROOT_DIR, 'results-analysis-cache.git'));
 
   // First, grab aligned runs from the server for the dates that we are
   // interested in.
-  const from = moment(flags.get('from'));
-  const to = moment(flags.get('to'));
+  const from = (flags.isSet('from')) ? moment(flags.get('from')) : moment(`${year}-01-01`);
+  const to = (flags.isSet('to')) ? moment(flags.get('to')) : moment();
   const experimental = flags.get('experimental');
   const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);
@@ -272,40 +337,46 @@ async function main() {
       }
     }
   }
-
-  for (const category of CATEGORIES) {
-    console.log(`Scoring runs for ${category}`);
-    const testsSet = labeledTests.get(category);
-    if (!testsSet || !testsSet.size) {
-      throw new Error(`No tests labeled for ${category}`);
+  // category is an object with "name" and "labels" props.
+  for (const category of categories) {
+    console.log(`Scoring runs for ${category.name}`);
+    const testsSet = new Set();
+    // We aggregate all the tests with the labels defined in the category.
+    for (const label of category.labels) {
+      const labeledTestsSet = labeledTests.get(label);
+      if (!labeledTestsSet || !labeledTestsSet.size) {
+        throw new Error(`No tests labeled for ${label}`);
+      }
+      labeledTestsSet.forEach(test => testsSet.add(test));
     }
     const dateToScores = await scoreCategory(category, experimental, products,
         alignedRuns, testsSet);
-
     // Store the entire dateToScores for producing the unified CSV later.
-    dateToScoresMaps.set(category, dateToScores);
+    dateToScoresMaps.set(category.name, dateToScores);
   }
 
   // TODO: Once the other score CSVs are no longer used, we can push
   // some of this logic into scoreCategory and simplify things.
   let unifiedCsv = 'date';
   for (const product of products) {
-    const categoryLabels = CATEGORIES.map(c => `${product}-${c}`);
+    const categoryLabels = categories.map(c => `${product}-${c.name}`);
     unifiedCsv += `,${product}-version,${categoryLabels.join()}`;
   }
+  // Add the interop category headers.
+  unifiedCsv += `,${categories.map(c => `interop-${c.name}`)}`;
   unifiedCsv += '\n';
 
   // We know that all dateToScoresMaps have the same dates (as they come from
   // the same runs), so we can just iterate the keys from the first.
-  for (const date of dateToScoresMaps.get(CATEGORIES[0]).keys()) {
+  for (const date of dateToScoresMaps.get(categories[0].name).keys()) {
     let csvLine = [date.substr(0, 10)];
     // This is essentially an inversion loop; we have the data mapped by
     // individual categories, but we need it mapped by product.
     for (let browserIdx = 0; browserIdx < products.length; browserIdx++) {
       let version;
       const productScores = [];
-      for (const category of CATEGORIES) {
-        const {versions, scores} = dateToScoresMaps.get(category).get(date);
+      for (const category of categories) {
+        const {versions, scores} = dateToScoresMaps.get(category.name).get(date);
         const score = scores[browserIdx];
         productScores.push(score);
         // The versions should all be the same, so we just grab the latest one.
@@ -314,11 +385,17 @@ async function main() {
       csvLine.push(version);
       csvLine = csvLine.concat(productScores);
     }
+    // Add the interop scores for each category.
+    for (const category of categories) {
+      const scoreInfo = dateToScoresMaps.get(category.name).get(date);
+      const categoryInteropScore = scoreInfo.scores[products.length];
+      csvLine.push(categoryInteropScore);
+    }
     unifiedCsv += `${csvLine.join()}\n`;
   }
 
   const csvFilename = experimental ?
-      `interop-2022-experimental.csv` : `interop-2022-stable.csv`;
+      `interop-${year}-experimental.csv` : `interop-${year}-stable.csv`;
   await fs.promises.writeFile(csvFilename, unifiedCsv, 'utf-8');
   console.log(`Wrote scores to ${csvFilename}`);
 }
