@@ -25,7 +25,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/transform-interpolation-translate-em.html,1/1,1/1,0/1
 /css/css-transforms/animation/transform-interpolation-translate.html,1/1,1/1,1/1
 /css/css-transforms/animation/transform-matrix-composition.html,56/56,56/56,56/56
-/css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,164/168
+/css/css-transforms/animation/transform-origin-interpolation.html,168/168,168/168,168/168
 /css/css-transforms/animation/transform-perspective-composition.html,14/14,14/14,14/14
 /css/css-transforms/animation/transform-rotate-composition.html,63/63,63/63,63/63
 /css/css-transforms/animation/transform-scale-composition.html,49/49,49/49,49/49
@@ -395,7 +395,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/2d-rotate-js.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-notref.html,1/1,1/1,1/1
 /css/css-transforms/2d-rotate-ref.html,1/1,1/1,1/1
-/css/css-transforms/3d-rendering-context-behavior.html,12/12,12/12,8/12
+/css/css-transforms/3d-rendering-context-behavior.html,12/12,12/12,12/12
 /css/css-transforms/backface-visibility-001.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-001.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-002.tentative.html,1/1,1/1,1/1
@@ -405,7 +405,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/backface-visibility-hidden-006.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-animated-001.html,1/1,1/1,1/1
 /css/css-transforms/backface-visibility-hidden-animated-002.html,0/1,0/1,0/1
-/css/css-transforms/change-scale-wide-range.html,1/1,1/1,1/1
+/css/css-transforms/change-scale-wide-range.html,1/1,1/1,0/1
 /css/css-transforms/composited-under-rotateY-180deg-clip-perspective.html,1/1,1/1,1/1
 /css/css-transforms/composited-under-rotateY-180deg-clip.html,0/1,1/1,1/1
 /css/css-transforms/composited-under-rotateY-180deg.html,0/1,1/1,1/1
@@ -621,9 +621,9 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-table-003.html,1/1,1/1,1/1
 /css/css-transforms/transform-table-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-table-005.html,1/1,1/1,1/1
-/css/css-transforms/transform-table-006.html,1/1,1/1,0/1
-/css/css-transforms/transform-table-007.html,1/1,1/1,0/1
-/css/css-transforms/transform-table-008.html,1/1,1/1,0/1
+/css/css-transforms/transform-table-006.html,1/1,1/1,1/1
+/css/css-transforms/transform-table-007.html,1/1,1/1,1/1
+/css/css-transforms/transform-table-008.html,1/1,1/1,1/1
 /css/css-transforms/transform-table-009.html,1/1,0/1,1/1
 /css/css-transforms/transform-table-010.html,1/1,0/1,1/1
 /css/css-transforms/transform-table-011.html,1/1,0/1,1/1
@@ -680,8 +680,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-matrix3d-005.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-002.html,1/1,1/1,1/1
-/css/css-transforms/transform3d-perspective-003.html,1/1,1/1,0/1
-/css/css-transforms/transform3d-perspective-004.html,1/1,1/1,0/1
+/css/css-transforms/transform3d-perspective-003.html,1/1,1/1,1/1
+/css/css-transforms/transform3d-perspective-004.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-005.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-006.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-perspective-007.html,1/1,1/1,1/1
@@ -721,7 +721,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform3d-sorting-001.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-002.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-003.html,1/1,1/1,0/1
-/css/css-transforms/transform3d-sorting-004.html,1/1,1/1,0/1
+/css/css-transforms/transform3d-sorting-004.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-005.html,1/1,1/1,1/1
 /css/css-transforms/transform3d-sorting-006.html,1/1,1/1,0/1
 /css/css-transforms/transform3d-translate3d-001.html,1/1,1/1,1/1
