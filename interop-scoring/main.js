@@ -72,9 +72,8 @@ const KNOWN_TEST_STATUSES = new Set([
 
 
   /**
-   * The tests below cause errors for interop 2023 and should be investigated
-   * to determine if they should actually be added to this list or if action
-   * needs to be taken to repair them.
+   * The tests below have non-OK statuses that have not been investigated
+   * as of today.
    */
   // interop-2023-contain
   '/css/css-contain/container-queries/nested-query-containers.html',
@@ -95,6 +94,31 @@ const KNOWN_TEST_STATUSES = new Set([
   '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transferrable.w.html',
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.basic.html',
   '/html/canvas/offscreen/drawing-images-to-the-canvas/2d.drawImage.animated.poster.html',
+  '/html/canvas/offscreen/compositing/2d.composite.globalAlpha.imagepattern.html',
+  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.copy.html',
+  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.destination-atop.html',
+  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.destination-in.html',
+  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.source-in.html',
+  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.source-out.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.basic.image.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.crosscanvas.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.basic.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord1.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord2.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord3.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.outside.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord3.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.coord1.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.outside.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.basic.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.coord1.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.outside.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.repeat.empty.html',
+  '/html/canvas/offscreen/shadows/2d.shadow.pattern.basic.html',
+  '/html/canvas/offscreen/shadows/2d.shadow.pattern.transparent.2.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord2.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.basic.html',
+  '/html/canvas/offscreen/shadows/2d.shadow.pattern.alpha.html',
   // interop-2023-webcomponents
   '/shadow-dom/focus/focus-shadowhost-display-none.html',
   '/custom-elements/form-associated/ElementInternals-labels.html',
@@ -106,21 +130,19 @@ const KNOWN_TEST_STATUSES = new Set([
 
 function aggregateInteropTestScores(interopScores, numRuns) {
   if (interopScores.length === 0) return 0;
-
-  const aggregateScore = interopScores.map(test => {
-    let subtestTotal = 0;
+  let aggregateScore = 0;
+  for (const [, results] of interopScores) {
     let subtestsAllPassing = 0;
-    Object.keys(test).forEach(subtestName => {
-      subtestTotal += 1;
+    for (const [, subtestResults] of results) {
       // A subtest passes if it is marked as passing for every array.
       // The length is checked to make sure there was no missing value for a browser.
-      if (test[subtestName].length === numRuns && test[subtestName].every(isPassed => isPassed)) {
+      if (subtestResults.length === numRuns && subtestResults.every(isPassed => isPassed)) {
         subtestsAllPassing += 1;
       }
-    });
-    return Math.floor(1000 * subtestsAllPassing / subtestTotal);
-  }).reduce((a, b) => a + b, 0);
-  return Math.floor(aggregateScore / interopScores.length);
+    }
+    aggregateScore += Math.floor(1000 * subtestsAllPassing / results.size);
+  }
+  return Math.floor(aggregateScore / interopScores.size);
 }
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
@@ -155,13 +177,11 @@ function aggregateInteropTestScores(interopScores, numRuns) {
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
-  const interopScores = [];
+  const interopScores = new Map();
   try {
-    let isFirstCalcedRun = true;
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
       let score = 0;
-      let i = 0;
       lib.results.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
         if (!allTestsSet.has(testname)) {
@@ -175,8 +195,8 @@ function scoreRuns(runs, allTestsSet) {
 
         // Keep subtest data for every test in order to calculate interop scores.
         // A test entry is created for each test in the first run.
-        if (isFirstCalcedRun) {
-          interopScores.push({});
+        if (!interopScores.has(testname)) {
+          interopScores.set(testname, new Map());
         }
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
@@ -185,32 +205,31 @@ function scoreRuns(runs, allTestsSet) {
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
             // Keep a boolean array that represents whether each browser passed the subtest.
-            if (!(subtest.name in interopScores[i])) {
-              interopScores[i][subtest.name] = [];
+            if (!interopScores.get(testname).has(subtest.name)) {
+              interopScores.get(testname).set(subtest.name, []);
             }
             if (subtest['status'] == 'PASS') {
               subtestPasses += 1;
             }
+
             // Push the pass/fail result to the subtest array.
-            interopScores[i][subtest.name].push(subtest['status'] == 'PASS');
+            interopScores.get(testname).get(subtest.name).push(subtest['status'] == 'PASS');
           }
         } else {
           // If there are no subtests, just keep a single "overall" prop
           // in the subtests object to determine interop score for the test.
-          if (!('overall' in interopScores[i])) {
-            interopScores[i].overall = [];
+          if (!(interopScores.get(testname).has('overall'))) {
+            interopScores.get(testname).set('overall', []);
           }
-          interopScores[i].overall.push(results['status'] == 'PASS');
+          interopScores.get(testname).get('overall').push(results['status'] == 'PASS');
           if (results['status'] == 'PASS') {
             subtestPasses = 1;
           }
         }
-        i++;
         // A single test is scored 0-1000 based on how many of its subtests
         // pass, rounding down so that 1000 always means fully passing.
         score += Math.floor(1000 * subtestPasses / subtestTotal);
       });
-      isFirstCalcedRun = false;
       // We always normalize against the number of tests we are looking for,
       // rather than the total number of tests we found. The trade-off is all
       // about new tests being added to the set.
