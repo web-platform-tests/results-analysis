@@ -382,7 +382,7 @@ async function main() {
     unifiedCsv += `,${product}-version,${categoryLabels.join()}`;
   }
   // Add the interop category headers.
-  unifiedCsv += `,${categories.map(c => `interop-${c.name}`)}`;
+  unifiedCsv += `,interop-version,${categories.map(c => `interop-${c.name}`)}`;
   unifiedCsv += '\n';
 
   // We know that all dateToScoresMaps have the same dates (as they come from
@@ -405,6 +405,7 @@ async function main() {
       csvLine = csvLine.concat(productScores);
     }
     // Add the interop scores for each category.
+    csvLine.push('-');
     for (const category of categories) {
       const scoreInfo = dateToScoresMaps.get(category.name).get(date);
       const categoryInteropScore = scoreInfo.scores[products.length];
