@@ -142,7 +142,7 @@ function aggregateInteropTestScores(interopScores, numRuns) {
     }
     aggregateScore += Math.floor(1000 * subtestsAllPassing / results.size);
   }
-  return Math.floor(aggregateScore / interopScores.size);
+  return Math.floor(aggregateScore / interopScores.size) || 0;
 }
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
