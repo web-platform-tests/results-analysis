@@ -119,6 +119,9 @@ const KNOWN_TEST_STATUSES = new Set([
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord2.html',
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.basic.html',
   '/html/canvas/offscreen/shadows/2d.shadow.pattern.alpha.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.orientation.image.html',
+  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord1.html',
+  '/html/canvas/offscreen/shadows/2d.shadow.pattern.transparent.1.html',
   // interop-2023-webcomponents
   '/shadow-dom/focus/focus-shadowhost-display-none.html',
   '/custom-elements/form-associated/ElementInternals-labels.html',
