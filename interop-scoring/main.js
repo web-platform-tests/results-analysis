@@ -295,7 +295,14 @@ async function main() {
   // First, grab aligned runs from the server for the dates that we are
   // interested in.
   const from = (flags.isSet('from')) ? moment(flags.get('from')) : moment(`${year}-01-01`);
-  const to = (flags.isSet('to')) ? moment(flags.get('to')) : moment();
+  let to = moment();
+  if (flags.isSet('to')) {
+    to = moment(flags.get('to'));
+  // If a "to" flag was not set and the specified interop year has passed,
+  // only get the data for that year.
+  } else if (moment().year() >= (parseInt(year) + 1)) {
+    to = moment(`${parseInt(year) + 1}-01-01`);
+  }
   const experimental = flags.get('experimental');
   const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);

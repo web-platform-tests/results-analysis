@@ -87,5 +87,6 @@ update_interop_year() {
   mv interop-${YEAR}-*.csv out/data/interop-${YEAR}/
 }
 
+update_interop_data 2021
 update_interop_data 2022
 update_interop_data 2023

@@ -1,4 +1,38 @@
 {
+  "2021": {
+    "categories": [
+        {
+        "name": "interop-2021-aspect-ratio",
+        "labels": [
+          "interop-2021-aspect-ratio"
+        ]
+      },
+      {
+        "name": "interop-2021-flexbox",
+        "labels": [
+          "interop-2021-flexbox"
+        ]
+      },
+      {
+        "name": "interop-2021-grid",
+        "labels": [
+          "interop-2021-grid"
+        ]
+      },
+      {
+        "name": "interop-2021-position-sticky",
+        "labels": [
+          "interop-2021-position-sticky"
+        ]
+      },
+      {
+        "name": "interop-2021-transforms",
+        "labels": [
+          "interop-2021-transforms"
+        ]
+      }
+    ]
+  },
   "2022": {
     "categories": [
       {
