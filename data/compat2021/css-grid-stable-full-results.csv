@@ -788,7 +788,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/baseline-alignment-affects-intrinsic-size-005.html,24/24,24/24,24/24
 /css/css-grid/layout-algorithm/baseline-alignment-affects-intrinsic-size-006.html,24/24,24/24,24/24
 /css/css-grid/layout-algorithm/flex-and-intrinsic-sizes-001.html,8/8,8/8,8/8
-/css/css-grid/layout-algorithm/flex-and-intrinsic-sizes-002.html,1/1,0/1,1/1
+/css/css-grid/layout-algorithm/flex-and-intrinsic-sizes-002.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/flex-sizing-columns-min-max-width-001.html,12/12,12/12,12/12
 /css/css-grid/layout-algorithm/flex-sizing-rows-min-max-height-001.html,12/12,12/12,12/12
 /css/css-grid/layout-algorithm/grid-as-flex-item-should-not-shrink-to-fit-001.html,1/1,1/1,1/1
