@@ -211,7 +211,7 @@
         "name": "interop-2023-flexbox",
         "labels": [
           "interop-2021-flexbox",
-          "interop-2021-flexbox-expansion"
+          "interop-2023-flexbox"
         ]
       },
       {
@@ -223,6 +223,7 @@
       {
         "name": "interop-2023-forms",
         "labels": [
+          "interop-2022-forms",
           "interop-2023-forms"
         ]
       },
@@ -230,7 +231,7 @@
         "name": "interop-2023-grid",
         "labels": [
           "interop-2021-grid",
-          "interop-2021-grid-expansion"
+          "interop-2023-grid"
         ]
       },
       {
@@ -258,6 +259,12 @@
         ]
       },
       {
+        "name": "interop-2023-modules",
+        "labels": [
+          "interop-2023-modules"
+        ]
+      },
+      {
         "name": "interop-2023-motion",
         "labels": [
           "interop-2023-motion"
@@ -270,6 +277,12 @@
         ]
       },
       {
+        "name": "interop-2023-events",
+        "labels": [
+          "interop-2023-events"
+        ]
+      },
+      {
         "name": "interop-2023-url",
         "labels": [
           "interop-2023-url"
@@ -279,6 +292,12 @@
         "name": "interop-2023-webcomponents",
         "labels": [
           "interop-2023-webcomponents"
+        ]
+      },
+      {
+        "name": "interop-2023-webcompat",
+        "labels": [
+          "interop-2023-webcompat"
         ]
       }
     ]

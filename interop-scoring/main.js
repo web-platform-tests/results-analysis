@@ -72,8 +72,7 @@ const KNOWN_TEST_STATUSES = new Set([
 
 
   /**
-   * The tests below have non-OK statuses that have not been investigated
-   * as of today.
+   * The tests below have non-OK statuses that have not been investigated as of today.
    */
   // interop-2023-contain
   '/css/css-contain/container-queries/nested-query-containers.html',
@@ -83,6 +82,26 @@ const KNOWN_TEST_STATUSES = new Set([
   '/css/selectors/invalidation/fullscreen-pseudo-class-in-has.html',
   '/css/selectors/invalidation/modal-pseudo-class-in-has.html',
   '/css/selectors/invalidation/user-action-pseudo-classes-in-has.html',
+  // interop-2023-modules
+  '/html/semantics/scripting-1/the-script-element/import-assertions/empty-assertion-clause.html',
+  '/html/semantics/scripting-1/the-script-element/import-assertions/unsupported-assertion.html',
+  '/workers/modules/dedicated-worker-import-blob-url.any.html',
+  '/workers/modules/dedicated-worker-import-blob-url.any.worker.html',
+  '/workers/modules/dedicated-worker-import-data-url-cross-origin.html',
+  '/workers/modules/dedicated-worker-import-data-url.any.html',
+  '/workers/modules/dedicated-worker-import-data-url.any.worker.html',
+  '/workers/modules/dedicated-worker-import-meta.html',
+  '/workers/modules/dedicated-worker-import.any.html',
+  '/workers/modules/dedicated-worker-import.any.worker.html',
+  '/workers/modules/dedicated-worker-options-credentials.html',
+  '/workers/modules/dedicated-worker-parse-error-failure.html',
+  '/workers/modules/shared-worker-import-data-url-cross-origin.html',
+  '/workers/modules/shared-worker-import-data-url.window.html',
+  '/workers/modules/shared-worker-options-credentials.html',
+  '/workers/modules/shared-worker-parse-error-failure.html',
+  '/import-maps/acquiring/modulepreload-link-header.html',
+  '/import-maps/acquiring/modulepreload.html',
+  '/workers/modules/shared-worker-import-failure.html',
   // interop-2023-offscreencanvas
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.outside.html',
   '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
@@ -122,6 +141,12 @@ const KNOWN_TEST_STATUSES = new Set([
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.orientation.image.html',
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord1.html',
   '/html/canvas/offscreen/shadows/2d.shadow.pattern.transparent.1.html',
+  // interop-2023-events
+  '/uievents/mouse/cancel-mousedown-in-subframe.html',
+  '/pointerevents/pointerevent_attributes_hoverable_pointers.html?mouse',
+  '/pointerevents/pointerevent_attributes_nohover_pointers.html',
+  '/pointerevents/pointerevent_disabled_form_control.html?mouse',
+  '/html/user-activation/activation-trigger-pointerevent.html?mouse',
   // interop-2023-webcomponents
   '/shadow-dom/focus/focus-shadowhost-display-none.html',
   '/custom-elements/form-associated/ElementInternals-labels.html',
