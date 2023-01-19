@@ -102,6 +102,10 @@ const KNOWN_TEST_STATUSES = new Set([
   '/import-maps/acquiring/modulepreload-link-header.html',
   '/import-maps/acquiring/modulepreload.html',
   '/workers/modules/shared-worker-import-failure.html',
+  '/import-maps/acquiring/dynamic-import.html',
+  '/import-maps/acquiring/script-tag-inline.html',
+  '/import-maps/acquiring/script-tag.html',
+  '/import-maps/bare-specifiers.sub.html',
   // interop-2023-offscreencanvas
   '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.outside.html',
   '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
@@ -147,6 +151,9 @@ const KNOWN_TEST_STATUSES = new Set([
   '/pointerevents/pointerevent_attributes_nohover_pointers.html',
   '/pointerevents/pointerevent_disabled_form_control.html?mouse',
   '/html/user-activation/activation-trigger-pointerevent.html?mouse',
+  '/pointerevents/pointerevent_movementxy.html?mouse',
+  '/pointerevents/pointerevent_pointercapture_in_frame.html?mouse',
+  '/uievents/mouse/attributes.html',
   // interop-2023-webcomponents
   '/shadow-dom/focus/focus-shadowhost-display-none.html',
   '/custom-elements/form-associated/ElementInternals-labels.html',
