@@ -93,8 +93,8 @@ update_interop_year() {
   local YEAR="${1}"
 
   mkdir -p out/data/interop-${YEAR}/
-  node interop-scoring/main.js --to=${TO_DATE}
-  node interop-scoring/main.js --to=${TO_DATE} --experimental
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE}
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --experimental
 
   mv interop-${YEAR}-*.csv out/data/interop-${YEAR}/
 }
