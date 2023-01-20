@@ -16,6 +16,7 @@ const Git = require('nodegit');
 const lib = require('../lib');
 const moment = require('moment');
 const path = require('path');
+// Read category data by year from JSON file.
 const interopData = require('./category-data.json');
 
 flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
@@ -201,6 +202,8 @@ const KNOWN_TEST_STATUSES = new Set([
 ]);
 
 
+// Calculate interop score (passing in all browsers) for a category
+// after tracking the category's scores for each browser.
 function aggregateInteropTestScores(interopScores, numRuns) {
   if (interopScores.length === 0) return 0;
   let aggregateScore = 0;
@@ -352,7 +355,7 @@ async function scoreCategory(category, experimental, products, alignedRuns,
 }
 
 async function main() {
-  const year = (flags.isSet('year')) ? flags.get('year') : '2022';
+  const year = (flags.isSet('year')) ? flags.get('year') : '2023';
   if (!year in interopData) {
     throw new Error(`Categories not defined for year ${year}`);
   }
@@ -440,6 +443,7 @@ async function main() {
       if (!labeledTestsSet || !labeledTestsSet.size) {
         throw new Error(`No tests labeled for ${label}`);
       }
+      // Keep a unique set of tests associated with the category.
       labeledTestsSet.forEach(test => testsSet.add(test));
     }
     const dateToScores = await scoreCategory(category, experimental, products,
@@ -456,6 +460,7 @@ async function main() {
     unifiedCsv += `,${product}-version,${categoryLabels.join()}`;
   }
   // Add the interop category headers.
+  // An arbitrary interop version header is kept for ease of parsing on the interop dashboard.
   unifiedCsv += `,interop-version,${categories.map(c => `interop-${c.name}`)}`;
   unifiedCsv += '\n';
 
@@ -488,8 +493,9 @@ async function main() {
     unifiedCsv += `${csvLine.join()}\n`;
   }
 
+  // Use "-v2" suffix to differentiate from the old csv formats.
   const csvFilename = experimental ?
-      `interop-${year}-experimental.csv` : `interop-${year}-stable.csv`;
+      `interop-${year}-experimental-v2.csv` : `interop-${year}-stable-v2.csv`;
   await fs.promises.writeFile(csvFilename, unifiedCsv, 'utf-8');
   console.log(`Wrote scores to ${csvFilename}`);
 }
