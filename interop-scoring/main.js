@@ -3,10 +3,12 @@
 'use strict';
 
 /**
- * Implements test results scoring for Interop 2022 as described in the RFC:
+ * Implements interop test results scoring as described in the Interop 2022 RFC:
  * https://github.com/web-platform-tests/rfcs/blob/master/rfcs/interop_2022.md#metrics
+ * However, this script can also compute scores for later years as well.
  *
- * Note that the scaling to 90% happens in the https://wpt.fyi/interop-2022 frontend.
+ * The results include an interoperability score which is calculated by aggregating
+ * browser runs and determining the percentage of tests that pass in all observed browsers.
  */
 
 const fetch = require('node-fetch');
@@ -204,12 +206,12 @@ const KNOWN_TEST_STATUSES = new Set([
 
 // Calculate interop score (passing in all browsers) for a category
 // after tracking the category's scores for each browser.
-function aggregateInteropTestScores(interopScores, numBrowsers) {
-  if (interopScores.length === 0) return 0;
+function aggregateInteropTestScores(testPassCounts, numBrowsers) {
+  if (testPassCounts.size === 0) return 0;
   let aggregateScore = 0;
-  for (const [, results] of interopScores) {
+  for (const results of testPassCounts.values()) {
     let subtestsAllPassing = 0;
-    for (const [, subtestNumPassing] of results) {
+    for (const subtestNumPassing of results.values()) {
       // A subtest counts toward the interop score if every browser passed the subtest.
       // In other words, the number of passes should match the number of browsers.
       if (subtestNumPassing === numBrowsers) {
@@ -218,7 +220,7 @@ function aggregateInteropTestScores(interopScores, numBrowsers) {
     }
     aggregateScore += Math.floor(1000 * subtestsAllPassing / results.size);
   }
-  return Math.floor(aggregateScore / interopScores.size) || 0;
+  return Math.floor(aggregateScore / testPassCounts.size) || 0;
 }
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
@@ -253,7 +255,9 @@ function aggregateInteropTestScores(interopScores, numBrowsers) {
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
-  const interopScores = new Map();
+  const testPassCounts = new Map();
+  const TEST_STATUS = Symbol('overall');
+
   try {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
@@ -270,9 +274,9 @@ function scoreRuns(runs, allTestsSet) {
         let subtestTotal = 1;
 
         // Keep subtest data for every test in order to calculate interop scores.
-        // A test entry is created for each test in the first run.
-        if (!interopScores.has(testname)) {
-          interopScores.set(testname, new Map());
+        // A test entry is created the first time each test is encountered.
+        if (!testPassCounts.has(testname)) {
+          testPassCounts.set(testname, new Map());
         }
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
@@ -281,25 +285,25 @@ function scoreRuns(runs, allTestsSet) {
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
             // Keep a count of how many browsers passed the subtest.
-            if (!interopScores.get(testname).has(subtest.name)) {
-              interopScores.get(testname).set(subtest.name, 0);
+            if (!testPassCounts.get(testname).has(subtest.name)) {
+              testPassCounts.get(testname).set(subtest.name, 0);
             }
             if (subtest['status'] == 'PASS') {
               subtestPasses += 1;
-              const previousVal = interopScores.get(testname).get(subtest.name);
-              interopScores.get(testname).set(subtest.name, previousVal + 1);
+              const previousVal = testPassCounts.get(testname).get(subtest.name);
+              testPassCounts.get(testname).set(subtest.name, previousVal + 1);
             }
           }
         } else {
           // If there are no subtests, just keep a single "overall" prop
           // in the subtests object to determine interop score for the test.
-          if (!(interopScores.get(testname).has('overall'))) {
-            interopScores.get(testname).set('overall', 0);
+          if (!(testPassCounts.get(testname).has(TEST_STATUS))) {
+            testPassCounts.get(testname).set(TEST_STATUS, 0);
           }
           if (results['status'] == 'PASS') {
             subtestPasses = 1;
-            const previousVal = interopScores.get(testname).get('overall');
-            interopScores.get(testname).set('overall', previousVal + 1);
+            const previousVal = testPassCounts.get(testname).get(TEST_STATUS);
+            testPassCounts.get(testname).set(TEST_STATUS, previousVal + 1);
           }
         }
         // A single test is scored 0-1000 based on how many of its subtests
@@ -331,8 +335,8 @@ function scoreRuns(runs, allTestsSet) {
     throw e;
   }
   // Calculate the interop scores that have been saved and add
-  // The interop score to the end of the browsers' scores array.
-  scores.push(aggregateInteropTestScores(interopScores, runs.length));
+  // the interop score to the end of the browsers' scores array.
+  scores.push(aggregateInteropTestScores(testPassCounts, runs.length));
   return scores;
 }
 
