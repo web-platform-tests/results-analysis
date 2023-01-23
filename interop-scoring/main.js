@@ -280,7 +280,7 @@ function scoreRuns(runs, allTestsSet) {
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
-            // Keep a number that represents how many browsers passed the subtest.
+            // Keep a count of how many browsers passed the subtest.
             if (!interopScores.get(testname).has(subtest.name)) {
               interopScores.get(testname).set(subtest.name, 0);
             }
