@@ -206,19 +206,37 @@ const KNOWN_TEST_STATUSES = new Set([
 
 // Calculate interop score (passing in all browsers) for a category
 // after tracking the category's scores for each browser.
+//
+// Subtests can be difficult to match accurately, as they can sometimes be missing
+// from runs entirely, and passing/failing cannot be discerned. The approach taken
+// here simply checks the percentage of passing subtests within a test
+// for each browser and adds the minimum percentage of passing subtests to the
+// interop score. Tests (not subtests) that are missing entirely from a
+// browser run are marked with an interop score of 0.
+//
+// This deviates from another approach that attempted to match each subtest result
+// together from all browser runs and calculate an interop score based on parallel
+// subtest results. Due to some missing subtests, this score skewed lower than the
+// current implementation. Neither is without its drawbacks, and the hope is that
+// the current approach will score runs more optimistically and avoid subtest matching.
 function aggregateInteropTestScores(testPassCounts, numBrowsers) {
   if (testPassCounts.size === 0) return 0;
   let aggregateScore = 0;
-  for (const results of testPassCounts.values()) {
-    let subtestsAllPassing = 0;
-    for (const subtestNumPassing of results.values()) {
-      // A subtest counts toward the interop score if every browser passed the subtest.
-      // In other words, the number of passes should match the number of browsers.
-      if (subtestNumPassing === numBrowsers) {
-        subtestsAllPassing += 1;
+  for (const testResults of testPassCounts.values()) {
+    let minSubtestPercentage = 1;
+    // If a test result value is missing from any browser, the interop score is 0.
+    if (testResults['subtestTotal'].length !== numBrowsers) {
+      minSubtestPercentage = 0;
+    } else {
+      // Find the lowest subtest pass percentage for the test among all browser runs.
+      for (let i = 0; i < numBrowsers; i++) {
+        const subtestPassPercentage = (
+          testResults['subtestPasses'][i] / testResults['subtestTotal'][i]);
+        minSubtestPercentage = Math.min(minSubtestPercentage, subtestPassPercentage);
       }
     }
-    aggregateScore += Math.floor(1000 * subtestsAllPassing / results.size);
+    // Add the min subtest percentage to the aggregate interop score.
+    aggregateScore += Math.floor(1000 * minSubtestPercentage);
   }
   return Math.floor(aggregateScore / testPassCounts.size) || 0;
 }
@@ -256,7 +274,6 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testPassCounts = new Map();
-  const TEST_STATUS = Symbol('overall');
 
   try {
     for (const run of runs) {
@@ -276,7 +293,9 @@ function scoreRuns(runs, allTestsSet) {
         // Keep subtest data for every test in order to calculate interop scores.
         // A test entry is created the first time each test is encountered.
         if (!testPassCounts.has(testname)) {
-          testPassCounts.set(testname, new Map());
+          testPassCounts.set(testname, {});
+          testPassCounts.get(testname)['subtestPasses'] = [];
+          testPassCounts.get(testname)['subtestTotal'] = [];
         }
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
@@ -284,28 +303,21 @@ function scoreRuns(runs, allTestsSet) {
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
-            // Keep a count of how many browsers passed the subtest.
-            if (!testPassCounts.get(testname).has(subtest.name)) {
-              testPassCounts.get(testname).set(subtest.name, 0);
-            }
             if (subtest['status'] == 'PASS') {
               subtestPasses += 1;
-              const previousVal = testPassCounts.get(testname).get(subtest.name);
-              testPassCounts.get(testname).set(subtest.name, previousVal + 1);
             }
           }
         } else {
-          // If there are no subtests, just keep a single "overall" prop
-          // in the subtests object to determine interop score for the test.
-          if (!(testPassCounts.get(testname).has(TEST_STATUS))) {
-            testPassCounts.get(testname).set(TEST_STATUS, 0);
-          }
           if (results['status'] == 'PASS') {
             subtestPasses = 1;
-            const previousVal = testPassCounts.get(testname).get(TEST_STATUS);
-            testPassCounts.get(testname).set(TEST_STATUS, previousVal + 1);
           }
         }
+
+        // Add an entry to subtest passes and total for calculating the interop score.
+        const subtestCounts = testPassCounts.get(testname);
+        subtestCounts['subtestPasses'].push(subtestPasses);
+        subtestCounts['subtestTotal'].push(subtestTotal);
+
         // A single test is scored 0-1000 based on how many of its subtests
         // pass, rounding down so that 1000 always means fully passing.
         score += Math.floor(1000 * subtestPasses / subtestTotal);
