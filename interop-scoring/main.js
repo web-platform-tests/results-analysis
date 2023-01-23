@@ -204,15 +204,15 @@ const KNOWN_TEST_STATUSES = new Set([
 
 // Calculate interop score (passing in all browsers) for a category
 // after tracking the category's scores for each browser.
-function aggregateInteropTestScores(interopScores, numRuns) {
+function aggregateInteropTestScores(interopScores, numBrowsers) {
   if (interopScores.length === 0) return 0;
   let aggregateScore = 0;
   for (const [, results] of interopScores) {
     let subtestsAllPassing = 0;
-    for (const [, subtestResults] of results) {
-      // A subtest passes if it is marked as passing for every array.
-      // The length is checked to make sure there was no missing value for a browser.
-      if (subtestResults.length === numRuns && subtestResults.every(isPassed => isPassed)) {
+    for (const [, subtestNumPassing] of results) {
+      // A subtest counts toward the interop score if every browser passed the subtest.
+      // In other words, the number of passes should match the number of browsers.
+      if (subtestNumPassing === numBrowsers) {
         subtestsAllPassing += 1;
       }
     }
@@ -280,26 +280,26 @@ function scoreRuns(runs, allTestsSet) {
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
-            // Keep a boolean array that represents whether each browser passed the subtest.
+            // Keep a number that represents how many browsers passed the subtest.
             if (!interopScores.get(testname).has(subtest.name)) {
-              interopScores.get(testname).set(subtest.name, []);
+              interopScores.get(testname).set(subtest.name, 0);
             }
             if (subtest['status'] == 'PASS') {
               subtestPasses += 1;
+              const previousVal = interopScores.get(testname).get(subtest.name);
+              interopScores.get(testname).set(subtest.name, previousVal + 1);
             }
-
-            // Push the pass/fail result to the subtest array.
-            interopScores.get(testname).get(subtest.name).push(subtest['status'] == 'PASS');
           }
         } else {
           // If there are no subtests, just keep a single "overall" prop
           // in the subtests object to determine interop score for the test.
           if (!(interopScores.get(testname).has('overall'))) {
-            interopScores.get(testname).set('overall', []);
+            interopScores.get(testname).set('overall', 0);
           }
-          interopScores.get(testname).get('overall').push(results['status'] == 'PASS');
           if (results['status'] == 'PASS') {
             subtestPasses = 1;
+            const previousVal = interopScores.get(testname).get('overall');
+            interopScores.get(testname).set('overall', previousVal + 1);
           }
         }
         // A single test is scored 0-1000 based on how many of its subtests
