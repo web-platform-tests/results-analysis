@@ -88,3 +88,17 @@ update_interop_2022() {
 
 mkdir -p out/data/interop-2022/
 update_interop_2022 out/data/interop-2022/
+
+update_interop_year() {
+  local YEAR="${1}"
+
+  mkdir -p out/data/interop-${YEAR}/
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE}
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --experimental
+
+  mv interop-${YEAR}-*.csv out/data/interop-${YEAR}/
+}
+
+update_interop_year 2021
+update_interop_year 2022
+update_interop_year 2023
