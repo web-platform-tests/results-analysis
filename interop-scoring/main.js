@@ -223,20 +223,20 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
   if (testPassCounts.size === 0) return 0;
   let aggregateScore = 0;
   for (const testResults of testPassCounts.values()) {
-    let minSubtestPercentage = 1;
+    let minTestScore = 1;
     // If a test result value is missing from any browser, the interop score is 0.
     if (testResults['subtestTotal'].length !== numBrowsers) {
-      minSubtestPercentage = 0;
+      minTestScore = 0;
     } else {
-      // Find the lowest subtest pass percentage for the test among all browser runs.
+      // Find the lowest score for the test among all browser runs.
       for (let i = 0; i < numBrowsers; i++) {
-        const subtestPassPercentage = (
+        const testScore = (
           testResults['subtestPasses'][i] / testResults['subtestTotal'][i]);
-        minSubtestPercentage = Math.min(minSubtestPercentage, subtestPassPercentage);
+        minTestScore = Math.min(minTestScore, testScore);
       }
     }
-    // Add the min subtest percentage to the aggregate interop score.
-    aggregateScore += Math.floor(1000 * minSubtestPercentage);
+    // Add the minimum test score to the aggregate interop score.
+    aggregateScore += Math.floor(1000 * minTestScore);
   }
   return Math.floor(aggregateScore / testPassCounts.size) || 0;
 }
