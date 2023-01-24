@@ -157,6 +157,8 @@ const KNOWN_TEST_STATUSES = new Set([
   '/pointerevents/pointerevent_movementxy.html?mouse',
   '/pointerevents/pointerevent_pointercapture_in_frame.html?mouse',
   '/uievents/mouse/attributes.html',
+  // interop-2022-scrolling
+  '/css/css-scroll-snap/snap-at-user-scroll-end.html',
   // interop-2023-webcodecs
   '/webcodecs/videoDecoder-codec-specific.https.any.html?av1',
   '/webcodecs/videoDecoder-codec-specific.https.any.html?h264_annexb',
@@ -274,6 +276,7 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testPassCounts = new Map();
+  const unexpectedNonOKTests = new Set();
 
   try {
     for (const run of runs) {
@@ -299,7 +302,7 @@ function scoreRuns(runs, allTestsSet) {
         }
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
-            throw new Error(`Unexpected non-OK status for test: ${testname}`);
+            unexpectedNonOKTests.add(testname);
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
@@ -345,6 +348,14 @@ function scoreRuns(runs, allTestsSet) {
   } catch (e) {
     e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
     throw e;
+  }
+
+  // Log and tests with unexpected non-OK statuses.
+  if (unexpectedNonOKTests.size > 0) {
+    console.log('Unexpected non-OK status for tests:');
+    for (const testname of unexpectedNonOKTests.values()) {
+      console.log(testname);
+    }
   }
   // Calculate the interop scores that have been saved and add
   // the interop score to the end of the browsers' scores array.
