@@ -85,6 +85,8 @@ const KNOWN_TEST_STATUSES = new Set([
   '/html/semantics/forms/the-input-element/range-restore-oninput-onchange-event.html',
   // TIMEOUT in STP 137, since fixed
   '/html/semantics/interactive-elements/the-dialog-element/backdrop-receives-element-events.html',
+  // TIMEOUT for one run in Safari but has since run successfully.
+  '/css/css-scroll-snap/snap-at-user-scroll-end.html',
 ]);
 
 
