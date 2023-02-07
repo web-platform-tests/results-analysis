@@ -37,6 +37,8 @@ const ROOT_DIR = path.join(__dirname, '..');
 // before being added to this list, so that we don't score tests in the wrong
 // way because of a test or infrastructure issue.
 const KNOWN_TEST_STATUSES = new Set([
+  // ERROR due to duplicate subtest name, fixed in https://github.com/web-platform-tests/wpt/pull/38387
+  '/css/css-color/parsing/color-invalid-color-function.html',
   // TIMEOUT in Safari due to https://webkit.org/b/212201
   '/css/css-grid/grid-definition/grid-limits-001.html',
   // TIMEOUT in Firefox and Safari, all subtests present
