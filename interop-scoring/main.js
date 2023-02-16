@@ -33,182 +33,8 @@ flags.parse();
 
 const ROOT_DIR = path.join(__dirname, '..');
 
-// All non-OK harness statuses. Any non-OK harness status should be investigated
-// before being added to this list, so that we don't score tests in the wrong
-// way because of a test or infrastructure issue.
-const KNOWN_TEST_STATUSES = new Set([
-  // ERROR due to duplicate subtest name, fixed in https://github.com/web-platform-tests/wpt/pull/38387
-  '/css/css-color/parsing/color-invalid-color-function.html',
-  // TIMEOUT in Safari due to https://webkit.org/b/212201
-  '/css/css-grid/grid-definition/grid-limits-001.html',
-  // TIMEOUT in Firefox and Safari, all subtests present
-  '/css/css-scroll-snap/input/keyboard.html',
-  // ERROR in Firefox, TIMEOUT in Safari, all subtests failing in Chrome
-  '/css/css-scroll-snap/input/snap-area-overflow-boundary.html',
-  // TIMEOUT in Chrome with TIMEOUT subtests
-  '/dom/events/Event-dispatch-click.html',
-  // ERROR in Safari but linked bug is fixed
-  '/html/browsers/browsing-the-web/navigating-across-documents/replace-before-load/form-requestsubmit-during-load.html',
-  '/html/browsers/browsing-the-web/navigating-across-documents/replace-before-load/form-requestsubmit-during-pageshow.html',
-  // TIMEOUT in Safari, but just a single subtest
-  '/html/semantics/forms/form-submission-0/form-double-submit-multiple-targets.html',
-  // TIMEOUT in Firefox and Safari, but just a single subtest
-  '/html/semantics/forms/form-submission-0/form-double-submit-to-different-origin-frame.html',
-  // TIMEOUT in Safari but all passing subtests due to https://bugs.webkit.org/show_bug.cgi?id=235407
-  '/html/semantics/forms/form-submission-target/rel-base-target.html',
-  '/html/semantics/forms/form-submission-target/rel-button-target.html',
-  '/html/semantics/forms/form-submission-target/rel-form-target.html',
-  '/html/semantics/forms/form-submission-target/rel-input-target.html',
-  // ERROR in Firefox 95 and Safari 15.2, since fixed
-  '/html/semantics/interactive-elements/the-dialog-element/dialog-showModal.html',
-  // ERROR in Chrome 96, since fixed
-  '/html/semantics/interactive-elements/the-dialog-element/modal-dialog-ancestor-is-inert.html',
-  // TIMEOUT in Safari, but all subtests present
-  '/html/semantics/forms/textfieldselection/select-event.html',
-  '/html/semantics/forms/textfieldselection/selection-start-end.html',
-  '/html/semantics/forms/textfieldselection/textfieldselection-setRangeText.html',
-  '/html/semantics/forms/textfieldselection/textfieldselection-setSelectionRange.html',
-  // TIMEOUT in Firefox 98, since fixed
-  '/html/semantics/forms/the-input-element/image-click-form-data.html',
-  // TIMEOUT in Safari, but all subtests present
-  '/html/semantics/forms/the-input-element/range-restore-oninput-onchange-event.html',
-  // TIMEOUT in STP 137, since fixed
-  '/html/semantics/interactive-elements/the-dialog-element/backdrop-receives-element-events.html',
-  // TIMEOUT for one run in Safari but has since run successfully.
-  '/css/css-scroll-snap/snap-at-user-scroll-end.html',
-
-
-  /**
-   * The tests below have non-OK statuses that have not been investigated as of today.
-   */
-  // interop-2023-contain
-  '/css/css-contain/container-queries/nested-query-containers.html',
-  '/css/css-contain/content-visibility/content-visibility-input-image.html',
-  '/css/css-contain/content-visibility/content-visibility-031.html',
-  '/css/css-contain/content-visibility/content-visibility-auto-state-changed.html',
-  '/css/selectors/invalidation/fullscreen-pseudo-class-in-has.html',
-  '/css/selectors/invalidation/modal-pseudo-class-in-has.html',
-  '/css/selectors/invalidation/user-action-pseudo-classes-in-has.html',
-  // interop-2023-modules
-  '/html/semantics/scripting-1/the-script-element/import-assertions/empty-assertion-clause.html',
-  '/html/semantics/scripting-1/the-script-element/import-assertions/unsupported-assertion.html',
-  '/workers/modules/dedicated-worker-import-blob-url.any.html',
-  '/workers/modules/dedicated-worker-import-blob-url.any.worker.html',
-  '/workers/modules/dedicated-worker-import-data-url-cross-origin.html',
-  '/workers/modules/dedicated-worker-import-data-url.any.html',
-  '/workers/modules/dedicated-worker-import-data-url.any.worker.html',
-  '/workers/modules/dedicated-worker-import-meta.html',
-  '/workers/modules/dedicated-worker-import.any.html',
-  '/workers/modules/dedicated-worker-import.any.worker.html',
-  '/workers/modules/dedicated-worker-options-credentials.html',
-  '/workers/modules/dedicated-worker-parse-error-failure.html',
-  '/workers/modules/shared-worker-import-data-url-cross-origin.html',
-  '/workers/modules/shared-worker-import-data-url.window.html',
-  '/workers/modules/shared-worker-options-credentials.html',
-  '/workers/modules/shared-worker-parse-error-failure.html',
-  '/import-maps/acquiring/modulepreload-link-header.html',
-  '/import-maps/acquiring/modulepreload.html',
-  '/workers/modules/shared-worker-import-failure.html',
-  '/import-maps/acquiring/dynamic-import.html',
-  '/import-maps/acquiring/script-tag-inline.html',
-  '/import-maps/acquiring/script-tag.html',
-  '/import-maps/bare-specifiers.sub.html',
-  // interop-2023-offscreencanvas
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.outside.html',
-  '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
-  '/html/canvas/offscreen/manual/convert-to-blob/offscreencanvas.convert.to.blob.w.html',
-  '/html/canvas/offscreen/manual/draw-generic-family/2d.text.draw.generic.family.w.html',
-  '/html/canvas/offscreen/manual/filter/offscreencanvas.filter.w.html',
-  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.commit.w.html',
-  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transfer.to.imagebitmap.w.html',
-  '/html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transferrable.w.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.basic.html',
-  '/html/canvas/offscreen/drawing-images-to-the-canvas/2d.drawImage.animated.poster.html',
-  '/html/canvas/offscreen/compositing/2d.composite.globalAlpha.imagepattern.html',
-  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.copy.html',
-  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.destination-atop.html',
-  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.destination-in.html',
-  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.source-in.html',
-  '/html/canvas/offscreen/compositing/2d.composite.uncovered.pattern.source-out.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.basic.image.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.crosscanvas.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.basic.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord1.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord2.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.coord3.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.norepeat.outside.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord3.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.coord1.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.outside.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.basic.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.coord1.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeaty.outside.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.repeat.empty.html',
-  '/html/canvas/offscreen/shadows/2d.shadow.pattern.basic.html',
-  '/html/canvas/offscreen/shadows/2d.shadow.pattern.transparent.2.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord2.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeatx.basic.html',
-  '/html/canvas/offscreen/shadows/2d.shadow.pattern.alpha.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.orientation.image.html',
-  '/html/canvas/offscreen/fill-and-stroke-styles/2d.pattern.paint.repeat.coord1.html',
-  '/html/canvas/offscreen/shadows/2d.shadow.pattern.transparent.1.html',
-  // interop-2023-events
-  '/uievents/mouse/cancel-mousedown-in-subframe.html',
-  '/pointerevents/pointerevent_attributes_hoverable_pointers.html?mouse',
-  '/pointerevents/pointerevent_attributes_nohover_pointers.html',
-  '/pointerevents/pointerevent_disabled_form_control.html?mouse',
-  '/html/user-activation/activation-trigger-pointerevent.html?mouse',
-  '/pointerevents/pointerevent_movementxy.html?mouse',
-  '/pointerevents/pointerevent_pointercapture_in_frame.html?mouse',
-  '/uievents/mouse/attributes.html',
-  // interop-2022-scrolling
-  '/css/css-scroll-snap/snap-at-user-scroll-end.html',
-  // interop-2023-webcodecs
-  '/webcodecs/videoDecoder-codec-specific.https.any.html?av1',
-  '/webcodecs/videoDecoder-codec-specific.https.any.html?h264_annexb',
-  '/webcodecs/videoDecoder-codec-specific.https.any.html?h264_avc',
-  '/webcodecs/videoDecoder-codec-specific.https.any.html?vp8',
-  '/webcodecs/videoDecoder-codec-specific.https.any.html?vp9',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?av1',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?h264_annexb',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?h264_avc',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?vp8',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?vp9',
-  '/webcodecs/videoDecoder-codec-specific.https.any.worker.html?av1',
-  '/webcodecs/videoFrame-construction.any.html',
-  '/webcodecs/videoFrame-construction.crossOriginSource.sub.html',
-  '/webcodecs/videoFrame-construction.window.html',
-  '/webcodecs/videoFrame-serialization.crossAgentCluster.https.html',
-  '/webcodecs/videoFrame-serialization.crossAgentCluster.https.html',
-  '/webcodecs/temporal-svc-encoding.https.any.html?h264',
-  '/webcodecs/temporal-svc-encoding.https.any.html?vp8',
-  '/webcodecs/temporal-svc-encoding.https.any.html?vp9',
-  '/webcodecs/temporal-svc-encoding.https.any.worker.html?h264',
-  '/webcodecs/temporal-svc-encoding.https.any.worker.html?vp8',
-  '/webcodecs/temporal-svc-encoding.https.any.worker.html?vp9',
-  '/webcodecs/videoFrame-serialization.crossAgentCluster.https.html',
-  '/webcodecs/videoFrame-serialization.crossAgentCluster.https.html',
-  '/webcodecs/videoFrame-serialization.crossAgentCluster.https.html',
-  '/webcodecs/full-cycle-test.https.any.html?av1',
-  '/webcodecs/full-cycle-test.https.any.html?h264_annexb',
-  '/webcodecs/full-cycle-test.https.any.html?h264_avc',
-  '/webcodecs/full-cycle-test.https.any.html?vp9_p0',
-  '/webcodecs/full-cycle-test.https.any.html?vp9_p2',
-  '/webcodecs/full-cycle-test.https.any.worker.html?av1',
-  '/webcodecs/full-cycle-test.https.any.worker.html?h264_annexb',
-  '/webcodecs/full-cycle-test.https.any.worker.html?h264_avc',
-  '/webcodecs/full-cycle-test.https.any.worker.html?vp9_p0',
-  '/webcodecs/full-cycle-test.https.any.worker.html?vp9_p2',
-  '/webcodecs/full-cycle-test.https.any.html?vp8',
-  '/webcodecs/full-cycle-test.https.any.worker.html?vp8',
-  // interop-2023-webcomponents
-  '/shadow-dom/focus/focus-shadowhost-display-none.html',
-  '/custom-elements/form-associated/ElementInternals-labels.html',
-  '/custom-elements/form-associated/ElementInternals-setFormValue.html',
-  '/custom-elements/form-associated/ElementInternals-validation.html',
-  '/custom-elements/form-associated/form-disabled-callback.html',
-]);
-
+const RESULTS_TREE = Symbol('run results tree');
+const COLLECT_NON_OK_TESTS = Symbol('flag for whether to collect non-OK tests for this run');
 
 // Calculate interop score (passing in all browsers) for a category
 // after tracking the category's scores for each browser.
@@ -277,16 +103,15 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
 //
 //   4. Because we round down twice, the score for a category can end up lower
 //   than if we used rational numbers.
-function scoreRuns(runs, allTestsSet) {
+function scoreRuns(runs, allTestsSet, nonOKTests) {
   const scores = [];
   const testPassCounts = new Map();
-  const unexpectedNonOKTests = new Set();
 
   try {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
       let score = 0;
-      lib.results.walkTests(run.tree, (path, test, results) => {
+      lib.results.walkTests(run[RESULTS_TREE], (path, test, results) => {
         const testname = path + '/' + test;
         if (!allTestsSet.has(testname)) {
           return;
@@ -305,8 +130,8 @@ function scoreRuns(runs, allTestsSet) {
           testPassCounts.get(testname)['subtestTotal'] = [];
         }
         if ('subtests' in results) {
-          if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
-            unexpectedNonOKTests.add(testname);
+          if (results['status'] != 'OK' && run[COLLECT_NON_OK_TESTS]) {
+            nonOKTests.add(testname);
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
@@ -354,27 +179,19 @@ function scoreRuns(runs, allTestsSet) {
     throw e;
   }
 
-  // Log and tests with unexpected non-OK statuses.
-  if (unexpectedNonOKTests.size > 0) {
-    console.log('Unexpected non-OK status for tests:');
-    for (const testname of unexpectedNonOKTests.values()) {
-      console.log(testname);
-    }
-  }
   // Calculate the interop scores that have been saved and add
   // the interop score to the end of the browsers' scores array.
   scores.push(aggregateInteropTestScores(testPassCounts, runs.length));
   return scores;
 }
 
-async function scoreCategory(category, experimental, products, alignedRuns,
-    testsSet) {
+async function scoreAlignedRuns(alignedRuns, testsSet, nonOKTests) {
   // Score the test runs.
   const before = Date.now();
   const dateToScores = new Map();
   for (const [date, runs] of alignedRuns.entries()) {
     const versions = runs.map(run => run.browser_version);
-    const scores = scoreRuns(runs, testsSet);
+    const scores = scoreRuns(runs, testsSet, nonOKTests);
     dateToScores.set(date, {versions, scores});
   }
   const after = Date.now();
@@ -432,22 +249,27 @@ async function main() {
   // Load the test result trees into memory; creates a list of recursive tree
   // structures: tree = { trees: [...], tests: [...] }. Each 'tree' represents a
   // directory, each 'test' is the results from a given test file.
+  //
+  // Also set the LAST symbol to true on the last set of aligned runs, to allow
+  // logging non-OK harness statuses for only those.
   console.log('Iterating over all runs, loading test results');
   before = Date.now();
+  let lastRuns = null;
   for (const runs of alignedRuns.values()) {
     for (const run of runs) {
-      // Just in case someone ever adds a 'tree' field to the JSON.
-      if (run.tree) {
-        throw new Error('Run JSON contains "tree" field; code needs changed.');
-      }
-      run.tree = await lib.results.getGitTree(repo, run);
+      run[RESULTS_TREE] = await lib.results.getGitTree(repo, run);
     }
+    lastRuns = runs;
   }
   after = Date.now();
   console.log(`Loading ${alignedRuns.size} sets of runs took ` +
       `${after - before} ms`);
+  for (const run of lastRuns) {
+    run[COLLECT_NON_OK_TESTS] = true;
+  }
 
   const dateToScoresMaps = new Map();
+  const nonOKTests = new Set();
 
   // Map from labels to tests (includes)
   const labeledTests = new Map();
@@ -464,7 +286,12 @@ async function main() {
       }
     }
   }
-  // category is an object with "name" and "labels" props.
+
+  // Score each category and add scores to |dateToScores|. For runs that have
+  // COLLECT_NON_OK_TESTS set (the last ones) any non-OK harness statuses are
+  // added to |nonOKTests|.
+  //
+  // Note: category is an object with "name" and "labels" props.
   for (const category of categories) {
     console.log(`Scoring runs for ${category.name}`);
     const testsSet = new Set();
@@ -477,14 +304,18 @@ async function main() {
       // Keep a unique set of tests associated with the category.
       labeledTestsSet.forEach(test => testsSet.add(test));
     }
-    const dateToScores = await scoreCategory(category, experimental, products,
-        alignedRuns, testsSet);
+    const dateToScores = await scoreAlignedRuns(alignedRuns, testsSet, nonOKTests);
     // Store the entire dateToScores for producing the unified CSV later.
     dateToScoresMaps.set(category.name, dateToScores);
   }
 
+  // Write non-OK harness statuses to a file.
+  const lines = Array.from(nonOKTests).sort();
+  lines.push('');
+  await fs.promises.writeFile('non-ok-harness-statuses.txt', lines.join('\n'), 'utf-8');
+
   // TODO: Once the other score CSVs are no longer used, we can push
-  // some of this logic into scoreCategory and simplify things.
+  // some of this logic into scoreAlignedRuns and simplify things.
   let unifiedCsv = 'date';
   for (const product of products) {
     const categoryLabels = categories.map(c => `${product}-${c.name}`);
