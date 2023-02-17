@@ -312,7 +312,9 @@ async function main() {
   // Write non-OK harness statuses to a file.
   const lines = Array.from(nonOKTests).sort();
   lines.push('');
-  await fs.promises.writeFile('non-ok-harness-statuses.txt', lines.join('\n'), 'utf-8');
+  const errorsFilename = experimental ?
+      `interop-${year}-errors-experimental.txt` : `interop-${year}-errors-stable.txt`;
+  await fs.promises.writeFile(errorsFilename, lines.join('\n'), 'utf-8');
 
   // TODO: Once the other score CSVs are no longer used, we can push
   // some of this logic into scoreAlignedRuns and simplify things.

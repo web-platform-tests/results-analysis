@@ -43,7 +43,7 @@ update_interop_year() {
   node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE}
   node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --experimental
 
-  mv interop-${YEAR}-*.csv out/data/interop-${YEAR}/
+  mv interop-${YEAR}-*.csv interop-${YEAR}-errors-*.txt out/data/interop-${YEAR}/
 }
 
 update_interop_year 2021
