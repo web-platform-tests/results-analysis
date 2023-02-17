@@ -122,6 +122,7 @@ const KNOWN_TEST_STATUSES = new Set([
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
+  const unexpectedNonOKTests = new Set();
   try {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
@@ -139,7 +140,7 @@ function scoreRuns(runs, allTestsSet) {
         let subtestTotal = 1;
         if ('subtests' in results) {
           if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
-            throw new Error(`Unexpected non-OK status for test: ${testname}`);
+            unexpectedNonOKTests.add(testname);
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
@@ -181,6 +182,13 @@ function scoreRuns(runs, allTestsSet) {
     throw e;
   }
 
+  // Log and tests with unexpected non-OK statuses.
+  if (unexpectedNonOKTests.size > 0) {
+    console.log('Unexpected non-OK status for tests:');
+    for (const testname of unexpectedNonOKTests.values()) {
+      console.log(testname);
+    }
+  }
   return scores;
 }
 
