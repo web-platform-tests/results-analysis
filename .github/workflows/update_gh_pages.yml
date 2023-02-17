@@ -1,12 +1,16 @@
+# This needs to stay in sync with the results.yml workflow in results-analysis,
+# since both repos check out results-analysis and run the same code. This setup
+# is to avoid having a secret access token to allow a workflow in one repo to
+# push to the other repo.
 name: Update gh-pages
 on:
-  # Trigger on every three hours, or manually.
+  # Trigger every three hours, or manually.
   schedule:
     - cron: '20 */3 * * *'
   workflow_dispatch:
 jobs:
   update-gh-pages:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
 
@@ -24,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Build app
+    - name: Build
       run: ./build.sh
 
     - name: Deploy to gh-pages/
