@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use strict';
 
 const fetch = require('node-fetch');
@@ -31,7 +33,7 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
   // tree is traversed depth first to write all of the trees.
   async function emptyTree() {
     const builder = await Git.Treebuilder.create(repo, null);
-    return { builder, subtrees: new Map };
+    return {builder, subtrees: new Map};
   }
 
   const rootTree = await emptyTree();
@@ -58,10 +60,10 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
     return tree.builder.write();
   }
 
-  let blobCache = new Map;
+  const blobCache = new Map;
 
   function isJSONObject(v) {
-    return typeof v === "object" && v !== null && !Array.isArray(v);
+    return typeof v === 'object' && v !== null && !Array.isArray(v);
   }
 
   // Keep only a fixed set of keys. This filters out at least:
@@ -72,9 +74,10 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
   //  - "screenshots" which contains screenshot hashes
   //  - "test" which is the test path, and will be represented elsewhere
   // Note that "" is the dummy key value for the initial object.
-  const keepKeys = new Set(["", "name", "status", "subtests"]);
+  const keepKeys = new Set(['', 'name', 'status', 'subtests']);
 
   function replacer(key, value) {
+    // eslint-disable-next-line no-invalid-this
     if (isJSONObject(this)) {
       if (!keepKeys.has(key)) {
         return undefined;
