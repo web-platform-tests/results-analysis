@@ -9,7 +9,7 @@
   },
   "scripts": {
     "install": "git clone --bare https://github.com/web-platform-tests/results-analysis-cache.git && git --git-dir=results-analysis-cache.git remote set-url --push origin git@github.com:web-platform-tests/results-analysis-cache.git || git --git-dir=results-analysis-cache.git fetch --tags",
-    "lint": "eslint browser-specific-failures.js lib/browser-specific.js lib/runs.js compat-2021/main.js interop-2022/main.js interop-scoring/main.js",
+    "lint": "eslint .",
     "test": "npm run lint && npm run test-unit",
     "test-unit": "mocha -u bdd ./test/*.js"
   },
