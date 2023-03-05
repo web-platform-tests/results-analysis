@@ -3,7 +3,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/list-interpolation.html,76/76,76/76,76/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,4/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
-/css/css-transforms/animation/perspective-interpolation.html,203/212,203/212,203/212
+/css/css-transforms/animation/perspective-interpolation.html,212/212,212/212,212/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
 /css/css-transforms/animation/rotate-composition.html,66/66,55/66,60/66
 /css/css-transforms/animation/rotate-interpolation.html,360/360,360/360,348/360
@@ -539,7 +539,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-input-010.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-011.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-012.html,1/1,1/1,1/1
-/css/css-transforms/transform-input-013.html,1/1,0/1,1/1
+/css/css-transforms/transform-input-013.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-014.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-015.html,1/1,1/1,1/1
 /css/css-transforms/transform-input-016.html,1/1,1/1,1/1
