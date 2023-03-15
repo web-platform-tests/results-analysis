@@ -487,7 +487,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox-basic-fieldset-vert-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-iframe-horiz-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-iframe-vert-001.xhtml,1/1,1/1,1/1
-/css/css-flexbox/flexbox-basic-img-horiz-001.xhtml,1/1,1/1,1/1
+/css/css-flexbox/flexbox-basic-img-horiz-001.xhtml,1/1,1/1,0/1
 /css/css-flexbox/flexbox-basic-img-vert-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-textarea-horiz-001.xhtml,1/1,1/1,1/1
 /css/css-flexbox/flexbox-basic-textarea-vert-001.xhtml,1/1,1/1,1/1
