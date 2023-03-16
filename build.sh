@@ -12,6 +12,9 @@ cd results-analysis-cache.git/
 git fetch --all --tags
 cd ../
 
+# Scoring scripts may require more memory than the default.
+export NODE_OPTIONS="--max-old-space-size=8192"
+
 TO_DATE=$(date -d "tomorrow 13:00" '+%Y-%m-%d')
 
 node git-write.js --max-time=300 --max-age-days=5
@@ -25,7 +28,7 @@ update_bsf_csv() {
     EXPERIMENTAL_FLAG="--experimental"
   fi
 
-  node --max-old-space-size=8192 browser-specific-failures.js \
+  node browser-specific-failures.js \
     ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE} \
     --output=${OUTPUT}
 }
