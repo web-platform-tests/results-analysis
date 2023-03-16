@@ -865,7 +865,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-shorthand-invalid.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-template-shorthand-valid.html,23/39,38/39,38/39
 /css/css-grid/parsing/grid-template-shorthand.html,24/24,24/24,24/24
-/css/css-grid/placement/grid-auto-flow-sparse-001.html,8/8,8/8,8/8
+/css/css-grid/placement/grid-auto-flow-sparse-001.html,8/8,8/8,0/1
 /css/css-grid/placement/grid-auto-placement-implicit-tracks-001.html,12/12,12/12,12/12
 /css/css-grid/placement/grid-container-change-grid-tracks-recompute-child-positions-001.html,6/6,6/6,6/6
 /css/css-grid/placement/grid-container-change-named-grid-recompute-child-positions-001.html,4/4,4/4,4/4
