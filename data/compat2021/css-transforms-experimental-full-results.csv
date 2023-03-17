@@ -500,8 +500,8 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-background-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-background-005.html,1/1,1/1,1/1
 /css/css-transforms/transform-background-006.html,1/1,1/1,1/1
-/css/css-transforms/transform-background-007.html,0/1,1/1,0/1
-/css/css-transforms/transform-background-008.html,0/1,1/1,0/1
+/css/css-transforms/transform-background-007.html,1/1,1/1,0/1
+/css/css-transforms/transform-background-008.html,1/1,1/1,0/1
 /css/css-transforms/transform-compound-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-containing-block-dynamic-1a.html,1/1,1/1,1/1
 /css/css-transforms/transform-containing-block-dynamic-1b.html,1/1,1/1,1/1
@@ -591,9 +591,9 @@ testname,chrome,firefox,safari
 /css/css-transforms/transform-percent-009.html,4/4,4/4,4/4
 /css/css-transforms/transform-percent-010.html,1/1,1/1,1/1
 /css/css-transforms/transform-propagate-inherit-boolean-001.html,1/1,1/1,1/1
-/css/css-transforms/transform-root-bg-001.html,0/1,1/1,0/1
-/css/css-transforms/transform-root-bg-002.html,0/1,1/1,0/1
-/css/css-transforms/transform-root-bg-003.html,0/1,1/1,0/1
+/css/css-transforms/transform-root-bg-001.html,1/1,1/1,0/1
+/css/css-transforms/transform-root-bg-002.html,1/1,1/1,0/1
+/css/css-transforms/transform-root-bg-003.html,1/1,1/1,0/1
 /css/css-transforms/transform-root-bg-004.html,1/1,1/1,1/1
 /css/css-transforms/transform-rotate-001.html,1/1,1/1,1/1
 /css/css-transforms/transform-rotate-002.html,1/1,1/1,1/1
