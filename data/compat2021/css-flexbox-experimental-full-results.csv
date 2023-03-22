@@ -961,7 +961,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/percentage-descendant-of-anonymous-flex-item.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-000.html,6/6,6/6,6/6
 /css/css-flexbox/percentage-heights-001.html,13/13,13/13,13/13
-/css/css-flexbox/percentage-heights-002.html,1/1,1/1,0/1
+/css/css-flexbox/percentage-heights-002.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-003.html,7/7,7/7,7/7
 /css/css-flexbox/percentage-heights-004.html,1/1,1/1,1/1
 /css/css-flexbox/percentage-heights-005.html,1/1,1/1,1/1
