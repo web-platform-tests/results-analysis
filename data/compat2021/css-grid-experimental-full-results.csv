@@ -849,7 +849,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-areas-one-cell.html,6/6,6/6,6/6
 /css/css-grid/parsing/grid-template-areas-valid.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-columns-computed-implicit-track.html,24/24,24/24,24/24
-/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,24/24,24/24,24/24
+/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,27/32,32/32,32/32
 /css/css-grid/parsing/grid-template-columns-computed-withcontent.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-template-columns-computed.html,24/24,24/24,24/24
 /css/css-grid/parsing/grid-template-columns-invalid.html,15/15,15/15,15/15
