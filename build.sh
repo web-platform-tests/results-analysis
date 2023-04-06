@@ -107,4 +107,5 @@ update_interop_year() {
 # or the current date if it is the current interop year.
 update_interop_year 2021 "2022-01-01"
 update_interop_year 2022 "2023-01-01"
+# TODO(DanielRyanSmith): 2023 should end with "2024-01-01" once interop 2024 has begun.
 update_interop_year 2023 $TO_DATE
