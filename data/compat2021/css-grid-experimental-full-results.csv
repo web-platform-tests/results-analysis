@@ -490,9 +490,9 @@ testname,chrome,firefox,safari
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-008.html,1/1,0/1,1/1
 /css/css-grid/alignment/replaced-alignment-with-aspect-ratio-009.html,1/1,0/1,1/1
 /css/css-grid/animation/grid-template-columns-001.html,1/1,1/1,1/1
-/css/css-grid/animation/grid-template-columns-interpolation.html,514/544,514/544,514/544
+/css/css-grid/animation/grid-template-columns-interpolation.html,544/544,514/544,514/544
 /css/css-grid/animation/grid-template-rows-001.html,1/1,1/1,1/1
-/css/css-grid/animation/grid-template-rows-interpolation.html,514/544,514/544,514/544
+/css/css-grid/animation/grid-template-rows-interpolation.html,544/544,514/544,514/544
 /css/css-grid/grid-definition/explicit-grid-size-001.html,11/11,11/11,11/11
 /css/css-grid/grid-definition/flex-content-distribution-001.html,6/6,6/6,6/6
 /css/css-grid/grid-definition/flex-content-resolution-columns-001.html,15/15,15/15,15/15
@@ -849,7 +849,7 @@ testname,chrome,firefox,safari
 /css/css-grid/parsing/grid-template-areas-one-cell.html,6/6,6/6,6/6
 /css/css-grid/parsing/grid-template-areas-valid.html,9/9,6/9,9/9
 /css/css-grid/parsing/grid-template-columns-computed-implicit-track.html,24/24,24/24,24/24
-/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,27/32,32/32,32/32
+/css/css-grid/parsing/grid-template-columns-computed-nogrid.html,32/32,32/32,32/32
 /css/css-grid/parsing/grid-template-columns-computed-withcontent.html,30/30,30/30,30/30
 /css/css-grid/parsing/grid-template-columns-computed.html,24/24,24/24,24/24
 /css/css-grid/parsing/grid-template-columns-invalid.html,15/15,15/15,15/15

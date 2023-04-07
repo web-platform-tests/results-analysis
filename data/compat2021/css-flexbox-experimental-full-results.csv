@@ -63,7 +63,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/abspos/position-absolute-containing-block-001.html,1/1,1/1,1/1
 /css/css-flexbox/abspos/position-absolute-containing-block-002.html,1/1,1/1,1/1
 /css/css-flexbox/animation/flex-basis-composition.html,25/25,25/25,25/25
-/css/css-flexbox/animation/flex-basis-interpolation.html,146/152,146/152,146/152
+/css/css-flexbox/animation/flex-basis-interpolation.html,152/152,146/152,146/152
 /css/css-flexbox/animation/flex-grow-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/flex-shrink-interpolation.html,152/152,152/152,152/152
 /css/css-flexbox/animation/order-interpolation.html,168/168,168/168,168/168
@@ -804,7 +804,7 @@ testname,chrome,firefox,safari
 /css/css-flexbox/flexbox_margin-left-ex.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_margin.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_nested-flex.html,1/1,1/1,1/1
-/css/css-flexbox/flexbox_object.html,1/1,1/1,0/1
+/css/css-flexbox/flexbox_object.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-abspos-space-around.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-box.html,1/1,1/1,1/1
 /css/css-flexbox/flexbox_order-noninteger-invalid.html,1/1,1/1,1/1

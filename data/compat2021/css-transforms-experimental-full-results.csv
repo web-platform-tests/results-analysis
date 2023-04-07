@@ -3,7 +3,7 @@ testname,chrome,firefox,safari
 /css/css-transforms/animation/list-interpolation.html,76/76,76/76,76/76
 /css/css-transforms/animation/matrix-interpolation.html,4/4,4/4,4/4
 /css/css-transforms/animation/perspective-composition.html,20/20,20/20,20/20
-/css/css-transforms/animation/perspective-interpolation.html,203/212,203/212,203/212
+/css/css-transforms/animation/perspective-interpolation.html,212/212,203/212,203/212
 /css/css-transforms/animation/perspective-origin-interpolation.html,120/120,120/120,120/120
 /css/css-transforms/animation/rotate-composition.html,66/66,55/66,60/66
 /css/css-transforms/animation/rotate-interpolation.html,360/360,360/360,348/360
