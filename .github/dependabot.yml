@@ -6,4 +6,5 @@ updates:
     interval: monthly
   ignore:
       - dependency-name: "node-fetch"
-        update-types: ["version-update:semver-major"]"
+        update-types: ["version-update:semver-major"]
+
