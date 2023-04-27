@@ -4,3 +4,7 @@ updates:
   directory: /
   schedule:
     interval: monthly
+  ignore:
+      - dependency-name: "node-fetch"
+        update-types: ["version-update:semver-major"]
+
