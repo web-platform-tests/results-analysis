@@ -817,7 +817,7 @@ testname,chrome,firefox,safari
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-001.html,4/4,4/4,4/4
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-vertical-lr-001.html,4/4,4/4,4/4
 /css/css-grid/layout-algorithm/grid-item-margin-auto-columns-rows-vertical-rl-001.html,4/4,4/4,4/4
-/css/css-grid/layout-algorithm/grid-layout-free-space-unit.html,1/1,1/1,0/1
+/css/css-grid/layout-algorithm/grid-layout-free-space-unit.html,1/1,1/1,1/1
 /css/css-grid/layout-algorithm/grid-minimum-contribution-baseline-shim-vertical-lr.html,6/6,4/6,6/6
 /css/css-grid/layout-algorithm/grid-minimum-contribution-baseline-shim-vertical-rl.html,6/6,4/6,3/6
 /css/css-grid/layout-algorithm/grid-minimum-contribution-baseline-shim.html,6/6,4/6,6/6
