@@ -50,3 +50,22 @@ Options:
   --[no]experimental: Calculate metrics for experimental runs.
     (default: false)
 ```
+
+### Generating end-of-year interop scores
+
+The scores used on the current year of the Interop Dashboard are generated
+regularly from this repository. At the end of each year, the scoring script
+should be run to generate final CSV files to use as the static final numbers
+for that interop year. Both stable and experimental numbers should be generated.
+
+```
+$ node interop-scoring/main.js --year={{YEAR}} --to={{YEAR + 1}}-01-01
+$ node interop-scoring/main.js --year={{YEAR}} --to={{YEAR + 1}}-01-01 --experimental
+```
+
+This will generate two files with final year numbers to use. These files should
+be added to the `webapp/static` directory of the
+[wpt.fyi repository](https://github.com/web-platform-tests/wpt.fyi). The
+`csv_url` property should be updated for that year in
+[webapp/components/interop-data.js](https://github.com/web-platform-tests/wpt.fyi/blob/main/webapp/components/interop-data.js)
+to match the new file locations.
