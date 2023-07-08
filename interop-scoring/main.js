@@ -315,7 +315,7 @@ function scoreRuns(runs, allTestsSet) {
             }
           }
         } else {
-          if (results['status'] == 'PASS' || subtest['status'] == 'PRECONDITION_FAILED') {
+          if (results['status'] == 'PASS' || results['status'] == 'PRECONDITION_FAILED') {
             subtestPasses = 1;
           }
         }
