@@ -41,8 +41,9 @@ const EXPERIMENTAL_BAD_RANGES = [
   // This was a regression from https://github.com/web-platform-tests/wpt/pull/29089,
   // fixed by https://github.com/web-platform-tests/wpt/pull/32540
   [moment('2022-01-25'), moment('2022-01-27')],
-  // This was a very much incomplete Safari run.
+  // These were very much incomplete Safari runs.
   [moment('2023-09-02'), moment('2023-09-03')],
+  [moment('2023-09-11'), moment('2023-09-12')],
 ];
 
 // Advances date to the end of a bad range if it's in a bad range, and otherwise
