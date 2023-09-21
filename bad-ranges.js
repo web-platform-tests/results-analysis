@@ -44,6 +44,7 @@ const EXPERIMENTAL_BAD_RANGES = [
   // These were very much incomplete Safari runs.
   [moment('2023-09-02'), moment('2023-09-03')],
   [moment('2023-09-11'), moment('2023-09-12')],
+  [moment('2023-09-20'), moment('2023-09-20')],
 ];
 
 // Advances date to the end of a bad range if it's in a bad range, and otherwise
