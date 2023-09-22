@@ -45,6 +45,7 @@ const EXPERIMENTAL_BAD_RANGES = [
   [moment('2023-09-02'), moment('2023-09-03')],
   [moment('2023-09-11'), moment('2023-09-12')],
   [moment('2023-09-20'), moment('2023-09-21')],
+  [moment('2023-09-22'), moment('2023-09-23')],
 ];
 
 // Advances date to the end of a bad range if it's in a bad range, and otherwise
