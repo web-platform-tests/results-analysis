@@ -24,7 +24,7 @@ const STABLE_BAD_RANGES = [
   [moment('2023-07-17'), moment('2023-07-18')],
   // Safari got a lot of broken screenshots.
   // https://bugs.webkit.org/show_bug.cgi?id=262078
-  [moment('2023-09-19'), moment('2023-09-20')],
+  [moment('2023-09-20'), moment('2023-09-21')],
 ];
 
 const EXPERIMENTAL_BAD_RANGES = [
