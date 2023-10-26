@@ -156,7 +156,26 @@ async function main() {
   const deadline = maxTime ? Date.now() + 1000 * maxTime : NaN;
   const maxAge = maxAgeDays ? moment().subtract(maxAgeDays, 'days') : null;
 
-  const products = ['chrome', 'edge', 'firefox', 'safari', 'webkitgtk'];
+  const products = [
+    'android_webview',
+    'chrome',
+    'chrome_android',
+    'chrome_ios',
+    'chromium',
+    'deno',
+    'edge',
+    'epiphany',
+    'firefox',
+    'firefox_android',
+    'flow',
+    'node.js',
+    'safari',
+    'servo',
+    'uc',
+    'webkitgtk',
+    'wktr',
+  ];
+
   for (const product of products) {
     let productRuns = 0;
     let stop = false;
