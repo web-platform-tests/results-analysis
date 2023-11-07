@@ -160,7 +160,6 @@ async function main() {
     'android_webview',
     'chrome',
     'chrome_android',
-    'chrome_ios',
     'chromium',
     'deno',
     'edge',
