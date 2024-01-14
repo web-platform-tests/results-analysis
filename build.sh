@@ -47,3 +47,4 @@ update_interop_year() {
 }
 
 update_interop_year 2023
+update_interop_year 2024
