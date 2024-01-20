@@ -443,6 +443,48 @@
         ]
       },
       {
+        "name": "interop-2021-aspect-ratio",
+        "labels": [
+          "interop-2021-aspect-ratio"
+        ]
+      },
+      {
+        "name": "interop-2021-position-sticky",
+        "labels": [
+          "interop-2021-position-sticky"
+        ]
+      },
+      {
+        "name": "interop-2022-cascade",
+        "labels": [
+          "interop-2022-cascade"
+        ]
+      },
+      {
+        "name": "interop-2022-dialog",
+        "labels": [
+          "interop-2022-dialog"
+        ]
+      },
+      {
+        "name": "interop-2022-text",
+        "labels": [
+          "interop-2022-text"
+        ]
+      },
+      {
+        "name": "interop-2022-viewport",
+        "labels": [
+          "interop-2022-viewport"
+        ]
+      },
+      {
+        "name": "interop-2022-webcompat",
+        "labels": [
+          "interop-2022-webcompat"
+        ]
+      },
+      {
         "name": "interop-2023-cssborderimage",
         "labels": [
           "interop-2023-cssborderimage"
@@ -475,13 +517,6 @@
         ]
       },
       {
-        "name": "interop-2023-flexbox",
-        "labels": [
-          "interop-2021-flexbox",
-          "interop-2023-flexbox"
-        ]
-      },
-      {
         "name": "interop-2023-fonts",
         "labels": [
           "interop-2023-fonts"
@@ -492,13 +527,6 @@
         "labels": [
           "interop-2022-forms",
           "interop-2023-forms"
-        ]
-      },
-      {
-        "name": "interop-2023-grid",
-        "labels": [
-          "interop-2021-grid",
-          "interop-2023-grid"
         ]
       },
       {
@@ -553,12 +581,6 @@
         "name": "interop-2022-scrolling",
         "labels": [
           "interop-2022-scrolling"
-        ]
-      },
-      {
-        "name": "interop-2022-subgrid",
-        "labels": [
-          "interop-2022-subgrid"
         ]
       },
       {
