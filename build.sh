@@ -38,13 +38,14 @@ update_bsf_csv out/data/experimental-browser-specific-failures.csv
 
 update_interop_year() {
   local YEAR="${1}"
+  local PRODUCTS="${2}"
 
   mkdir -p out/data/interop-${YEAR}/
-  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE}
-  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --experimental
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --products=${PRODUCTS}
+  node interop-scoring/main.js --year=${YEAR} --to=${TO_DATE} --products=${PRODUCTS} --experimental
 
   mv interop-${YEAR}-*.csv out/data/interop-${YEAR}/
 }
 
-update_interop_year 2023
-update_interop_year 2024
+update_interop_year 2023 chrome,firefox,safari
+update_interop_year 2024 chrome,edge,firefox,safari
