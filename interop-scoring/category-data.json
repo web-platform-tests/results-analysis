@@ -389,6 +389,7 @@
         "name": "interop-2024-layout",
         "labels": [
           "interop-2021-flexbox",
+          "interop-2021-grid",
           "interop-2023-flexbox",
           "interop-2023-grid",
           "interop-2022-subgrid"
