@@ -9,17 +9,17 @@ describe('bad-ranges.js', () => {
   it('should advance date at beginning of bad range', () => {
     const date = moment('2019-02-06');
     const adjusted = advanceDateToSkipBadDataIfNecessary(date);
-    assert.equal(adjusted.format('YYYY-MM-DD'), '2019-03-04');
+    assert.equal(adjusted.format('YYYY-MM-DD'), '2019-03-09');
   });
 
   it('should advance date in middle of bad range', () => {
     const date = moment('2019-02-28');
     const adjusted = advanceDateToSkipBadDataIfNecessary(date);
-    assert.equal(adjusted.format('YYYY-MM-DD'), '2019-03-04');
+    assert.equal(adjusted.format('YYYY-MM-DD'), '2019-03-09');
   });
 
   it('should NOT advance date at end of bad range', () => {
-    const date = moment('2019-03-04');
+    const date = moment('2019-03-09');
     const adjusted = advanceDateToSkipBadDataIfNecessary(date);
     assert.equal(date, adjusted);
   });
