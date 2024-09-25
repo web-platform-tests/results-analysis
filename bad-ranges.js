@@ -7,9 +7,9 @@ const moment = require('moment');
 // inclusive start dates and exclusive end dates.
 
 const STABLE_BAD_RANGES = [
-  // This was some form of Safari outage, undiagnosed but a clear erroneous
-  // spike in failure rates.
-  [moment('2019-02-06'), moment('2019-03-04')],
+  // This was a safaridriver outage, resolved by
+  // https://github.com/web-platform-tests/wpt/pull/15659
+  [moment('2019-02-06'), moment('2019-03-09')],
   // This was a safaridriver outage, resolved by
   // https://github.com/web-platform-tests/wpt/pull/18585
   [moment('2019-06-27'), moment('2019-08-23')],
