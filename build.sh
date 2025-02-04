@@ -48,3 +48,4 @@ update_interop_year() {
 }
 
 update_interop_year 2024 chrome,edge,firefox,safari
+update_interop_year 2025 chrome,edge,firefox,safari
