@@ -609,5 +609,127 @@
         ]
       }
     ]
+  },
+  "2025": {
+    "categories": [
+      {
+        "name": "interop-2025-anchor-positioning",
+        "labels": [
+          "interop-2025-anchor-positioning"
+        ]
+      },
+      {
+        "name": "interop-2025-core-web-vitals",
+        "labels": [
+          "interop-2025-core-web-vitals"
+        ]
+      },
+      {
+        "name": "interop-2025-modules",
+        "labels": [
+          "interop-2025-modules"
+        ]
+      },
+      {
+        "name": "interop-2025-navigation",
+        "labels": [
+          "interop-2025-navigation"
+        ]
+      },
+      {
+        "name": "interop-2025-backdrop-filter",
+        "labels": [
+          "interop-2025-backdrop-filter"
+        ]
+      },
+      {
+        "name": "interop-2023-events",
+        "labels": [
+          "interop-2023-events"
+        ]
+      },
+      {
+        "name": "interop-2024-layout",
+        "labels": [
+          "interop-2021-flexbox",
+          "interop-2021-grid",
+          "interop-2023-flexbox",
+          "interop-2023-grid",
+          "interop-2022-subgrid"
+        ]
+      },
+      {
+        "name": "interop-2025-remove-mutation-events",
+        "labels": [
+          "interop-2025-remove-mutation-events"
+        ]
+      },
+      {
+        "name": "interop-2025-scrollend",
+        "labels": [
+          "interop-2025-scrollend"
+        ]
+      },
+      {
+        "name": "interop-2025-storageaccess",
+        "labels": [
+          "interop-2025-storageaccess"
+        ]
+      },
+      {
+        "name": "interop-2025-details",
+        "labels": [
+          "interop-2025-details"
+        ]
+      },
+      {
+        "name": "interop-2025-textdecoration",
+        "labels": [
+          "interop-2025-textdecoration"
+        ]
+      },
+      {
+        "name": "interop-2025-scope",
+        "labels": [
+          "interop-2025-scope"
+        ]
+      },
+      {
+        "name": "interop-2025-urlpattern",
+        "labels": [
+          "interop-2025-urlpattern"
+        ]
+      },
+      {
+        "name": "interop-2025-view-transitions",
+        "labels": [
+          "interop-2025-view-transitions"
+        ]
+      },
+      {
+        "name": "interop-2025-webassembly",
+        "labels": [
+          "interop-2025-webassembly"
+        ]
+      },
+      {
+        "name": "interop-2025-writingmodes",
+        "labels": [
+          "interop-2025-writingmodes"
+        ]
+      },
+      {
+        "name": "interop-2025-webcompat",
+        "labels": [
+          "interop-2025-webcompat"
+        ]
+      },
+      {
+        "name": "interop-2025-webrtc",
+        "labels": [
+          "interop-2025-webrtc"
+        ]
+      }
+    ]
   }
 }
