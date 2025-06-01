@@ -23,7 +23,7 @@
     "chai": "4.5.0",
     "eslint": "8.57.1",
     "eslint-config-google": "0.14.0",
-    "mocha": "11.2.2"
+    "mocha": "11.5.0"
   },
   "engines": {
     "node": "^18"
