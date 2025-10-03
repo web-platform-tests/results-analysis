@@ -25,6 +25,8 @@ const STABLE_BAD_RANGES = [
   // Safari got a lot of broken screenshots.
   // https://bugs.webkit.org/show_bug.cgi?id=262078
   [moment('2023-09-20'), moment('2023-09-21')],
+  // macOS Tahoe upgrade caused a bunch of bogus reftest failures.
+  [moment('2025-09-20'), moment('2025-09-23')],
 ];
 
 const EXPERIMENTAL_BAD_RANGES = [
@@ -50,6 +52,8 @@ const EXPERIMENTAL_BAD_RANGES = [
   [moment('2023-09-20'), moment('2023-09-21')],
   [moment('2023-09-22'), moment('2023-09-23')],
   [moment('2024-01-29'), moment('2024-01-30')],
+  // macOS Tahoe upgrade caused a bunch of bogus reftest failures.
+  [moment('2025-09-20'), moment('2025-09-23')],
 ];
 
 // Advances date to the end of a bad range if it's in a bad range, and otherwise
