@@ -731,5 +731,129 @@
         ]
       }
     ]
+  },
+  "2026": {
+    "categories": [
+      {
+        "name": "interop-2026-anchor-positioning",
+        "labels": [
+          "interop-2026-anchor-positioning"
+        ]
+      },
+      {
+        "name": "interop-2026-attr",
+        "labels": [
+          "interop-2026-attr"
+        ]
+      },
+      {
+        "name": "interop-2026-contrast-color",
+        "labels": [
+          "interop-2026-contrast-color"
+        ]
+      },
+      {
+        "name": "interop-2026-container-style-queries",
+        "labels": [
+          "interop-2026-container-style-queries"
+        ]
+      },
+      {
+        "name": "interop-2026-custom-highlights",
+        "labels": [
+          "interop-2026-custom-highlights"
+        ]
+      },
+      {
+        "name": "interop-2026-dialogs-and-popovers",
+        "labels": [
+          "interop-2026-dialogs-and-popovers"
+        ]
+      },
+      {
+        "name": "interop-2026-fetch",
+        "labels": [
+          "interop-2026-fetch"
+        ]
+      },
+      {
+        "name": "interop-2026-indexeddb",
+        "labels": [
+          "interop-2026-indexeddb"
+        ]
+      },
+      {
+        "name": "interop-2026-jspi-for-wasm",
+        "labels": [
+          "interop-2026-jspi-for-wasm"
+        ]
+      },
+      {
+        "name": "interop-2026-media-pseudo-classes",
+        "labels": [
+          "interop-2026-media-pseudo-classes"
+        ]
+      },
+      {
+        "name": "interop-2026-navigation",
+        "labels": [
+          "interop-2026-navigation"
+        ]
+      },
+      {
+        "name": "interop-2026-scoped-custom-element-registries",
+        "labels": [
+          "interop-2026-scoped-custom-element-registries"
+        ]
+      },
+      {
+        "name": "interop-2026-scroll-driven-animations",
+        "labels": [
+          "interop-2026-scroll-driven-animations"
+        ]
+      },
+      {
+        "name": "interop-2026-scroll-snap",
+        "labels": [
+          "interop-2026-scroll-snap"
+        ]
+      },
+      {
+        "name": "interop-2026-shape",
+        "labels": [
+          "interop-2026-shape"
+        ]
+      },
+      {
+        "name": "interop-2026-view-transitions",
+        "labels": [
+          "interop-2026-view-transitions"
+        ]
+      },
+      {
+        "name": "interop-2026-webcompat",
+        "labels": [
+          "interop-2026-webcompat"
+        ]
+      },
+      {
+        "name": "interop-2026-webrtc",
+        "labels": [
+          "interop-2026-webrtc"
+        ]
+      },
+      {
+        "name": "interop-2026-webtransport",
+        "labels": [
+          "interop-2026-webtransport"
+        ]
+      },
+      {
+        "name": "interop-2026-zoom",
+        "labels": [
+          "interop-2026-zoom"
+        ]
+      }
+    ]
   }
 }
