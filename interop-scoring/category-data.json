@@ -831,12 +831,6 @@
         ]
       },
       {
-        "name": "interop-2026-zoom",
-        "labels": [
-          "interop-2026-zoom"
-        ]
-      },
-      {
         "name": "interop-2026-webcompat",
         "labels": [
           "interop-2026-webcompat"
@@ -852,6 +846,12 @@
         "name": "interop-2026-webtransport",
         "labels": [
           "interop-2026-webtransport"
+        ]
+      },
+      {
+        "name": "interop-2026-zoom",
+        "labels": [
+          "interop-2026-zoom"
         ]
       }
     ]
