@@ -225,7 +225,7 @@ const KNOWN_TEST_STATUSES = new Set([
 // subtest results. Due to some missing subtests, this score skewed lower than the
 // current implementation. Neither is without its drawbacks, and the hope is that
 // the current approach will score runs more optimistically and avoid subtest matching.
-function aggregateInteropTestScores(testPassCounts, numBrowsers) {
+function aggregateInteropTestScores(testPassCounts, numBrowsers, numTotalTests) {
   if (testPassCounts.size === 0) return 0;
   let aggregateScore = 0;
   for (const testResults of testPassCounts.values()) {
@@ -244,7 +244,7 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
     // Add the minimum test score to the aggregate interop score.
     aggregateScore += Math.floor(1000 * minTestScore);
   }
-  return Math.floor(aggregateScore / testPassCounts.size) || 0;
+  return Math.floor(aggregateScore / numTotalTests) || 0;
 }
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
@@ -281,7 +281,6 @@ function scoreRuns(runs, allTestsSet) {
   const scores = [];
   const testPassCounts = new Map();
   const unexpectedNonOKTests = new Set();
-
   try {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
@@ -363,7 +362,7 @@ function scoreRuns(runs, allTestsSet) {
   }
   // Calculate the interop scores that have been saved and add
   // the interop score to the end of the browsers' scores array.
-  scores.push(aggregateInteropTestScores(testPassCounts, runs.length));
+  scores.push(aggregateInteropTestScores(testPassCounts, runs.length, allTestsSet.size));
   return scores;
 }
 
