@@ -21,6 +21,8 @@ flags.defineString('output', null,
     '{stable, experimental}-browser-specific-failures.csv');
 flags.defineBoolean('experimental', false,
     'Calculate metrics for experimental runs.');
+flags.defineBoolean('include-third-party', false,
+    'Include /third_party tests in BSF scoring.');
 flags.parse();
 
 
@@ -39,6 +41,7 @@ async function main() {
   const from = moment(flags.get('from'));
   const to = moment(flags.get('to'));
   const experimental = flags.get('experimental');
+  const includeThirdParty = flags.get('include-third-party');
   const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);
 
@@ -78,6 +81,10 @@ async function main() {
         throw new Error('Run JSON contains "tree" field; code needs changed.');
       }
       run.tree = await lib.results.getGitTree(repo, run);
+      if (!includeThirdParty) {
+        run.tree = lib.browserSpecific.pruneExcludedPaths(
+            run.tree, ['/third_party']);
+      }
     }
   }
   after = Date.now();

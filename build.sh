@@ -27,14 +27,21 @@ update_bsf_csv() {
   if [[ $1 == *"experimental"* ]]; then
     EXPERIMENTAL_FLAG="--experimental"
   fi
+  local INCLUDE_THIRD_PARTY_FLAG=""
+  if [[ $1 == *"with-third-party"* ]]; then
+    INCLUDE_THIRD_PARTY_FLAG="--include-third-party"
+  fi
 
   node browser-specific-failures.js \
-    ${EXPERIMENTAL_FLAG} --from=${FROM_DATE} --to=${TO_DATE} \
+    ${EXPERIMENTAL_FLAG} ${INCLUDE_THIRD_PARTY_FLAG} \
+    --from=${FROM_DATE} --to=${TO_DATE} \
     --output=${OUTPUT}
 }
 
 update_bsf_csv out/data/stable-browser-specific-failures.csv
 update_bsf_csv out/data/experimental-browser-specific-failures.csv
+update_bsf_csv out/data/stable-browser-specific-failures-with-third-party.csv
+update_bsf_csv out/data/experimental-browser-specific-failures-with-third-party.csv
 
 update_interop_year() {
   local YEAR="${1}"

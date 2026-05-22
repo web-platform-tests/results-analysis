@@ -547,4 +547,78 @@ describe('browser-specific.js', () => {
       assert.deepEqual(scores, new Map([['chrome', 0.5], ['firefox', 0.5], ['safari', 0.0]]));
     });
   });
+
+  describe('pruneExcludedPaths', () => {
+    function collectTestPaths(tree, currentPath = '') {
+      const paths = [];
+      for (const name of Object.keys(tree.tests || {})) {
+        paths.push(`${currentPath}/${name}`);
+      }
+      for (const [name, child] of Object.entries(tree.trees || {})) {
+        paths.push(...collectTestPaths(child, `${currentPath}/${name}`));
+      }
+      return paths.sort();
+    }
+
+    it('removes a top-level excluded subtree', () => {
+      const tree = new TreeBuilder()
+          .addTest('third_party/test.html', 'PASS')
+          .addTest('foo/test.html', 'PASS')
+          .build();
+
+      const pruned = browserSpecific.pruneExcludedPaths(tree, ['/third_party']);
+
+      assert.deepEqual(collectTestPaths(pruned), ['/foo/test.html']);
+    });
+
+    it('does not remove a same-named subtree under a different parent', () => {
+      // /foo/third_party/ is NOT on the excluded list and must be retained.
+      const tree = new TreeBuilder()
+          .addTest('third_party/a.html', 'PASS')
+          .addTest('foo/third_party/b.html', 'PASS')
+          .addTest('bar/baz.html', 'PASS')
+          .build();
+
+      const pruned = browserSpecific.pruneExcludedPaths(tree, ['/third_party']);
+
+      assert.deepEqual(collectTestPaths(pruned), [
+        '/bar/baz.html',
+        '/foo/third_party/b.html',
+      ]);
+    });
+
+    it('does not remove a sibling that shares a name prefix', () => {
+      // /third_party_extra is a sibling of /third_party and must be retained;
+      // the exclusion is by exact path segment, not string prefix.
+      const tree = new TreeBuilder()
+          .addTest('third_party/a.html', 'PASS')
+          .addTest('third_party_extra/b.html', 'PASS')
+          .build();
+
+      const pruned = browserSpecific.pruneExcludedPaths(tree, ['/third_party']);
+
+      assert.deepEqual(collectTestPaths(pruned), ['/third_party_extra/b.html']);
+    });
+
+    it('preserves all tests when no excluded path matches', () => {
+      const tree = new TreeBuilder()
+          .addTest('foo/a.html', 'PASS')
+          .addTest('bar/b.html', 'PASS')
+          .build();
+
+      const pruned = browserSpecific.pruneExcludedPaths(tree, ['/third_party']);
+
+      assert.deepEqual(collectTestPaths(pruned), ['/bar/b.html', '/foo/a.html']);
+    });
+
+    it('handles an empty exclusion list', () => {
+      const tree = new TreeBuilder()
+          .addTest('third_party/test.html', 'PASS')
+          .build();
+
+      const pruned = browserSpecific.pruneExcludedPaths(tree, []);
+
+      assert.strictEqual(pruned, tree);
+    });
+  });
 });
