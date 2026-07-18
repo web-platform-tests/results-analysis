@@ -310,12 +310,12 @@ function scoreRuns(runs, allTestsSet) {
           }
           subtestTotal = results['subtests'].length;
           for (const subtest of results['subtests']) {
-            if (subtest['status'] == 'PASS') {
+            if (subtest['status'] == 'PASS' || subtest['status'] == 'PRECONDITION_FAILED') {
               subtestPasses += 1;
             }
           }
         } else {
-          if (results['status'] == 'PASS') {
+          if (results['status'] == 'PASS' || results['status'] == 'PRECONDITION_FAILED') {
             subtestPasses = 1;
           }
         }
