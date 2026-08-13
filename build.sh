@@ -43,6 +43,23 @@ update_bsf_csv out/data/experimental-browser-specific-failures.csv
 update_bsf_csv out/data/stable-browser-specific-failures-with-third-party.csv
 update_bsf_csv out/data/experimental-browser-specific-failures-with-third-party.csv
 
+# TODO: feature-level-interop.js is scaffolding only; it parses these flags but
+# does not score anything or write a CSV yet.
+update_feature_level_interop_csv() {
+  local OUTPUT="${1}"
+
+  local FROM_DATE="2018-06-01"
+  local EXPERIMENTAL_FLAG=""
+  if [[ $1 == *"experimental"* ]]; then
+    EXPERIMENTAL_FLAG="--experimental"
+  fi
+
+  node feature-level-interop.js \
+    ${EXPERIMENTAL_FLAG} \
+    --from=${FROM_DATE} --to=${TO_DATE} \
+    --output=${OUTPUT}
+}
+
 update_interop_year() {
   local YEAR="${1}"
   local PRODUCTS="${2}"
@@ -55,3 +72,6 @@ update_interop_year() {
 }
 
 update_interop_year 2026 chrome,edge,firefox,safari
+
+update_feature_level_interop_csv out/data/stable-feature-level-interop.csv
+update_feature_level_interop_csv out/data/experimental-feature-level-interop.csv
