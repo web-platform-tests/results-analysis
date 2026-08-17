@@ -405,47 +405,7 @@ async function main() {
   const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);
 
-  // Verify that we have data for the fetched runs in the results-analysis-cache
-  // repo.
-  console.log('Getting local set of run ids from repo');
-  let before = Date.now();
-  const localRunIds = await lib.results.getLocalRunIds(repo);
-  let after = Date.now();
-  console.log(`Found ${localRunIds.size} ids (took ${after - before} ms)`);
-
-  let hadErrors = false;
-  for (const [date, runs] of alignedRuns.entries()) {
-    for (const run of runs) {
-      if (!localRunIds.has(run.id)) {
-        // If you see this, you probably need to run git-write.js or just update
-        // your results-analysis-cache.git repo; see the README.md.
-        console.error(`Run ${run.id} missing from local git repo (${date})`);
-        hadErrors = true;
-      }
-    }
-  }
-  if (hadErrors) {
-    throw new Error('Missing data for some runs (see errors logged above). ' +
-        'Try running "git fetch --all --tags" in results-analysis-cache/');
-  }
-
-  // Load the test result trees into memory; creates a list of recursive tree
-  // structures: tree = { trees: [...], tests: [...] }. Each 'tree' represents a
-  // directory, each 'test' is the results from a given test file.
-  console.log('Iterating over all runs, loading test results');
-  before = Date.now();
-  for (const runs of alignedRuns.values()) {
-    for (const run of runs) {
-      // Just in case someone ever adds a 'tree' field to the JSON.
-      if (run.tree) {
-        throw new Error('Run JSON contains "tree" field; code needs changed.');
-      }
-      run.tree = await lib.results.getGitTree(repo, run);
-    }
-  }
-  after = Date.now();
-  console.log(`Loading ${alignedRuns.size} sets of runs took ` +
-      `${after - before} ms`);
+  await lib.results.loadRunTrees(repo, alignedRuns);
 
   const dateToScoresMaps = new Map();
 
