@@ -286,7 +286,7 @@ function scoreRuns(runs, allTestsSet) {
     for (const run of runs) {
       // Sum of the integer 0-1000 scores for each test.
       let score = 0;
-      lib.results.walkTests(run.tree, (path, test, results) => {
+      lib.resultTrees.walkTests(run.tree, (path, test, results) => {
         const testname = path + '/' + test;
         if (!allTestsSet.has(testname)) {
           return;
