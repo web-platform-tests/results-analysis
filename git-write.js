@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 const flags = require('flags');
 const moment = require('moment');
 const Git = require('nodegit');
+const resultTrees = require('./lib/result-trees');
 const runs = require('./lib/runs');
 
 flags.defineInteger('max-runs', 0, 'Write at most this many runs');
@@ -120,15 +121,8 @@ async function writeReportToGit(report, repo, commitMessage, tagName) {
       blobCache.set(json, blobId);
     }
 
-    const path = test.test;
-    // Complexity to handle /foo/bar/test.html?a/b, which can occur especially
-    // with variants. decodeURIComponent needs to be used when reading.
-    const queryStart = path.indexOf('?');
-    const lastSlash = path.lastIndexOf('/', queryStart >= 0 ? queryStart : path.length);
-    const dirname = path.substr(0, lastSlash);
-    const filename = encodeURIComponent(path.substr(lastSlash + 1));
-
-    const dirs = dirname.split('/').filter(d => d);
+    const {dirs, filename} =
+        resultTrees.splitTestPathEncodedName(test.test);
 
     const tree = await getTree(dirs);
     tree.builder.insert(`${filename}.json`, blobId, Git.TreeEntry.FILEMODE.BLOB);
