@@ -225,26 +225,24 @@ const KNOWN_TEST_STATUSES = new Set([
 // subtest results. Due to some missing subtests, this score skewed lower than the
 // current implementation. Neither is without its drawbacks, and the hope is that
 // the current approach will score runs more optimistically and avoid subtest matching.
-function aggregateInteropTestScores(testPassCounts, numBrowsers) {
-  if (testPassCounts.size === 0) return 0;
+function aggregateInteropTestScores(testScores, numBrowsers) {
+  if (testScores.size === 0) return 0;
   let aggregateScore = 0;
-  for (const testResults of testPassCounts.values()) {
+  for (const browserScores of testScores.values()) {
     let minTestScore = 1;
     // If a test result value is missing from any browser, the interop score is 0.
-    if (testResults['subtestTotal'].length !== numBrowsers) {
+    if (browserScores.length !== numBrowsers) {
       minTestScore = 0;
     } else {
       // Find the lowest score for the test among all browser runs.
-      for (let i = 0; i < numBrowsers; i++) {
-        const testScore = (
-          testResults['subtestPasses'][i] / testResults['subtestTotal'][i]);
-        minTestScore = Math.min(minTestScore, testScore);
+      for (const browserScore of browserScores) {
+        minTestScore = Math.min(minTestScore, browserScore);
       }
     }
     // Add the minimum test score to the aggregate interop score.
     aggregateScore += Math.floor(1000 * minTestScore);
   }
-  return Math.floor(aggregateScore / testPassCounts.size) || 0;
+  return Math.floor(aggregateScore / testScores.size) || 0;
 }
 
 // Score a set of runs (independently) on a set of tests. The runs are presumed
@@ -279,7 +277,7 @@ function aggregateInteropTestScores(testPassCounts, numBrowsers) {
 //   than if we used rational numbers.
 function scoreRuns(runs, allTestsSet) {
   const scores = [];
-  const testPassCounts = new Map();
+  const testScores = new Map();
   const unexpectedNonOKTests = new Set();
 
   try {
@@ -292,42 +290,23 @@ function scoreRuns(runs, allTestsSet) {
           return;
         }
 
-        // TODO: Validate the data by checking that all statuses are recognized.
-
-        let subtestPasses = 0;
-        let subtestTotal = 1;
-
-        // Keep subtest data for every test in order to calculate interop scores.
-        // A test entry is created the first time each test is encountered.
-        if (!testPassCounts.has(testname)) {
-          testPassCounts.set(testname, {});
-          testPassCounts.get(testname)['subtestPasses'] = [];
-          testPassCounts.get(testname)['subtestTotal'] = [];
+        // Keep each browser's score for every test in order to calculate
+        // interop scores. A test entry is created the first time each test is
+        // encountered.
+        if (!testScores.has(testname)) {
+          testScores.set(testname, []);
         }
-        if ('subtests' in results) {
-          if (results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
-            unexpectedNonOKTests.add(testname);
-          }
-          subtestTotal = results['subtests'].length;
-          for (const subtest of results['subtests']) {
-            if (subtest['status'] == 'PASS') {
-              subtestPasses += 1;
-            }
-          }
-        } else {
-          if (results['status'] == 'PASS') {
-            subtestPasses = 1;
-          }
+        if ('subtests' in results &&
+            results['status'] != 'OK' && !KNOWN_TEST_STATUSES.has(testname)) {
+          unexpectedNonOKTests.add(testname);
         }
 
-        // Add an entry to subtest passes and total for calculating the interop score.
-        const subtestCounts = testPassCounts.get(testname);
-        subtestCounts['subtestPasses'].push(subtestPasses);
-        subtestCounts['subtestTotal'].push(subtestTotal);
+        const testScore = lib.resultTrees.scoreTestResults(results);
+        testScores.get(testname).push(testScore);
 
         // A single test is scored 0-1000 based on how many of its subtests
         // pass, rounding down so that 1000 always means fully passing.
-        score += Math.floor(1000 * subtestPasses / subtestTotal);
+        score += Math.floor(1000 * testScore);
       });
       // We always normalize against the number of tests we are looking for,
       // rather than the total number of tests we found. The trade-off is all
@@ -363,7 +342,7 @@ function scoreRuns(runs, allTestsSet) {
   }
   // Calculate the interop scores that have been saved and add
   // the interop score to the end of the browsers' scores array.
-  scores.push(aggregateInteropTestScores(testPassCounts, runs.length));
+  scores.push(aggregateInteropTestScores(testScores, runs.length));
   return scores;
 }
 
