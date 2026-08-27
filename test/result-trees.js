@@ -3,6 +3,7 @@
 const assert = require('chai').assert;
 
 const resultTrees = require('../lib/result-trees');
+const {TreeBuilder} = require('./lib/tree-builder');
 
 describe('result-trees.js', () => {
   describe('splitTestPath', () => {
@@ -59,6 +60,35 @@ describe('result-trees.js', () => {
 
       assert.equal(decodeURIComponent(filename),
           resultTrees.splitTestPath(testPath).rawFileName);
+    });
+  });
+
+  describe('findTestResults', () => {
+    const tree = new TreeBuilder()
+        .addTest('css/a.html', 'PASS')
+        .addTest('root.html', 'OK')
+        .build();
+
+    it('finds a test in a directory', () => {
+      assert.equal(resultTrees.findTestResults(tree, '/css/a.html').status,
+          'PASS');
+    });
+
+    it('finds a test at the root of the tree', () => {
+      assert.equal(resultTrees.findTestResults(tree, '/root.html').status,
+          'OK');
+    });
+
+    it('returns undefined for a test the run does not have', () => {
+      assert.isUndefined(resultTrees.findTestResults(tree, '/css/gone.html'));
+    });
+
+    it('returns undefined for a directory the run does not have', () => {
+      assert.isUndefined(resultTrees.findTestResults(tree, '/dom/a.html'));
+    });
+
+    it('does not match a path differing only in case', () => {
+      assert.isUndefined(resultTrees.findTestResults(tree, '/css/A.html'));
     });
   });
 });
