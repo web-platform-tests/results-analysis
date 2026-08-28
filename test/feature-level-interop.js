@@ -126,7 +126,7 @@ describe('feature-level-interop.js', () => {
     });
   });
 
-  describe('scoreRuns', () => {
+  describe('scoreFeatureLevelInterop', () => {
     const expectedBrowsers = ['chrome', 'firefox'];
 
     it('scores every feature the manifest lists', () => {
@@ -141,7 +141,8 @@ describe('feature-level-interop.js', () => {
             .build(),
       });
 
-      const scored = featureLevelInterop.scoreRuns(runs, expectedBrowsers,
+      const scored = featureLevelInterop.scoreFeatureLevelInterop(
+          runs, expectedBrowsers,
           createFeatureTests({grid: ['/css/a.html'], audio: ['/x.html']}));
 
       assert.deepEqual([...scored.keys()].sort(), ['audio', 'grid']);
@@ -155,7 +156,8 @@ describe('feature-level-interop.js', () => {
         firefox: new TreeBuilder().addTest('css/a.html', 'PASS').build(),
       });
 
-      const scored = featureLevelInterop.scoreRuns(runs, expectedBrowsers,
+      const scored = featureLevelInterop.scoreFeatureLevelInterop(
+          runs, expectedBrowsers,
           createFeatureTests({grid: ['/css/a.html'], audio: ['/x.html']}));
 
       assert.deepEqual([...scored.keys()], ['grid']);
@@ -167,7 +169,7 @@ describe('feature-level-interop.js', () => {
         firefox: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
       });
 
-      const scored = featureLevelInterop.scoreRuns(
+      const scored = featureLevelInterop.scoreFeatureLevelInterop(
           runs, expectedBrowsers, createFeatureTests({
             grid: ['/css/a.html'],
             subgrid: ['/css/a.html'],
