@@ -91,4 +91,95 @@ describe('result-trees.js', () => {
       assert.isUndefined(resultTrees.findTestResults(tree, '/css/A.html'));
     });
   });
+
+  describe('scoreTestResults', () => {
+    it('scores a reftest that passed as one and one that timed out as zero',
+        () => {
+          assert.equal(
+              resultTrees.scoreTestResults({status: 'PASS'}), 1);
+          assert.equal(
+              resultTrees.scoreTestResults({status: 'TIMEOUT'}), 0);
+        });
+
+    it('scores a test with subtests as the fraction that passed', () => {
+      const results = {status: 'OK', subtests: [
+        {name: 'test 1', status: 'PASS'},
+        {name: 'test 2', status: 'PASS'},
+        {name: 'test 3', status: 'FAIL'},
+        {name: 'test 4', status: 'FAIL'},
+      ]};
+
+      assert.equal(resultTrees.scoreTestResults(results), 0.5);
+    });
+
+    it('ignores the harness status when the test has subtests', () => {
+      const results = {status: 'ERROR', subtests: [
+        {name: 'test 1', status: 'PASS'},
+        {name: 'test 2', status: 'FAIL'},
+      ]};
+
+      assert.equal(resultTrees.scoreTestResults(results), 0.5);
+    });
+
+    it('scores a test reporting an empty subtests array as zero', () => {
+      assert.equal(resultTrees.scoreTestResults(
+          {status: 'OK', subtests: []}), 0);
+    });
+
+    it('scores a test whose harness reported OK with no subtests as zero',
+        () => {
+          assert.equal(resultTrees.scoreTestResults({status: 'OK'}), 0);
+        });
+
+    it('counts duplicate subtest names once each, as the run reported them',
+        () => {
+          const results = {status: 'OK', subtests: [
+            {name: 'test 1', status: 'PASS'},
+            {name: 'test 1', status: 'FAIL'},
+          ]};
+
+          assert.equal(resultTrees.scoreTestResults(results), 0.5);
+        });
+
+    it('counts NOTRUN, SKIP and PRECONDITION_FAILED subtests as failures',
+        () => {
+          const results = {status: 'OK', subtests: [
+            {name: 'test 1', status: 'PASS'},
+            {name: 'test 2', status: 'NOTRUN'},
+            {name: 'test 3', status: 'SKIP'},
+            {name: 'test 4', status: 'PRECONDITION_FAILED'},
+          ]};
+
+          assert.equal(resultTrees.scoreTestResults(results), 0.25);
+        });
+
+    it('counts a top-level SKIP as a failure', () => {
+      assert.equal(resultTrees.scoreTestResults({status: 'SKIP'}), 0);
+    });
+
+    it('scores a test that timed out after its one passing subtest as a full ' +
+        'pass', () => {
+      // The harness died early, so the browser is credited with the single
+      // subtest it managed to report; see the note on scoreTestResults.
+      const results = {status: 'TIMEOUT', subtests: [
+        {name: 'test 1', status: 'PASS'},
+      ]};
+
+      assert.equal(resultTrees.scoreTestResults(results), 1);
+    });
+
+    it('throws for a test status it does not know', () => {
+      assert.throws(() => {
+        resultTrees.scoreTestResults({status: 'FOO'});
+      }, /Unknown test status: 'FOO'/);
+    });
+
+    it('throws for a subtest status it does not know', () => {
+      assert.throws(() => {
+        resultTrees.scoreTestResults({status: 'OK', subtests: [
+          {name: 'test 1', status: 'FOO'},
+        ]});
+      }, /Unknown subtest status for 'test 1': 'FOO'/);
+    });
+  });
 });
