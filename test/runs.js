@@ -69,6 +69,28 @@ describe('runs.js', () => {
         runs.findWebFeaturesManifestAsset(release);
       }, /No WEB_FEATURES_MANIFEST\.json\.gz asset on merge_pr_12345/);
     });
+
+    it('should pick the gzip asset among the compressions published', () => {
+      // Every manifest is published as .bz2, .gz and .zst, so matching on a
+      // name or label prefix would take whichever came first, and only the
+      // gzip one is what parseWebFeaturesManifest can gunzip. Asset list seen
+      // on merge_pr_62355 with:
+      //   gh api repos/web-platform-tests/wpt/releases/tags/merge_pr_62355
+      const gzip = createAsset(
+          'WEB_FEATURES_MANIFEST-abcdef.json.gz', MANIFEST_LABEL);
+      const release = createRelease([
+        createAsset('MANIFEST-abcdef.json.bz2', 'MANIFEST.json.bz2'),
+        createAsset('MANIFEST-abcdef.json.gz', 'MANIFEST.json.gz'),
+        createAsset('MANIFEST-abcdef.json.zst', 'MANIFEST.json.zst'),
+        createAsset('WEB_FEATURES_MANIFEST-abcdef.json.bz2',
+            'WEB_FEATURES_MANIFEST.json.bz2'),
+        gzip,
+        createAsset('WEB_FEATURES_MANIFEST-abcdef.json.zst',
+            'WEB_FEATURES_MANIFEST.json.zst'),
+      ]);
+
+      assert.strictEqual(runs.findWebFeaturesManifestAsset(release), gzip);
+    });
   });
 
   describe('parseWebFeaturesManifest', () => {
