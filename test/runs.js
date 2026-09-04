@@ -93,6 +93,52 @@ describe('runs.js', () => {
     });
   });
 
+  describe('parseWptTagMap', () => {
+    it('should map each commit to its tag', () => {
+      const output = [
+        '5ec18b17503524523ff6fe6a6b801512d659a6e5\trefs/tags/merge_pr_57790',
+        '92e4771f00d1ae92e94abf4754249c227252293e\trefs/tags/merge_pr_57791',
+      ].join('\n');
+
+      assert.deepEqual(runs.parseWptTagMap(output), new Map([
+        ['5ec18b17503524523ff6fe6a6b801512d659a6e5', 'merge_pr_57790'],
+        ['92e4771f00d1ae92e94abf4754249c227252293e', 'merge_pr_57791'],
+      ]));
+    });
+
+    it('should key an annotated tag on the peeled commit, not the tag object',
+        () => {
+          // ls-remote prints the tag object under refs/tags/X and the commit it
+          // points at under refs/tags/X^{}. Keying on the first would map a
+          // revision no run is ever on, silently skipping every date.
+          const output = [
+            'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\t' +
+                'refs/tags/merge_pr_57791',
+            '92e4771f00d1ae92e94abf4754249c227252293e\t' +
+                'refs/tags/merge_pr_57791^{}',
+          ].join('\n');
+
+          assert.deepEqual(runs.parseWptTagMap(output), new Map([
+            ['92e4771f00d1ae92e94abf4754249c227252293e', 'merge_pr_57791'],
+          ]));
+        });
+
+    it('should ignore refs that are not merge_pr tags', () => {
+      const output = [
+        '0000000000000000000000000000000000000001\trefs/tags/epochs/daily',
+        '92e4771f00d1ae92e94abf4754249c227252293e\trefs/tags/merge_pr_57791',
+      ].join('\n');
+
+      assert.deepEqual(runs.parseWptTagMap(output), new Map([
+        ['92e4771f00d1ae92e94abf4754249c227252293e', 'merge_pr_57791'],
+      ]));
+    });
+
+    it('should return an empty map for no output', () => {
+      assert.deepEqual(runs.parseWptTagMap(''), new Map());
+    });
+  });
+
   describe('parseWebFeaturesManifest', () => {
     it('should map each feature to its set of tests', () => {
       const manifest = createManifest(1, {
