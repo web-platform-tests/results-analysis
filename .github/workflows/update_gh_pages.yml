@@ -28,8 +28,25 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    # Every scoring script caches what it fetches under cache/, keyed by
+    # something immutable, so restoring it leaves a build fetching only the
+    # dates and wpt releases that have appeared since the last one. The run id
+    # keeps each key unique, so the cache is always saved back.
+    - name: Restore the fetch cache
+      uses: actions/cache@v4
+      with:
+        path: cache
+        key: results-analysis-fetch-${{ github.run_id }}
+        restore-keys: results-analysis-fetch-
+
     - name: Build
       run: ./build.sh
+      env:
+        # feature-level-interop.js looks a wpt release up for every date it
+        # scores, which does not fit in the 60 requests an hour GitHub allows an
+        # unauthenticated caller. GITHUB_TOKEN raises that to 1000 an hour per
+        # repository, and the cache restored above keeps a build well under it.
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Deploy to gh-pages/
       uses: JamesIves/github-pages-deploy-action@releases/v3
