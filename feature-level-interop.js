@@ -119,6 +119,7 @@ async function main() {
         versions,
         scores: averaged.scores,
         interop: averaged.interop,
+        features: averaged.features,
       });
     } catch (e) {
       e.message += `\n\tRuns: ${runs.map(r => r.id)}`;
