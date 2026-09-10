@@ -30,6 +30,8 @@ jobs:
 
     - name: Build
       run: ./build.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Deploy to gh-pages/
       uses: JamesIves/github-pages-deploy-action@releases/v3
