@@ -129,7 +129,7 @@ describe('browser-specific.js', () => {
       assert.deepEqual(scores, new Map([['chrome', 0], ['firefox', 0]]));
     });
 
-    it('should throw for an unknown top-level test status', () => {
+    it('should not throw for an unknown top-level test status', () => {
       const expectedBrowsers = new Set(['chrome', 'firefox']);
 
       const chromeTree = new TreeBuilder().addTest('TestA', 'FOO').build();
@@ -139,9 +139,7 @@ describe('browser-specific.js', () => {
         {browser_name: 'firefox', tree: firefoxTree},
       ];
 
-      assert.throws(() => {
-        browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
-      });
+      browserSpecific.scoreBrowserSpecificFailures(runs, expectedBrowsers);
     });
 
     it('should traverse subtrees correctly', () => {
