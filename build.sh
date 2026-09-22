@@ -43,14 +43,14 @@ update_bsf_csv out/data/experimental-browser-specific-failures.csv
 update_bsf_csv out/data/stable-browser-specific-failures-with-third-party.csv
 update_bsf_csv out/data/experimental-browser-specific-failures-with-third-party.csv
 
-# TODO: Call update_feature_level_interop_csv once feature-level-interop.js
-# scores the runs and writes a CSV. It currently only loads the aligned runs,
-# their result trees and the web features manifest, so running it here would
-# cost a full load of every run without producing any output.
+# Writes the aggregate CSV named by $1, plus one detail CSV per date scored
+# beside it, named with that date before the extension.
 update_feature_level_interop_csv() {
   local OUTPUT="${1}"
 
-  local FROM_DATE="2018-06-01"
+  # Dates before the web features catalogue settled would measure cataloguing
+  # progress as much as browser progress, so the series starts here.
+  local FROM_DATE="2026-01-28"
   local EXPERIMENTAL_FLAG=""
   if [[ $1 == *"experimental"* ]]; then
     EXPERIMENTAL_FLAG="--experimental"
@@ -61,6 +61,9 @@ update_feature_level_interop_csv() {
     --from=${FROM_DATE} --to=${TO_DATE} \
     --output=${OUTPUT}
 }
+
+update_feature_level_interop_csv out/data/stable-browser-feature-interop-exclusions.csv
+update_feature_level_interop_csv out/data/experimental-browser-feature-interop-exclusions.csv
 
 update_interop_year() {
   local YEAR="${1}"
