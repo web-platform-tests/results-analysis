@@ -14,27 +14,36 @@ const fs = require('fs');
 const Git = require('nodegit');
 const lib = require('./lib');
 const moment = require('moment');
-
-flags.defineString('from', '2026-01-28', 'Starting date (inclusive)');
-flags.defineString('to', moment().format('YYYY-MM-DD'),
-    'Ending date (exclusive)');
-flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
-    'Browsers to compare. Must match the products used on wpt.fyi');
-flags.defineBoolean('experimental', false,
-    'Calculate metrics for experimental runs.');
-flags.parse();
+const path = require('path');
 
 // The earliest date whose wpt release carries a web features manifest. Dates
 // before it cannot be scored at all, so we refuse them rather than skip them.
 const EARLIEST_MANIFEST_DATE = '2024-01-20';
 
-
-// Every CSV lands here, which is the directory build.sh deploys to gh-pages.
+// Every CSV lands here by default, which is the directory build.sh deploys to
+// gh-pages.
 const OUTPUT_DIR = 'out/data';
 
 // The name wpt.fyi fetches from gh-pages/data, so it is the one thing the two
-// repositories have to agree on.
-const CSV_NAME = 'browser-feature-interop';
+// repositories have to agree on. Named apart from the scores main publishes so
+// that the two denominators can be compared date for date; it becomes
+// browser-feature-interop if this scoring lands as the published one.
+const CSV_NAME = 'browser-feature-interop-exclusions';
+
+// The default is the date the web features catalogue settled; build.sh
+// passes the same date explicitly, and says why there.
+flags.defineString('from', '2026-01-28', 'Starting date (inclusive)');
+flags.defineString('to', moment().format('YYYY-MM-DD'),
+    'Ending date (exclusive)');
+flags.defineStringList('products', ['chrome', 'firefox', 'safari'],
+    'Browsers to compare. Must match the products used on wpt.fyi');
+flags.defineString('output', null,
+    'Aggregate output CSV file to write to. Each date scored also gets a ' +
+    'detail CSV beside it, named with that date before the extension. ' +
+    `Defaults to ${OUTPUT_DIR}/{stable, experimental}-${CSV_NAME}.csv`);
+flags.defineBoolean('experimental', false,
+    'Calculate metrics for experimental runs.');
+flags.parse();
 
 // Names the aggregate CSV for |channel|, which holds one row per date, each
 // averaged over every feature scored that day.
@@ -42,10 +51,13 @@ function aggregateFilename(channel) {
   return `${OUTPUT_DIR}/${channel}-${CSV_NAME}.csv`;
 }
 
-// Names the detail file for one |date| of |channel|, which holds one row per
-// feature.
-function detailFilename(channel, date) {
-  return `${OUTPUT_DIR}/${channel}-${CSV_NAME}-${date}.csv`;
+// Names the detail file beside the aggregate CSV at |aggregateFile|, holding
+// one row per feature for |date|. Derived from the aggregate path rather than
+// named independently, so that --output moves the whole set of files together.
+function detailFilename(aggregateFile, date) {
+  const extension = path.extname(aggregateFile);
+  const base = aggregateFile.slice(0, aggregateFile.length - extension.length);
+  return `${base}-${date}${extension}`;
 }
 
 async function main() {
@@ -69,8 +81,8 @@ async function main() {
   const experimental = flags.get('experimental');
 
   const channel = experimental ? 'experimental' : 'stable';
-  const aggregateFile = aggregateFilename(channel);
-  await fs.promises.mkdir(OUTPUT_DIR, {recursive: true});
+  const aggregateFile = flags.get('output') || aggregateFilename(channel);
+  await fs.promises.mkdir(path.dirname(aggregateFile), {recursive: true});
 
   const alignedRuns = await lib.runs.fetchAlignedRunsFromServer(
       products, from, to, experimental);
@@ -110,7 +122,7 @@ async function main() {
         continue;
       }
 
-      await fs.promises.writeFile(detailFilename(channel, date),
+      await fs.promises.writeFile(detailFilename(aggregateFile, date),
           lib.interopCsv.formatDetailCsv(products, featureScores), 'utf-8');
 
       dateToScores.set(date, {
@@ -119,6 +131,7 @@ async function main() {
         versions,
         scores: averaged.scores,
         interop: averaged.interop,
+        features: averaged.features,
       });
     } catch (e) {
       e.message += `\n\tRuns: ${runs.map(r => r.id)}`;

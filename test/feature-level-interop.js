@@ -25,6 +25,8 @@ function createRuns(browserToTree) {
 describe('feature-level-interop.js', () => {
   describe('scoreFeature', () => {
     it('scores each product as its fraction of the feature passed', () => {
+      // Each test is passed by two of the three products, so none of them is
+      // dropped as scope a single product implemented alone.
       const runs = createRuns({
         chrome: new TreeBuilder()
             .addTest('css/a.html', 'PASS')
@@ -36,7 +38,7 @@ describe('feature-level-interop.js', () => {
             .build(),
         safari: new TreeBuilder()
             .addTest('css/a.html', 'FAIL')
-            .addTest('css/b.html', 'FAIL')
+            .addTest('css/b.html', 'PASS')
             .build(),
       });
 
@@ -44,7 +46,7 @@ describe('feature-level-interop.js', () => {
           runs, expectedBrowsers, new Set(['/css/a.html', '/css/b.html']));
 
       assert.deepEqual(scored.scores,
-          new Map([['chrome', 1], ['firefox', 0.5], ['safari', 0]]));
+          new Map([['chrome', 1], ['firefox', 0.5], ['safari', 0.5]]));
       assert.equal(scored.tests, 2);
     });
 
@@ -87,28 +89,27 @@ describe('feature-level-interop.js', () => {
     });
 
     it('scores zero interop when no test passes in every product', () => {
+      // Two products pass each test, so neither is excluded, but no test is
+      // passed by all three.
       const runs = createRuns({
         chrome: new TreeBuilder()
             .addTest('css/a.html', 'PASS')
             .addTest('css/b.html', 'FAIL')
-            .addTest('css/c.html', 'FAIL')
             .build(),
         firefox: new TreeBuilder()
-            .addTest('css/a.html', 'FAIL')
+            .addTest('css/a.html', 'PASS')
             .addTest('css/b.html', 'PASS')
-            .addTest('css/c.html', 'FAIL')
             .build(),
         safari: new TreeBuilder()
             .addTest('css/a.html', 'FAIL')
-            .addTest('css/b.html', 'FAIL')
-            .addTest('css/c.html', 'PASS')
+            .addTest('css/b.html', 'PASS')
             .build(),
       });
 
       const scored = featureLevelInterop.scoreFeature(runs, expectedBrowsers,
-          new Set(['/css/a.html', '/css/b.html', '/css/c.html']));
+          new Set(['/css/a.html', '/css/b.html']));
 
-      // The lowest per-product mean would be 1/3; the mean of the per-test
+      // The lowest per-product mean would be 0.5; the mean of the per-test
       // minima is 0, because no test passes everywhere.
       assert.equal(scored.interop, 0);
     });
@@ -128,13 +129,18 @@ describe('feature-level-interop.js', () => {
           new Map([['chrome', 1], ['firefox', 1], ['safari', 1]]));
     });
 
-    it('scores a product zero for a test only another product has', () => {
+    it('scores a product zero for a test it has no result for', () => {
+      // Two products have b, so it is not dropped, and the third scores zero
+      // for it rather than having it left out of its fraction.
       const runs = createRuns({
         chrome: new TreeBuilder()
             .addTest('css/a.html', 'PASS')
             .addTest('css/b.html', 'PASS')
             .build(),
-        firefox: new TreeBuilder().addTest('css/a.html', 'PASS').build(),
+        firefox: new TreeBuilder()
+            .addTest('css/a.html', 'PASS')
+            .addTest('css/b.html', 'PASS')
+            .build(),
         safari: new TreeBuilder().addTest('css/a.html', 'PASS').build(),
       });
 
@@ -143,7 +149,7 @@ describe('feature-level-interop.js', () => {
 
       assert.equal(scored.tests, 2);
       assert.deepEqual(scored.scores,
-          new Map([['chrome', 1], ['firefox', 0.5], ['safari', 0.5]]));
+          new Map([['chrome', 1], ['firefox', 1], ['safari', 0.5]]));
       assert.equal(scored.interop, 0.5);
     });
 
@@ -189,6 +195,112 @@ describe('feature-level-interop.js', () => {
       // The fractions are 1, 0.75 and 0.5, so ignoring safari would give 0.75.
       assert.equal(scored.interop, 0.5);
     });
+
+    it('excludes a test only one product passes', () => {
+      // Two tests every product passes, and a third only chrome does. That
+      // third test is the scope chrome implemented alone, so excluding it
+      // leaves the feature fully interoperable rather than two thirds.
+      const runs = createRuns({
+        chrome: new TreeBuilder()
+            .addTest('css/a.html', 'PASS')
+            .addTest('css/b.html', 'PASS')
+            .addTest('css/c.html', 'PASS')
+            .build(),
+        firefox: new TreeBuilder()
+            .addTest('css/a.html', 'PASS')
+            .addTest('css/b.html', 'PASS')
+            .addTest('css/c.html', 'FAIL')
+            .build(),
+        safari: new TreeBuilder()
+            .addTest('css/a.html', 'PASS')
+            .addTest('css/b.html', 'PASS')
+            .addTest('css/c.html', 'FAIL')
+            .build(),
+      });
+      const tests = new Set(
+          ['/css/a.html', '/css/b.html', '/css/c.html']);
+
+      const scored = featureLevelInterop.scoreFeature(
+          runs, expectedBrowsers, tests);
+
+      // Two of the three tests counted, and the third is absent from every
+      // product's fraction rather than scored zero against two of them.
+      assert.deepEqual(scored.scores,
+          new Map([['chrome', 1], ['firefox', 1], ['safari', 1]]));
+      assert.equal(scored.interop, 1);
+      assert.equal(scored.tests, 2);
+    });
+
+    it('keeps a test no product passes', () => {
+      // Nobody implementing a test is not one product racing ahead, so it still
+      // counts against every product. Excluding it would report a feature that
+      // no browser passes at all as fully interoperable.
+      const runs = createRuns({
+        chrome: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+        firefox: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+        safari: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+      });
+
+      const scored = featureLevelInterop.scoreFeature(
+          runs, expectedBrowsers, new Set(['/css/a.html']));
+
+      assert.deepEqual(scored.scores,
+          new Map([['chrome', 0], ['firefox', 0], ['safari', 0]]));
+      assert.equal(scored.interop, 0);
+      assert.equal(scored.tests, 1);
+    });
+
+    it('keeps a test two of three products pass', () => {
+      const runs = createRuns({
+        chrome: new TreeBuilder().addTest('css/a.html', 'PASS').build(),
+        firefox: new TreeBuilder().addTest('css/a.html', 'PASS').build(),
+        safari: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+      });
+
+      const scored = featureLevelInterop.scoreFeature(
+          runs, expectedBrowsers, new Set(['/css/a.html']));
+
+      assert.equal(scored.tests, 1);
+      assert.equal(scored.interop, 0);
+    });
+
+    it('excludes a test only one product partly passes', () => {
+      // The one product ahead need not pass the test outright; a subtest it
+      // alone gets anything from is still scope only it has implemented.
+      const runs = createRuns({
+        chrome: new TreeBuilder()
+            .addTest('css/a.html', 'OK')
+            .addSubtest('css/a.html', 'one', 'PASS')
+            .addSubtest('css/a.html', 'two', 'FAIL')
+            .build(),
+        firefox: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+        safari: new TreeBuilder().addTest('css/a.html', 'FAIL').build(),
+      });
+
+      const scored = featureLevelInterop.scoreFeature(
+          runs, expectedBrowsers, new Set(['/css/a.html']));
+
+      assert.equal(scored, undefined);
+    });
+  });
+
+  describe('passingProductCount', () => {
+    it('counts the products with any score above zero', () => {
+      assert.equal(featureLevelInterop.passingProductCount(
+          new Map([['chrome', 1], ['firefox', 0.5], ['safari', 0]]),
+          expectedBrowsers), 2);
+    });
+
+    it('does not count a product with no result for the test', () => {
+      assert.equal(featureLevelInterop.passingProductCount(
+          new Map([['chrome', 1]]), expectedBrowsers), 1);
+    });
+
+    it('counts none when every product scored zero', () => {
+      assert.equal(featureLevelInterop.passingProductCount(
+          new Map([['chrome', 0], ['firefox', 0], ['safari', 0]]),
+          expectedBrowsers), 0);
+    });
   });
 
   describe('averageFeatureScores', () => {
@@ -205,8 +317,8 @@ describe('feature-level-interop.js', () => {
             .addTest('dom/c.html', 'PASS')
             .build(),
         safari: new TreeBuilder()
-            .addTest('css/a.html', 'PASS')
-            .addTest('css/b.html', 'FAIL')
+            .addTest('css/a.html', 'FAIL')
+            .addTest('css/b.html', 'PASS')
             .addTest('dom/c.html', 'FAIL')
             .build(),
       });
